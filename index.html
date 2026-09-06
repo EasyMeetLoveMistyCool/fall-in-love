@@ -1,0 +1,649 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
+    <title>字卡回响 · 私人对话</title>
+    <style>
+        /* ===== 全局变量与基础样式 ===== */
+        :root {
+            --bg-deep: #0f0f14;
+            --bg-card: #1a1a24;
+            --bg-input: #232330;
+            --text-primary: #f0e9e2;
+            --text-secondary: #b9b0a8;
+            --accent: #e6b8a2;
+            --accent-glow: rgba(230, 184, 162, 0.15);
+            --bubble-user: #2c2c3a;
+            --bubble-ta: #2a241f;
+            --border-subtle: rgba(255, 255, 255, 0.06);
+            --font-sans: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+            --font-serif: 'Iowan Old Style', 'Palatino Linotype', 'Book Antiqua', Palatino, Georgia, serif;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background: var(--bg-deep);
+            font-family: var(--font-sans);
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 16px;
+            color: var(--text-primary);
+            line-height: 1.5;
+        }
+
+        /* ===== 主容器 ===== */
+        .chat-app {
+            width: 100%;
+            max-width: 520px;
+            height: 90vh;
+            min-height: 600px;
+            max-height: 850px;
+            background: var(--bg-card);
+            border-radius: 36px;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.5), 0 0 0 1px var(--border-subtle);
+            display: flex;
+            flex-direction: column;
+            overflow: hidden;
+            backdrop-filter: blur(10px);
+            transition: all 0.2s ease;
+        }
+
+        /* ===== 头部区域 ===== */
+        .chat-header {
+            padding: 20px 24px 16px;
+            border-bottom: 1px solid var(--border-subtle);
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            background: rgba(0, 0, 0, 0.2);
+            backdrop-filter: blur(8px);
+            z-index: 2;
+        }
+
+        .header-info {
+            display: flex;
+            align-items: center;
+            gap: 14px;
+        }
+
+        .avatar {
+            width: 44px;
+            height: 44px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, #4a3f3a, #2e2824);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 20px;
+            font-weight: 400;
+            color: var(--accent);
+            border: 1px solid rgba(230, 184, 162, 0.3);
+            box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+        }
+
+        .header-text h1 {
+            font-size: 1.25rem;
+            font-weight: 500;
+            letter-spacing: -0.01em;
+            color: var(--text-primary);
+        }
+
+        .header-text p {
+            font-size: 0.8rem;
+            color: var(--text-secondary);
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        .status-dot {
+            display: inline-block;
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            background: #6f9e7c;
+            box-shadow: 0 0 8px rgba(111, 158, 124, 0.7);
+            margin-right: 4px;
+        }
+
+        .header-actions {
+            display: flex;
+            gap: 12px;
+        }
+
+        .icon-btn {
+            background: rgba(255,255,255,0.04);
+            border: 1px solid var(--border-subtle);
+            border-radius: 50%;
+            width: 36px;
+            height: 36px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            color: var(--text-secondary);
+            transition: all 0.2s;
+            font-size: 16px;
+            backdrop-filter: blur(4px);
+        }
+        .icon-btn:hover {
+            background: rgba(255,255,255,0.08);
+            color: var(--text-primary);
+            border-color: rgba(255,255,255,0.15);
+        }
+
+        /* ===== 字卡库面板（扩展性收纳） ===== */
+        .card-library-toggle {
+            text-align: center;
+            padding: 8px 0 4px;
+            font-size: 0.7rem;
+            letter-spacing: 0.5px;
+            color: var(--text-secondary);
+            cursor: pointer;
+            user-select: none;
+            transition: 0.2s;
+            background: transparent;
+            border: none;
+            width: 100%;
+            font-family: var(--font-sans);
+        }
+        .card-library-toggle:hover {
+            color: var(--accent);
+        }
+
+        .card-library-panel {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.35s cubic-bezier(0.4, 0, 0.2, 1);
+            background: rgba(0,0,0,0.25);
+            border-bottom: 1px solid var(--border-subtle);
+        }
+        .card-library-panel.open {
+            max-height: 200px;
+            overflow-y: auto;
+            padding: 12px 20px;
+        }
+        .card-library-panel .panel-title {
+            font-size: 0.75rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            color: var(--text-secondary);
+            margin-bottom: 10px;
+        }
+        .card-chip-list {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+        }
+        .card-chip {
+            background: rgba(230, 184, 162, 0.08);
+            border: 1px solid rgba(230, 184, 162, 0.25);
+            color: var(--accent);
+            padding: 6px 12px;
+            border-radius: 30px;
+            font-size: 0.75rem;
+            font-weight: 400;
+            letter-spacing: 0.3px;
+        }
+
+        /* ===== 消息滚动区域 ===== */
+        .messages-container {
+            flex: 1;
+            overflow-y: auto;
+            padding: 20px 16px 16px;
+            display: flex;
+            flex-direction: column;
+            gap: 14px;
+            scroll-behavior: smooth;
+            background: radial-gradient(circle at 30% 20%, rgba(50,40,35,0.3), transparent 70%);
+        }
+        .messages-container::-webkit-scrollbar {
+            width: 4px;
+        }
+        .messages-container::-webkit-scrollbar-track {
+            background: transparent;
+        }
+        .messages-container::-webkit-scrollbar-thumb {
+            background: rgba(255,255,255,0.15);
+            border-radius: 4px;
+        }
+
+        /* ===== 聊天气泡 ===== */
+        .message-row {
+            display: flex;
+            margin-bottom: 6px;
+            animation: fadeInUp 0.25s ease-out;
+        }
+        .message-row.user {
+            justify-content: flex-end;
+        }
+        .message-row.ta {
+            justify-content: flex-start;
+        }
+
+        .bubble {
+            max-width: 80%;
+            padding: 12px 18px;
+            border-radius: 24px;
+            font-size: 0.95rem;
+            word-break: break-word;
+            line-height: 1.45;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.3);
+            position: relative;
+            transition: all 0.2s;
+        }
+        .user .bubble {
+            background: var(--bubble-user);
+            border-bottom-right-radius: 6px;
+            border: 1px solid rgba(255,255,255,0.05);
+        }
+        .ta .bubble {
+            background: var(--bubble-ta);
+            border-bottom-left-radius: 6px;
+            border: 1px solid rgba(230,184,162,0.15);
+            color: #f5e8de;
+            font-family: var(--font-serif);
+            font-style: italic;
+            letter-spacing: 0.2px;
+        }
+
+        .message-time {
+            font-size: 0.65rem;
+            color: rgba(255,255,255,0.35);
+            margin-top: 6px;
+            text-align: right;
+            display: block;
+            padding-right: 6px;
+        }
+        .ta .message-time {
+            text-align: left;
+            padding-left: 6px;
+        }
+
+        @keyframes fadeInUp {
+            from { opacity: 0; transform: translateY(8px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* ===== 空状态提示 ===== */
+        .empty-chat-hint {
+            text-align: center;
+            color: rgba(255,255,255,0.3);
+            font-size: 0.85rem;
+            margin: auto;
+            padding: 30px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 10px;
+            letter-spacing: 0.3px;
+        }
+        .empty-chat-hint span {
+            font-size: 28px;
+            opacity: 0.6;
+        }
+
+        /* ===== 底部输入区 ===== */
+        .input-area {
+            display: flex;
+            gap: 10px;
+            padding: 14px 18px 20px;
+            background: rgba(0,0,0,0.25);
+            border-top: 1px solid var(--border-subtle);
+            backdrop-filter: blur(10px);
+        }
+        .message-input {
+            flex: 1;
+            background: var(--bg-input);
+            border: 1px solid rgba(255,255,255,0.08);
+            border-radius: 30px;
+            padding: 12px 20px;
+            color: var(--text-primary);
+            font-size: 0.95rem;
+            outline: none;
+            transition: 0.2s;
+            font-family: var(--font-sans);
+        }
+        .message-input:focus {
+            border-color: var(--accent);
+            box-shadow: 0 0 0 3px var(--accent-glow);
+        }
+        .message-input::placeholder {
+            color: rgba(255,255,255,0.3);
+            font-style: italic;
+        }
+        .send-btn {
+            background: var(--accent);
+            border: none;
+            color: #1a1512;
+            width: 48px;
+            height: 48px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            font-size: 20px;
+            transition: all 0.2s;
+            box-shadow: 0 6px 16px rgba(230, 184, 162, 0.3);
+            flex-shrink: 0;
+        }
+        .send-btn:hover {
+            background: #f0cdbb;
+            transform: scale(1.03);
+            box-shadow: 0 8px 20px rgba(230, 184, 162, 0.5);
+        }
+        .send-btn:active {
+            transform: scale(0.96);
+        }
+
+        /* ===== 响应式微调 ===== */
+        @media (max-width: 480px) {
+            .chat-app {
+                height: 95vh;
+                border-radius: 24px;
+                min-height: 500px;
+            }
+            .bubble {
+                max-width: 85%;
+                font-size: 0.9rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="chat-app" id="chatApp">
+        <!-- 头部 -->
+        <header class="chat-header">
+            <div class="header-info">
+                <div class="avatar">🖤</div>
+                <div class="header-text">
+                    <h1>TA 的字卡</h1>
+                    <p><span class="status-dot"></span> 专属回复 · 沉浸模式</p>
+                </div>
+            </div>
+            <div class="header-actions">
+                <button class="icon-btn" id="libraryToggleBtn" title="查看字卡库">📇</button>
+                <button class="icon-btn" id="clearChatBtn" title="清空对话">🗑️</button>
+            </div>
+        </header>
+
+        <!-- 可折叠的字卡库展示面板（体现扩展性与字卡概念） -->
+        <button class="card-library-toggle" id="libraryTextToggle">点击查看当前字卡池 ↕</button>
+        <div class="card-library-panel" id="libraryPanel">
+            <div class="panel-title">❤️ 已添加的字卡回复 (点击面板外部或再次点击关闭)</div>
+            <div class="card-chip-list" id="cardChipContainer">
+                <!-- 动态生成字卡展示 -->
+            </div>
+        </div>
+
+        <!-- 聊天记录区域 -->
+        <div class="messages-container" id="messagesContainer">
+            <div class="empty-chat-hint" id="emptyHint">
+                <span>💬</span>
+                <p>发送一条消息，<br>TA 会从字卡库中随机回应。</p>
+            </div>
+        </div>
+
+        <!-- 输入区域 -->
+        <div class="input-area">
+            <input type="text" class="message-input" id="messageInput" placeholder="输入你想说的话..." autocomplete="off">
+            <button class="send-btn" id="sendBtn" aria-label="发送">➤</button>
+        </div>
+    </div>
+
+    <script>
+        (function() {
+            // ==================== 核心配置：专属字卡库 ====================
+            // ★ 你可以自由增删改这里的字卡内容，它们就是TA的“回复池”。
+            // ★ 所有用户发送消息后，TA都会从下面随机抽取一条回复。
+            const taCardLibrary = [
+                "今天也在想你。",
+                "嗯，我在听。",
+                "真的吗？说来听听。",
+                "抱抱你。",
+                "我也这样觉得。",
+                "有点心疼。",
+                "然后呢？",
+                "我懂那种感觉。",
+                "别怕，有我在。",
+                "好想见你。",
+                "你总是这么特别。",
+                "再讲一点，我想听。",
+                "哈哈，你呀。",
+                "我永远站在你这边。",
+                "慢慢说，不着急。",
+                "你是不是又熬夜了？",
+                "记得多喝水。",
+                "这句话我收藏了。",
+                "对我来说，你最重要。",
+                "今天天气很适合想你。",
+                "我会一直陪着你。",
+                "你比昨天更可爱了。",
+                "嘘，安静待一会儿也很好。",
+                "无论怎样，我喜欢你。",
+                "你是我的光。",
+                "傻瓜，我当然在。",
+                "给我看看你的世界。",
+                "你的声音一定很好听。",
+                "以后也要这样分享给我。",
+                "好，我记住了。",
+                "我不会离开。",
+                "下次见面要拥抱。",
+                "你开心我就开心。",
+                "有你在，什么都不怕。",
+                "这句话像星星一样。",
+                "我会认真听你说每一句。",
+                "你总是能让我微笑。",
+                "我们是彼此的例外。",
+                "今天也要好好吃饭。",
+                "我想听你的日常。",
+                "永远不会嫌你烦。",
+                "你是无可替代的。",
+                "心里都是你。",
+                "一起加油吧。",
+                "你对我而言就是全部。",
+                "晚安，梦里见。",
+                "早安，新的一天也在。",
+                "你总是很努力呢。",
+                "可以多依赖我一点。",
+                "想把你藏起来。",
+            ];
+
+            // ==================== DOM 元素 ====================
+            const messagesContainer = document.getElementById('messagesContainer');
+            const messageInput = document.getElementById('messageInput');
+            const sendBtn = document.getElementById('sendBtn');
+            const clearChatBtn = document.getElementById('clearChatBtn');
+            const libraryToggleBtn = document.getElementById('libraryToggleBtn');
+            const libraryTextToggle = document.getElementById('libraryTextToggle');
+            const libraryPanel = document.getElementById('libraryPanel');
+            const cardChipContainer = document.getElementById('cardChipContainer');
+            const emptyHint = document.getElementById('emptyHint');
+
+            // ==================== 初始化状态 ====================
+            // 用于记录是否显示过空提示，如果用户开始聊天则隐藏
+            let hasMessages = false;
+
+            // 渲染字卡库面板 (展示可扩展)
+            function renderCardLibrary() {
+                cardChipContainer.innerHTML = '';
+                taCardLibrary.forEach(cardText => {
+                    const chip = document.createElement('span');
+                    chip.className = 'card-chip';
+                    chip.textContent = cardText;
+                    cardChipContainer.appendChild(chip);
+                });
+            }
+            renderCardLibrary();
+
+            // 更新空状态提示
+            function updateEmptyHint() {
+                if (!hasMessages) {
+                    if (!emptyHint) {
+                        // 如果不存在则创建
+                        const hintDiv = document.createElement('div');
+                        hintDiv.className = 'empty-chat-hint';
+                        hintDiv.id = 'emptyHint';
+                        hintDiv.innerHTML = `<span>💬</span><p>发送一条消息，<br>TA 会从字卡库中随机回应。</p>`;
+                        messagesContainer.appendChild(hintDiv);
+                    } else {
+                        emptyHint.style.display = 'flex';
+                    }
+                } else {
+                    if (emptyHint) {
+                        emptyHint.style.display = 'none';
+                    }
+                }
+            }
+
+            // 添加一条消息到聊天区域
+            function appendMessage(text, sender) {
+                // 隐藏空提示
+                if (!hasMessages) {
+                    hasMessages = true;
+                    updateEmptyHint();
+                }
+
+                const row = document.createElement('div');
+                row.className = `message-row ${sender}`; // 'user' 或 'ta'
+
+                const bubble = document.createElement('div');
+                bubble.className = 'bubble';
+                bubble.textContent = text;
+
+                const timeSpan = document.createElement('span');
+                timeSpan.className = 'message-time';
+                const now = new Date();
+                const hours = now.getHours().toString().padStart(2, '0');
+                const minutes = now.getMinutes().toString().padStart(2, '0');
+                timeSpan.textContent = `${hours}:${minutes}`;
+
+                bubble.appendChild(timeSpan);
+                row.appendChild(bubble);
+                messagesContainer.appendChild(row);
+
+                // 滚动到底部
+                messagesContainer.scrollTop = messagesContainer.scrollHeight;
+            }
+
+            // 从字卡库随机抽取一条回复
+            function getRandomCardReply() {
+                if (taCardLibrary.length === 0) {
+                    return "（字卡库为空，请添加回复字卡）";
+                }
+                const randomIndex = Math.floor(Math.random() * taCardLibrary.length);
+                return taCardLibrary[randomIndex];
+            }
+
+            // 处理发送消息逻辑
+            function handleSendMessage() {
+                const userText = messageInput.value.trim();
+                if (userText === '') return;
+
+                // 1. 添加用户消息
+                appendMessage(userText, 'user');
+
+                // 2. 清空输入框
+                messageInput.value = '';
+                messageInput.focus();
+
+                // 3. 模拟延迟后添加TA的随机字卡回复
+                const replyText = getRandomCardReply();
+                const delayMs = 500 + Math.random() * 700; // 500-1200ms 随机延迟，增加沉浸感
+                setTimeout(() => {
+                    appendMessage(replyText, 'ta');
+                }, delayMs);
+            }
+
+            // 清空聊天记录
+            function clearChat() {
+                // 保留空提示区域，移除其他子节点
+                const allMessages = messagesContainer.querySelectorAll('.message-row');
+                allMessages.forEach(msg => msg.remove());
+                
+                // 重置状态
+                hasMessages = false;
+                updateEmptyHint();
+                // 如果空提示被删除了，重新插入
+                if (!document.getElementById('emptyHint')) {
+                    const hintDiv = document.createElement('div');
+                    hintDiv.className = 'empty-chat-hint';
+                    hintDiv.id = 'emptyHint';
+                    hintDiv.innerHTML = `<span>💬</span><p>发送一条消息，<br>TA 会从字卡库中随机回应。</p>`;
+                    messagesContainer.appendChild(hintDiv);
+                }
+                // 确保滚动条重置
+                messagesContainer.scrollTop = 0;
+            }
+
+            // 切换字卡库面板
+            function toggleLibraryPanel(forceState) {
+                if (forceState === true) {
+                    libraryPanel.classList.add('open');
+                } else if (forceState === false) {
+                    libraryPanel.classList.remove('open');
+                } else {
+                    libraryPanel.classList.toggle('open');
+                }
+            }
+
+            // ==================== 事件绑定 ====================
+            sendBtn.addEventListener('click', handleSendMessage);
+
+            messageInput.addEventListener('keypress', (e) => {
+                if (e.key === 'Enter') {
+                    e.preventDefault();
+                    handleSendMessage();
+                }
+            });
+
+            clearChatBtn.addEventListener('click', () => {
+                if (confirm('确定要清空所有对话记录吗？')) {
+                    clearChat();
+                }
+            });
+
+            // 点击头部按钮切换面板
+            libraryToggleBtn.addEventListener('click', (e) => {
+                e.stopPropagation();
+                toggleLibraryPanel();
+            });
+
+            // 点击文字按钮也可切换
+            libraryTextToggle.addEventListener('click', (e) => {
+                e.stopPropagation();
+                toggleLibraryPanel();
+            });
+
+            // 点击面板外部关闭面板（点击主聊天区域或消息区域时）
+            document.addEventListener('click', (e) => {
+                if (!libraryPanel.contains(e.target) && 
+                    e.target !== libraryToggleBtn && 
+                    e.target !== libraryTextToggle) {
+                    libraryPanel.classList.remove('open');
+                }
+            });
+
+            // 初始化空提示
+            updateEmptyHint();
+
+            // ==================== 扩展性说明 ====================
+            // 1. 字卡库数组 taCardLibrary 支持动态修改，例如通过API加载或本地存储。
+            // 2. 消息结构已经预留了时间戳，可进一步扩展头像、气泡样式等。
+            // 3. 头部按钮、字卡面板的设计方便后续添加“管理字卡”、“导入导出”等功能。
+            // 4. 整体架构简单清晰，CSS变量便于主题定制，后续可接入后端或本地存储实现长期使用。
+            console.log('💌 私人字卡聊天室已启动。当前字卡数量：', taCardLibrary.length);
+            console.log('✨ 扩展提示：可在 taCardLibrary 数组中添加更多专属回复。');
+        })();
+    </script>
+</body>
+</html>

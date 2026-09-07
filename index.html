@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-<title></title>
+<title>易遇♡夏雾凉</title>
 <style>
 /* ========== 基础重置 ========== */
 * {
@@ -45,9 +45,9 @@ html, body {
   flex-direction: column;
   width: 100%;
   height: 100%;
-  backdrop-filter: blur(20px) saturate(1.2);
-  -webkit-backdrop-filter: blur(20px) saturate(1.2);
-  background: rgba(255, 255, 255, 0.12);
+  backdrop-filter: blur(16px) saturate(1.1);
+  -webkit-backdrop-filter: blur(16px) saturate(1.1);
+  background: rgba(255, 255, 255, 0.08);
 }
 
 /* ========== 顶栏 ========== */
@@ -69,7 +69,7 @@ html, body {
   flex-shrink: 0;
   background: rgba(255, 255, 255, 0.3);
   border: 1.5px solid rgba(255, 255, 255, 0.5);
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
 }
 
 #heart-line {
@@ -123,7 +123,8 @@ html, body {
   font-size: 16px;
   color: #ff3b5c;
 }
-    /* ========== 消息区 ========== */
+
+/* ========== 消息区 ========== */
 #messages-area {
   flex: 1;
   overflow-y: auto;
@@ -169,8 +170,7 @@ html, body {
 .pinned-item .pin-icon {
   font-size: 10px;
 }
-
-/* ========== 消息行 ========== */
+  /* ========== 消息行 ========== */
 .message-row {
   display: flex;
   margin-bottom: 14px;
@@ -198,7 +198,7 @@ html, body {
   flex-shrink: 0;
   background: rgba(255, 255, 255, 0.3);
   border: 1px solid rgba(255, 255, 255, 0.5);
-  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.08);
+  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.06);
 }
 
 .message-row.me .msg-avatar {
@@ -342,7 +342,6 @@ html, body {
   outline: none;
   min-height: 42px;
   max-height: 120px;
-  resize: none;
 }
 
 #chat-input::placeholder {
@@ -381,7 +380,8 @@ html, body {
   letter-spacing: 0.5px;
   border-color: rgba(255, 255, 255, 0.6);
 }
-    /* ========== 悬浮球 ========== */
+
+/* ========== 悬浮球 ========== */
 #floating-ball {
   position: fixed;
   z-index: 10;
@@ -396,7 +396,7 @@ html, body {
   backdrop-filter: blur(12px);
   -webkit-backdrop-filter: blur(12px);
   border: 1.5px solid rgba(255, 255, 255, 0.6);
-  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.12);
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.1);
   animation: ballBreathe 3.2s ease-in-out infinite;
   overflow: hidden;
   touch-action: none;
@@ -410,11 +410,10 @@ html, body {
 }
 
 @keyframes ballBreathe {
-  0%, 100% { transform: scale(1); box-shadow: 0 4px 16px rgba(0,0,0,0.12); }
-  50% { transform: scale(1.04); box-shadow: 0 6px 24px rgba(0,0,0,0.18); }
+  0%, 100% { transform: scale(1); box-shadow: 0 4px 16px rgba(0,0,0,0.1); }
+  50% { transform: scale(1.04); box-shadow: 0 6px 24px rgba(0,0,0,0.16); }
 }
-
-/* ========== 弹窗通用 ========== */
+  /* ========== 弹窗通用 ========== */
 .modal-overlay {
   position: fixed;
   top: 0;
@@ -454,24 +453,6 @@ html, body {
 @keyframes panelIn {
   from { opacity: 0; transform: scale(0.92) translateY(12px); }
   to { opacity: 1; transform: scale(1) translateY(0); }
-}
-
-.modal-close {
-  position: sticky;
-  top: 0;
-  float: right;
-  width: 28px;
-  height: 28px;
-  border-radius: 50%;
-  border: none;
-  background: rgba(0, 0, 0, 0.06);
-  cursor: pointer;
-  font-size: 14px;
-  color: #6b4c3b;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  z-index: 2;
 }
 
 /* ========== 悬浮球展开面板 ========== */
@@ -525,8 +506,8 @@ html, body {
   align-items: center;
   justify-content: center;
   border-radius: 50%;
-  background: rgba(255, 255, 255, 0.5);
-  border: 1px solid rgba(255, 255, 255, 0.7);
+  background: rgba(255, 255, 255, 0.55);
+  border: 1px solid rgba(255, 255, 255, 0.8);
 }
 
 .ball-item .icon-wrap svg {
@@ -536,10 +517,11 @@ html, body {
 
 .ball-item span {
   font-size: 12px;
-  color: #5c4a40;
+  color: #4a3528;
   text-align: center;
 }
-    /* ========== 字卡面板 ========== */
+
+/* ========== 字卡面板 ========== */
 .card-input-row input,
 .card-search-row input {
   width: 100%;
@@ -566,7 +548,7 @@ html, body {
   border-radius: 14px;
   padding: 8px 14px;
   font-size: 13px;
-  color: #6b4c3b;
+  color: #4a3528;
   cursor: pointer;
   transition: all 0.2s;
 }
@@ -582,7 +564,7 @@ html, body {
   align-items: center;
   margin-bottom: 10px;
   font-size: 13px;
-  color: #6b4c3b;
+  color: #4a3528;
 }
 
 .card-list {
@@ -628,7 +610,7 @@ html, body {
   text-align: center;
   font-size: 17px;
   font-weight: 600;
-  color: #5c4a40;
+  color: #4a3528;
   margin-bottom: 16px;
 }
 
@@ -673,8 +655,7 @@ html, body {
   transform: scale(0.95);
   background: rgba(255, 150, 100, 0.8);
 }
-
-/* ========== 头像/背景面板 ========== */
+  /* ========== 头像/背景面板 ========== */
 .about-section {
   display: flex;
   align-items: center;
@@ -701,13 +682,15 @@ html, body {
 .about-info .about-name {
   font-size: 16px;
   font-weight: 600;
-  color: #5c4a40;
+  color: #4a3528;
   margin-bottom: 2px;
+  cursor: pointer;
 }
 
 .about-info .about-nick {
   font-size: 13px;
   color: #8b6f60;
+  cursor: pointer;
 }
 
 .library-grid {
@@ -736,6 +719,23 @@ html, body {
   object-fit: cover;
 }
 
+.lib-item .lib-del {
+  position: absolute;
+  top: 4px;
+  right: 4px;
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  background: rgba(0, 0, 0, 0.45);
+  color: #fff;
+  border: none;
+  font-size: 10px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
 .upload-btn {
   display: block;
   width: 100%;
@@ -744,7 +744,7 @@ html, body {
   border-radius: 14px;
   padding: 12px;
   font-size: 14px;
-  color: #6b4c3b;
+  color: #4a3528;
   cursor: pointer;
   text-align: center;
   margin-top: 10px;
@@ -771,7 +771,7 @@ html, body {
   border-radius: 14px;
   padding: 8px 14px;
   font-size: 13px;
-  color: #6b4c3b;
+  color: #4a3528;
   cursor: pointer;
   white-space: nowrap;
 }
@@ -844,7 +844,7 @@ html, body {
   border-radius: 14px;
   padding: 8px;
   font-size: 13px;
-  color: #6b4c3b;
+  color: #4a3528;
   cursor: pointer;
   text-align: center;
 }
@@ -902,6 +902,35 @@ html, body {
   flex-shrink: 0;
 }
 
+/* ========== 轻提示 ========== */
+#toast {
+  position: fixed;
+  bottom: 120px;
+  left: 50%;
+  transform: translateX(-50%) translateY(20px);
+  background: rgba(255, 255, 255, 0.75);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1px solid rgba(255, 255, 255, 0.8);
+  border-radius: 18px;
+  padding: 10px 18px;
+  font-size: 14px;
+  color: #4a3528;
+  z-index: 40;
+  opacity: 0;
+  pointer-events: none;
+  transition: all 0.3s ease-out;
+  white-space: nowrap;
+  max-width: 80%;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+#toast.show {
+  opacity: 1;
+  transform: translateX(-50%) translateY(0);
+}
+
 /* ========== 滚动条 ========== */
 ::-webkit-scrollbar {
   width: 4px;
@@ -931,58 +960,49 @@ html, body {
 <canvas id="bg-canvas"></canvas>
 
 <div id="app">
-  <!-- 顶栏 -->
   <div id="topbar">
     <img id="ta-avatar-top" class="top-avatar" alt="TA" src="">
     <div id="heart-line"></div>
     <img id="me-avatar-top" class="top-avatar" alt="我" src="">
   </div>
 
-  <!-- 心意值 -->
   <div id="heart-value-box">
     <span class="empty-heart">♡</span>
     <span id="heart-value-num">0</span>
   </div>
 
-  <!-- 置顶区 -->
   <div id="pinned-area"></div>
-
-  <!-- 消息区 -->
   <div id="messages-area"></div>
 
-  <!-- 正在输入 -->
   <div id="typing-indicator">
     <span>TA正在输入中</span>
-    <div class="typing-dots">
-      <span></span><span></span><span></span>
-    </div>
+    <div class="typing-dots"><span></span><span></span><span></span></div>
   </div>
 
-  <!-- 输入区 -->
   <div id="input-area">
     <input id="chat-input" type="text" placeholder="对TA说些什么..." autocomplete="off">
     <button id="send-btn">⊕</button>
   </div>
 </div>
 
-<!-- 悬浮球 -->
 <div id="floating-ball">
   <img id="ball-img" src="" alt="" style="display:none;">
-  <svg id="ball-default" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="rgba(255,255,255,0.8)" stroke-width="1.5" stroke-linecap="round">
+  <svg id="ball-default" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="rgba(255,255,255,0.9)" stroke-width="1.5" stroke-linecap="round">
     <circle cx="12" cy="12" r="8" opacity="0.5"/>
     <circle cx="12" cy="12" r="4" opacity="0.8"/>
     <circle cx="12" cy="12" r="1.5" fill="rgba(255,255,255,0.9)" stroke="none"/>
   </svg>
 </div>
 
-<!-- 悬浮球展开面板 -->
 <div id="ball-panel">
   <div class="ball-grid" id="ball-grid"></div>
 </div>
 
+<div id="toast"></div>
+
 <script>
 // ============================================================
-// 易遇♡夏雾凉 - V1.0.0
+// 易遇♡夏雾凉 - V1.0.0 完整版
 // ============================================================
 
 const DEFAULT_SETTINGS = {
@@ -994,8 +1014,8 @@ const DEFAULT_SETTINGS = {
   meAvatar: '',
   ballImage: '',
   replyTpl: 'natural',
-  replyMin: 5000,
-  replyMax: 8000,
+  replyMin: 5,
+  replyMax: 8,
   stickerTpl: 'daily',
   stickerProb: 0.06,
   activeTpl: 'occasional',
@@ -1006,38 +1026,27 @@ const DEFAULT_SETTINGS = {
   fullscreen: false,
   notifEnabled: false,
   bgCurrent: '',
-  bgLibrary: [],
   heartValue: 0,
   lastArchiveDate: ''
 };
 
 let db = null;
 let settings = JSON.parse(JSON.stringify(DEFAULT_SETTINGS));
-let pendingReplyCount = 0;
 let stopTimer = null;
 let replyQueue = [];
 let isReplying = false;
 
-// ========== IndexedDB 初始化 ==========
+// ========== IndexedDB ==========
 function openDB() {
   return new Promise((resolve, reject) => {
     const req = indexedDB.open('YiyuXiawuliang', 1);
     req.onupgradeneeded = (e) => {
       const d = e.target.result;
-      if (!d.objectStoreNames.contains('cards')) {
-        d.createObjectStore('cards', { keyPath: 'id', autoIncrement: true });
-      }
-      if (!d.objectStoreNames.contains('messages')) {
-        d.createObjectStore('messages', { keyPath: 'id', autoIncrement: true });
-      }
-      if (!d.objectStoreNames.contains('kv')) {
-        d.createObjectStore('kv', { keyPath: 'key' });
-      }
+      if (!d.objectStoreNames.contains('cards')) d.createObjectStore('cards', { keyPath: 'id', autoIncrement: true });
+      if (!d.objectStoreNames.contains('messages')) d.createObjectStore('messages', { keyPath: 'id', autoIncrement: true });
+      if (!d.objectStoreNames.contains('kv')) d.createObjectStore('kv', { keyPath: 'key' });
     };
-    req.onsuccess = (e) => {
-      db = e.target.result;
-      resolve();
-    };
+    req.onsuccess = (e) => { db = e.target.result; resolve(); };
     req.onerror = (e) => reject(e);
   });
 }
@@ -1096,12 +1105,10 @@ function idbPutReturnId(store, data) {
   });
 }
 
-// ========== 设置存取 ==========
+// ========== 设置 ==========
 async function loadSettings() {
   const saved = await idbGet('kv', 'settings');
-  if (saved) {
-    settings = { ...DEFAULT_SETTINGS, ...saved.value };
-  }
+  if (saved) settings = { ...DEFAULT_SETTINGS, ...saved.value };
   applySettings();
 }
 
@@ -1146,7 +1153,15 @@ function downloadFile(content, filename, mime) {
 function delay(ms) {
   return new Promise(r => setTimeout(r, ms));
 }
-    // ========== 心跳线 ==========
+
+function showToast(text) {
+  const t = document.getElementById('toast');
+  t.textContent = text;
+  t.classList.add('show');
+  clearTimeout(t._hideTimer);
+  t._hideTimer = setTimeout(() => t.classList.remove('show'), 1800);
+}
+  // ========== 心跳线 ==========
 function renderHeartLine() {
   const el = document.getElementById('heart-line');
   el.innerHTML = `
@@ -1166,21 +1181,14 @@ function renderHeartLine() {
 function updateTopAvatars() {
   const ta = document.getElementById('ta-avatar-top');
   const me = document.getElementById('me-avatar-top');
-  if (settings.taAvatar) {
-    ta.src = settings.taAvatar;
-  } else {
-    ta.src = 'data:image/svg+xml,' + encodeURIComponent('<svg xmlns="http://www.w3.org/2000/svg" width="40" height="40"><circle cx="20" cy="20" r="19" fill="rgba(255,255,255,0.4)"/><text x="20" y="26" text-anchor="middle" font-size="16" fill="rgba(90,70,60,0.6)">TA</text></svg>');
-  }
-  if (settings.meAvatar) {
-    me.src = settings.meAvatar;
-  } else {
-    me.src = 'data:image/svg+xml,' + encodeURIComponent('<svg xmlns="http://www.w3.org/2000/svg" width="40" height="40"><circle cx="20" cy="20" r="19" fill="rgba(255,255,255,0.4)"/><text x="20" y="26" text-anchor="middle" font-size="16" fill="rgba(90,70,60,0.6)">我</text></svg>');
-  }
+  if (settings.taAvatar) ta.src = settings.taAvatar;
+  else ta.src = 'data:image/svg+xml,' + encodeURIComponent('<svg xmlns="http://www.w3.org/2000/svg" width="40" height="40"><circle cx="20" cy="20" r="19" fill="rgba(255,255,255,0.4)"/><text x="20" y="26" text-anchor="middle" font-size="16" fill="rgba(90,70,60,0.6)">TA</text></svg>');
+  if (settings.meAvatar) me.src = settings.meAvatar;
+  else me.src = 'data:image/svg+xml,' + encodeURIComponent('<svg xmlns="http://www.w3.org/2000/svg" width="40" height="40"><circle cx="20" cy="20" r="19" fill="rgba(255,255,255,0.4)"/><text x="20" y="26" text-anchor="middle" font-size="16" fill="rgba(90,70,60,0.6)">我</text></svg>');
 }
 
-// ========== 悬浮球样式 ==========
+// ========== 悬浮球 ==========
 function updateBallStyle() {
-  const ball = document.getElementById('floating-ball');
   const img = document.getElementById('ball-img');
   const def = document.getElementById('ball-default');
   if (settings.ballImage) {
@@ -1193,7 +1201,6 @@ function updateBallStyle() {
   }
 }
 
-// ========== 悬浮球位置记忆 ==========
 function initBallPosition() {
   const ball = document.getElementById('floating-ball');
   const savedPos = JSON.parse(localStorage.getItem('ballPos') || 'null');
@@ -1254,18 +1261,29 @@ const BALL_ITEMS = [
 ];
 
 const ICONS = {
-  world: `<svg viewBox="0 0 24 24" fill="none" stroke="#5c4a40" stroke-width="1.5"><circle cx="12" cy="12" r="8"/><ellipse cx="12" cy="12" rx="3.5" ry="8"/><line x1="4" y1="12" x2="20" y2="12"/></svg>`,
-  mail: `<svg viewBox="0 0 24 24" fill="none" stroke="#5c4a40" stroke-width="1.5"><rect x="3" y="5" width="18" height="14" rx="3"/><path d="M4 7l8 6 8-6"/></svg>`,
-  note: `<svg viewBox="0 0 24 24" fill="none" stroke="#5c4a40" stroke-width="1.5"><path d="M5 4h11l3 3v13H5z"/><line x1="8" y1="9" x2="16" y2="9"/><line x1="8" y1="13" x2="16" y2="13"/></svg>`,
+  world: `<svg viewBox="0 0 24 24" fill="none" stroke="#4a3528" stroke-width="1.8"><circle cx="12" cy="12" r="8"/><ellipse cx="12" cy="12" rx="3.5" ry="8"/><line x1="4" y1="12" x2="20" y2="12"/></svg>`,
+  mail: `<svg viewBox="0 0 24 24" fill="none" stroke="#4a3528" stroke-width="1.8"><rect x="3" y="5" width="18" height="14" rx="3"/><path d="M4 7l8 6 8-6"/></svg>`,
+  note: `<svg viewBox="0 0 24 24" fill="none" stroke="#4a3528" stroke-width="1.8"><path d="M5 4h11l3 3v13H5z"/><line x1="8" y1="9" x2="16" y2="9"/><line x1="8" y1="13" x2="16" y2="13"/></svg>`,
   lover: `<svg viewBox="0 0 24 24" fill="#ff3b5c" stroke="none"><path d="M12,20 C12,20 4,14.5 4,9.5 C4,6.5 6.5,4.5 9,4.5 C11,4.5 12,6 12,6 C12,6 13,4.5 15,4.5 C17.5,4.5 20,6.5 20,9.5 C20,14.5 12,20 12,20 Z"/></svg>`,
-  music: `<svg viewBox="0 0 24 24" fill="none" stroke="#5c4a40" stroke-width="1.5"><path d="M9 18V6l10-2v12"/><circle cx="6" cy="18" r="3"/><circle cx="16" cy="16" r="3"/></svg>`,
-  choice: `<svg viewBox="0 0 24 24" fill="none" stroke="#5c4a40" stroke-width="1.5"><path d="M12 3v18M7 21h10M4 7l8-4 8 4"/><circle cx="12" cy="12" r="2" fill="#5c4a40" stroke="none"/></svg>`,
-  stats: `<svg viewBox="0 0 24 24" fill="none" stroke="#5c4a40" stroke-width="1.5"><rect x="5" y="12" width="3" height="7" rx="1.5"/><rect x="10.5" y="8" width="3" height="11" rx="1.5"/><rect x="16" y="4" width="3" height="15" rx="1.5"/></svg>`,
-  data: `<svg viewBox="0 0 24 24" fill="none" stroke="#5c4a40" stroke-width="1.5"><path d="M7 16a4 4 0 01-.8-7.9 5 5 0 019.4-1.2A3.5 3.5 0 0117 16H7z"/><path d="M11 14l-2 2 2 2" stroke="#ff3b5c" stroke-width="2" fill="none" stroke-linecap="round"/></svg>`,
+  music: `<svg viewBox="0 0 24 24" fill="none" stroke="#4a3528" stroke-width="1.8"><path d="M9 18V6l10-2v12"/><circle cx="6" cy="18" r="3"/><circle cx="16" cy="16" r="3"/></svg>`,
+  choice: `<svg viewBox="0 0 24 24" fill="none" stroke="#4a3528" stroke-width="1.8"><path d="M12 3v18M7 21h10M4 7l8-4 8 4"/><circle cx="12" cy="12" r="2" fill="#4a3528" stroke="none"/></svg>`,
+  stats: `<svg viewBox="0 0 24 24" fill="none" stroke="#4a3528" stroke-width="1.8"><rect x="5" y="12" width="3" height="7" rx="1.5"/><rect x="10.5" y="8" width="3" height="11" rx="1.5"/><rect x="16" y="4" width="3" height="15" rx="1.5"/></svg>`,
+  data: `<svg viewBox="0 0 24 24" fill="none" stroke="#4a3528" stroke-width="1.8"><path d="M7 16a4 4 0 01-.8-7.9 5 5 0 019.4-1.2A3.5 3.5 0 0117 16H7z"/><path d="M11 14l-2 2 2 2" stroke="#ff3b5c" stroke-width="2" fill="none" stroke-linecap="round"/></svg>`,
   heartbeat: `<svg viewBox="0 0 24 24" fill="#ff8fb0" stroke="none"><path d="M12,20 C12,20 4,14.5 4,9.5 C4,6.5 6.5,4.5 9,4.5 C11,4.5 12,6 12,6 C12,6 13,4.5 15,4.5 C17.5,4.5 20,6.5 20,9.5 C20,14.5 12,20 12,20 Z"/></svg>`,
-  playback: `<svg viewBox="0 0 24 24" fill="none" stroke="#5c4a40" stroke-width="1.5"><rect x="3" y="5" width="18" height="14" rx="3"/><line x1="3" y1="9" x2="21" y2="9"/><line x1="3" y1="15" x2="21" y2="15"/><circle cx="8" cy="12" r="2"/></svg>`,
-  wish: `<svg viewBox="0 0 24 24" fill="#ff3b5c" stroke="none"><path d="M12,6 C12,3 9,2 7.5,4 C6,6 7.5,8 12,12 C16.5,8 18,6 16.5,4 C15,2 12,3 12,6 Z"/></svg>`,
-  settings: `<svg viewBox="0 0 24 24" fill="none" stroke="#5c4a40" stroke-width="1.5"><circle cx="12" cy="12" r="3"/><path d="M19 12a7 7 0 00-.1-1.2l2-1.5-2-3.4-2.4 1A7 7 0 0014.7 6L14 3.5h-4L9.3 6a7 7 0 00-1.8.9l-2.4-1-2 3.4 2 1.5A7 7 0 005 12c0 .4 0 .8.1 1.2l-2 1.5 2 3.4 2.4-1a7 7 0 001.8.9l.7 2.5h4l.7-2.5a7 7 0 001.8-.9l2.4 1 2-3.4-2-1.5c.1-.4.1-.8.1-1.2z"/></svg>`
+  playback: `<svg viewBox="0 0 24 24" fill="none" stroke="#4a3528" stroke-width="1.8"><rect x="3" y="5" width="18" height="14" rx="3"/><line x1="3" y1="9" x2="21" y2="9"/><line x1="3" y1="15" x2="21" y2="15"/><circle cx="8" cy="12" r="2"/></svg>`,
+  wish: `<svg viewBox="0 0 24 24" fill="none" stroke="#ff3b5c" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 17l6-6-2-5 8 2-6 6 3 3z" fill="#ff3b5c" stroke="none"/><path d="M14 4l2 5 5 2-8 2-6 7" stroke="#ff3b5c" stroke-width="1.5" fill="none"/></svg>`,
+  settings: `<svg viewBox="0 0 24 24" fill="none" stroke="#4a3528" stroke-width="1.8"><circle cx="12" cy="12" r="3"/><path d="M19 12a7 7 0 00-.1-1.2l2-1.5-2-3.4-2.4 1A7 7 0 0014.7 6L14 3.5h-4L9.3 6a7 7 0 00-1.8.9l-2.4-1-2 3.4 2 1.5A7 7 0 005 12c0 .4 0 .8.1 1.2l-2 1.5 2 3.4 2.4-1a7 7 0 001.8.9l.7 2.5h4l.7-2.5a7 7 0 001.8-.9l2.4 1 2-3.4-2-1.5c.1-.4.1-.8.1-1.2z"/></svg>`
+};
+
+const PLUS_ICONS = {
+  camera: `<svg viewBox="0 0 24 24" fill="none" stroke="#4a3528" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 8h3l2-3h6l2 3h3v11H4z"/><circle cx="12" cy="13" r="4"/></svg>`,
+  album: `<svg viewBox="0 0 24 24" fill="none" stroke="#4a3528" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="16" rx="3"/><circle cx="9" cy="9" r="2"/><path d="M4 18l5-5 3 3 4-4 4 4"/></svg>`,
+  video: `<svg viewBox="0 0 24 24" fill="none" stroke="#4a3528" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="6" width="13" height="12" rx="3"/><path d="M16 10l5-3v10l-5-3"/></svg>`,
+  sticker: `<svg viewBox="0 0 24 24" fill="#ff8fb0" stroke="none"><path d="M12,20 C12,20 4,14.5 4,9.5 C4,6.5 6.5,4.5 9,4.5 C11,4.5 12,6 12,6 C12,6 13,4.5 15,4.5 C17.5,4.5 20,6.5 20,9.5 C20,14.5 12,20 12,20 Z"/></svg>`,
+  gift: `<svg viewBox="0 0 24 24" fill="none" stroke="#4a3528" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="11" width="16" height="9" rx="2"/><path d="M3 8h18v3H3zM12 8v12M12 8c-2-3-5-4-7-2s0 5 3 5c2 0 4-1 4-3zM12 8c2-3 5-4 7-2s0 5-3 5c-2 0-4-1-4-3z"/></svg>`,
+  interact: `<svg viewBox="0 0 24 24" fill="none" stroke="#4a3528" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M8 13V5.5a1.5 1.5 0 013 0V12m0-5.5v-1a1.5 1.5 0 013 0V11m0-4.5a1.5 1.5 0 013 0V15a6 6 0 01-6 6h-1a8 8 0 01-4-1.5L4 18"/></svg>`,
+  ball: `<svg viewBox="0 0 24 24" fill="none" stroke="#4a3528" stroke-width="1.8" stroke-linecap="round"><circle cx="12" cy="12" r="8" opacity="0.5"/><circle cx="12" cy="12" r="4" opacity="0.8"/><circle cx="12" cy="12" r="1.5" fill="#4a3528" stroke="none"/></svg>`,
+  telepathy: `<svg viewBox="0 0 24 24" fill="none" stroke="#ff3b5c" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12,19 C12,19 5,14.5 5,10 C5,7 7.5,5 10,5 C11.5,5 12,6 12,6 C12,6 12.5,5 14,5 C16.5,5 19,7 19,10 C19,14.5 12,19 12,19 Z" fill="#ff8fb0" fill-opacity="0.3"/><path d="M9,11 C9,11 10,12 12,12 C14,12 15,11 15,11" stroke="#ff3b5c" stroke-width="1.2" fill="none"/></svg>`
 };
 
 function renderBallGrid() {
@@ -1290,14 +1308,17 @@ function onBallItemClick(item) {
 }
 
 function showPlaceholder(name) {
+  const overlay = createModal('');
+  overlay.querySelector('.modal-panel').innerHTML = `<div class="placeholder-tip">${name}<br><br>即将到来</div>`;
+}
+
+function createModal(innerHTML) {
   const overlay = document.createElement('div');
   overlay.className = 'modal-overlay';
-  overlay.innerHTML = `<div class="modal-panel"><button class="modal-close">✕</button><div class="placeholder-tip">${name}<br><br>即将到来</div></div>`;
+  overlay.innerHTML = `<div class="modal-panel">${innerHTML}</div>`;
   document.body.appendChild(overlay);
-  overlay.addEventListener('click', (e) => {
-    if (e.target === overlay) overlay.remove();
-  });
-  overlay.querySelector('.modal-close').addEventListener('click', () => overlay.remove());
+  overlay.addEventListener('click', (e) => { if (e.target === overlay) overlay.remove(); });
+  return overlay;
 }
 
 function toggleBallPanel() {
@@ -1316,30 +1337,18 @@ function closeBallPanel() {
 }
 
 document.getElementById('floating-ball').addEventListener('click', (e) => {
-  if (e.target.closest('#floating-ball') && !e.defaultPrevented) {
-    toggleBallPanel();
-  }
+  if (!e.defaultPrevented) toggleBallPanel();
 });
-    // ========== 小世界面板 ==========
+  // ========== 小世界面板 ==========
 function openWorldPanel() {
-  const overlay = document.createElement('div');
-  overlay.className = 'modal-overlay';
-  overlay.innerHTML = `
-  <div class="modal-panel">
-    <button class="modal-close">✕</button>
+  const overlay = createModal(`
     <div class="ball-grid">
       <div class="ball-item" id="world-card"><div class="icon-wrap">${ICONS.note}</div><span>字卡</span></div>
-      <div class="ball-item" id="world-sticker"><div class="icon-wrap">${ICONS.heartbeat}</div><span>贴纸</span></div>
+      <div class="ball-item" id="world-sticker"><div class="icon-wrap">${ICONS.sticker || ICONS.heartbeat}</div><span>贴纸</span></div>
       <div class="ball-item" id="world-bg"><div class="icon-wrap">${ICONS.playback}</div><span>背景</span></div>
       <div class="ball-item" id="world-avatar"><div class="icon-wrap">${ICONS.lover}</div><span>头像</span></div>
       <div class="ball-item" id="world-music"><div class="icon-wrap">${ICONS.music}</div><span>歌单</span></div>
-    </div>
-  </div>`;
-  document.body.appendChild(overlay);
-  overlay.addEventListener('click', (e) => {
-    if (e.target === overlay) overlay.remove();
-  });
-  overlay.querySelector('.modal-close').addEventListener('click', () => overlay.remove());
+    </div>`);
   overlay.querySelector('#world-card').addEventListener('click', () => { overlay.remove(); openCardPanel(); });
   overlay.querySelector('#world-sticker').addEventListener('click', () => { overlay.remove(); showPlaceholder('贴纸'); });
   overlay.querySelector('#world-bg').addEventListener('click', () => { overlay.remove(); openBGPanel(); });
@@ -1351,13 +1360,9 @@ function openWorldPanel() {
 let cardPageMode = false;
 
 function openCardPanel() {
-  const overlay = document.createElement('div');
-  overlay.className = 'modal-overlay';
-  overlay.innerHTML = `
-  <div class="modal-panel" id="card-panel">
-    <button class="modal-close">✕</button>
+  const overlay = createModal(`
     <div class="card-search-row"><input type="text" id="card-search-btn" placeholder="搜索字卡" readonly></div>
-    <div class="card-input-row"><input type="text" id="card-add-input" placeholder="添加新字卡..."></div>
+    <div class="card-input-row"><input type="text" id="card-add-input" placeholder="添加新字卡..." readonly></div>
     <div class="card-actions-row">
       <button class="mini-btn" id="card-file-import">文件导入</button>
       <button class="mini-btn" id="card-file-export">文件导出</button>
@@ -1368,24 +1373,19 @@ function openCardPanel() {
       <span id="card-count-text">总数量：0 张</span>
       <button class="mini-btn" id="card-batch-confirm" style="display:none;">一键删除</button>
     </div>
-    <div class="card-list" id="card-list"></div>
-  </div>`;
-  document.body.appendChild(overlay);
-  overlay.addEventListener('click', (e) => {
-    if (e.target === overlay) overlay.remove();
-  });
-  overlay.querySelector('.modal-close').addEventListener('click', () => overlay.remove());
-  loadCardList(overlay);
-  bindCardEvents(overlay);
+    <div class="card-list" id="card-list"></div>`);
+  const panel = overlay.querySelector('.modal-panel');
+  loadCardList(panel);
+  bindCardEvents(panel);
 }
 
-async function loadCardList(overlay) {
+async function loadCardList(panel) {
   const cards = await idbGetAll('cards');
-  const list = overlay.querySelector('#card-list');
-  const countText = overlay.querySelector('#card-count-text');
+  const list = panel.querySelector('#card-list');
+  const countText = panel.querySelector('#card-count-text');
   countText.textContent = `总数量：${cards.length} 张`;
   list.innerHTML = '';
-  if (cards.length === 0) {
+  if (!cards.length) {
     list.innerHTML = '<div class="placeholder-tip">还没有字卡，快点添加吧</div>';
     return;
   }
@@ -1404,35 +1404,28 @@ async function loadCardList(overlay) {
   });
 }
 
-function bindCardEvents(overlay) {
-  const list = overlay.querySelector('#card-list');
-  const addInput = overlay.querySelector('#card-add-input');
-  const batchDelBtn = overlay.querySelector('#card-batch-del');
-  const batchConfirm = overlay.querySelector('#card-batch-confirm');
-  const recycleBtn = overlay.querySelector('#card-recycle');
-  const importBtn = overlay.querySelector('#card-file-import');
-  const exportBtn = overlay.querySelector('#card-file-export');
-  const searchBtn = overlay.querySelector('#card-search-btn');
+function bindCardEvents(panel) {
+  const list = panel.querySelector('#card-list');
+  const addInput = panel.querySelector('#card-add-input');
+  const batchDelBtn = panel.querySelector('#card-batch-del');
+  const batchConfirm = panel.querySelector('#card-batch-confirm');
+  const recycleBtn = panel.querySelector('#card-recycle');
+  const importBtn = panel.querySelector('#card-file-import');
+  const exportBtn = panel.querySelector('#card-file-export');
+  const searchBtn = panel.querySelector('#card-search-btn');
 
-  addInput.addEventListener('keydown', (e) => {
-    if (e.key === 'Enter' && addInput.value.trim()) {
-      addSingleCard(addInput.value.trim(), overlay);
-      addInput.value = '';
-    }
-  });
+  addInput.addEventListener('click', () => openAddCardDialog(panel));
 
   batchDelBtn.addEventListener('click', () => {
     cardPageMode = !cardPageMode;
-    const boxes = overlay.querySelectorAll('.card-checkbox');
+    const boxes = panel.querySelectorAll('.card-checkbox');
     boxes.forEach(b => b.style.display = cardPageMode ? 'inline-block' : 'none');
     batchConfirm.style.display = cardPageMode ? 'inline-block' : 'none';
-    if (!cardPageMode) {
-      boxes.forEach(b => b.checked = false);
-    }
+    if (!cardPageMode) boxes.forEach(b => b.checked = false);
   });
 
   batchConfirm.addEventListener('click', async () => {
-    const checked = overlay.querySelectorAll('.card-checkbox:checked');
+    const checked = panel.querySelectorAll('.card-checkbox:checked');
     for (const box of checked) {
       const id = Number(box.closest('.card-item').dataset.id);
       const card = (await idbGetAll('cards')).find(c => c.id === id);
@@ -1444,10 +1437,10 @@ function bindCardEvents(overlay) {
       }
     }
     cardPageMode = false;
-    loadCardList(overlay);
+    loadCardList(panel);
   });
 
-  recycleBtn.addEventListener('click', () => openRecyclePanel(overlay));
+  recycleBtn.addEventListener('click', () => openRecyclePanel(panel));
 
   importBtn.addEventListener('click', () => {
     const inp = document.createElement('input');
@@ -1466,39 +1459,28 @@ function bindCardEvents(overlay) {
         }
       } else {
         const lines = text.split('\n').map(s => s.trim()).filter(Boolean);
-        for (const line of lines) {
-          await idbPut('cards', { content: line });
-        }
+        for (const line of lines) await idbPut('cards', { content: line });
       }
-      loadCardList(overlay);
+      loadCardList(panel);
     };
     inp.click();
   });
 
   exportBtn.addEventListener('click', () => {
-    const fmtOverlay = document.createElement('div');
-    fmtOverlay.className = 'modal-overlay';
-    fmtOverlay.innerHTML = `<div class="modal-panel">
-      <button class="modal-close">✕</button>
+    const fmtOverlay = createModal(`
       <div class="big-input-title">导出格式</div>
       <div style="display:flex;gap:10px;justify-content:center;margin-top:10px;">
         <button class="mini-btn" id="export-txt">TXT</button>
         <button class="mini-btn" id="export-json">JSON</button>
-      </div>
-    </div>`;
-    document.body.appendChild(fmtOverlay);
-    fmtOverlay.addEventListener('click', (e) => { if (e.target === fmtOverlay) fmtOverlay.remove(); });
-    fmtOverlay.querySelector('.modal-close').addEventListener('click', () => fmtOverlay.remove());
+      </div>`);
     fmtOverlay.querySelector('#export-txt').addEventListener('click', async () => {
       const cards = await idbGetAll('cards');
-      const txt = cards.map(c => c.content).join('\n');
-      downloadFile(txt, '字卡导出.txt', 'text/plain');
+      downloadFile(cards.map(c => c.content).join('\n'), '字卡导出.txt', 'text/plain');
       fmtOverlay.remove();
     });
     fmtOverlay.querySelector('#export-json').addEventListener('click', async () => {
       const cards = await idbGetAll('cards');
-      const json = JSON.stringify({ cards }, null, 2);
-      downloadFile(json, '字卡导出.json', 'application/json');
+      downloadFile(JSON.stringify({ cards }, null, 2), '字卡导出.json', 'application/json');
       fmtOverlay.remove();
     });
   });
@@ -1517,78 +1499,74 @@ function bindCardEvents(overlay) {
       recycled.push(card);
       localStorage.setItem('recycledCards', JSON.stringify(recycled));
       await idbDelete('cards', id);
-      loadCardList(overlay);
+      loadCardList(panel);
     } else if (e.target.closest('.card-edit')) {
-      showEditCardDialog(id, card.content, overlay);
+      showEditCardDialog(id, card.content, panel);
     }
   });
 }
 
-async function addSingleCard(content, overlay) {
-  await idbPut('cards', { content });
-  loadCardList(overlay);
+function openAddCardDialog(panel) {
+  const overlay = createModal(`
+    <div class="big-input-title">字卡内容</div>
+    <textarea class="big-input-area" id="add-card-area" placeholder="他会用这些字卡回复你哦"></textarea>
+    <div class="big-input-hint">一行一条字卡，换行分隔</div>
+    <button class="save-btn-center" id="save-add-card">保存字卡</button>`);
+  overlay.querySelector('#save-add-card').addEventListener('click', async () => {
+    const text = overlay.querySelector('#add-card-area').value.trim();
+    if (!text) return;
+    const lines = text.split('\n').map(s => s.trim()).filter(Boolean);
+    for (const line of lines) await idbPut('cards', { content: line });
+    showToast(`已添加 ${lines.length} 张字卡`);
+    overlay.remove();
+    loadCardList(panel);
+  });
 }
 
-function showEditCardDialog(id, content, panelOverlay) {
-  const overlay = document.createElement('div');
-  overlay.className = 'modal-overlay';
-  overlay.innerHTML = `<div class="modal-panel">
-    <button class="modal-close">✕</button>
+function showEditCardDialog(id, content, panel) {
+  const overlay = createModal(`
     <div class="big-input-title">编辑字卡</div>
     <textarea class="big-input-area" id="edit-card-area">${escapeHtml(content)}</textarea>
-    <div style="display:flex;justify-content:center;margin-top:16px;">
-      <button class="save-btn-center" id="save-edit-card">保存</button>
-    </div>
-  </div>`;
-  document.body.appendChild(overlay);
-  overlay.addEventListener('click', (e) => { if (e.target === overlay) overlay.remove(); });
-  overlay.querySelector('.modal-close').addEventListener('click', () => overlay.remove());
+    <button class="save-btn-center" id="save-edit-card" style="margin-top:12px;">保存</button>`);
   overlay.querySelector('#save-edit-card').addEventListener('click', async () => {
     const newContent = overlay.querySelector('#edit-card-area').value.trim();
     if (newContent) {
       await idbPut('cards', { id, content: newContent });
-      if (panelOverlay) loadCardList(panelOverlay);
+      if (panel) loadCardList(panel);
     }
     overlay.remove();
   });
 }
 
-function openRecyclePanel(panelOverlay) {
-  const overlay = document.createElement('div');
-  overlay.className = 'modal-overlay';
-  overlay.innerHTML = `<div class="modal-panel">
-    <button class="modal-close">✕</button>
+function openRecyclePanel(panel) {
+  const overlay = createModal(`
     <div class="big-input-title">回收站</div>
     <div class="card-count-row"><span id="recycle-count"></span></div>
     <div class="card-list" id="recycle-list"></div>
     <div style="display:flex;gap:8px;justify-content:center;margin-top:12px;">
       <button class="mini-btn" id="recycle-restore-all">全部恢复</button>
       <button class="mini-btn" id="recycle-clear-all">清空</button>
-    </div>
-  </div>`;
-  document.body.appendChild(overlay);
-  overlay.addEventListener('click', (e) => { if (e.target === overlay) overlay.remove(); });
-  overlay.querySelector('.modal-close').addEventListener('click', () => overlay.remove());
-  loadRecycleList(overlay);
+    </div>`);
+  loadRecycleList(overlay, panel);
   overlay.querySelector('#recycle-restore-all').addEventListener('click', async () => {
     const recycled = JSON.parse(localStorage.getItem('recycledCards') || '[]');
     for (const c of recycled) await idbPut('cards', { content: c.content });
     localStorage.setItem('recycledCards', '[]');
-    loadRecycleList(overlay);
-    if (panelOverlay) loadCardList(panelOverlay);
+    loadRecycleList(overlay, panel);
+    if (panel) loadCardList(panel);
   });
   overlay.querySelector('#recycle-clear-all').addEventListener('click', () => {
     localStorage.setItem('recycledCards', '[]');
-    loadRecycleList(overlay);
+    loadRecycleList(overlay, panel);
   });
 }
 
-function loadRecycleList(overlay) {
+function loadRecycleList(overlay, panel) {
   const recycled = JSON.parse(localStorage.getItem('recycledCards') || '[]');
   overlay.querySelector('#recycle-count').textContent = `共 ${recycled.length} 张`;
   const list = overlay.querySelector('#recycle-list');
   list.innerHTML = '';
-  if (recycled.length === 0) {
+  if (!recycled.length) {
     list.innerHTML = '<div class="placeholder-tip">回收站是空的</div>';
     return;
   }
@@ -1602,29 +1580,22 @@ function loadRecycleList(overlay) {
       await idbPut('cards', { content: all[i].content });
       all.splice(i, 1);
       localStorage.setItem('recycledCards', JSON.stringify(all));
-      loadRecycleList(overlay);
+      loadRecycleList(overlay, panel);
     });
     div.querySelector('.recycle-forever').addEventListener('click', () => {
       const all = JSON.parse(localStorage.getItem('recycledCards') || '[]');
       all.splice(i, 1);
       localStorage.setItem('recycledCards', JSON.stringify(all));
-      loadRecycleList(overlay);
+      loadRecycleList(overlay, panel);
     });
     list.appendChild(div);
   });
 }
 
 function openCardSearchPanel() {
-  const overlay = document.createElement('div');
-  overlay.className = 'modal-overlay';
-  overlay.innerHTML = `<div class="modal-panel">
-    <button class="modal-close">✕</button>
+  const overlay = createModal(`
     <div class="card-search-row"><input type="text" id="card-search-input" placeholder="请输入搜索内容..."></div>
-    <div class="card-list" id="card-search-results"></div>
-  </div>`;
-  document.body.appendChild(overlay);
-  overlay.addEventListener('click', (e) => { if (e.target === overlay) overlay.remove(); });
-  overlay.querySelector('.modal-close').addEventListener('click', () => overlay.remove());
+    <div class="card-list" id="card-search-results"></div>`);
   const searchInput = overlay.querySelector('#card-search-input');
   const resultList = overlay.querySelector('#card-search-results');
   searchInput.addEventListener('input', async () => {
@@ -1650,38 +1621,27 @@ function openCardSearchPanel() {
   });
   searchInput.dispatchEvent(new Event('input'));
 }
-    // ========== 头像面板 ==========
+  // ========== 头像面板 ==========
 function openAvatarPanel() {
-  const overlay = document.createElement('div');
-  overlay.className = 'modal-overlay';
-  overlay.innerHTML = `
-  <div class="modal-panel">
-    <button class="modal-close">✕</button>
+  const overlay = createModal(`
     <div class="about-section">
       <img class="about-avatar" id="about-ta-avatar" alt="TA">
       <div class="about-info">
-        <div class="about-name">关于TA</div>
-        <div class="about-nick">名字：${escapeHtml(settings.taName)}</div>
-        <div class="about-nick">昵称：${escapeHtml(settings.taNick || '未设置')}</div>
+        <div class="about-name" id="about-ta-name">关于TA</div>
+        <div class="about-nick" id="about-ta-nick">名字：${escapeHtml(settings.taName)} ｜ 昵称：${escapeHtml(settings.taNick || '未设置')}</div>
       </div>
       <button class="mini-btn" id="about-ta-change">更换</button>
     </div>
     <div class="about-section">
       <img class="about-avatar" id="about-me-avatar" alt="我">
       <div class="about-info">
-        <div class="about-name">关于我</div>
-        <div class="about-nick">名字：${escapeHtml(settings.meName)}</div>
-        <div class="about-nick">昵称：${escapeHtml(settings.meNick || '未设置')}</div>
+        <div class="about-name" id="about-me-name">关于我</div>
+        <div class="about-nick" id="about-me-nick">名字：${escapeHtml(settings.meName)} ｜ 昵称：${escapeHtml(settings.meNick || '未设置')}</div>
       </div>
       <button class="mini-btn" id="about-me-change">更换</button>
     </div>
-    <div class="big-input-title">头像库</div>
     <div class="library-grid" id="avatar-library"></div>
-    <button class="upload-btn" id="avatar-upload-btn">上传头像</button>
-  </div>`;
-  document.body.appendChild(overlay);
-  overlay.addEventListener('click', (e) => { if (e.target === overlay) overlay.remove(); });
-  overlay.querySelector('.modal-close').addEventListener('click', () => overlay.remove());
+    <button class="upload-btn" id="avatar-upload-btn">上传头像</button>`);
   updateAvatarPanelPreviews(overlay);
   loadAvatarLibrary(overlay);
   bindAvatarEvents(overlay);
@@ -1704,89 +1664,179 @@ function loadAvatarLibrary(overlay) {
     const div = document.createElement('div');
     div.className = 'lib-item';
     if (settings.taAvatar === a.data || settings.meAvatar === a.data) div.classList.add('active');
-    div.innerHTML = `<img src="${a.data}" alt="">`;
-    div.addEventListener('click', () => {
-      const act = prompt('设为：1-TA 2-我 3-情侣可用（可多选用逗号）');
-      if (act) {
-        if (act.includes('1')) settings.taAvatar = a.data;
-        if (act.includes('2')) settings.meAvatar = a.data;
-        saveSettings();
-        applySettings();
-        updateAvatarPanelPreviews(overlay);
+    div.innerHTML = `<img src="${a.data}" alt=""><button class="lib-del">✕</button>`;
+    div.addEventListener('click', (e) => {
+      if (e.target.closest('.lib-del')) {
+        lib.splice(i, 1);
+        localStorage.setItem('avatarLibrary', JSON.stringify(lib));
         loadAvatarLibrary(overlay);
+        return;
       }
+      openAvatarMarkDialog(a.data, overlay);
     });
     grid.appendChild(div);
   });
 }
 
+function openAvatarMarkDialog(data, panelOverlay) {
+  const overlay = createModal(`
+    <div class="big-input-title">标记头像</div>
+    <div style="display:flex;gap:8px;justify-content:center;margin-top:10px;">
+      <button class="mini-btn" id="mark-ta">TA</button>
+      <button class="mini-btn" id="mark-me">我</button>
+      <button class="mini-btn" id="mark-couple">情侣可用</button>
+    </div>`);
+  overlay.querySelector('#mark-ta').addEventListener('click', () => {
+    settings.taAvatar = data;
+    saveSettings();
+    applySettings();
+    overlay.remove();
+    panelOverlay.remove();
+    openAvatarPanel();
+  });
+  overlay.querySelector('#mark-me').addEventListener('click', () => {
+    settings.meAvatar = data;
+    saveSettings();
+    applySettings();
+    overlay.remove();
+    panelOverlay.remove();
+    openAvatarPanel();
+  });
+  overlay.querySelector('#mark-couple').addEventListener('click', () => {
+    const lib = JSON.parse(localStorage.getItem('avatarLibrary') || '[]');
+    const item = lib.find(a => a.data === data);
+    if (item) {
+      item.tags = item.tags || [];
+      if (!item.tags.includes('couple')) item.tags.push('couple');
+      localStorage.setItem('avatarLibrary', JSON.stringify(lib));
+    }
+    showToast('已标记为情侣可用');
+    overlay.remove();
+    loadAvatarLibrary(panelOverlay);
+  });
+}
+
 function bindAvatarEvents(overlay) {
+  overlay.querySelector('#about-ta-name').addEventListener('click', () => openNameEdit('ta', overlay));
+  overlay.querySelector('#about-ta-nick').addEventListener('click', () => openNickEdit('ta', overlay));
+  overlay.querySelector('#about-me-name').addEventListener('click', () => openNameEdit('me', overlay));
+  overlay.querySelector('#about-me-nick').addEventListener('click', () => openNickEdit('me', overlay));
+
   overlay.querySelector('#about-ta-change').addEventListener('click', () => {
     const lib = JSON.parse(localStorage.getItem('avatarLibrary') || '[]');
-    if (!lib.length) return alert('头像库是空的，先上传吧');
-    const idx = prompt(`输入头像序号（1-${lib.length}）`);
-    if (idx) {
-      const i = Number(idx) - 1;
-      if (lib[i]) {
-        settings.taAvatar = lib[i].data;
-        saveSettings();
-        applySettings();
-        updateAvatarPanelPreviews(overlay);
-        loadAvatarLibrary(overlay);
-      }
-    }
+    if (!lib.length) return showToast('头像库是空的');
+    openAvatarSelectDialog('ta', lib, overlay);
   });
   overlay.querySelector('#about-me-change').addEventListener('click', () => {
     const lib = JSON.parse(localStorage.getItem('avatarLibrary') || '[]');
-    if (!lib.length) return alert('头像库是空的，先上传吧');
-    const idx = prompt(`输入头像序号（1-${lib.length}）`);
-    if (idx) {
-      const i = Number(idx) - 1;
-      if (lib[i]) {
-        settings.meAvatar = lib[i].data;
-        saveSettings();
-        applySettings();
-        updateAvatarPanelPreviews(overlay);
-        loadAvatarLibrary(overlay);
-      }
-    }
+    if (!lib.length) return showToast('头像库是空的');
+    openAvatarSelectDialog('me', lib, overlay);
   });
   overlay.querySelector('#avatar-upload-btn').addEventListener('click', () => {
     const inp = document.createElement('input');
     inp.type = 'file';
     inp.accept = 'image/*';
+    inp.multiple = true;
     inp.onchange = (e) => {
-      const file = e.target.files[0];
-      if (!file) return;
-      const reader = new FileReader();
-      reader.onload = async () => {
-        const lib = JSON.parse(localStorage.getItem('avatarLibrary') || '[]');
-        lib.push({ data: reader.result, tags: [] });
-        localStorage.setItem('avatarLibrary', JSON.stringify(lib));
-        loadAvatarLibrary(overlay);
-      };
-      reader.readAsDataURL(file);
+      const files = Array.from(e.target.files);
+      let loaded = 0;
+      files.forEach(file => {
+        const reader = new FileReader();
+        reader.onload = () => {
+          const lib = JSON.parse(localStorage.getItem('avatarLibrary') || '[]');
+          lib.push({ data: reader.result, tags: [] });
+          localStorage.setItem('avatarLibrary', JSON.stringify(lib));
+          loaded++;
+          if (loaded === files.length) loadAvatarLibrary(overlay);
+        };
+        reader.readAsDataURL(file);
+      });
     };
     inp.click();
   });
 }
 
-// ========== 背景面板 ==========
+function openAvatarSelectDialog(who, lib, panelOverlay) {
+  const overlay = createModal(`<div class="library-grid" id="avatar-select-grid"></div>`);
+  const grid = overlay.querySelector('#avatar-select-grid');
+  lib.forEach((a, i) => {
+    const div = document.createElement('div');
+    div.className = 'lib-item';
+    div.innerHTML = `<img src="${a.data}" alt="">`;
+    div.addEventListener('click', () => {
+      if (who === 'ta') settings.taAvatar = a.data;
+      else settings.meAvatar = a.data;
+      saveSettings();
+      applySettings();
+      overlay.remove();
+      panelOverlay.remove();
+      openAvatarPanel();
+    });
+    grid.appendChild(div);
+  });
+}
+
+function openNameEdit(who, panelOverlay) {
+  const current = who === 'ta' ? settings.taName : settings.meName;
+  const overlay = createModal(`
+    <div class="big-input-title">修改名字</div>
+    <input type="text" id="name-edit-input" value="${escapeHtml(current)}" style="width:100%;background:rgba(255,255,255,0.5);border:1px solid rgba(255,255,255,0.6);border-radius:14px;padding:10px 14px;font-size:15px;color:#4a3f3a;outline:none;">
+    <button class="save-btn-center" id="save-name-edit" style="margin-top:14px;">保存</button>`);
+  overlay.querySelector('#save-name-edit').addEventListener('click', () => {
+    const val = overlay.querySelector('#name-edit-input').value.trim();
+    if (val) {
+      if (who === 'ta') settings.taName = val;
+      else settings.meName = val;
+      saveSettings();
+      applySettings();
+    }
+    overlay.remove();
+    panelOverlay.remove();
+    openAvatarPanel();
+  });
+}
+
+function openNickEdit(who, panelOverlay) {
+  const current = who === 'ta' ? settings.taNick : settings.meNick;
+  const overlay = createModal(`
+    <div class="big-input-title">修改昵称</div>
+    <input type="text" id="nick-edit-input" value="${escapeHtml(current || '')}" placeholder="输入昵称" style="width:100%;background:rgba(255,255,255,0.5);border:1px solid rgba(255,255,255,0.6);border-radius:14px;padding:10px 14px;font-size:15px;color:#4a3f3a;outline:none;">
+    <button class="save-btn-center" id="save-nick-edit" style="margin-top:14px;">保存</button>`);
+  overlay.querySelector('#save-nick-edit').addEventListener('click', () => {
+    const val = overlay.querySelector('#nick-edit-input').value.trim();
+    if (who === 'ta') settings.taNick = val;
+    else settings.meNick = val;
+    saveSettings();
+    applySettings();
+    overlay.remove();
+    panelOverlay.remove();
+    openAvatarPanel();
+  });
+}
+
+// ========== TA自主换头像 ==========
+function scheduleTAAvatarChange() {
+  setInterval(async () => {
+    if (Math.random() < 0.1) {
+      const lib = JSON.parse(localStorage.getItem('avatarLibrary') || '[]');
+      if (!lib.length) return;
+      const candidates = lib.filter(a => a.tags && (a.tags.includes('couple') || a.tags.includes('ta')));
+      const pool = candidates.length ? candidates : lib;
+      const pick = pool[Math.floor(Math.random() * pool.length)];
+      settings.taAvatar = pick.data;
+      await saveSettings();
+      applySettings();
+      showToast('TA换了一个头像');
+    }
+  }, 1800000);
+}
+  // ========== 背景面板 ==========
 function openBGPanel() {
-  const overlay = document.createElement('div');
-  overlay.className = 'modal-overlay';
-  overlay.innerHTML = `
-  <div class="modal-panel">
-    <button class="modal-close">✕</button>
+  const overlay = createModal(`
     <div class="big-input-title">当前背景</div>
     <div style="width:100%;height:120px;border-radius:16px;overflow:hidden;margin-bottom:12px;" id="current-bg-preview"></div>
-    <div class="big-input-title">背景库</div>
     <div class="library-grid" id="bg-library"></div>
-    <button class="upload-btn" id="bg-upload-btn">上传背景</button>
-  </div>`;
-  document.body.appendChild(overlay);
-  overlay.addEventListener('click', (e) => { if (e.target === overlay) overlay.remove(); });
-  overlay.querySelector('.modal-close').addEventListener('click', () => overlay.remove());
+    <button class="upload-btn" id="bg-upload-btn">上传背景</button>`);
   loadBGPanel(overlay);
 }
 
@@ -1804,8 +1854,17 @@ function loadBGPanel(overlay) {
     const div = document.createElement('div');
     div.className = 'lib-item';
     if (settings.bgCurrent === b) div.classList.add('active');
-    div.innerHTML = `<img src="${b}" alt="">`;
-    div.addEventListener('click', () => {
+    div.innerHTML = `<img src="${b}" alt=""><button class="lib-del">✕</button>`;
+    div.addEventListener('click', (e) => {
+      if (e.target.closest('.lib-del')) {
+        lib.splice(i, 1);
+        localStorage.setItem('bgLibrary', JSON.stringify(lib));
+        if (settings.bgCurrent === b) settings.bgCurrent = '';
+        saveSettings();
+        applyBG();
+        loadBGPanel(overlay);
+        return;
+      }
       settings.bgCurrent = b;
       saveSettings();
       applyBG();
@@ -1817,17 +1876,21 @@ function loadBGPanel(overlay) {
     const inp = document.createElement('input');
     inp.type = 'file';
     inp.accept = 'image/*';
+    inp.multiple = true;
     inp.onchange = (e) => {
-      const file = e.target.files[0];
-      if (!file) return;
-      const reader = new FileReader();
-      reader.onload = () => {
-        const lib = JSON.parse(localStorage.getItem('bgLibrary') || '[]');
-        lib.push(reader.result);
-        localStorage.setItem('bgLibrary', JSON.stringify(lib));
-        loadBGPanel(overlay);
-      };
-      reader.readAsDataURL(file);
+      const files = Array.from(e.target.files);
+      let loaded = 0;
+      files.forEach(file => {
+        const reader = new FileReader();
+        reader.onload = () => {
+          const lib = JSON.parse(localStorage.getItem('bgLibrary') || '[]');
+          lib.push(reader.result);
+          localStorage.setItem('bgLibrary', JSON.stringify(lib));
+          loaded++;
+          if (loaded === files.length) loadBGPanel(overlay);
+        };
+        reader.readAsDataURL(file);
+      });
     };
     inp.click();
   });
@@ -1842,11 +1905,13 @@ function applyBG() {
     const img = new Image();
     img.onload = () => {
       ctx.clearRect(0, 0, canvas.width, canvas.height);
-      ctx.globalAlpha = 0.35;
-      ctx.filter = 'blur(10px)';
+      ctx.globalAlpha = 0.85;
+      ctx.filter = 'none';
       ctx.drawImage(img, 0, 0, canvas.width, canvas.height);
       ctx.filter = 'none';
       ctx.globalAlpha = 1;
+      ctx.fillStyle = 'rgba(255,255,255,0.12)';
+      ctx.fillRect(0, 0, canvas.width, canvas.height);
     };
     img.src = settings.bgCurrent;
   } else {
@@ -1864,83 +1929,118 @@ function drawDefaultBG(ctx, w, h) {
   ctx.fillRect(0, 0, w, h);
 }
 
-// ========== 设置面板 ==========
-function openSettingsPanel() {
-  const overlay = document.createElement('div');
-  overlay.className = 'modal-overlay';
-  overlay.innerHTML = `
-  <div class="modal-panel">
-    <button class="modal-close">✕</button>
-    <div class="big-input-title">设置</div>
-    <div style="margin-bottom:8px;font-size:13px;color:#6b4c3b;">回复速度</div>
-    <select id="set-reply-tpl" class="mini-btn" style="width:100%;margin-bottom:8px;">
-      <option value="instant">即时陪伴（1~3秒）</option>
-      <option value="natural" selected>日常闲聊（5~8秒）</option>
-      <option value="distant">若即若离（30秒~2分钟）</option>
-      <option value="custom">自定义</option>
-    </select>
-    <div style="display:flex;gap:8px;margin-bottom:8px;">
-      <input type="number" id="set-reply-min" placeholder="最小毫秒" value="5000" style="flex:1;background:rgba(255,255,255,0.5);border:1px solid rgba(255,255,255,0.6);border-radius:12px;padding:8px;font-size:13px;color:#4a3f3a;outline:none;">
-      <input type="number" id="set-reply-max" placeholder="最大毫秒" value="8000" style="flex:1;background:rgba(255,255,255,0.5);border:1px solid rgba(255,255,255,0.6);border-radius:12px;padding:8px;font-size:13px;color:#4a3f3a;outline:none;">
-    </div>
-    <div style="margin-bottom:8px;font-size:13px;color:#6b4c3b;">全屏模式</div>
-    <button class="mini-btn" id="set-fullscreen" style="width:100%;margin-bottom:8px;">开启/关闭全屏</button>
-    <div style="margin-bottom:8px;font-size:13px;color:#6b4c3b;">桌面提醒</div>
-    <button class="mini-btn" id="set-notif" style="width:100%;margin-bottom:8px;">请求通知权限</button>
-    <button class="mini-btn" id="set-backup-now" style="width:100%;margin-bottom:8px;">立即备份数据</button>
-    <button class="mini-btn" id="set-clear-all" style="width:100%;margin-bottom:8px;color:#c33;">清空所有数据</button>
-  </div>`;
-  document.body.appendChild(overlay);
-  overlay.addEventListener('click', (e) => { if (e.target === overlay) overlay.remove(); });
-  overlay.querySelector('.modal-close').addEventListener('click', () => overlay.remove());
-  bindSettingsEvents(overlay);
+// ========== TA随机换背景 ==========
+function scheduleTABGChange() {
+  setInterval(async () => {
+    if (Math.random() < 0.08) {
+      const lib = JSON.parse(localStorage.getItem('bgLibrary') || '[]');
+      if (!lib.length) return;
+      const pick = lib[Math.floor(Math.random() * lib.length)];
+      settings.bgCurrent = pick;
+      await saveSettings();
+      applyBG();
+      showToast('TA换了一张背景');
+    }
+  }, 2400000);
 }
 
-function bindSettingsEvents(overlay) {
-  const replyTpl = overlay.querySelector('#set-reply-tpl');
-  const replyMin = overlay.querySelector('#set-reply-min');
-  const replyMax = overlay.querySelector('#set-reply-max');
-  replyTpl.value = settings.replyTpl;
-  replyMin.value = settings.replyMin;
-  replyMax.value = settings.replyMax;
-  replyTpl.addEventListener('change', () => {
-    settings.replyTpl = replyTpl.value;
-    if (replyTpl.value === 'instant') { settings.replyMin = 1000; settings.replyMax = 3000; }
-    if (replyTpl.value === 'natural') { settings.replyMin = 5000; settings.replyMax = 8000; }
-    if (replyTpl.value === 'distant') { settings.replyMin = 30000; settings.replyMax = 120000; }
-    replyMin.value = settings.replyMin;
-    replyMax.value = settings.replyMax;
+// ========== 设置面板 ==========
+function openSettingsPanel() {
+  const overlay = createModal(`
+    <div style="margin-bottom:8px;font-size:13px;color:#4a3528;">回复速度</div>
+    <button class="mini-btn" id="set-reply-tpl-btn" style="width:100%;margin-bottom:8px;">选择模板</button>
+    <div id="set-reply-custom" style="display:none;margin-bottom:8px;">
+      <div style="display:flex;gap:8px;align-items:center;justify-content:center;">
+        <span style="font-size:13px;color:#4a3528;">最小</span>
+        <input type="number" id="set-reply-min" placeholder="秒" value="${settings.replyMin}" style="width:70px;background:rgba(255,255,255,0.5);border:1px solid rgba(255,255,255,0.6);border-radius:12px;padding:8px;font-size:13px;color:#4a3f3a;outline:none;">
+        <span style="font-size:13px;color:#4a3528;">秒</span>
+        <span style="font-size:13px;color:#4a3528;">最大</span>
+        <input type="number" id="set-reply-max" placeholder="秒" value="${settings.replyMax}" style="width:70px;background:rgba(255,255,255,0.5);border:1px solid rgba(255,255,255,0.6);border-radius:12px;padding:8px;font-size:13px;color:#4a3f3a;outline:none;">
+        <span style="font-size:13px;color:#4a3528;">秒</span>
+      </div>
+    </div>
+    <div style="margin-bottom:8px;font-size:13px;color:#4a3528;">全屏模式</div>
+    <button class="mini-btn" id="set-fullscreen" style="width:100%;margin-bottom:8px;">开启/关闭全屏</button>
+    <div style="margin-bottom:8px;font-size:13px;color:#4a3528;">桌面提醒</div>
+    <button class="mini-btn" id="set-notif" style="width:100%;margin-bottom:8px;">请求通知权限</button>
+    <button class="mini-btn" id="set-backup-now" style="width:100%;margin-bottom:8px;">立即备份数据</button>
+    <button class="mini-btn" id="set-clear-all" style="width:100%;margin-bottom:8px;color:#c33;">清空所有数据</button>`);
+  if (settings.replyTpl === 'custom') {
+    overlay.querySelector('#set-reply-custom').style.display = 'block';
+  }
+  overlay.querySelector('#set-reply-tpl-btn').addEventListener('click', () => openReplyTplDialog(overlay));
+  overlay.querySelector('#set-reply-min').addEventListener('change', (e) => {
+    settings.replyMin = Number(e.target.value);
+    settings.replyTpl = 'custom';
     saveSettings();
   });
-  replyMin.addEventListener('change', () => { settings.replyMin = Number(replyMin.value); settings.replyTpl = 'custom'; replyTpl.value = 'custom'; saveSettings(); });
-  replyMax.addEventListener('change', () => { settings.replyMax = Number(replyMax.value); settings.replyTpl = 'custom'; replyTpl.value = 'custom'; saveSettings(); });
+  overlay.querySelector('#set-reply-max').addEventListener('change', (e) => {
+    settings.replyMax = Number(e.target.value);
+    settings.replyTpl = 'custom';
+    saveSettings();
+  });
   overlay.querySelector('#set-fullscreen').addEventListener('click', () => {
     if (!document.fullscreenElement) document.documentElement.requestFullscreen();
     else document.exitFullscreen();
   });
   overlay.querySelector('#set-notif').addEventListener('click', () => {
-    if ('Notification' in window) Notification.requestPermission();
+    if (!('Notification' in window)) return showToast('浏览器不支持通知');
+    if (Notification.permission === 'granted') return showToast('通知已开启');
+    if (Notification.permission === 'denied') return showToast('通知被拒绝，请到浏览器设置打开');
+    Notification.requestPermission().then(perm => {
+      if (perm === 'granted') showToast('通知已开启');
+      else showToast('通知未开启');
+    });
   });
   overlay.querySelector('#set-backup-now').addEventListener('click', () => backupNow());
-  overlay.querySelector('#set-clear-all').addEventListener('click', async () => {
-    if (confirm('确定清空所有数据？此操作不可逆！')) {
+  overlay.querySelector('#set-clear-all').addEventListener('click', () => {
+    const confirmOverlay = createModal(`
+      <div class="big-input-title">确定清空所有数据？</div>
+      <div style="display:flex;gap:10px;justify-content:center;margin-top:10px;">
+        <button class="mini-btn" id="confirm-clear">确定</button>
+        <button class="mini-btn" id="cancel-clear">取消</button>
+      </div>`);
+    confirmOverlay.querySelector('#confirm-clear').addEventListener('click', async () => {
       await idbClear('cards');
       await idbClear('messages');
       localStorage.clear();
       settings = JSON.parse(JSON.stringify(DEFAULT_SETTINGS));
       await saveSettings();
       location.reload();
-    }
+    });
+    confirmOverlay.querySelector('#cancel-clear').addEventListener('click', () => confirmOverlay.remove());
   });
 }
-    // ========== 消息渲染 ==========
+
+function openReplyTplDialog(panelOverlay) {
+  const overlay = createModal(`
+    <div class="big-input-title">选择回复速度模板</div>
+    <div style="display:flex;flex-direction:column;gap:8px;margin-top:10px;">
+      <button class="mini-btn tpl-option" data-tpl="instant">即时陪伴（1~3秒）</button>
+      <button class="mini-btn tpl-option" data-tpl="natural">日常闲聊（5~8秒）</button>
+      <button class="mini-btn tpl-option" data-tpl="distant">若即若离（30秒~2分钟）</button>
+      <button class="mini-btn tpl-option" data-tpl="custom">自定义</button>
+    </div>`);
+  overlay.querySelectorAll('.tpl-option').forEach(btn => {
+    btn.addEventListener('click', () => {
+      const tpl = btn.dataset.tpl;
+      settings.replyTpl = tpl;
+      if (tpl === 'instant') { settings.replyMin = 1; settings.replyMax = 3; }
+      if (tpl === 'natural') { settings.replyMin = 5; settings.replyMax = 8; }
+      if (tpl === 'distant') { settings.replyMin = 30; settings.replyMax = 120; }
+      saveSettings();
+      overlay.remove();
+      panelOverlay.remove();
+      openSettingsPanel();
+    });
+  });
+}
+  // ========== 消息渲染 ==========
 async function renderMessages() {
   const area = document.getElementById('messages-area');
   const msgs = await idbGetAll('messages');
   area.innerHTML = '';
-  msgs.forEach(msg => {
-    area.appendChild(createMessageEl(msg));
-  });
+  msgs.forEach(msg => area.appendChild(createMessageEl(msg)));
   area.scrollTop = area.scrollHeight;
   renderPinnedArea(msgs);
 }
@@ -1951,14 +2051,21 @@ function createMessageEl(msg) {
   row.dataset.id = msg.id;
   const avatar = document.createElement('img');
   avatar.className = 'msg-avatar';
-  avatar.src = msg.sender === 'me' 
+  avatar.src = msg.sender === 'me'
     ? (settings.meAvatar || 'data:image/svg+xml,' + encodeURIComponent('<svg xmlns="http://www.w3.org/2000/svg" width="32" height="32"><circle cx="16" cy="16" r="15" fill="rgba(255,255,255,0.5)"/><text x="16" y="21" text-anchor="middle" font-size="12" fill="rgba(90,70,60,0.6)">我</text></svg>'))
     : (settings.taAvatar || 'data:image/svg+xml,' + encodeURIComponent('<svg xmlns="http://www.w3.org/2000/svg" width="32" height="32"><circle cx="16" cy="16" r="15" fill="rgba(255,255,255,0.5)"/><text x="16" y="21" text-anchor="middle" font-size="12" fill="rgba(90,70,60,0.6)">TA</text></svg>'));
   const wrapper = document.createElement('div');
   wrapper.className = 'msg-content-wrapper';
   const bubble = document.createElement('div');
   bubble.className = 'msg-bubble';
-  bubble.textContent = msg.content;
+  if (msg.imageData) {
+    bubble.style.padding = '4px';
+    bubble.style.background = 'transparent';
+    bubble.style.border = 'none';
+    bubble.innerHTML = `<img src="${msg.imageData}" style="max-width:200px;border-radius:12px;display:block;">`;
+  } else {
+    bubble.textContent = msg.content;
+  }
   wrapper.appendChild(bubble);
   const meta = document.createElement('div');
   meta.className = 'msg-meta';
@@ -2012,9 +2119,8 @@ document.getElementById('chat-input').addEventListener('keydown', (e) => {
 });
 document.getElementById('send-btn').addEventListener('click', () => {
   const input = document.getElementById('chat-input');
-  if (input.value.trim()) {
-    sendMyMessage();
-  }
+  if (input.value.trim()) sendMyMessage();
+  else togglePlusMenu();
 });
 
 async function sendMyMessage() {
@@ -2078,10 +2184,8 @@ function scheduleReadReceipt(msg) {
 // ========== 停止检测与回复 ==========
 function resetStopTimer() {
   clearTimeout(stopTimer);
-  const delayMs = Math.random() * (settings.replyMax - settings.replyMin) + settings.replyMin;
-  stopTimer = setTimeout(() => {
-    triggerTAReply();
-  }, delayMs);
+  const delayMs = Math.random() * (settings.replyMax * 1000 - settings.replyMin * 1000) + settings.replyMin * 1000;
+  stopTimer = setTimeout(() => triggerTAReply(), delayMs);
 }
 
 async function triggerTAReply() {
@@ -2104,7 +2208,7 @@ async function triggerTAReply() {
     replyQueue.push(card.content);
   }
   showTyping(true);
-  let waitTime = Math.random() * (settings.replyMax - settings.replyMin) * 0.6 + settings.replyMin * 0.4;
+  let waitTime = Math.random() * (settings.replyMax * 1000 - settings.replyMin * 1000) * 0.6 + settings.replyMin * 1000 * 0.4;
   await delay(waitTime);
   showTyping(false);
   for (let i = 0; i < replyQueue.length; i++) {
@@ -2145,9 +2249,7 @@ function showTyping(show) {
 
 // ========== TA主动发消息 ==========
 function scheduleTAActive() {
-  const min = settings.activeMin;
-  const max = settings.activeMax;
-  const next = Math.random() * (max - min) + min;
+  const next = Math.random() * (settings.activeMax - settings.activeMin) + settings.activeMin;
   setTimeout(async () => {
     const cards = await idbGetAll('cards');
     if (cards.length && !isReplying) {
@@ -2170,7 +2272,7 @@ function sendNotification(content) {
     new Notification('TA', { body: content });
   }
 }
-    // ========== 置顶 / 收藏 / 引用 / 删除（消息操作） ==========
+  // ========== 消息操作 ==========
 document.getElementById('messages-area').addEventListener('contextmenu', (e) => {
   e.preventDefault();
   const row = e.target.closest('.message-row');
@@ -2183,9 +2285,7 @@ document.getElementById('messages-area').addEventListener('touchstart', (e) => {
     const row = document.elementFromPoint(touch.clientX, touch.clientY).closest('.message-row');
     if (row) {
       clearTimeout(window._longPressTimer);
-      window._longPressTimer = setTimeout(() => {
-        showMessageActions(row);
-      }, 600);
+      window._longPressTimer = setTimeout(() => showMessageActions(row), 600);
     }
   }
 }, { passive: true });
@@ -2196,21 +2296,13 @@ document.getElementById('messages-area').addEventListener('touchend', () => {
 
 function showMessageActions(row) {
   const id = Number(row.dataset.id);
-  const overlay = document.createElement('div');
-  overlay.className = 'modal-overlay';
-  overlay.innerHTML = `<div class="modal-panel">
-    <button class="modal-close">✕</button>
-    <div class="big-input-title">消息操作</div>
+  const overlay = createModal(`
     <div style="display:grid;grid-template-columns:repeat(2,1fr);gap:8px;">
       <button class="mini-btn" id="act-pin">置顶</button>
       <button class="mini-btn" id="act-heart">收藏</button>
       <button class="mini-btn" id="act-quote">引用</button>
       <button class="mini-btn" id="act-del">删除</button>
-    </div>
-  </div>`;
-  document.body.appendChild(overlay);
-  overlay.addEventListener('click', (e) => { if (e.target === overlay) overlay.remove(); });
-  overlay.querySelector('.modal-close').addEventListener('click', () => overlay.remove());
+    </div>`);
   overlay.querySelector('#act-pin').addEventListener('click', async () => {
     const msgs = await idbGetAll('messages');
     const target = msgs.find(m => m.id === id);
@@ -2249,7 +2341,7 @@ function showMessageActions(row) {
   });
 }
 
-// ========== TA自主收藏/置顶 ==========
+// ========== TA自主行为 ==========
 function scheduleTAAutonomy() {
   setInterval(async () => {
     if (Math.random() < 0.2) {
@@ -2268,17 +2360,204 @@ function scheduleTAAutonomy() {
   }, 600000);
 }
 
+// ========== ⊕ 功能菜单 ==========
+function togglePlusMenu() {
+  const existing = document.querySelector('.plus-menu-overlay');
+  if (existing) {
+    existing.remove();
+    return;
+  }
+  const overlay = createModal(`
+    <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin-top:10px;">
+      <div class="plus-item" id="plus-camera"><div class="icon-wrap">${PLUS_ICONS.camera}</div><span>拍照</span></div>
+      <div class="plus-item" id="plus-album"><div class="icon-wrap">${PLUS_ICONS.album}</div><span>相册</span></div>
+      <div class="plus-item" id="plus-video"><div class="icon-wrap">${PLUS_ICONS.video}</div><span>视频</span></div>
+      <div class="plus-item" id="plus-sticker"><div class="icon-wrap">${PLUS_ICONS.sticker}</div><span>贴纸</span></div>
+      <div class="plus-item" id="plus-gift"><div class="icon-wrap">${PLUS_ICONS.gift}</div><span>礼物</span></div>
+      <div class="plus-item" id="plus-interact"><div class="icon-wrap">${PLUS_ICONS.interact}</div><span>互动</span></div>
+      <div class="plus-item" id="plus-telepathy"><div class="icon-wrap">${PLUS_ICONS.telepathy}</div><span>默契考验</span></div>
+      <div class="plus-item" id="plus-ball"><div class="icon-wrap">${PLUS_ICONS.ball}</div><span>悬浮球</span></div>
+    </div>`);
+  overlay.classList.add('plus-menu-overlay');
+  overlay.querySelector('#plus-camera').addEventListener('click', () => { overlay.remove(); openCamera(); });
+  overlay.querySelector('#plus-album').addEventListener('click', () => { overlay.remove(); openAlbum(); });
+  overlay.querySelector('#plus-video').addEventListener('click', () => { overlay.remove(); showPlaceholder('视频'); });
+  overlay.querySelector('#plus-sticker').addEventListener('click', () => { overlay.remove(); showPlaceholder('贴纸'); });
+  overlay.querySelector('#plus-gift').addEventListener('click', () => { overlay.remove(); showPlaceholder('礼物'); });
+  overlay.querySelector('#plus-interact').addEventListener('click', () => { overlay.remove(); showPlaceholder('互动'); });
+  overlay.querySelector('#plus-telepathy').addEventListener('click', () => { overlay.remove(); startTelepathy(); });
+  overlay.querySelector('#plus-ball').addEventListener('click', () => {
+    const ball = document.getElementById('floating-ball');
+    ball.style.display = ball.style.display === 'none' ? 'flex' : 'none';
+    overlay.remove();
+  });
+}
+
+function openCamera() {
+  const inp = document.createElement('input');
+  inp.type = 'file';
+  inp.accept = 'image/*';
+  inp.capture = 'environment';
+  inp.onchange = async (e) => {
+    const file = e.target.files[0];
+    if (!file) return;
+    const reader = new FileReader();
+    reader.onload = async () => await sendImageMessage(reader.result);
+    reader.readAsDataURL(file);
+  };
+  inp.click();
+}
+
+function openAlbum() {
+  const inp = document.createElement('input');
+  inp.type = 'file';
+  inp.accept = 'image/*';
+  inp.multiple = true;
+  inp.onchange = async (e) => {
+    const files = Array.from(e.target.files);
+    for (const file of files) {
+      const reader = new FileReader();
+      reader.onload = async () => await sendImageMessage(reader.result);
+      reader.readAsDataURL(file);
+    }
+  };
+  inp.click();
+}
+
+async function sendImageMessage(dataUrl) {
+  const msg = {
+    sender: 'me',
+    content: '[图片]',
+    imageData: dataUrl,
+    timestamp: Date.now(),
+    readTime: null,
+    pinned: false,
+    heartMark: null
+  };
+  const id = await idbPutReturnId('messages', msg);
+  msg.id = id;
+  appendMessage(msg);
+  settings.heartValue += 1;
+  await saveSettings();
+  updateHeartValue();
+  scheduleReadReceipt(msg);
+  resetStopTimer();
+}
+  // ========== 默契考验 ==========
+let telepathyActive = false;
+let telepathyQuestion = '';
+let telepathyMyAnswer = '';
+
+async function startTelepathy() {
+  const questions = JSON.parse(localStorage.getItem('telepathyQuestions') || '[]');
+  const cards = await idbGetAll('cards');
+  let question = '';
+  if (questions.length && Math.random() < 0.6) {
+    question = questions[Math.floor(Math.random() * questions.length)].question;
+  } else if (cards.length) {
+    question = '如果TA现在想对你说一句话，会是什么？';
+  } else {
+    showToast('先添加字卡或默契题');
+    return;
+  }
+  telepathyActive = true;
+  telepathyQuestion = question;
+  telepathyMyAnswer = '';
+  const sysMsg = {
+    sender: 'ta',
+    content: '💫 默契考验：' + question + '\n（请回答后发送）',
+    timestamp: Date.now(),
+    pinned: false,
+    heartMark: null,
+    isSystem: true
+  };
+  const id = await idbPutReturnId('messages', sysMsg);
+  sysMsg.id = id;
+  appendMessage(sysMsg);
+}
+
+async function checkTelepathy(myAnswer) {
+  if (!telepathyActive) return;
+  telepathyMyAnswer = myAnswer;
+  const cards = await idbGetAll('cards');
+  if (!cards.length) {
+    telepathyActive = false;
+    return;
+  }
+  const taCard = cards[Math.floor(Math.random() * cards.length)];
+  const taMsg = {
+    sender: 'ta',
+    content: taCard.content,
+    timestamp: Date.now(),
+    pinned: false,
+    heartMark: null
+  };
+  const id = await idbPutReturnId('messages', taMsg);
+  taMsg.id = id;
+  appendMessage(taMsg);
+  
+  const matched = taCard.content.includes(myAnswer) || myAnswer.includes(taCard.content);
+  let resultContent = '';
+  if (matched) {
+    resultContent = '💗 默契达成！心意值+10';
+    settings.heartValue += 10;
+  } else {
+    resultContent = '🤍 没达成默契，但TA在听。心意值+2';
+    settings.heartValue += 2;
+  }
+  await saveSettings();
+  updateHeartValue();
+  const resultMsg = {
+    sender: 'ta',
+    content: resultContent,
+    timestamp: Date.now(),
+    pinned: false,
+    heartMark: null,
+    isSystem: true
+  };
+  const rid = await idbPutReturnId('messages', resultMsg);
+  resultMsg.id = rid;
+  appendMessage(resultMsg);
+  telepathyActive = false;
+}
+
+// 修改sendMyMessage，在发送时检查默契
+const originalSendMyMessage = sendMyMessage;
+sendMyMessage = async function() {
+  const input = document.getElementById('chat-input');
+  const content = input.value.trim();
+  if (!content) return;
+  input.value = '';
+  updateSendBtn();
+  const msg = {
+    sender: 'me',
+    content,
+    timestamp: Date.now(),
+    readTime: null,
+    pinned: false,
+    heartMark: null
+  };
+  const id = await idbPutReturnId('messages', msg);
+  msg.id = id;
+  appendMessage(msg);
+  settings.heartValue += 1;
+  await saveSettings();
+  updateHeartValue();
+  scheduleReadReceipt(msg);
+  if (telepathyActive) {
+    checkTelepathy(content);
+  } else {
+    resetStopTimer();
+  }
+};
+
 // ========== 心动瞬间面板 ==========
 let heartCurrentTab = 'ta';
 let heartCurrentView = 'timeline';
 let heartPlaybackTimer = null;
 
 function openHeartPanel() {
-  const overlay = document.createElement('div');
-  overlay.className = 'modal-overlay';
-  overlay.innerHTML = `
-  <div class="modal-panel">
-    <button class="modal-close">✕</button>
+  const overlay = createModal(`
     <div class="heart-tabs">
       <button class="heart-tab active" id="heart-tab-ta">TA收藏的瞬间</button>
       <button class="heart-tab" id="heart-tab-me">我收藏的瞬间</button>
@@ -2288,14 +2567,7 @@ function openHeartPanel() {
       <button class="mini-btn" id="heart-view-timeline">时间线</button>
       <button class="mini-btn" id="heart-view-cards">卡片</button>
       <button class="mini-btn" id="heart-view-play">播放</button>
-    </div>
-  </div>`;
-  document.body.appendChild(overlay);
-  overlay.addEventListener('click', (e) => { if (e.target === overlay) overlay.remove(); });
-  overlay.querySelector('.modal-close').addEventListener('click', () => {
-    clearInterval(heartPlaybackTimer);
-    overlay.remove();
-  });
+    </div>`);
   overlay.querySelector('#heart-tab-ta').addEventListener('click', () => switchHeartTab('ta', overlay));
   overlay.querySelector('#heart-tab-me').addEventListener('click', () => switchHeartTab('me', overlay));
   overlay.querySelector('#heart-view-timeline').addEventListener('click', () => switchHeartView('timeline', overlay));
@@ -2319,11 +2591,8 @@ function switchHeartView(view, overlay) {
 
 async function getHeartMessages() {
   const msgs = await idbGetAll('messages');
-  if (heartCurrentTab === 'ta') {
-    return msgs.filter(m => m.heartMark && m.heartMark.includes('TA'));
-  } else {
-    return msgs.filter(m => m.heartMark && m.heartMark.includes('我'));
-  }
+  if (heartCurrentTab === 'ta') return msgs.filter(m => m.heartMark && m.heartMark.includes('TA'));
+  return msgs.filter(m => m.heartMark && m.heartMark.includes('我'));
 }
 
 async function renderHeartContent(overlay) {
@@ -2374,30 +2643,29 @@ async function renderHeartContent(overlay) {
     }, 1000);
   }
 }
-    // ========== 回忆放映室 ==========
+  // ========== 回忆放映室 ==========
 let playbackTimer = null;
 let playbackSpeed = 1000;
+let playbackView = 'play';
+let currentPlayDate = '';
 
 function openPlaybackPanel() {
-  const overlay = document.createElement('div');
-  overlay.className = 'modal-overlay';
-  overlay.innerHTML = `
-  <div class="modal-panel">
-    <button class="modal-close">✕</button>
+  const overlay = createModal(`
     <div class="playback-dates" id="playback-dates"></div>
-    <div class="playback-screen" id="playback-screen"></div>
-    <div class="playback-controls">
-      <button class="mini-btn" id="playback-pause">暂停</button>
-      <button class="mini-btn" id="playback-speed">速度 1x</button>
-      <button class="mini-btn" id="playback-exit">退出</button>
+    <div class="heart-view-tabs" style="margin-bottom:12px;">
+      <button class="mini-btn" id="playback-view-timeline">时间线</button>
+      <button class="mini-btn" id="playback-view-cards">卡片</button>
+      <button class="mini-btn" id="playback-view-play">播放</button>
     </div>
-  </div>`;
-  document.body.appendChild(overlay);
-  overlay.addEventListener('click', (e) => { if (e.target === overlay) overlay.remove(); });
-  overlay.querySelector('.modal-close').addEventListener('click', () => {
-    clearInterval(playbackTimer);
-    overlay.remove();
-  });
+    <div id="playback-screen" class="playback-screen"></div>
+    <div class="playback-controls">
+      <button class="mini-btn" id="playback-pause" style="display:none;">暂停</button>
+      <button class="mini-btn" id="playback-speed" style="display:none;">速度 1x</button>
+      <button class="mini-btn" id="playback-exit">退出</button>
+    </div>`);
+  overlay.querySelector('#playback-view-timeline').addEventListener('click', () => switchPlaybackView('timeline', overlay));
+  overlay.querySelector('#playback-view-cards').addEventListener('click', () => switchPlaybackView('cards', overlay));
+  overlay.querySelector('#playback-view-play').addEventListener('click', () => switchPlaybackView('play', overlay));
   overlay.querySelector('#playback-pause').addEventListener('click', () => {
     if (playbackTimer) {
       clearInterval(playbackTimer);
@@ -2425,6 +2693,14 @@ function openPlaybackPanel() {
   loadPlaybackDates(overlay);
 }
 
+function switchPlaybackView(view, overlay) {
+  playbackView = view;
+  clearInterval(playbackTimer);
+  overlay.querySelector('#playback-pause').style.display = view === 'play' ? 'inline-block' : 'none';
+  overlay.querySelector('#playback-speed').style.display = view === 'play' ? 'inline-block' : 'none';
+  if (currentPlayDate) renderPlaybackContent(currentPlayDate, overlay);
+}
+
 async function loadPlaybackDates(overlay) {
   const archives = JSON.parse(localStorage.getItem('archives') || '{}');
   const dates = Object.keys(archives).sort().reverse();
@@ -2441,20 +2717,57 @@ async function loadPlaybackDates(overlay) {
     div.addEventListener('click', () => {
       container.querySelectorAll('.playback-date').forEach(d => d.classList.remove('active'));
       div.classList.add('active');
-      playArchive(date, overlay);
+      currentPlayDate = date;
+      renderPlaybackContent(date, overlay);
     });
     container.appendChild(div);
   });
   container.querySelector('.playback-date').classList.add('active');
-  playArchive(dates[0], overlay);
+  currentPlayDate = dates[0];
+  renderPlaybackContent(dates[0], overlay);
 }
 
-function playArchive(dateStr, overlay) {
+function renderPlaybackContent(dateStr, overlay) {
   clearInterval(playbackTimer);
   const archives = JSON.parse(localStorage.getItem('archives') || '{}');
   const msgs = archives[dateStr] || [];
   const screen = overlay.querySelector('#playback-screen');
   screen.innerHTML = '';
+  if (!msgs.length) {
+    screen.innerHTML = '<div class="placeholder-tip">这一天没有消息</div>';
+    return;
+  }
+  if (playbackView === 'timeline') {
+    msgs.forEach(m => {
+      const pm = document.createElement('div');
+      pm.className = 'playback-msg ' + m.sender;
+      let bubble = m.content;
+      if (m.pinned) bubble = '📌 ' + bubble;
+      if (m.heartMark) bubble = '💗 ' + bubble;
+      pm.innerHTML = `<div class="pm-sender">${m.sender === 'me' ? settings.meName : settings.taName}</div><div class="pm-bubble">${escapeHtml(bubble)}</div>`;
+      screen.appendChild(pm);
+    });
+  } else if (playbackView === 'cards') {
+    const grid = document.createElement('div');
+    grid.className = 'heart-grid-cards';
+    msgs.forEach(m => {
+      const card = document.createElement('div');
+      card.className = 'heart-card';
+      card.textContent = m.content;
+      grid.appendChild(card);
+    });
+    screen.appendChild(grid);
+  } else if (playbackView === 'play') {
+    startPlayback(overlay);
+  }
+}
+
+function startPlayback(overlay) {
+  clearInterval(playbackTimer);
+  const screen = overlay.querySelector('#playback-screen');
+  screen.innerHTML = '';
+  const archives = JSON.parse(localStorage.getItem('archives') || '{}');
+  const msgs = archives[currentPlayDate] || [];
   if (!msgs.length) {
     screen.innerHTML = '<div class="placeholder-tip">这一天没有消息</div>';
     return;
@@ -2478,8 +2791,7 @@ function playArchive(dateStr, overlay) {
     idx++;
   }, playbackSpeed);
 }
-
-// ========== 归档 ==========
+  // ========== 归档 ==========
 function checkArchive() {
   const now = new Date();
   const today = now.getFullYear() + '-' + (now.getMonth() + 1) + '-' + now.getDate();
@@ -2524,11 +2836,13 @@ async function backupNow() {
     archives: JSON.parse(localStorage.getItem('archives') || '{}'),
     avatarLibrary: JSON.parse(localStorage.getItem('avatarLibrary') || '[]'),
     bgLibrary: JSON.parse(localStorage.getItem('bgLibrary') || '[]'),
-    recycledCards: JSON.parse(localStorage.getItem('recycledCards') || '[]')
+    recycledCards: JSON.parse(localStorage.getItem('recycledCards') || '[]'),
+    telepathyQuestions: JSON.parse(localStorage.getItem('telepathyQuestions') || '[]')
   };
   const json = JSON.stringify(data);
   downloadFile(json, '易遇♡夏雾凉-备份-' + new Date().toISOString().slice(0, 10) + '.json', 'application/json');
   localStorage.setItem('autoBackup', json);
+  showToast('备份完成');
 }
 
 function scheduleDailyBackup() {
@@ -2542,7 +2856,7 @@ function scheduleDailyBackup() {
   }, 3600000);
 }
 
-// ========== 动态背景循环 ==========
+// ========== 动态背景 ==========
 let bgHue = 0;
 function animateBG() {
   const canvas = document.getElementById('bg-canvas');
@@ -2565,7 +2879,8 @@ function animateBG() {
   ctx.fillRect(0, 0, canvas.width, canvas.height);
   requestAnimationFrame(animateBG);
 }
-    // ========== 初始化 ==========
+
+// ========== 初始化 ==========
 async function init() {
   await openDB();
   await loadSettings();
@@ -2574,6 +2889,8 @@ async function init() {
   renderMessages();
   scheduleTAActive();
   scheduleTAAutonomy();
+  scheduleTAAvatarChange();
+  scheduleTABGChange();
   scheduleDailyBackup();
   checkArchive();
   animateBG();

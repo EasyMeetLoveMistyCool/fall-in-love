@@ -5,7 +5,6 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
 <title>易遇♡夏雾凉</title>
 <style>
-/* ========== 基础重置 ========== */
 * {
   margin: 0;
   padding: 0;
@@ -26,7 +25,6 @@ html, body {
   -webkit-tap-highlight-color: transparent;
 }
 
-/* ========== 动态背景 ========== */
 #bg-canvas {
   position: fixed;
   top: 0;
@@ -37,7 +35,6 @@ html, body {
   pointer-events: none;
 }
 
-/* ========== 主容器 ========== */
 #app {
   position: relative;
   z-index: 1;
@@ -48,7 +45,6 @@ html, body {
   background: rgba(255, 255, 255, 0.05);
 }
 
-/* ========== 顶栏 ========== */
 #topbar {
   display: flex;
   align-items: center;
@@ -103,7 +99,6 @@ html, body {
   to { stroke-dashoffset: -18; }
 }
 
-/* ========== 心意值 ========== */
 #heart-value-box {
   display: flex;
   align-items: center;
@@ -121,7 +116,7 @@ html, body {
   font-size: 16px;
   color: #ff3b5c;
 }
-  /* ========== 消息区 ========== */
+
 #messages-area {
   flex: 1;
   overflow-y: auto;
@@ -131,7 +126,6 @@ html, body {
   scroll-behavior: smooth;
 }
 
-/* ========== 置顶区 ========== */
 #pinned-area {
   display: flex;
   gap: 8px;
@@ -167,9 +161,7 @@ html, body {
 .pinned-item .pin-icon {
   font-size: 10px;
 }
-
-/* ========== 消息行 ========== */
-.message-row {
+  .message-row {
   display: flex;
   margin-bottom: 14px;
   animation: msgIn 0.25s ease-out;
@@ -275,7 +267,16 @@ html, body {
   margin-left: 4px;
 }
 
-/* ========== 正在输入 ========== */
+.msg-quote {
+  font-size: 12px;
+  color: rgba(90, 70, 60, 0.6);
+  margin-bottom: 4px;
+  padding: 4px 8px;
+  background: rgba(255, 255, 255, 0.3);
+  border-radius: 8px;
+  border-left: 2px solid #ff8fb0;
+}
+
 #typing-indicator {
   display: none;
   align-items: center;
@@ -317,7 +318,6 @@ html, body {
   30% { transform: translateY(-5px); }
 }
 
-/* ========== 输入区 ========== */
 #input-area {
   display: flex;
   align-items: center;
@@ -378,8 +378,7 @@ html, body {
   letter-spacing: 0.5px;
   border-color: rgba(255, 255, 255, 0.6);
 }
-  /* ========== 悬浮球 ========== */
-#floating-ball {
+  #floating-ball {
   position: fixed;
   z-index: 10;
   width: 52px;
@@ -411,7 +410,6 @@ html, body {
   50% { transform: scale(1.04); box-shadow: 0 6px 24px rgba(0,0,0,0.16); }
 }
 
-/* ========== 弹窗通用 ========== */
 .modal-overlay {
   position: fixed;
   top: 0;
@@ -453,7 +451,6 @@ html, body {
   to { opacity: 1; transform: scale(1) translateY(0); }
 }
 
-/* ========== 悬浮球展开面板 ========== */
 #ball-panel {
   position: fixed;
   z-index: 30;
@@ -520,8 +517,48 @@ html, body {
   white-space: nowrap;
 }
 
-/* ========== 字卡面板 ========== */
-.card-input-row input,
+.plus-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  padding: 12px 6px;
+  border-radius: 18px;
+  cursor: pointer;
+  transition: background 0.2s;
+  text-align: center;
+}
+
+.plus-item:active {
+  background: rgba(0, 0, 0, 0.04);
+}
+
+.plus-item .icon-wrap {
+  width: 44px;
+  height: 44px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.55);
+  border: 1px solid rgba(255, 255, 255, 0.8);
+}
+
+.plus-item .icon-wrap svg {
+  width: 24px;
+  height: 24px;
+}
+
+.plus-item span {
+  font-size: 12px;
+  color: #4a3528;
+  text-align: center;
+  white-space: nowrap;
+  display: block;
+  width: 100%;
+}
+  .card-input-row input,
 .card-search-row input {
   width: 100%;
   background: rgba(255, 255, 255, 0.5);
@@ -603,7 +640,7 @@ html, body {
   color: #8b6f60;
   padding: 2px;
 }
-  /* ========== 大输入弹窗 ========== */
+
 .big-input-title {
   text-align: center;
   font-size: 17px;
@@ -654,7 +691,6 @@ html, body {
   background: rgba(255, 150, 100, 0.8);
 }
 
-/* ========== 头像/背景面板 ========== */
 .about-section {
   display: flex;
   align-items: center;
@@ -683,7 +719,6 @@ html, body {
   font-weight: 600;
   color: #4a3528;
   margin-bottom: 2px;
-  cursor: pointer;
 }
 
 .about-info .about-nick {
@@ -748,9 +783,7 @@ html, body {
   text-align: center;
   margin-top: 10px;
 }
-
-/* ========== 回忆放映室 ========== */
-.playback-dates {
+  .playback-dates {
   display: flex;
   gap: 8px;
   overflow-x: auto;
@@ -829,7 +862,6 @@ html, body {
   justify-content: center;
 }
 
-/* ========== 心动瞬间 ========== */
 .heart-tabs {
   display: flex;
   gap: 8px;
@@ -901,7 +933,6 @@ html, body {
   flex-shrink: 0;
 }
 
-/* ========== 轻提示 ========== */
 #toast {
   position: fixed;
   bottom: 120px;
@@ -930,7 +961,6 @@ html, body {
   transform: translateX(-50%) translateY(0);
 }
 
-/* ========== 滚动条 ========== */
 ::-webkit-scrollbar {
   width: 4px;
   height: 4px;
@@ -945,12 +975,157 @@ html, body {
   border-radius: 4px;
 }
 
-/* ========== 占位提示 ========== */
 .placeholder-tip {
   text-align: center;
   padding: 30px 10px;
   font-size: 14px;
   color: rgba(90, 70, 60, 0.55);
+}
+
+/* 视频通话样式 */
+.video-call-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(30, 20, 30, 0.85);
+  z-index: 50;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  animation: fadeIn 0.3s ease-out;
+}
+
+.video-call-avatar {
+  width: 120px;
+  height: 120px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 2px solid rgba(255, 255, 255, 0.6);
+  animation: videoBreathe 3s ease-in-out infinite;
+}
+
+@keyframes videoBreathe {
+  0%, 100% { box-shadow: 0 0 0 0 rgba(255,255,255,0.3); }
+  50% { box-shadow: 0 0 0 20px rgba(255,255,255,0.1); }
+}
+
+.video-wave-bar {
+  display: flex;
+  gap: 3px;
+  align-items: center;
+  margin: 12px 0;
+}
+
+.video-wave-bar span {
+  width: 4px;
+  background: #6b5ce7;
+  border-radius: 2px;
+  animation: waveJump 0.8s infinite;
+}
+
+.video-wave-bar span:nth-child(1) { height: 8px; animation-delay: 0s; }
+.video-wave-bar span:nth-child(2) { height: 16px; animation-delay: 0.1s; }
+.video-wave-bar span:nth-child(3) { height: 24px; animation-delay: 0.2s; }
+.video-wave-bar span:nth-child(4) { height: 16px; animation-delay: 0.3s; }
+.video-wave-bar span:nth-child(5) { height: 8px; animation-delay: 0.4s; }
+
+@keyframes waveJump {
+  0%, 100% { transform: scaleY(1); }
+  50% { transform: scaleY(1.6); }
+}
+
+.video-call-info {
+  color: #fff;
+  font-size: 15px;
+  margin: 8px 0;
+}
+
+.video-call-timer {
+  color: rgba(255,255,255,0.8);
+  font-size: 18px;
+  font-weight: 600;
+  margin: 4px 0;
+  font-variant-numeric: tabular-nums;
+}
+
+.video-call-btns {
+  display: flex;
+  gap: 20px;
+  margin-top: 16px;
+}
+
+.video-call-btn {
+  width: 56px;
+  height: 56px;
+  border-radius: 50%;
+  border: none;
+  cursor: pointer;
+  font-size: 13px;
+  color: #fff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.2s;
+}
+
+.video-call-btn:active {
+  transform: scale(0.85);
+}
+
+.video-call-btn.minimize {
+  background: rgba(255, 255, 255, 0.25);
+}
+
+.video-call-btn.hangup {
+  background: #e74c3c;
+}
+
+.video-call-btn.accept {
+  background: #2ecc71;
+}
+
+.video-call-btn.reject {
+  background: #e74c3c;
+}
+
+.video-mini-window {
+  position: fixed;
+  top: 80px;
+  right: 16px;
+  z-index: 45;
+  background: rgba(255, 255, 255, 0.8);
+  backdrop-filter: blur(16px);
+  border: 1px solid rgba(255, 255, 255, 0.7);
+  border-radius: 16px;
+  padding: 8px 12px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  cursor: pointer;
+  box-shadow: 0 4px 16px rgba(0,0,0,0.15);
+}
+
+.video-mini-avatar {
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  object-fit: cover;
+}
+
+.video-mini-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: #2ecc71;
+  animation: dotPulse 1.2s infinite;
+}
+
+@keyframes dotPulse {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.3; }
 }
 </style>
 </head>
@@ -1012,6 +1187,7 @@ const DEFAULT_SETTINGS = {
   taAvatar: '',
   meAvatar: '',
   ballImage: '',
+  ballSize: 52,
   replyTpl: 'natural',
   replyMin: 5,
   replyMax: 8,
@@ -1039,9 +1215,8 @@ const DEFAULT_SETTINGS = {
   bondLastCheckDate: '',
   bondHistoryBest: 0,
   bondProtectUsed: false,
-  reminderCards: [],
-  reminderTimes: [],
-  reminderProb: 0.5
+  hourlyWage: 0,
+  videoRecords: []
 };
 
 let db = null;
@@ -1060,6 +1235,15 @@ let heartCurrentView = 'timeline';
 let heartPlaybackTimer = null;
 let accompanyTimer = null;
 let accompanySleepTimer = null;
+let videoCallActive = false;
+let videoCallIncoming = false;
+let videoCallStartTime = 0;
+let videoCallTimer = null;
+let videoCallOverlay = null;
+let videoCallMini = null;
+let videoCallType = '';
+let videoCallAnswered = false;
+let isArchiving = false;
 
 // ========== IndexedDB ==========
 function openDB() {
@@ -1130,7 +1314,6 @@ function idbPutReturnId(store, data) {
   });
 }
 
-// ========== 设置 ==========
 async function loadSettings() {
   const saved = await idbGet('kv', 'settings');
   if (saved) settings = { ...DEFAULT_SETTINGS, ...saved.value };
@@ -1145,6 +1328,7 @@ function applySettings() {
   document.getElementById('heart-value-num').textContent = settings.heartValue;
   updateTopAvatars();
   updateBallStyle();
+  applyBallSize();
   updateSendBtn();
   renderBallGrid();
 }
@@ -1159,6 +1343,12 @@ function updateSendBtn() {
     btn.textContent = '⊕';
     btn.classList.remove('send-mode');
   }
+}
+
+function applyBallSize() {
+  const ball = document.getElementById('floating-ball');
+  ball.style.width = settings.ballSize + 'px';
+  ball.style.height = settings.ballSize + 'px';
 }
 
 function escapeHtml(str) {
@@ -1200,18 +1390,14 @@ function renderHeartLine() {
   const el = document.getElementById('heart-line');
   el.innerHTML = `
   <svg width="110" height="36" viewBox="0 0 110 36" fill="none">
-    <path class="heartbeat-path" d="M0,18 L18,18 L22,8 L28,28 L32,14 L36,18 L44,18" 
-          stroke="#ff3b5c" stroke-width="2" stroke-linecap="round" fill="none"/>
+    <path class="heartbeat-path" d="M0,18 L18,18 L22,8 L28,28 L32,14 L36,18 L44,18" stroke="#ff3b5c" stroke-width="2" stroke-linecap="round" fill="none"/>
     <g class="heart-fill">
-      <path d="M55,15 C55,11 58,9 61,11 C64,9 67,11 67,15 C67,19 61,25 61,25 C61,25 55,19 55,15 Z" 
-            fill="#ff3b5c" opacity="0.9"/>
+      <path d="M55,15 C55,11 58,9 61,11 C64,9 67,11 67,15 C67,19 61,25 61,25 C61,25 55,19 55,15 Z" fill="#ff3b5c" opacity="0.9"/>
     </g>
-    <path class="heartbeat-path" d="M74,18 L78,8 L84,28 L88,12 L92,18 L110,18" 
-          stroke="#ff3b5c" stroke-width="2" stroke-linecap="round" fill="none"/>
+    <path class="heartbeat-path" d="M74,18 L78,8 L84,28 L88,12 L92,18 L110,18" stroke="#ff3b5c" stroke-width="2" stroke-linecap="round" fill="none"/>
   </svg>`;
 }
 
-// ========== 顶栏头像 ==========
 function updateTopAvatars() {
   const ta = document.getElementById('ta-avatar-top');
   const me = document.getElementById('me-avatar-top');
@@ -1221,7 +1407,6 @@ function updateTopAvatars() {
   else me.src = 'data:image/svg+xml,' + encodeURIComponent('<svg xmlns="http://www.w3.org/2000/svg" width="40" height="40"><circle cx="20" cy="20" r="19" fill="rgba(255,255,255,0.4)"/><text x="20" y="26" text-anchor="middle" font-size="16" fill="rgba(90,70,60,0.6)">我</text></svg>');
 }
 
-// ========== 悬浮球 ==========
 function updateBallStyle() {
   const img = document.getElementById('ball-img');
   const def = document.getElementById('ball-default');
@@ -1265,8 +1450,8 @@ function initBallPosition() {
     const dy = e.clientY - startY;
     let nx = origX + dx;
     let ny = origY + dy;
-    nx = Math.max(4, Math.min(window.innerWidth - 56, nx));
-    ny = Math.max(4, Math.min(window.innerHeight - 56, ny));
+    nx = Math.max(4, Math.min(window.innerWidth - settings.ballSize - 4, nx));
+    ny = Math.max(4, Math.min(window.innerHeight - settings.ballSize - 4, ny));
     ball.style.left = nx + 'px';
     ball.style.top = ny + 'px';
   });
@@ -1315,18 +1500,6 @@ const ICONS = {
   memo: `<svg viewBox="0 0 24 24" fill="none" stroke="#4a3528" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="5" y="3" width="14" height="18" rx="2"/><line x1="9" y1="8" x2="15" y2="8"/><line x1="9" y1="12" x2="15" y2="12"/><line x1="9" y1="16" x2="13" y2="16"/></svg>`,
   bond: `<svg viewBox="0 0 24 24" fill="none" stroke="#4a3528" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M5 6C5 6 9 10 9 14C9 18 5 20 5 20"/><path d="M19 6C19 6 15 10 15 14C15 18 19 20 19 20"/><path d="M9 14L15 14" stroke-dasharray="2,2"/><path d="M12 13C12 13 10 16 10 17.5C10 19 11 20 12 20C13 20 14 19 14 17.5C14 16 12 13 12 13Z" fill="#ff3b5c" stroke="none"/></svg>`,
   settings: `<svg viewBox="0 0 24 24" fill="none" stroke="#4a3528" stroke-width="1.8"><circle cx="12" cy="12" r="3"/><path d="M19 12a7 7 0 00-.1-1.2l2-1.5-2-3.4-2.4 1A7 7 0 0014.7 6L14 3.5h-4L9.3 6a7 7 0 00-1.8.9l-2.4-1-2 3.4 2 1.5A7 7 0 005 12c0 .4 0 .8.1 1.2l-2 1.5 2 3.4 2.4-1a7 7 0 001.8.9l.7 2.5h4l.7-2.5a7 7 0 001.8-.9l2.4 1 2-3.4-2-1.5c.1-.4.1-.8.1-1.2z"/></svg>`
-};
-
-const PLUS_ICONS = {
-  camera: `<svg viewBox="0 0 24 24" fill="none" stroke="#4a3528" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 8h3l2-3h6l2 3h3v11H4z"/><circle cx="12" cy="13" r="4"/></svg>`,
-  album: `<svg viewBox="0 0 24 24" fill="none" stroke="#4a3528" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="16" rx="3"/><circle cx="9" cy="9" r="2"/><path d="M4 18l5-5 3 3 4-4 4 4"/></svg>`,
-  video: `<svg viewBox="0 0 24 24" fill="none" stroke="#4a3528" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="6" width="13" height="12" rx="3"/><path d="M16 10l5-3v10l-5-3"/></svg>`,
-  sticker: `<svg viewBox="0 0 24 24" fill="#ff8fb0" stroke="none"><path d="M12,20 C12,20 4,14.5 4,9.5 C4,6.5 6.5,4.5 9,4.5 C11,4.5 12,6 12,6 C12,6 13,4.5 15,4.5 C17.5,4.5 20,6.5 20,9.5 C20,14.5 12,20 12,20 Z"/></svg>`,
-  gift: `<svg viewBox="0 0 24 24" fill="none" stroke="#4a3528" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="11" width="16" height="9" rx="2"/><path d="M3 8h18v3H3zM12 8v12M12 8c-2-3-5-4-7-2s0 5 3 5c2 0 4-1 4-3zM12 8c2-3 5-4 7-2s0 5-3 5c-2 0-4-1-4-3z"/></svg>`,
-  interact: `<svg viewBox="0 0 24 24" fill="none" stroke="#4a3528" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M8 13V5.5a1.5 1.5 0 013 0V12m0-5.5v-1a1.5 1.5 0 013 0V11m0-4.5a1.5 1.5 0 013 0V15a6 6 0 01-6 6h-1a8 8 0 01-4-1.5L4 18"/></svg>`,
-  ball: `<svg viewBox="0 0 24 24" fill="none" stroke="#4a3528" stroke-width="1.8" stroke-linecap="round"><circle cx="12" cy="12" r="8" opacity="0.5"/><circle cx="12" cy="12" r="4" opacity="0.8"/><circle cx="12" cy="12" r="1.5" fill="#4a3528" stroke="none"/></svg>`,
-  telepathy: `<svg viewBox="0 0 24 24" fill="none" stroke="#ff3b5c" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12,19 C12,19 5,14.5 5,10 C5,7 7.5,5 10,5 C11.5,5 12,6 12,6 C12,6 12.5,5 14,5 C16.5,5 19,7 19,10 C19,14.5 12,19 12,19 Z" fill="#ff8fb0" fill-opacity="0.3"/><path d="M9,11 C9,11 10,12 12,12 C14,12 15,11 15,11" stroke="#ff3b5c" stroke-width="1.2" fill="none"/></svg>`,
-  accompany: `<svg viewBox="0 0 24 24" fill="none" stroke="#4a3528" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 21C12 21 4 14.5 4 9.5C4 6.5 6.5 4.5 9 4.5C11 4.5 12 6 12 6C12 6 13 4.5 15 4.5C17.5 4.5 20 6.5 20 9.5C20 14.5 12 21 12 21Z" fill="#ff8fb0" fill-opacity="0.4"/><circle cx="12" cy="12" r="2.5" fill="#4a3528" stroke="none" opacity="0.5"/></svg>`
 };
 
 function renderBallGrid() {
@@ -1381,16 +1554,24 @@ function openWorldPanel() {
   const overlay = createModal(`
     <div class="ball-grid">
       <div class="ball-item" id="world-card"><div class="icon-wrap">${ICONS.note}</div><span>字卡</span></div>
-      <div class="ball-item" id="world-sticker"><div class="icon-wrap">${PLUS_ICONS.sticker}</div><span>贴纸</span></div>
+      <div class="ball-item" id="world-sticker"><div class="icon-wrap">${ICONS.heartbeat}</div><span>贴纸</span></div>
       <div class="ball-item" id="world-bg"><div class="icon-wrap">${ICONS.playback}</div><span>背景</span></div>
       <div class="ball-item" id="world-avatar"><div class="icon-wrap">${ICONS.lover}</div><span>头像</span></div>
       <div class="ball-item" id="world-music"><div class="icon-wrap">${ICONS.music}</div><span>歌单</span></div>
+      <div class="ball-item" id="world-gift"><div class="icon-wrap">${ICONS.wish}</div><span>礼物</span></div>
+      <div class="ball-item" id="world-interact"><div class="icon-wrap">${ICONS.choice}</div><span>互动</span></div>
+      <div class="ball-item" id="world-quiz"><div class="icon-wrap">${ICONS.stats}</div><span>问答题库</span></div>
+      <div class="ball-item" id="world-remind"><div class="icon-wrap">${ICONS.memo}</div><span>提醒</span></div>
     </div>`);
   overlay.querySelector('#world-card').addEventListener('click', () => { overlay.remove(); openCardPanel(); });
   overlay.querySelector('#world-sticker').addEventListener('click', () => { overlay.remove(); openStickerPanel(); });
   overlay.querySelector('#world-bg').addEventListener('click', () => { overlay.remove(); openBGPanel(); });
   overlay.querySelector('#world-avatar').addEventListener('click', () => { overlay.remove(); openAvatarPanel(); });
   overlay.querySelector('#world-music').addEventListener('click', () => { overlay.remove(); showPlaceholder('歌单'); });
+  overlay.querySelector('#world-gift').addEventListener('click', () => { overlay.remove(); openGiftManagePanel(); });
+  overlay.querySelector('#world-interact').addEventListener('click', () => { overlay.remove(); openInteractManagePanel(); });
+  overlay.querySelector('#world-quiz').addEventListener('click', () => { overlay.remove(); openQuizManagePanel(); });
+  overlay.querySelector('#world-remind').addEventListener('click', () => { overlay.remove(); openRemindPanel(); });
 }
 
 // ========== 字卡面板 ==========
@@ -1405,6 +1586,7 @@ function openCardPanel() {
       <button class="mini-btn" id="card-file-export">文件导出</button>
       <button class="mini-btn" id="card-batch-del">批量删除</button>
       <button class="mini-btn" id="card-recycle">回收站</button>
+      <button class="mini-btn" id="card-dedupe">一键去重</button>
     </div>
     <div class="card-count-row">
       <span id="card-count-text">总数量：0 张</span>
@@ -1450,6 +1632,7 @@ function bindCardEvents(panel) {
   const importBtn = panel.querySelector('#card-file-import');
   const exportBtn = panel.querySelector('#card-file-export');
   const searchBtn = panel.querySelector('#card-search-btn');
+  const dedupeBtn = panel.querySelector('#card-dedupe');
 
   addInput.addEventListener('click', () => openAddCardDialog(panel));
 
@@ -1478,6 +1661,22 @@ function bindCardEvents(panel) {
   });
 
   recycleBtn.addEventListener('click', () => openRecyclePanel(panel));
+
+  dedupeBtn.addEventListener('click', async () => {
+    const cards = await idbGetAll('cards');
+    const seen = new Set();
+    let removed = 0;
+    for (const card of cards) {
+      if (seen.has(card.content)) {
+        await idbDelete('cards', card.id);
+        removed++;
+      } else {
+        seen.add(card.content);
+      }
+    }
+    showToast(`已去除 ${removed} 张重复字卡`);
+    loadCardList(panel);
+  });
 
   importBtn.addEventListener('click', () => {
     const inp = document.createElement('input');
@@ -1553,8 +1752,22 @@ function openAddCardDialog(panel) {
     const text = overlay.querySelector('#add-card-area').value.trim();
     if (!text) return;
     const lines = text.split('\n').map(s => s.trim()).filter(Boolean);
-    for (const line of lines) await idbPut('cards', { content: line });
-    showToast(`已添加 ${lines.length} 张字卡`);
+    const existing = await idbGetAll('cards');
+    const existingContents = existing.map(c => c.content);
+    let added = 0;
+    let skipped = 0;
+    for (const line of lines) {
+      if (existingContents.includes(line)) {
+        skipped++;
+      } else {
+        await idbPut('cards', { content: line });
+        existingContents.push(line);
+        added++;
+      }
+    }
+    if (skipped > 0) showToast(`有 ${skipped} 张已存在，已跳过`);
+    if (added > 0) showToast(`成功添加 ${added} 张新字卡`);
+    else if (added === 0 && skipped === 0) showToast('没有新字卡可添加');
     overlay.remove();
     loadCardList(panel);
   });
@@ -1665,28 +1878,12 @@ function openStickerPanel() {
     <div class="library-grid" id="sticker-library"></div>
     <button class="upload-btn" id="sticker-upload-btn">上传贴纸</button>
     <div style="margin-top:12px;font-size:13px;color:#4a3528;">TA发贴纸概率</div>
-    <div style="display:flex;gap:8px;margin-top:8px;">
-      <button class="mini-btn sticker-tpl" data-tpl="rare">偶尔惊喜(1~2%)</button>
-      <button class="mini-btn sticker-tpl" data-tpl="daily">日常甜(5~8%)</button>
-      <button class="mini-btn sticker-tpl" data-tpl="active">活跃(15~20%)</button>
+    <div style="display:flex;gap:8px;margin-top:8px;flex-wrap:wrap;">
+      <button class="mini-btn sticker-tpl" data-tpl="rare">偶尔惊喜</button>
+      <button class="mini-btn sticker-tpl" data-tpl="daily">日常甜</button>
+      <button class="mini-btn sticker-tpl" data-tpl="active">活跃</button>
     </div>`);
-  const lib = JSON.parse(localStorage.getItem('stickerLibrary') || '[]');
-  const grid = overlay.querySelector('#sticker-library');
-  grid.innerHTML = '';
-  lib.forEach((s, i) => {
-    const div = document.createElement('div');
-    div.className = 'lib-item';
-    div.innerHTML = `<img src="${s}" alt=""><button class="lib-del">✕</button>`;
-    div.addEventListener('click', (e) => {
-      if (e.target.closest('.lib-del')) {
-        lib.splice(i, 1);
-        localStorage.setItem('stickerLibrary', JSON.stringify(lib));
-        openStickerPanel();
-        return;
-      }
-    });
-    grid.appendChild(div);
-  });
+  loadStickerLibrary(overlay);
   overlay.querySelector('#sticker-upload-btn').addEventListener('click', () => {
     const inp = document.createElement('input');
     inp.type = 'file';
@@ -1702,7 +1899,10 @@ function openStickerPanel() {
           lib.push(reader.result);
           localStorage.setItem('stickerLibrary', JSON.stringify(lib));
           loaded++;
-          if (loaded === files.length) openStickerPanel();
+          if (loaded === files.length) {
+            overlay.remove();
+            openStickerPanel();
+          }
         };
         reader.readAsDataURL(file);
       });
@@ -1726,22 +1926,44 @@ function openStickerPanel() {
   });
 }
 
+function loadStickerLibrary(overlay) {
+  const lib = JSON.parse(localStorage.getItem('stickerLibrary') || '[]');
+  const grid = overlay.querySelector('#sticker-library');
+  grid.innerHTML = '';
+  lib.forEach((s, i) => {
+    const div = document.createElement('div');
+    div.className = 'lib-item';
+    div.innerHTML = `<img src="${s}" alt=""><button class="lib-del">✕</button>`;
+    div.addEventListener('click', (e) => {
+      if (e.target.closest('.lib-del')) {
+        lib.splice(i, 1);
+        localStorage.setItem('stickerLibrary', JSON.stringify(lib));
+        overlay.remove();
+        openStickerPanel();
+      }
+    });
+    grid.appendChild(div);
+  });
+}
+
 // ========== 头像面板 ==========
 function openAvatarPanel() {
   const overlay = createModal(`
     <div class="about-section">
       <img class="about-avatar" id="about-ta-avatar" alt="TA">
       <div class="about-info">
-        <div class="about-name" id="about-ta-name">关于TA</div>
-        <div class="about-nick" id="about-ta-nick">名字：${escapeHtml(settings.taName)} ｜ 昵称：${escapeHtml(settings.taNick || '未设置')}</div>
+        <div class="about-name">关于TA</div>
+        <div class="about-nick" id="about-ta-name-click">名字：${escapeHtml(settings.taName)}</div>
+        <div class="about-nick" id="about-ta-nick-click">昵称：${escapeHtml(settings.taNick || '未设置')}</div>
       </div>
       <button class="mini-btn" id="about-ta-change">更换</button>
     </div>
     <div class="about-section">
       <img class="about-avatar" id="about-me-avatar" alt="我">
       <div class="about-info">
-        <div class="about-name" id="about-me-name">关于我</div>
-        <div class="about-nick" id="about-me-nick">名字：${escapeHtml(settings.meName)} ｜ 昵称：${escapeHtml(settings.meNick || '未设置')}</div>
+        <div class="about-name">关于我</div>
+        <div class="about-nick" id="about-me-name-click">名字：${escapeHtml(settings.meName)}</div>
+        <div class="about-nick" id="about-me-nick-click">昵称：${escapeHtml(settings.meNick || '未设置')}</div>
       </div>
       <button class="mini-btn" id="about-me-change">更换</button>
     </div>
@@ -1822,23 +2044,22 @@ function openAvatarMarkDialog(data, panelOverlay) {
 }
 
 function bindAvatarEvents(overlay) {
-  overlay.querySelector('#about-ta-name').addEventListener('click', (e) => {
+  overlay.querySelector('#about-ta-name-click').addEventListener('click', (e) => {
     e.stopPropagation();
     openNameEdit('ta', overlay);
   });
-  overlay.querySelector('#about-ta-nick').addEventListener('click', (e) => {
+  overlay.querySelector('#about-ta-nick-click').addEventListener('click', (e) => {
     e.stopPropagation();
     openNickEdit('ta', overlay);
   });
-  overlay.querySelector('#about-me-name').addEventListener('click', (e) => {
+  overlay.querySelector('#about-me-name-click').addEventListener('click', (e) => {
     e.stopPropagation();
     openNameEdit('me', overlay);
   });
-  overlay.querySelector('#about-me-nick').addEventListener('click', (e) => {
+  overlay.querySelector('#about-me-nick-click').addEventListener('click', (e) => {
     e.stopPropagation();
     openNickEdit('me', overlay);
   });
-
   overlay.querySelector('#about-ta-change').addEventListener('click', () => {
     const lib = JSON.parse(localStorage.getItem('avatarLibrary') || '[]');
     if (!lib.length) return showToast('头像库是空的');
@@ -1937,8 +2158,8 @@ function scheduleTAAvatarChange() {
     if (Math.random() < 0.08) {
       const lib = JSON.parse(localStorage.getItem('avatarLibrary') || '[]');
       if (!lib.length) return;
-      const pool = lib.filter(a => a.tags && a.tags.includes('couple')) || lib;
-      const pick = pool[Math.floor(Math.random() * pool.length)];
+      const pool = lib.filter(a => a.tags && a.tags.includes('couple'));
+      const pick = (pool.length ? pool : lib)[Math.floor(Math.random() * (pool.length ? pool : lib).length)];
       settings.taAvatar = pick.data;
       await saveSettings();
       applySettings();
@@ -1947,7 +2168,7 @@ function scheduleTAAvatarChange() {
   }, 1800000);
 }
 
-// ========== TA主动给你换头像 ==========
+// ========== TA给你换头像 ==========
 function scheduleTAGiveAvatar() {
   setInterval(async () => {
     if (Math.random() < 0.05) {
@@ -2045,7 +2266,7 @@ function applyBG() {
       ctx.fillRect(0, 0, canvas.width, canvas.height);
     };
     img.onerror = () => drawDefaultBG(ctx, canvas.width, canvas.height);
-    img.src = settings.bgCurrent;
+    img.src = settings.bgCurrent + (settings.bgCurrent.includes('?') ? '&' : '?') + 't=' + Date.now();
   } else {
     drawDefaultBG(ctx, canvas.width, canvas.height);
   }
@@ -2061,7 +2282,6 @@ function drawDefaultBG(ctx, w, h) {
   ctx.fillRect(0, 0, w, h);
 }
 
-// ========== TA随机换背景 ==========
 function scheduleTABGChange() {
   setInterval(async () => {
     if (Math.random() < 0.06) {
@@ -2094,6 +2314,16 @@ function openSettingsPanel() {
     <div style="margin-bottom:8px;font-size:13px;color:#4a3528;">悬浮球图片</div>
     <button class="mini-btn" id="set-ball-image" style="width:100%;margin-bottom:8px;">上传悬浮球图片</button>
     <button class="mini-btn" id="set-ball-reset" style="width:100%;margin-bottom:8px;">恢复默认悬浮球</button>
+    <div style="margin-bottom:8px;font-size:13px;color:#4a3528;">悬浮球大小</div>
+    <div style="display:flex;gap:8px;margin-bottom:8px;">
+      <button class="mini-btn ball-size-btn" data-size="40">小</button>
+      <button class="mini-btn ball-size-btn" data-size="52">中</button>
+      <button class="mini-btn ball-size-btn" data-size="64">大</button>
+    </div>
+    <div style="display:flex;gap:8px;align-items:center;margin-bottom:8px;">
+      <input type="range" id="ball-size-custom" min="30" max="120" value="${settings.ballSize}" style="flex:1;">
+      <span id="ball-size-val" style="font-size:13px;color:#4a3528;">${settings.ballSize}px</span>
+    </div>
     <div style="margin-bottom:8px;font-size:13px;color:#4a3528;">TA主动行为频率</div>
     <div style="display:flex;gap:8px;margin-bottom:8px;">
       <button class="mini-btn autonomy-tpl" data-tpl="low">少</button>
@@ -2105,7 +2335,8 @@ function openSettingsPanel() {
     <div style="margin-bottom:8px;font-size:13px;color:#4a3528;">桌面提醒</div>
     <button class="mini-btn" id="set-notif" style="width:100%;margin-bottom:8px;">请求通知权限</button>
     <button class="mini-btn" id="set-backup-now" style="width:100%;margin-bottom:8px;">立即备份数据</button>
-    <button class="mini-btn" id="set-clear-all" style="width:100%;margin-bottom:8px;color:#c33;">清空所有数据</button>`);
+    <button class="mini-btn" id="set-clear-all" style="width:100%;margin-bottom:8px;color:#c33;">清空所有数据</button>
+    <div style="text-align:center;font-size:11px;color:rgba(90,70,60,0.5);margin-top:16px;">V2.0.0</div>`);
   if (settings.replyTpl === 'custom') {
     overlay.querySelector('#set-reply-custom').style.display = 'block';
   }
@@ -2144,6 +2375,24 @@ function openSettingsPanel() {
     applySettings();
     showToast('悬浮球已恢复默认');
   });
+  overlay.querySelectorAll('.ball-size-btn').forEach(btn => {
+    btn.addEventListener('click', () => {
+      settings.ballSize = Number(btn.dataset.size);
+      saveSettings();
+      applyBallSize();
+      overlay.querySelector('#ball-size-custom').value = settings.ballSize;
+      overlay.querySelector('#ball-size-val').textContent = settings.ballSize + 'px';
+    });
+  });
+  overlay.querySelector('#ball-size-custom').addEventListener('input', (e) => {
+    const val = Number(e.target.value);
+    settings.ballSize = val;
+    overlay.querySelector('#ball-size-val').textContent = val + 'px';
+    applyBallSize();
+  });
+  overlay.querySelector('#ball-size-custom').addEventListener('change', () => {
+    saveSettings();
+  });
   overlay.querySelectorAll('.autonomy-tpl').forEach(btn => {
     if (btn.dataset.tpl === settings.autonomyTpl) {
       btn.style.background = 'rgba(255,150,100,0.6)';
@@ -2160,8 +2409,11 @@ function openSettingsPanel() {
     });
   });
   overlay.querySelector('#set-fullscreen').addEventListener('click', () => {
-    if (!document.fullscreenElement) document.documentElement.requestFullscreen();
-    else document.exitFullscreen();
+    if (!document.fullscreenElement) {
+      document.documentElement.requestFullscreen().then(() => setTimeout(() => applyBG(), 300));
+    } else {
+      document.exitFullscreen().then(() => setTimeout(() => applyBG(), 300));
+    }
   });
   overlay.querySelector('#set-notif').addEventListener('click', () => {
     if (!('Notification' in window)) return showToast('浏览器不支持通知');
@@ -2201,8 +2453,7 @@ function openReplyTplDialog(panelOverlay) {
       <button class="mini-btn tpl-option" data-tpl="distant">若即若离（30秒~2分钟）</button>
       <button class="mini-btn tpl-option" data-tpl="custom">自定义</button>
     </div>`);
-  const btns = overlay.querySelectorAll('.tpl-option');
-  btns.forEach(btn => {
+  overlay.querySelectorAll('.tpl-option').forEach(btn => {
     if (btn.dataset.tpl === settings.replyTpl) {
       btn.style.background = 'rgba(255,150,100,0.6)';
       btn.style.color = '#fff';
@@ -2246,7 +2497,6 @@ function createMessageEl(msg) {
     const quote = document.createElement('div');
     quote.className = 'msg-quote';
     quote.textContent = '「' + msg.quoteContent + '」';
-    quote.style.cssText = 'font-size:12px;color:rgba(90,70,60,0.6);margin-bottom:4px;padding:4px 8px;background:rgba(255,255,255,0.3);border-radius:8px;border-left:2px solid #ff8fb0;';
     wrapper.appendChild(quote);
   }
   const bubble = document.createElement('div');
@@ -2256,6 +2506,14 @@ function createMessageEl(msg) {
     bubble.style.background = 'transparent';
     bubble.style.border = 'none';
     bubble.innerHTML = `<img src="${msg.imageData}" style="max-width:200px;border-radius:12px;display:block;">`;
+  } else if (msg.giftData) {
+    bubble.style.background = 'transparent';
+    bubble.style.border = 'none';
+    bubble.innerHTML = `<div style="text-align:center;padding:8px;"><div style="font-size:36px;">${msg.giftData.icon || '🎁'}</div><div style="font-size:13px;color:#4a3528;margin-top:4px;">${escapeHtml(msg.giftData.name || '礼物')}</div><div style="font-size:11px;color:#ff3b5c;margin-top:2px;">-${msg.giftData.cost || 0}心意值</div></div>`;
+  } else if (msg.interactData) {
+    bubble.style.background = 'transparent';
+    bubble.style.border = 'none';
+    bubble.innerHTML = `<div style="text-align:center;padding:8px;font-size:14px;color:#4a3528;">${escapeHtml(msg.interactData.text || '')}</div>`;
   } else {
     bubble.textContent = msg.content;
   }
@@ -2322,11 +2580,14 @@ document.getElementById('send-btn').addEventListener('click', () => {
 });
 
 async function sendMyMessage() {
+  if (isArchiving) return showToast('归档中，请稍候');
   const input = document.getElementById('chat-input');
   const content = input.value.trim();
   if (!content) return;
   input.value = '';
   updateSendBtn();
+  const quoteContent = input.dataset.quoteContent || null;
+  input.dataset.quoteContent = '';
   const msg = {
     sender: 'me',
     content,
@@ -2334,7 +2595,7 @@ async function sendMyMessage() {
     readTime: null,
     pinned: false,
     heartMark: null,
-    quoteContent: null
+    quoteContent: quoteContent
   };
   const id = await idbPutReturnId('messages', msg);
   msg.id = id;
@@ -2343,11 +2604,8 @@ async function sendMyMessage() {
   await saveSettings();
   updateHeartValue();
   scheduleReadReceipt(msg);
-  if (telepathyActive) {
-    checkTelepathy(content);
-  } else {
-    resetStopTimer();
-  }
+  if (telepathyActive) checkTelepathy(content);
+  else resetStopTimer();
   checkBondDaily();
 }
 
@@ -2393,7 +2651,7 @@ function resetStopTimer() {
 }
 
 async function triggerTAReply() {
-  if (isReplying) return;
+  if (isReplying || isArchiving) return;
   const cards = await idbGetAll('cards');
   if (!cards.length) {
     showTyping(false);
@@ -2415,13 +2673,12 @@ async function triggerTAReply() {
   }
   replyQueue = [];
   for (let i = 0; i < replyCount; i++) {
-    let card;
     const stickers = JSON.parse(localStorage.getItem('stickerLibrary') || '[]');
     if (stickers.length && Math.random() < settings.stickerProb) {
       const sticker = stickers[Math.floor(Math.random() * stickers.length)];
       replyQueue.push({ type: 'sticker', content: sticker });
     } else {
-      card = cards[Math.floor(Math.random() * cards.length)];
+      const card = cards[Math.floor(Math.random() * cards.length)];
       replyQueue.push({ type: 'text', content: card.content });
     }
   }
@@ -2473,9 +2730,9 @@ function scheduleTAActive() {
   const next = Math.random() * (settings.activeMax - settings.activeMin) + settings.activeMin;
   setTimeout(async () => {
     const cards = await idbGetAll('cards');
-    if (cards.length && !isReplying) {
+    if (cards.length && !isReplying && !isArchiving) {
       const card = cards[Math.floor(Math.random() * cards.length)];
-      const msg = { sender: 'ta', content: card.content, timestamp: Date.now(), pinned: false, heartMark: null };
+      const msg = { sender: 'ta', content: card.content, timestamp: Date.now(), pinned: false, heartMark: null, quoteContent: null };
       const id = await idbPutReturnId('messages', msg);
       msg.id = id;
       appendMessage(msg);
@@ -2557,9 +2814,6 @@ function showMessageActions(row) {
     overlay.remove();
   });
   overlay.querySelector('#act-del').addEventListener('click', async () => {
-    if (settings.bondDays >= 30 && !settings.bondProtectUsed) {
-      // 熄灭保护：删除消息不影响羁绊
-    }
     await idbDelete('messages', id);
     renderMessages();
     overlay.remove();
@@ -2573,16 +2827,40 @@ function scheduleTAAutonomy() {
       const msgs = await idbGetAll('messages');
       if (msgs.length) {
         const target = msgs[Math.floor(Math.random() * msgs.length)];
-        if (Math.random() < 0.5) {
+        const action = Math.random();
+        if (action < 0.4) {
           target.pinned = !target.pinned;
-        } else {
+        } else if (action < 0.7) {
           target.heartMark = target.heartMark ? null : 'TA收藏';
+        } else if (action < 0.85) {
+          target.heartMark = target.heartMark ? null : 'TA指定';
+          showToast('TA希望你收藏这句话');
+        } else {
+          await taQuoteMessage(target);
+          return;
         }
         await idbPut('messages', target);
         renderMessages();
       }
     }
   }, 600000);
+}
+
+async function taQuoteMessage(target) {
+  const cards = await idbGetAll('cards');
+  if (!cards.length) return;
+  const card = cards[Math.floor(Math.random() * cards.length)];
+  const msg = {
+    sender: 'ta',
+    content: card.content,
+    timestamp: Date.now(),
+    pinned: false,
+    heartMark: null,
+    quoteContent: target.content
+  };
+  const id = await idbPutReturnId('messages', msg);
+  msg.id = id;
+  appendMessage(msg);
 }
 
 // ========== ⊕ 功能菜单 ==========
@@ -2594,24 +2872,24 @@ function togglePlusMenu() {
   }
   const overlay = createModal(`
     <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin-top:10px;">
-      <div class="plus-item" id="plus-camera"><div class="icon-wrap">${PLUS_ICONS.camera}</div><span>拍照</span></div>
-      <div class="plus-item" id="plus-album"><div class="icon-wrap">${PLUS_ICONS.album}</div><span>相册</span></div>
-      <div class="plus-item" id="plus-video"><div class="icon-wrap">${PLUS_ICONS.video}</div><span>视频</span></div>
-      <div class="plus-item" id="plus-sticker"><div class="icon-wrap">${PLUS_ICONS.sticker}</div><span>贴纸</span></div>
-      <div class="plus-item" id="plus-gift"><div class="icon-wrap">${PLUS_ICONS.gift}</div><span>礼物</span></div>
-      <div class="plus-item" id="plus-interact"><div class="icon-wrap">${PLUS_ICONS.interact}</div><span>互动</span></div>
-      <div class="plus-item" id="plus-telepathy"><div class="icon-wrap">${PLUS_ICONS.telepathy}</div><span>问答</span></div>
-      <div class="plus-item" id="plus-ball"><div class="icon-wrap">${PLUS_ICONS.ball}</div><span>悬浮球</span></div>
-      <div class="plus-item" id="plus-accompany"><div class="icon-wrap">${PLUS_ICONS.accompany}</div><span>陪伴</span></div>
+      <div class="plus-item" id="plus-camera"><div class="icon-wrap"><svg viewBox="0 0 24 24" fill="none" stroke="#4a3528" stroke-width="1.8"><path d="M4 8h3l2-3h6l2 3h3v11H4z"/><circle cx="12" cy="13" r="4"/></svg></div><span>拍照</span></div>
+      <div class="plus-item" id="plus-album"><div class="icon-wrap"><svg viewBox="0 0 24 24" fill="none" stroke="#4a3528" stroke-width="1.8"><rect x="3" y="4" width="18" height="16" rx="3"/><circle cx="9" cy="9" r="2"/><path d="M4 18l5-5 3 3 4-4 4 4"/></svg></div><span>相册</span></div>
+      <div class="plus-item" id="plus-video"><div class="icon-wrap"><svg viewBox="0 0 24 24" fill="none" stroke="#4a3528" stroke-width="1.8"><rect x="3" y="6" width="13" height="12" rx="3"/><path d="M16 10l5-3v10l-5-3"/></svg></div><span>视频</span></div>
+      <div class="plus-item" id="plus-sticker"><div class="icon-wrap"><svg viewBox="0 0 24 24" fill="#ff8fb0"><path d="M12,20 C12,20 4,14.5 4,9.5 C4,6.5 6.5,4.5 9,4.5 C11,4.5 12,6 12,6 C12,6 13,4.5 15,4.5 C17.5,4.5 20,6.5 20,9.5 C20,14.5 12,20 12,20 Z"/></svg></div><span>贴纸</span></div>
+      <div class="plus-item" id="plus-gift"><div class="icon-wrap"><svg viewBox="0 0 24 24" fill="none" stroke="#4a3528" stroke-width="1.8"><rect x="4" y="11" width="16" height="9" rx="2"/><path d="M3 8h18v3H3zM12 8v12M12 8c-2-3-5-4-7-2s0 5 3 5c2 0 4-1 4-3zM12 8c2-3 5-4 7-2s0 5-3 5c-2 0-4-1-4-3z"/></svg></div><span>礼物</span></div>
+      <div class="plus-item" id="plus-interact"><div class="icon-wrap"><svg viewBox="0 0 24 24" fill="none" stroke="#4a3528" stroke-width="1.8"><path d="M8 13V5.5a1.5 1.5 0 013 0V12m0-5.5v-1a1.5 1.5 0 013 0V11m0-4.5a1.5 1.5 0 013 0V15a6 6 0 01-6 6h-1a8 8 0 01-4-1.5L4 18"/></svg></div><span>互动</span></div>
+      <div class="plus-item" id="plus-quiz"><div class="icon-wrap"><svg viewBox="0 0 24 24" fill="none" stroke="#ff3b5c" stroke-width="1.8"><path d="M12,19 C12,19 5,14.5 5,10 C5,7 7.5,5 10,5 C11.5,5 12,6 12,6 C12,6 12.5,5 14,5 C16.5,5 19,7 19,10 C19,14.5 12,19 12,19 Z" fill="#ff8fb0" fill-opacity="0.3"/><path d="M9,11 C9,11 10,12 12,12 C14,12 15,11 15,11" stroke="#ff3b5c" stroke-width="1.2" fill="none"/></svg></div><span>问答</span></div>
+      <div class="plus-item" id="plus-ball"><div class="icon-wrap"><svg viewBox="0 0 24 24" fill="none" stroke="#4a3528" stroke-width="1.8"><circle cx="12" cy="12" r="8" opacity="0.5"/><circle cx="12" cy="12" r="4" opacity="0.8"/><circle cx="12" cy="12" r="1.5" fill="#4a3528" stroke="none"/></svg></div><span>悬浮球</span></div>
+      <div class="plus-item" id="plus-accompany"><div class="icon-wrap"><svg viewBox="0 0 24 24" fill="none" stroke="#4a3528" stroke-width="1.8"><path d="M12 21C12 21 4 14.5 4 9.5C4 6.5 6.5 4.5 9 4.5C11 4.5 12 6 12 6C12 6 13 4.5 15 4.5C17.5 4.5 20 6.5 20 9.5C20 14.5 12 21 12 21Z" fill="#ff8fb0" fill-opacity="0.4"/><circle cx="12" cy="12" r="2.5" fill="#4a3528" stroke="none" opacity="0.5"/></svg></div><span>陪伴</span></div>
     </div>`);
   overlay.classList.add('plus-menu-overlay');
   overlay.querySelector('#plus-camera').addEventListener('click', () => { overlay.remove(); openCamera(); });
   overlay.querySelector('#plus-album').addEventListener('click', () => { overlay.remove(); openAlbum(); });
-  overlay.querySelector('#plus-video').addEventListener('click', () => { overlay.remove(); showPlaceholder('视频'); });
-  overlay.querySelector('#plus-sticker').addEventListener('click', () => { overlay.remove(); showPlaceholder('贴纸'); });
-  overlay.querySelector('#plus-gift').addEventListener('click', () => { overlay.remove(); showPlaceholder('礼物'); });
-  overlay.querySelector('#plus-interact').addEventListener('click', () => { overlay.remove(); showPlaceholder('互动'); });
-  overlay.querySelector('#plus-telepathy').addEventListener('click', () => { overlay.remove(); startTelepathy(); });
+  overlay.querySelector('#plus-video').addEventListener('click', () => { overlay.remove(); startVideoCall(); });
+  overlay.querySelector('#plus-sticker').addEventListener('click', () => { overlay.remove(); openStickerSendPanel(); });
+  overlay.querySelector('#plus-gift').addEventListener('click', () => { overlay.remove(); openGiftSendPanel(); });
+  overlay.querySelector('#plus-interact').addEventListener('click', () => { overlay.remove(); openInteractSendPanel(); });
+  overlay.querySelector('#plus-quiz').addEventListener('click', () => { overlay.remove(); startQuiz(); });
   overlay.querySelector('#plus-ball').addEventListener('click', () => {
     const ball = document.getElementById('floating-ball');
     ball.style.display = ball.style.display === 'none' ? 'flex' : 'none';
@@ -2619,7 +2897,7 @@ function togglePlusMenu() {
   });
   overlay.querySelector('#plus-accompany').addEventListener('click', () => { overlay.remove(); openAccompanyPanel(); });
 }
-
+  // ========== 拍照和相册 ==========
 function openCamera() {
   const inp = document.createElement('input');
   inp.type = 'file';
@@ -2652,6 +2930,7 @@ function openAlbum() {
 }
 
 async function sendImageMessage(dataUrl) {
+  if (isArchiving) return showToast('归档中，请稍候');
   const msg = {
     sender: 'me',
     content: '[图片]',
@@ -2670,78 +2949,507 @@ async function sendImageMessage(dataUrl) {
   updateHeartValue();
   scheduleReadReceipt(msg);
   resetStopTimer();
+  checkBondDaily();
 }
 
-// ========== 问答 ==========
-async function startTelepathy() {
-  const questions = JSON.parse(localStorage.getItem('telepathyQuestions') || '[]');
-  const cards = await idbGetAll('cards');
-  let question = '';
-  if (questions.length && Math.random() < 0.6) {
-    question = questions[Math.floor(Math.random() * questions.length)].question;
-  } else if (cards.length) {
-    question = '如果TA现在想对你说一句话，会是什么？';
-  } else {
-    showToast('先添加字卡');
+// ========== 贴纸发送 ==========
+function openStickerSendPanel() {
+  const lib = JSON.parse(localStorage.getItem('stickerLibrary') || '[]');
+  if (!lib.length) return showToast('贴纸库是空的，先去小世界添加');
+  const overlay = createModal(`<div class="library-grid" id="sticker-send-grid"></div>`);
+  const grid = overlay.querySelector('#sticker-send-grid');
+  lib.forEach(s => {
+    const div = document.createElement('div');
+    div.className = 'lib-item';
+    div.innerHTML = `<img src="${s}" alt="">`;
+    div.addEventListener('click', async () => {
+      const msg = {
+        sender: 'me',
+        content: '[贴纸]',
+        imageData: s,
+        timestamp: Date.now(),
+        readTime: null,
+        pinned: false,
+        heartMark: null,
+        quoteContent: null
+      };
+      const id = await idbPutReturnId('messages', msg);
+      msg.id = id;
+      appendMessage(msg);
+      settings.heartValue += 1;
+      await saveSettings();
+      updateHeartValue();
+      overlay.remove();
+      scheduleReadReceipt(msg);
+      resetStopTimer();
+    });
+    grid.appendChild(div);
+  });
+}
+
+// ========== 礼物管理 ==========
+function openGiftManagePanel() {
+  const overlay = createModal(`
+    <div class="card-list" id="gift-manage-list"></div>
+    <button class="upload-btn" id="gift-add-btn">添加礼物</button>`);
+  loadGiftList(overlay);
+  overlay.querySelector('#gift-add-btn').addEventListener('click', () => openGiftAddDialog(overlay));
+}
+
+function loadGiftList(overlay) {
+  const gifts = JSON.parse(localStorage.getItem('giftLibrary') || '[]');
+  const list = overlay.querySelector('#gift-manage-list');
+  list.innerHTML = '';
+  if (!gifts.length) {
+    list.innerHTML = '<div class="placeholder-tip">还没有礼物</div>';
     return;
   }
+  gifts.forEach((g, i) => {
+    const div = document.createElement('div');
+    div.className = 'card-item';
+    div.innerHTML = `<div class="card-text">${g.icon || '🎁'} ${escapeHtml(g.name)} - ${g.cost}心意值</div>
+      <div class="card-ops"><button class="gift-del">✕</button></div>`;
+    div.querySelector('.gift-del').addEventListener('click', () => {
+      gifts.splice(i, 1);
+      localStorage.setItem('giftLibrary', JSON.stringify(gifts));
+      loadGiftList(overlay);
+    });
+    list.appendChild(div);
+  });
+}
+
+function openGiftAddDialog(panelOverlay) {
+  const overlay = createModal(`
+    <div class="big-input-title">添加礼物</div>
+    <div style="display:flex;gap:8px;margin-bottom:12px;">
+      <button class="mini-btn gift-type-btn" data-type="icon">图标礼物</button>
+      <button class="mini-btn gift-type-btn" data-type="image">图片礼物</button>
+    </div>
+    <div id="gift-type-area"></div>
+    <input type="text" id="gift-name-input" placeholder="礼物名称" style="width:100%;background:rgba(255,255,255,0.5);border:1px solid rgba(255,255,255,0.6);border-radius:14px;padding:10px 14px;font-size:14px;color:#4a3f3a;outline:none;margin-bottom:8px;">
+    <input type="number" id="gift-cost-input" placeholder="花费心意值" style="width:100%;background:rgba(255,255,255,0.5);border:1px solid rgba(255,255,255,0.6);border-radius:14px;padding:10px 14px;font-size:14px;color:#4a3f3a;outline:none;margin-bottom:12px;">
+    <button class="save-btn-center" id="save-gift">保存</button>`);
+  let giftType = 'icon';
+  let giftIcon = '🎁';
+  let giftImage = '';
+  
+  overlay.querySelectorAll('.gift-type-btn').forEach(btn => {
+    btn.addEventListener('click', () => {
+      giftType = btn.dataset.type;
+      renderGiftTypeArea();
+    });
+  });
+  
+  function renderGiftTypeArea() {
+    const area = overlay.querySelector('#gift-type-area');
+    if (giftType === 'icon') {
+      area.innerHTML = `<input type="text" id="gift-icon-input" placeholder="输入图标，如🌹" style="width:100%;background:rgba(255,255,255,0.5);border:1px solid rgba(255,255,255,0.6);border-radius:14px;padding:10px 14px;font-size:14px;color:#4a3f3a;outline:none;margin-bottom:8px;">`;
+    } else {
+      area.innerHTML = `<button class="upload-btn" id="gift-image-btn">上传图片</button>`;
+      area.querySelector('#gift-image-btn').addEventListener('click', () => {
+        const inp = document.createElement('input');
+        inp.type = 'file';
+        inp.accept = 'image/*';
+        inp.onchange = (e) => {
+          const file = e.target.files[0];
+          if (!file) return;
+          const reader = new FileReader();
+          reader.onload = () => {
+            giftImage = reader.result;
+            area.querySelector('#gift-image-btn').textContent = '已选择图片';
+          };
+          reader.readAsDataURL(file);
+        };
+        inp.click();
+      });
+    }
+  }
+  renderGiftTypeArea();
+  
+  overlay.querySelector('#save-gift').addEventListener('click', () => {
+    const name = overlay.querySelector('#gift-name-input').value.trim();
+    const cost = Number(overlay.querySelector('#gift-cost-input').value);
+    if (!name || !cost) return showToast('请填写名称和心意值');
+    if (giftType === 'icon') {
+      giftIcon = overlay.querySelector('#gift-icon-input')?.value || '🎁';
+    }
+    const gifts = JSON.parse(localStorage.getItem('giftLibrary') || '[]');
+    gifts.push({ type: giftType, name, cost, icon: giftIcon, image: giftImage });
+    localStorage.setItem('giftLibrary', JSON.stringify(gifts));
+    overlay.remove();
+    panelOverlay.remove();
+    openGiftManagePanel();
+  });
+}
+
+// ========== 礼物发送 ==========
+function openGiftSendPanel() {
+  const gifts = JSON.parse(localStorage.getItem('giftLibrary') || '[]');
+  if (!gifts.length) return showToast('礼物库是空的，先去小世界添加');
+  const overlay = createModal(`<div class="card-list" id="gift-send-list"></div>`);
+  const list = overlay.querySelector('#gift-send-list');
+  gifts.forEach(g => {
+    const div = document.createElement('div');
+    div.className = 'card-item';
+    div.innerHTML = `<div class="card-text">${g.icon || '🎁'} ${escapeHtml(g.name)} - ${g.cost}心意值</div>`;
+    div.addEventListener('click', async () => {
+      if (settings.heartValue < g.cost) return showToast('心意值不足');
+      settings.heartValue -= g.cost;
+      await saveSettings();
+      updateHeartValue();
+      const msg = {
+        sender: 'me',
+        content: '[礼物]',
+        giftData: g,
+        timestamp: Date.now(),
+        readTime: null,
+        pinned: false,
+        heartMark: null,
+        quoteContent: null
+      };
+      const id = await idbPutReturnId('messages', msg);
+      msg.id = id;
+      appendMessage(msg);
+      overlay.remove();
+      scheduleReadReceipt(msg);
+      resetStopTimer();
+    });
+    list.appendChild(div);
+  });
+}
+  // ========== 互动管理 ==========
+function openInteractManagePanel() {
+  const overlay = createModal(`
+    <div class="heart-tabs">
+      <button class="heart-tab active" id="interact-tab-me2ta">我对TA</button>
+      <button class="heart-tab" id="interact-tab-ta2me">TA对我</button>
+      <button class="heart-tab" id="interact-tab-couple">情侣</button>
+    </div>
+    <div class="card-list" id="interact-manage-list"></div>
+    <button class="upload-btn" id="interact-add-btn">添加互动</button>`);
+  let currentTab = 'me2ta';
+  loadInteractList(overlay, currentTab);
+  overlay.querySelector('#interact-tab-me2ta').addEventListener('click', () => switchInteractTab('me2ta', overlay));
+  overlay.querySelector('#interact-tab-ta2me').addEventListener('click', () => switchInteractTab('ta2me', overlay));
+  overlay.querySelector('#interact-tab-couple').addEventListener('click', () => switchInteractTab('couple', overlay));
+  overlay.querySelector('#interact-add-btn').addEventListener('click', () => openInteractAddDialog(currentTab, overlay));
+}
+
+function switchInteractTab(tab, overlay) {
+  overlay.querySelectorAll('.heart-tab').forEach(t => t.classList.remove('active'));
+  if (tab === 'me2ta') overlay.querySelector('#interact-tab-me2ta').classList.add('active');
+  if (tab === 'ta2me') overlay.querySelector('#interact-tab-ta2me').classList.add('active');
+  if (tab === 'couple') overlay.querySelector('#interact-tab-couple').classList.add('active');
+  loadInteractList(overlay, tab);
+}
+
+function loadInteractList(overlay, tab) {
+  const interactions = JSON.parse(localStorage.getItem('interactionLibrary') || '{}');
+  const items = interactions[tab] || [];
+  const list = overlay.querySelector('#interact-manage-list');
+  list.innerHTML = '';
+  if (!items.length) {
+    list.innerHTML = '<div class="placeholder-tip">还没有互动</div>';
+    return;
+  }
+  items.forEach((item, i) => {
+    const div = document.createElement('div');
+    div.className = 'card-item';
+    div.innerHTML = `<div class="card-text">${item.icon ? item.icon + ' ' : ''}${escapeHtml(item.text)}</div>
+      <div class="card-ops"><button class="interact-del">✕</button></div>`;
+    div.querySelector('.interact-del').addEventListener('click', () => {
+      interactions[tab].splice(i, 1);
+      localStorage.setItem('interactionLibrary', JSON.stringify(interactions));
+      loadInteractList(overlay, tab);
+    });
+    list.appendChild(div);
+  });
+}
+
+function openInteractAddDialog(tab, panelOverlay) {
+  const overlay = createModal(`
+    <div class="big-input-title">添加互动</div>
+    <input type="text" id="interact-icon-input" placeholder="图标（可选，如💗）" style="width:100%;background:rgba(255,255,255,0.5);border:1px solid rgba(255,255,255,0.6);border-radius:14px;padding:10px 14px;font-size:14px;color:#4a3f3a;outline:none;margin-bottom:8px;">
+    <input type="text" id="interact-text-input" placeholder="互动文字，如：我拍了拍TA" style="width:100%;background:rgba(255,255,255,0.5);border:1px solid rgba(255,255,255,0.6);border-radius:14px;padding:10px 14px;font-size:14px;color:#4a3f3a;outline:none;margin-bottom:12px;">
+    <button class="save-btn-center" id="save-interact">保存</button>`);
+  overlay.querySelector('#save-interact').addEventListener('click', () => {
+    const icon = overlay.querySelector('#interact-icon-input').value.trim();
+    const text = overlay.querySelector('#interact-text-input').value.trim();
+    if (!text) return showToast('请输入互动文字');
+    const interactions = JSON.parse(localStorage.getItem('interactionLibrary') || '{}');
+    if (!interactions[tab]) interactions[tab] = [];
+    interactions[tab].push({ icon, text });
+    localStorage.setItem('interactionLibrary', JSON.stringify(interactions));
+    overlay.remove();
+    panelOverlay.remove();
+    openInteractManagePanel();
+  });
+}
+
+// ========== 互动发送 ==========
+function openInteractSendPanel() {
+  const overlay = createModal(`
+    <div class="heart-tabs">
+      <button class="heart-tab active" id="send-interact-tab-me2ta">我对TA</button>
+      <button class="heart-tab" id="send-interact-tab-ta2me">TA对我</button>
+      <button class="heart-tab" id="send-interact-tab-couple">情侣</button>
+    </div>
+    <div class="card-list" id="interact-send-list"></div>`);
+  let currentTab = 'me2ta';
+  loadInteractSendList(overlay, currentTab);
+  overlay.querySelector('#send-interact-tab-me2ta').addEventListener('click', () => switchInteractSendTab('me2ta', overlay));
+  overlay.querySelector('#send-interact-tab-ta2me').addEventListener('click', () => switchInteractSendTab('ta2me', overlay));
+  overlay.querySelector('#send-interact-tab-couple').addEventListener('click', () => switchInteractSendTab('couple', overlay));
+}
+
+function switchInteractSendTab(tab, overlay) {
+  overlay.querySelectorAll('.heart-tab').forEach(t => t.classList.remove('active'));
+  if (tab === 'me2ta') overlay.querySelector('#send-interact-tab-me2ta').classList.add('active');
+  if (tab === 'ta2me') overlay.querySelector('#send-interact-tab-ta2me').classList.add('active');
+  if (tab === 'couple') overlay.querySelector('#send-interact-tab-couple').classList.add('active');
+  loadInteractSendList(overlay, tab);
+}
+
+function loadInteractSendList(overlay, tab) {
+  const interactions = JSON.parse(localStorage.getItem('interactionLibrary') || '{}');
+  const items = interactions[tab] || [];
+  const list = overlay.querySelector('#interact-send-list');
+  list.innerHTML = '';
+  if (!items.length) {
+    list.innerHTML = '<div class="placeholder-tip">还没有互动，先去小世界添加</div>';
+    return;
+  }
+  items.forEach(item => {
+    const div = document.createElement('div');
+    div.className = 'card-item';
+    div.innerHTML = `<div class="card-text">${item.icon ? item.icon + ' ' : ''}${escapeHtml(item.text)}</div>`;
+    div.addEventListener('click', async () => {
+      const msg = {
+        sender: tab === 'ta2me' ? 'ta' : 'me',
+        content: '[互动]',
+        interactData: item,
+        timestamp: Date.now(),
+        readTime: null,
+        pinned: false,
+        heartMark: null,
+        quoteContent: null
+      };
+      const id = await idbPutReturnId('messages', msg);
+      msg.id = id;
+      appendMessage(msg);
+      settings.heartValue += 1;
+      await saveSettings();
+      updateHeartValue();
+      overlay.remove();
+      if (tab === 'me2ta' || tab === 'couple') {
+        scheduleReadReceipt(msg);
+        resetStopTimer();
+      }
+    });
+    list.appendChild(div);
+  });
+}
+
+// ========== 问答题库管理 ==========
+function openQuizManagePanel() {
+  const overlay = createModal(`
+    <div class="card-count-row"><span id="quiz-count"></span></div>
+    <div class="card-list" id="quiz-manage-list"></div>
+    <button class="upload-btn" id="quiz-add-btn">添加题目</button>`);
+  loadQuizList(overlay);
+  overlay.querySelector('#quiz-add-btn').addEventListener('click', () => openQuizAddDialog(overlay));
+}
+
+function loadQuizList(overlay) {
+  const quizzes = JSON.parse(localStorage.getItem('quizLibrary') || '[]');
+  overlay.querySelector('#quiz-count').textContent = `共 ${quizzes.length} 题`;
+  const list = overlay.querySelector('#quiz-manage-list');
+  list.innerHTML = '';
+  if (!quizzes.length) {
+    list.innerHTML = '<div class="placeholder-tip">还没有题目</div>';
+    return;
+  }
+  quizzes.forEach((q, i) => {
+    const div = document.createElement('div');
+    div.className = 'card-item';
+    div.innerHTML = `<div class="card-text">${escapeHtml(q.question)}（${q.options.length}个选项）</div>
+      <div class="card-ops"><button class="quiz-del">✕</button></div>`;
+    div.querySelector('.quiz-del').addEventListener('click', () => {
+      quizzes.splice(i, 1);
+      localStorage.setItem('quizLibrary', JSON.stringify(quizzes));
+      loadQuizList(overlay);
+    });
+    list.appendChild(div);
+  });
+}
+
+function openQuizAddDialog(panelOverlay) {
+  const overlay = createModal(`
+    <div class="big-input-title">添加题目</div>
+    <input type="text" id="quiz-question-input" placeholder="题目" style="width:100%;background:rgba(255,255,255,0.5);border:1px solid rgba(255,255,255,0.6);border-radius:14px;padding:10px 14px;font-size:14px;color:#4a3f3a;outline:none;margin-bottom:8px;">
+    <textarea class="big-input-area" id="quiz-options-input" placeholder="选项（一行一个）" style="min-height:120px;"></textarea>
+    <button class="save-btn-center" id="save-quiz" style="margin-top:12px;">保存</button>`);
+  overlay.querySelector('#save-quiz').addEventListener('click', () => {
+    const question = overlay.querySelector('#quiz-question-input').value.trim();
+    const optionsText = overlay.querySelector('#quiz-options-input').value.trim();
+    if (!question || !optionsText) return showToast('请填写题目和选项');
+    const options = optionsText.split('\n').map(s => s.trim()).filter(Boolean);
+    if (options.length < 2) return showToast('至少两个选项');
+    const quizzes = JSON.parse(localStorage.getItem('quizLibrary') || '[]');
+    quizzes.push({ question, options });
+    localStorage.setItem('quizLibrary', JSON.stringify(quizzes));
+    overlay.remove();
+    panelOverlay.remove();
+    openQuizManagePanel();
+  });
+}
+  // ========== 问答玩法 ==========
+async function startQuiz() {
+  const quizType = Math.random();
+  const quizzes = JSON.parse(localStorage.getItem('quizLibrary') || '[]');
+  const cards = await idbGetAll('cards');
+  if (quizType < 0.5 && quizzes.length) {
+    await startLibraryQuiz(quizzes);
+  } else if (cards.length >= 2) {
+    await startCardQuiz(cards);
+  } else if (quizzes.length) {
+    await startLibraryQuiz(quizzes);
+  } else if (cards.length >= 2) {
+    await startCardQuiz(cards);
+  } else {
+    showToast('先添加字卡或问答题库');
+  }
+}
+
+async function startLibraryQuiz(quizzes) {
+  const quiz = quizzes[Math.floor(Math.random() * quizzes.length)];
+  let content = '💫 问答：' + quiz.question + '\n';
+  quiz.options.forEach((opt, i) => {
+    content += String.fromCharCode(65 + i) + '：' + opt + '\n';
+  });
+  content += '（请回复选项字母或内容）';
+  const msg = { sender: 'ta', content, timestamp: Date.now(), pinned: false, heartMark: null, isSystem: true };
+  const id = await idbPutReturnId('messages', msg);
+  msg.id = id;
+  appendMessage(msg);
+  window._pendingQuiz = { type: 'library', quiz };
   telepathyActive = true;
-  telepathyQuestion = question;
-  const sysMsg = {
-    sender: 'ta',
-    content: '💫 问答：' + question + '\n（请回答后发送）',
-    timestamp: Date.now(),
-    pinned: false,
-    heartMark: null,
-    isSystem: true
-  };
-  const id = await idbPutReturnId('messages', sysMsg);
-  sysMsg.id = id;
-  appendMessage(sysMsg);
+  telepathyQuestion = 'quiz';
 }
 
-async function checkTelepathy(myAnswer) {
-  if (!telepathyActive) return;
-  const cards = await idbGetAll('cards');
-  if (!cards.length) {
-    telepathyActive = false;
-    return;
-  }
-  const taCard = cards[Math.floor(Math.random() * cards.length)];
-  const taMsg = {
-    sender: 'ta',
-    content: taCard.content,
-    timestamp: Date.now(),
-    pinned: false,
-    heartMark: null
-  };
-  const id = await idbPutReturnId('messages', taMsg);
-  taMsg.id = id;
-  appendMessage(taMsg);
-  const matched = taCard.content.includes(myAnswer) || myAnswer.includes(taCard.content);
-  let resultContent = '';
-  if (matched) {
-    resultContent = '💗 你们想的一样！心意值+10';
-    settings.heartValue += 10;
-  } else {
-    resultContent = '🤍 你们的答案不一样。心意值+2';
-    settings.heartValue += 2;
-  }
-  await saveSettings();
-  updateHeartValue();
-  const resultMsg = {
-    sender: 'ta',
-    content: resultContent,
-    timestamp: Date.now(),
-    pinned: false,
-    heartMark: null,
-    isSystem: true
-  };
-  const rid = await idbPutReturnId('messages', resultMsg);
-  resultMsg.id = rid;
-  appendMessage(resultMsg);
-  telepathyActive = false;
+async function startCardQuiz(cards) {
+  const shuffled = [...cards].sort(() => Math.random() - 0.5).slice(0, Math.min(4, cards.length));
+  let content = '💫 问答：TA现在最想对你说哪句话？\n';
+  shuffled.forEach((card, i) => {
+    content += String.fromCharCode(65 + i) + '：' + card.content + '\n';
+  });
+  content += '（请回复选项字母或内容）';
+  const msg = { sender: 'ta', content, timestamp: Date.now(), pinned: false, heartMark: null, isSystem: true };
+  const id = await idbPutReturnId('messages', msg);
+  msg.id = id;
+  appendMessage(msg);
+  window._pendingQuiz = { type: 'card', cards: shuffled };
+  telepathyActive = true;
+  telepathyQuestion = 'card';
 }
+
+async function checkQuizAnswer(myAnswer) {
+  const pending = window._pendingQuiz;
+  if (!pending) return;
+  telepathyActive = false;
+  window._pendingQuiz = null;
+  if (pending.type === 'card') {
+    const taPick = pending.cards[Math.floor(Math.random() * pending.cards.length)];
+    const taMsg = { sender: 'ta', content: taPick.content, timestamp: Date.now(), pinned: false, heartMark: null };
+    const tid = await idbPutReturnId('messages', taMsg);
+    taMsg.id = tid;
+    appendMessage(taMsg);
+    const matched = taPick.content.includes(myAnswer) || myAnswer.includes(taPick.content);
+    let result;
+    if (matched) {
+      result = '💗 你们想的一样！心意值+10';
+      settings.heartValue += 10;
+    } else {
+      result = '🤍 你们的答案不一样。心意值+2';
+      settings.heartValue += 2;
+    }
+    await saveSettings();
+    updateHeartValue();
+    const resultMsg = { sender: 'ta', content: result, timestamp: Date.now(), pinned: false, heartMark: null, isSystem: true };
+    const rid = await idbPutReturnId('messages', resultMsg);
+    resultMsg.id = rid;
+    appendMessage(resultMsg);
+  } else if (pending.type === 'library') {
+    const quiz = pending.quiz;
+    const taPick = quiz.options[Math.floor(Math.random() * quiz.options.length)];
+    const taMsg = { sender: 'ta', content: taPick, timestamp: Date.now(), pinned: false, heartMark: null };
+    const tid = await idbPutReturnId('messages', taMsg);
+    taMsg.id = tid;
+    appendMessage(taMsg);
+    const matched = taPick.includes(myAnswer) || myAnswer.includes(taPick);
+    let result;
+    if (matched) {
+      result = '💗 你们想的一样！心意值+10';
+      settings.heartValue += 10;
+    } else {
+      result = '🤍 你们的答案不一样。心意值+2';
+      settings.heartValue += 2;
+    }
+    await saveSettings();
+    updateHeartValue();
+    const resultMsg = { sender: 'ta', content: result, timestamp: Date.now(), pinned: false, heartMark: null, isSystem: true };
+    const rid = await idbPutReturnId('messages', resultMsg);
+    resultMsg.id = rid;
+    appendMessage(resultMsg);
+  }
+}
+
+// ========== 提醒功能 ==========
+function openRemindPanel() {
+  const overlay = createModal(`
+    <div class="big-input-title">提醒</div>
+    <div style="margin-bottom:8px;font-size:13px;color:#4a3528;">提醒时间（一行一个，如 23:30）</div>
+    <textarea class="big-input-area" id="remind-times-input" style="min-height:100px;">${(settings.reminderTimes || []).join('\n')}</textarea>
+    <div style="margin-bottom:8px;font-size:13px;color:#4a3528;margin-top:12px;">提醒内容（一行一条）</div>
+    <textarea class="big-input-area" id="remind-cards-input" style="min-height:100px;">${(settings.reminderCards || []).join('\n')}</textarea>
+    <div style="margin-bottom:8px;font-size:13px;color:#4a3528;margin-top:12px;">触发概率（0.1~1）</div>
+    <input type="number" id="remind-prob-input" value="${settings.reminderProb}" min="0.1" max="1" step="0.1" style="width:100%;background:rgba(255,255,255,0.5);border:1px solid rgba(255,255,255,0.6);border-radius:14px;padding:10px 14px;font-size:14px;color:#4a3f3a;outline:none;">
+    <button class="save-btn-center" id="save-remind" style="margin-top:14px;">保存</button>`);
+  overlay.querySelector('#save-remind').addEventListener('click', async () => {
+    const times = overlay.querySelector('#remind-times-input').value.trim().split('\n').map(s => s.trim()).filter(Boolean);
+    const cards = overlay.querySelector('#remind-cards-input').value.trim().split('\n').map(s => s.trim()).filter(Boolean);
+    const prob = Number(overlay.querySelector('#remind-prob-input').value) || 0.5;
+    settings.reminderTimes = times;
+    settings.reminderCards = cards;
+    settings.reminderProb = prob;
+    await saveSettings();
+    showToast('提醒已保存');
+    overlay.remove();
+  });
+}
+
+function checkReminders() {
+  const now = new Date();
+  const hh = String(now.getHours()).padStart(2, '0');
+  const mm = String(now.getMinutes()).padStart(2, '0');
+  const currentTime = hh + ':' + mm;
+  if (!settings.reminderTimes || !settings.reminderTimes.includes(currentTime)) return;
+  const checked = JSON.parse(localStorage.getItem('reminderChecked') || '{}');
+  const today = now.toDateString();
+  if (checked[today + currentTime]) return;
+  checked[today + currentTime] = true;
+  localStorage.setItem('reminderChecked', JSON.stringify(checked));
+  if (Math.random() > settings.reminderProb) return;
+  if (!settings.reminderCards || !settings.reminderCards.length) return;
+  const card = settings.reminderCards[Math.floor(Math.random() * settings.reminderCards.length)];
+  const msg = { sender: 'ta', content: card, timestamp: Date.now(), pinned: false, heartMark: null };
+  idbPutReturnId('messages', msg).then(id => {
+    msg.id = id;
+    appendMessage(msg);
+    sendNotification(card);
+  });
+}
+setInterval(checkReminders, 30000);
   // ========== 陪伴面板 ==========
 function openAccompanyPanel() {
   const overlay = createModal(`
@@ -2758,11 +3466,9 @@ function openAccompanyPanel() {
       <button class="mini-btn acc-type" data-type="night">深夜型</button>
     </div>
     <button class="save-btn-center" id="acc-stop" style="display:none;margin-top:14px;background:rgba(200,100,100,0.6);">结束陪伴</button>`);
-  
   if (settings.accompanyMode) {
     overlay.querySelector('#acc-stop').style.display = 'block';
   }
-  
   overlay.querySelector('#acc-sleep').addEventListener('click', () => {
     settings.accompanyMode = 'sleep';
     settings.accompanyStartTime = Date.now();
@@ -2771,7 +3477,6 @@ function openAccompanyPanel() {
     overlay.remove();
     showToast('TA陪你睡了');
   });
-  
   overlay.querySelector('#acc-daze').addEventListener('click', () => {
     settings.accompanyMode = 'daze';
     settings.accompanyStartTime = Date.now();
@@ -2780,12 +3485,10 @@ function openAccompanyPanel() {
     showToast('和TA一起发呆');
     scheduleDazeMessages();
   });
-  
   overlay.querySelector('#acc-stats').addEventListener('click', () => {
     overlay.remove();
     openAccompanyStats();
   });
-  
   overlay.querySelectorAll('.acc-type').forEach(btn => {
     if (btn.dataset.type === settings.accompanyType) {
       btn.style.background = 'rgba(255,150,100,0.6)';
@@ -2801,7 +3504,6 @@ function openAccompanyPanel() {
       scheduleCompanionMessages();
     });
   });
-  
   overlay.querySelector('#acc-stop').addEventListener('click', () => {
     const mode = settings.accompanyMode;
     const duration = Date.now() - settings.accompanyStartTime;
@@ -2824,8 +3526,7 @@ function applySleepMode() {
 }
 
 function removeSleepMode() {
-  const app = document.getElementById('app');
-  app.style.filter = '';
+  document.getElementById('app').style.filter = '';
 }
 
 function scheduleSleepMessages() {
@@ -2935,7 +3636,7 @@ function switchHeartView(view, overlay) {
 
 async function getHeartMessages() {
   const msgs = await idbGetAll('messages');
-  if (heartCurrentTab === 'ta') return msgs.filter(m => m.heartMark && m.heartMark.includes('TA'));
+  if (heartCurrentTab === 'ta') return msgs.filter(m => m.heartMark && (m.heartMark.includes('TA')));
   return msgs.filter(m => m.heartMark && m.heartMark.includes('我'));
 }
 
@@ -3194,9 +3895,7 @@ function checkImportantDays() {
   const today = now.getFullYear() + '-' + String(now.getMonth() + 1).padStart(2, '0') + '-' + String(now.getDate()).padStart(2, '0');
   days.forEach(d => {
     let target = d.date;
-    if (d.repeat) {
-      target = now.getFullYear() + '-' + d.date.slice(5);
-    }
+    if (d.repeat) target = now.getFullYear() + '-' + d.date.slice(5);
     if (target === today) {
       const checked = JSON.parse(localStorage.getItem('importantChecked') || '{}');
       if (!checked[d.name + today]) {
@@ -3216,6 +3915,11 @@ function checkImportantDays() {
 function openAttendancePanel() {
   const overlay = createModal(`
     <div class="card-count-row"><span id="attendance-summary"></span></div>
+    <div style="margin-bottom:8px;font-size:13px;color:#4a3528;">时薪设置</div>
+    <div style="display:flex;gap:8px;margin-bottom:12px;">
+      <input type="number" id="attendance-wage" placeholder="时薪" value="${settings.hourlyWage}" style="flex:1;background:rgba(255,255,255,0.5);border:1px solid rgba(255,255,255,0.6);border-radius:14px;padding:8px 10px;font-size:13px;color:#4a3f3a;outline:none;">
+      <button class="mini-btn" id="attendance-save-wage">保存时薪</button>
+    </div>
     <div style="display:flex;gap:8px;margin-bottom:12px;">
       <input type="date" id="attendance-date" style="flex:1;background:rgba(255,255,255,0.5);border:1px solid rgba(255,255,255,0.6);border-radius:14px;padding:8px 10px;font-size:13px;color:#4a3f3a;outline:none;">
       <input type="number" id="attendance-hours" placeholder="小时" style="width:70px;background:rgba(255,255,255,0.5);border:1px solid rgba(255,255,255,0.6);border-radius:14px;padding:8px 10px;font-size:13px;color:#4a3f3a;outline:none;">
@@ -3223,6 +3927,14 @@ function openAttendancePanel() {
     </div>
     <div class="card-list" id="attendance-list"></div>`);
   loadAttendance(overlay);
+  overlay.querySelector('#attendance-save-wage').addEventListener('click', () => {
+    const wage = Number(overlay.querySelector('#attendance-wage').value);
+    if (!wage) return showToast('请输入时薪');
+    settings.hourlyWage = wage;
+    saveSettings();
+    showToast('时薪已保存');
+    loadAttendance(overlay);
+  });
   overlay.querySelector('#attendance-save').addEventListener('click', () => {
     const date = overlay.querySelector('#attendance-date').value;
     const hours = Number(overlay.querySelector('#attendance-hours').value);
@@ -3237,9 +3949,13 @@ function openAttendancePanel() {
 function loadAttendance(overlay) {
   const records = JSON.parse(localStorage.getItem('attendanceRecords') || '{}');
   const dates = Object.keys(records).sort().reverse();
-  const total = Object.values(records).reduce((a, b) => a + b, 0);
-  const avg = dates.length ? Math.round(total / dates.length * 10) / 10 : 0;
-  overlay.querySelector('#attendance-summary').textContent = `共 ${dates.length} 天，累计 ${total} 小时，平均 ${avg} 小时/天`;
+  const wage = settings.hourlyWage || 0;
+  const totalHours = Object.values(records).reduce((a, b) => a + b, 0);
+  const totalWage = totalHours * wage;
+  const monthDates = dates.filter(d => d.startsWith(new Date().toISOString().slice(0, 7)));
+  const monthHours = monthDates.reduce((a, d) => a + records[d], 0);
+  const monthWage = monthHours * wage;
+  overlay.querySelector('#attendance-summary').textContent = `本月 ${monthHours} 小时 ${monthWage} 元 ｜ 累计 ${totalHours} 小时 ${totalWage} 元`;
   const list = overlay.querySelector('#attendance-list');
   list.innerHTML = '';
   if (!dates.length) {
@@ -3249,7 +3965,7 @@ function loadAttendance(overlay) {
   dates.forEach(date => {
     const div = document.createElement('div');
     div.className = 'card-item';
-    div.innerHTML = `<div class="card-text">${date} - ${records[date]} 小时</div>
+    div.innerHTML = `<div class="card-text">${date} - ${records[date]} 小时 - ${records[date] * wage} 元</div>
       <div class="card-ops"><button class="attendance-del">✕</button></div>`;
     div.querySelector('.attendance-del').addEventListener('click', () => {
       delete records[date];
@@ -3266,8 +3982,7 @@ function openMemoPanel() {
     <textarea class="big-input-area" id="memo-content" placeholder="写点什么..." style="min-height:200px;">${escapeHtml(localStorage.getItem('memo') || '')}</textarea>
     <button class="save-btn-center" id="memo-save" style="margin-top:14px;">保存</button>`);
   overlay.querySelector('#memo-save').addEventListener('click', () => {
-    const val = overlay.querySelector('#memo-content').value;
-    localStorage.setItem('memo', val);
+    localStorage.setItem('memo', overlay.querySelector('#memo-content').value);
     showToast('已保存');
     overlay.remove();
   });
@@ -3287,11 +4002,8 @@ function openBondPanel() {
       <button class="mini-btn" id="bond-rename">改名</button>
     </div>
     <div class="big-input-title">${settings.bondName}日历</div>
-    <div class="playback-dates" id="bond-calendar"></div>
-    <div class="placeholder-tip" id="bond-tip"></div>`);
-  
+    <div class="playback-dates" id="bond-calendar"></div>`);
   renderBondCalendar(overlay);
-  
   overlay.querySelector('#bond-sign').addEventListener('click', () => {
     if (settings.heartValue < 50) return showToast('心意值不足');
     if (getBondTodayStatus() === '已聊') return showToast('今天已经聊过了');
@@ -3304,7 +4016,6 @@ function openBondPanel() {
     openBondPanel();
     showToast('补签成功');
   });
-  
   overlay.querySelector('#bond-rename').addEventListener('click', () => {
     const renameOverlay = createModal(`
       <div class="big-input-title">修改名字</div>
@@ -3363,7 +4074,8 @@ function renderBondCalendar(overlay) {
   dates.forEach(date => {
     const div = document.createElement('div');
     div.className = 'playback-date';
-    div.textContent = date.slice(5);
+    const d = new Date(date);
+    div.textContent = (d.getMonth() + 1) + '月' + d.getDate() + '日';
     div.style.background = 'rgba(255,143,176,0.4)';
     container.appendChild(div);
   });
@@ -3402,15 +4114,19 @@ function checkBondDaily() {
 function checkArchive() {
   const now = new Date();
   const today = now.getFullYear() + '-' + (now.getMonth() + 1) + '-' + now.getDate();
-  if (settings.lastArchiveDate && settings.lastArchiveDate !== today) {
+  if (settings.lastArchiveDate && settings.lastArchiveDate !== today && !isArchiving) {
     const prevDate = settings.lastArchiveDate;
-    archiveDay(prevDate);
+    performArchive(prevDate);
   }
   settings.lastArchiveDate = today;
   saveSettings();
 }
 
-async function archiveDay(dateStr) {
+async function performArchive(dateStr) {
+  isArchiving = true;
+  const input = document.getElementById('chat-input');
+  input.disabled = true;
+  input.placeholder = '归档中...';
   const all = await idbGetAll('messages');
   const dayMsgs = all.filter(m => {
     const d = new Date(m.timestamp);
@@ -3424,13 +4140,18 @@ async function archiveDay(dateStr) {
     for (const m of dayMsgs) {
       await idbDelete('messages', m.id);
     }
-    renderMessages();
+    await renderMessages();
   }
+  isArchiving = false;
+  input.disabled = false;
+  input.placeholder = '对TA说些什么...';
+  showToast('新的一天开始了');
 }
 
-setInterval(checkArchive, 60000);
+setInterval(checkArchive, 30000);
 setInterval(checkImportantDays, 3600000);
-  // ========== 数据备份 ==========
+
+// ========== 数据备份 ==========
 async function backupNow() {
   const cards = await idbGetAll('cards');
   const messages = await idbGetAll('messages');
@@ -3444,8 +4165,10 @@ async function backupNow() {
     avatarLibrary: JSON.parse(localStorage.getItem('avatarLibrary') || '[]'),
     bgLibrary: JSON.parse(localStorage.getItem('bgLibrary') || '[]'),
     stickerLibrary: JSON.parse(localStorage.getItem('stickerLibrary') || '[]'),
+    giftLibrary: JSON.parse(localStorage.getItem('giftLibrary') || '[]'),
+    interactionLibrary: JSON.parse(localStorage.getItem('interactionLibrary') || '{}'),
+    quizLibrary: JSON.parse(localStorage.getItem('quizLibrary') || '[]'),
     recycledCards: JSON.parse(localStorage.getItem('recycledCards') || '[]'),
-    telepathyQuestions: JSON.parse(localStorage.getItem('telepathyQuestions') || '[]'),
     importantDays: JSON.parse(localStorage.getItem('importantDays') || '[]'),
     attendanceRecords: JSON.parse(localStorage.getItem('attendanceRecords') || '{}'),
     memo: localStorage.getItem('memo') || '',
@@ -3471,14 +4194,11 @@ function scheduleDailyBackup() {
 // ========== 动态背景 ==========
 let bgHue = 0;
 function animateBG() {
+  if (settings.bgCurrent) return;
   const canvas = document.getElementById('bg-canvas');
   const ctx = canvas.getContext('2d');
   canvas.width = window.innerWidth;
   canvas.height = window.innerHeight;
-  if (settings.bgCurrent) {
-    applyBG();
-    return;
-  }
   bgHue = (bgHue + 0.15) % 360;
   const h1 = (bgHue + 15) % 360;
   const h2 = (bgHue + 45) % 360;
@@ -3490,6 +4210,204 @@ function animateBG() {
   ctx.fillStyle = grad;
   ctx.fillRect(0, 0, canvas.width, canvas.height);
   requestAnimationFrame(animateBG);
+}
+  // ========== 视频通话 ==========
+function startVideoCall() {
+  if (videoCallActive) return showToast('已在通话中');
+  videoCallActive = true;
+  videoCallType = 'outgoing';
+  videoCallAnswered = false;
+  videoCallStartTime = 0;
+  
+  videoCallOverlay = document.createElement('div');
+  videoCallOverlay.className = 'video-call-overlay';
+  videoCallOverlay.innerHTML = `
+    <img class="video-call-avatar" src="${settings.taAvatar || 'data:image/svg+xml,' + encodeURIComponent('<svg xmlns="http://www.w3.org/2000/svg" width="120" height="120"><circle cx="60" cy="60" r="58" fill="rgba(255,255,255,0.3)"/><text x="60" y="75" text-anchor="middle" font-size="40" fill="rgba(255,255,255,0.7)">TA</text></svg>')}" alt="TA">
+    <div class="video-wave-bar"><span></span><span></span><span></span><span></span><span></span></div>
+    <div class="video-call-info">正在呼叫TA...</div>
+    <div class="video-call-btns">
+      <button class="video-call-btn minimize" id="video-minimize-btn">缩小</button>
+      <button class="video-call-btn hangup" id="video-hangup-btn">挂断</button>
+    </div>`;
+  document.body.appendChild(videoCallOverlay);
+  
+  videoCallOverlay.querySelector('#video-minimize-btn').addEventListener('click', minimizeVideoCall);
+  videoCallOverlay.querySelector('#video-hangup-btn').addEventListener('click', hangupVideoCall);
+  
+  const answerDelay = Math.random() * 19000 + 1000;
+  videoCallTimer = setTimeout(() => {
+    if (videoCallActive && !videoCallAnswered) {
+      const answered = Math.random() < 0.8;
+      if (answered) {
+        videoCallAnswered = true;
+        videoCallStartTime = Date.now();
+        updateVideoCallUI();
+        startVideoTimer();
+        scheduleVideoTASpeak();
+      } else {
+        hangupVideoCall('TA正在忙');
+      }
+    }
+  }, answerDelay);
+}
+
+function incomingVideoCall() {
+  if (videoCallActive) return;
+  videoCallActive = true;
+  videoCallIncoming = true;
+  videoCallType = 'incoming';
+  videoCallAnswered = false;
+  
+  videoCallOverlay = document.createElement('div');
+  videoCallOverlay.className = 'video-call-overlay';
+  videoCallOverlay.innerHTML = `
+    <img class="video-call-avatar" src="${settings.taAvatar || 'data:image/svg+xml,' + encodeURIComponent('<svg xmlns="http://www.w3.org/2000/svg" width="120" height="120"><circle cx="60" cy="60" r="58" fill="rgba(255,255,255,0.3)"/><text x="60" y="75" text-anchor="middle" font-size="40" fill="rgba(255,255,255,0.7)">TA</text></svg>')}" alt="TA">
+    <div class="video-wave-bar"><span></span><span></span><span></span><span></span><span></span></div>
+    <div class="video-call-info">TA来电...</div>
+    <div class="video-call-btns">
+      <button class="video-call-btn reject" id="video-reject-btn">拒绝</button>
+      <button class="video-call-btn accept" id="video-accept-btn">接听</button>
+    </div>`;
+  document.body.appendChild(videoCallOverlay);
+  
+  videoCallOverlay.querySelector('#video-accept-btn').addEventListener('click', () => {
+    videoCallAnswered = true;
+    videoCallIncoming = false;
+    videoCallStartTime = Date.now();
+    updateVideoCallUI();
+    startVideoTimer();
+    scheduleVideoTASpeak();
+  });
+  videoCallOverlay.querySelector('#video-reject-btn').addEventListener('click', () => {
+    hangupVideoCall('你拒绝了TA的视频通话');
+  });
+  
+  setTimeout(() => {
+    if (videoCallActive && !videoCallAnswered) {
+      hangupVideoCall('TA的视频通话未接听');
+    }
+  }, 20000);
+}
+
+function updateVideoCallUI() {
+  if (!videoCallOverlay) return;
+  const taName = settings.taNick || settings.taName;
+  videoCallOverlay.innerHTML = `
+    <div style="color:#fff;font-size:16px;margin-bottom:8px;">${escapeHtml(taName)}</div>
+    <div class="video-call-timer" id="video-timer">00:00</div>
+    <img class="video-call-avatar" src="${settings.taAvatar || 'data:image/svg+xml,' + encodeURIComponent('<svg xmlns="http://www.w3.org/2000/svg" width="120" height="120"><circle cx="60" cy="60" r="58" fill="rgba(255,255,255,0.3)"/><text x="60" y="75" text-anchor="middle" font-size="40" fill="rgba(255,255,255,0.7)">TA</text></svg>')}" alt="TA">
+    <div class="video-wave-bar"><span></span><span></span><span></span><span></span><span></span></div>
+    <div class="video-call-info" id="video-ta-speaking"></div>
+    <div class="video-call-btns">
+      <button class="video-call-btn minimize" id="video-minimize-btn">缩小</button>
+      <button class="video-call-btn hangup" id="video-hangup-btn">挂断</button>
+    </div>`;
+  videoCallOverlay.querySelector('#video-minimize-btn').addEventListener('click', minimizeVideoCall);
+  videoCallOverlay.querySelector('#video-hangup-btn').addEventListener('click', () => hangupVideoCall());
+}
+
+function startVideoTimer() {
+  clearInterval(videoCallTimer);
+  videoCallTimer = setInterval(() => {
+    if (!videoCallStartTime) return;
+    const elapsed = Math.floor((Date.now() - videoCallStartTime) / 1000);
+    const hh = String(Math.floor(elapsed / 3600)).padStart(2, '0');
+    const mm = String(Math.floor((elapsed % 3600) / 60)).padStart(2, '0');
+    const ss = String(elapsed % 60).padStart(2, '0');
+    const timerEl = document.getElementById('video-timer');
+    if (timerEl) timerEl.textContent = elapsed >= 3600 ? `${hh}:${mm}:${ss}` : `${mm}:${ss}`;
+    const miniTimer = document.getElementById('video-mini-timer');
+    if (miniTimer) miniTimer.textContent = elapsed >= 3600 ? `${hh}:${mm}:${ss}` : `${mm}:${ss}`;
+  }, 1000);
+}
+
+async function scheduleVideoTASpeak() {
+  if (!videoCallActive || !videoCallAnswered) return;
+  const cards = await idbGetAll('cards');
+  if (!cards.length) return;
+  const card = cards[Math.floor(Math.random() * cards.length)];
+  const speakingEl = document.getElementById('video-ta-speaking');
+  if (speakingEl) speakingEl.textContent = card.content;
+  const delayMs = 3000 + Math.random() * 5000;
+  setTimeout(() => {
+    if (videoCallActive && videoCallAnswered) scheduleVideoTASpeak();
+  }, delayMs);
+}
+
+function minimizeVideoCall() {
+  if (videoCallOverlay) videoCallOverlay.remove();
+  videoCallOverlay = null;
+  const taName = settings.taNick || settings.taName;
+  videoCallMini = document.createElement('div');
+  videoCallMini.className = 'video-mini-window';
+  videoCallMini.innerHTML = `
+    <img class="video-mini-avatar" src="${settings.taAvatar || 'data:image/svg+xml,' + encodeURIComponent('<svg xmlns="http://www.w3.org/2000/svg" width="32" height="32"><circle cx="16" cy="16" r="15" fill="rgba(255,255,255,0.5)"/><text x="16" y="21" text-anchor="middle" font-size="12" fill="rgba(90,70,60,0.6)">TA</text></svg>')}" alt="TA">
+    <span style="font-size:13px;color:#4a3528;">${escapeHtml(taName)}</span>
+    <span class="video-mini-dot"></span>
+    <span style="font-size:13px;color:#4a3528;" id="video-mini-timer">00:00</span>
+    <button style="border:none;background:transparent;cursor:pointer;font-size:16px;color:#4a3528;" id="video-mini-close">✕</button>`;
+  document.body.appendChild(videoCallMini);
+  videoCallMini.addEventListener('click', (e) => {
+    if (e.target.closest('#video-mini-close')) return;
+    restoreVideoCall();
+  });
+  videoCallMini.querySelector('#video-mini-close').addEventListener('click', () => hangupVideoCall());
+}
+
+function restoreVideoCall() {
+  if (videoCallMini) videoCallMini.remove();
+  videoCallMini = null;
+  videoCallOverlay = document.createElement('div');
+  videoCallOverlay.className = 'video-call-overlay';
+  updateVideoCallUI();
+  document.body.appendChild(videoCallOverlay);
+}
+
+function hangupVideoCall(reason) {
+  if (videoCallStartTime) {
+    const duration = Math.floor((Date.now() - videoCallStartTime) / 1000);
+    const record = {
+      type: videoCallType,
+      startTime: videoCallStartTime,
+      duration,
+      answered: videoCallAnswered,
+      date: new Date().toISOString().slice(0, 10)
+    };
+    settings.videoRecords.push(record);
+    saveSettings();
+    if (videoCallAnswered) {
+      showToast(`通话结束，时长 ${Math.floor(duration / 60)}分${duration % 60}秒`);
+    }
+  }
+  if (reason) {
+    const msg = { sender: 'ta', content: reason, timestamp: Date.now(), pinned: false, heartMark: null };
+    idbPutReturnId('messages', msg).then(id => {
+      msg.id = id;
+      appendMessage(msg);
+    });
+  }
+  clearInterval(videoCallTimer);
+  videoCallActive = false;
+  videoCallIncoming = false;
+  videoCallAnswered = false;
+  videoCallStartTime = 0;
+  if (videoCallOverlay) {
+    videoCallOverlay.remove();
+    videoCallOverlay = null;
+  }
+  if (videoCallMini) {
+    videoCallMini.remove();
+    videoCallMini = null;
+  }
+}
+
+// ========== TA主动打视频 ==========
+function scheduleTAVideoCall() {
+  setInterval(() => {
+    if (Math.random() < 0.03 && !videoCallActive) {
+      incomingVideoCall();
+    }
+  }, 3600000);
 }
 
 // ========== 初始化 ==========
@@ -3505,6 +4423,7 @@ async function init() {
   scheduleTAGiveAvatar();
   scheduleTABGChange();
   scheduleDailyBackup();
+  scheduleTAVideoCall();
   checkArchive();
   checkImportantDays();
   animateBG();
@@ -3515,6 +4434,8 @@ async function init() {
       input.scrollIntoView({ behavior: 'smooth', block: 'end' });
     }, 300);
   });
+  document.addEventListener('fullscreenchange', () => setTimeout(() => applyBG(), 200));
+  document.addEventListener('webkitfullscreenchange', () => setTimeout(() => applyBG(), 200));
   window.addEventListener('resize', () => {
     const canvas = document.getElementById('bg-canvas');
     canvas.width = window.innerWidth;
@@ -3524,14 +4445,6 @@ async function init() {
       drawDefaultBG(ctx, canvas.width, canvas.height);
     }
   });
-  setInterval(() => {
-    const now = new Date();
-    const today = now.getFullYear() + '-' + (now.getMonth() + 1) + '-' + now.getDate();
-    if (settings.lastArchiveDate !== today) {
-      checkArchive();
-      renderMessages();
-    }
-  }, 30000);
 }
 
 init();

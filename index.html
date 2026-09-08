@@ -305,13 +305,8 @@ html, body {
   animation: dotjump 1.2s infinite;
 }
 
-.typing-dots span:nth-child(2) {
-  animation-delay: 0.2s;
-}
-
-.typing-dots span:nth-child(3) {
-  animation-delay: 0.4s;
-}
+.typing-dots span:nth-child(2) { animation-delay: 0.2s; }
+.typing-dots span:nth-child(3) { animation-delay: 0.4s; }
 
 @keyframes dotjump {
   0%, 60%, 100% { transform: translateY(0); }
@@ -440,7 +435,7 @@ html, body {
   padding: 20px;
   width: 90%;
   max-width: 420px;
-  max-height: 80vh;
+  max-height: 75vh;
   overflow-y: auto;
   box-shadow: 0 12px 40px rgba(0, 0, 0, 0.15);
   animation: panelIn 0.25s ease-out;
@@ -604,7 +599,7 @@ html, body {
 }
 
 .card-list {
-  max-height: 45vh;
+  max-height: 40vh;
   overflow-y: auto;
   -webkit-overflow-scrolling: touch;
 }
@@ -983,151 +978,6 @@ html, body {
   font-size: 14px;
   color: rgba(90, 70, 60, 0.55);
 }
-
-.video-call-overlay {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background: rgba(30, 20, 30, 0.85);
-  z-index: 50;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  flex-direction: column;
-  animation: fadeIn 0.3s ease-out;
-}
-
-.video-call-avatar {
-  width: 120px;
-  height: 120px;
-  border-radius: 50%;
-  object-fit: cover;
-  border: 2px solid rgba(255, 255, 255, 0.6);
-  animation: videoBreathe 3s ease-in-out infinite;
-}
-
-@keyframes videoBreathe {
-  0%, 100% { box-shadow: 0 0 0 0 rgba(255,255,255,0.3); }
-  50% { box-shadow: 0 0 0 20px rgba(255,255,255,0.1); }
-}
-
-.video-wave-bar {
-  display: flex;
-  gap: 3px;
-  align-items: center;
-  margin: 12px 0;
-}
-
-.video-wave-bar span {
-  width: 4px;
-  background: #6b5ce7;
-  border-radius: 2px;
-  animation: waveJump 0.8s infinite;
-}
-
-.video-wave-bar span:nth-child(1) { height: 8px; animation-delay: 0s; }
-.video-wave-bar span:nth-child(2) { height: 16px; animation-delay: 0.1s; }
-.video-wave-bar span:nth-child(3) { height: 24px; animation-delay: 0.2s; }
-.video-wave-bar span:nth-child(4) { height: 16px; animation-delay: 0.3s; }
-.video-wave-bar span:nth-child(5) { height: 8px; animation-delay: 0.4s; }
-
-@keyframes waveJump {
-  0%, 100% { transform: scaleY(1); }
-  50% { transform: scaleY(1.6); }
-}
-
-.video-call-info {
-  color: #fff;
-  font-size: 15px;
-  margin: 8px 0;
-}
-
-.video-call-timer {
-  color: rgba(255,255,255,0.8);
-  font-size: 18px;
-  font-weight: 600;
-  margin: 4px 0;
-  font-variant-numeric: tabular-nums;
-}
-
-.video-call-btns {
-  display: flex;
-  gap: 20px;
-  margin-top: 16px;
-}
-
-.video-call-btn {
-  width: 56px;
-  height: 56px;
-  border-radius: 50%;
-  border: none;
-  cursor: pointer;
-  font-size: 13px;
-  color: #fff;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  transition: all 0.2s;
-}
-
-.video-call-btn:active {
-  transform: scale(0.85);
-}
-
-.video-call-btn.minimize {
-  background: rgba(255, 255, 255, 0.25);
-}
-
-.video-call-btn.hangup {
-  background: #e74c3c;
-}
-
-.video-call-btn.accept {
-  background: #2ecc71;
-}
-
-.video-call-btn.reject {
-  background: #e74c3c;
-}
-
-.video-mini-window {
-  position: fixed;
-  top: 80px;
-  right: 16px;
-  z-index: 45;
-  background: rgba(255, 255, 255, 0.8);
-  backdrop-filter: blur(16px);
-  border: 1px solid rgba(255, 255, 255, 0.7);
-  border-radius: 16px;
-  padding: 8px 12px;
-  display: flex;
-  align-items: center;
-  gap: 8px;
-  cursor: pointer;
-  box-shadow: 0 4px 16px rgba(0,0,0,0.15);
-}
-
-.video-mini-avatar {
-  width: 32px;
-  height: 32px;
-  border-radius: 50%;
-  object-fit: cover;
-}
-
-.video-mini-dot {
-  width: 8px;
-  height: 8px;
-  border-radius: 50%;
-  background: #2ecc71;
-  animation: dotPulse 1.2s infinite;
-}
-
-@keyframes dotPulse {
-  0%, 100% { opacity: 1; }
-  50% { opacity: 0.3; }
-}
 </style>
 </head>
 <body>
@@ -1177,7 +1027,7 @@ html, body {
 
 <script>
 // ============================================================
-// 易遇♡夏雾凉 - V2.5.0 完整版
+// 易遇♡夏雾凉 - V2.6.0 完整版
 // ============================================================
 
 const DEFAULT_SETTINGS = {
@@ -1211,7 +1061,6 @@ const DEFAULT_SETTINGS = {
   accompanyStartTime: 0,
   accompanyStats: {},
   bondName: '羁绊',
-  bondStartDate: '',
   bondDays: 0,
   bondLastCheckDate: '',
   bondHistoryBest: 0,
@@ -1219,7 +1068,24 @@ const DEFAULT_SETTINGS = {
   hourlyWage: 0,
   videoRecords: [],
   taNickLibrary: [],
-  meNickLibrary: []
+  meNickLibrary: [],
+  taStickerProb: 0.07,
+  taGiftProb: 0.04,
+  taInteractProb: 0.05,
+  taAvatarProb: 0.08,
+  taBGProb: 0.06,
+  nicknameProb: 0.3,
+  lastBackupTime: '',
+  reminderTimes: [],
+  reminderCards: [],
+  reminderProb: 0.5,
+  periodRecords: [],
+  periodSymptoms: [],
+  dateRecords: [],
+  petData: null,
+  plantsData: { flowers: [], trees: [] },
+  wishes: { me: [], ta: [], common: [] },
+  taWishLibrary: []
 };
 
 let db = null;
@@ -1227,7 +1093,7 @@ let settings = JSON.parse(JSON.stringify(DEFAULT_SETTINGS));
 let stopTimer = null;
 let replyQueue = [];
 let isReplying = false;
-let telepathyActive = false;
+let pendingQuiz = null;
 let currentPlayDate = '';
 let playbackView = 'play';
 let playbackTimer = null;
@@ -1246,7 +1112,7 @@ let videoCallMini = null;
 let videoCallType = '';
 let videoCallAnswered = false;
 let isArchiving = false;
-let pendingQuiz = null;
+let cachedBGImage = null;
 
 // ========== IndexedDB ==========
 function openDB() {
@@ -1483,6 +1349,10 @@ const BALL_ITEMS = [
   { id: 'attendance', name: '出勤', icon: 'attendance' },
   { id: 'memo', name: '备忘录', icon: 'memo' },
   { id: 'bond', name: '羁绊', icon: 'bond' },
+  { id: 'period', name: '生理期', icon: 'period' },
+  { id: 'date', name: '约会', icon: 'date' },
+  { id: 'pet', name: '宠物', icon: 'pet' },
+  { id: 'plant', name: '种植', icon: 'plant' },
   { id: 'settings', name: '设置', icon: 'settings' }
 ];
 
@@ -1503,7 +1373,11 @@ const ICONS = {
   memo: `<svg viewBox="0 0 24 24" fill="none" stroke="#4a3528" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="5" y="3" width="14" height="18" rx="2"/><line x1="9" y1="8" x2="15" y2="8"/><line x1="9" y1="12" x2="15" y2="12"/><line x1="9" y1="16" x2="13" y2="16"/></svg>`,
   bond: `<svg viewBox="0 0 24 24" fill="none" stroke="#4a3528" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M5 6C5 6 9 10 9 14C9 18 5 20 5 20"/><path d="M19 6C19 6 15 10 15 14C15 18 19 20 19 20"/><path d="M9 14L15 14" stroke-dasharray="2,2"/><path d="M12 13C12 13 10 16 10 17.5C10 19 11 20 12 20C13 20 14 19 14 17.5C14 16 12 13 12 13Z" fill="#ff3b5c" stroke="none"/></svg>`,
   settings: `<svg viewBox="0 0 24 24" fill="none" stroke="#4a3528" stroke-width="1.8"><circle cx="12" cy="12" r="3"/><path d="M19 12a7 7 0 00-.1-1.2l2-1.5-2-3.4-2.4 1A7 7 0 0014.7 6L14 3.5h-4L9.3 6a7 7 0 00-1.8.9l-2.4-1-2 3.4 2 1.5A7 7 0 005 12c0 .4 0 .8.1 1.2l-2 1.5 2 3.4 2.4-1a7 7 0 001.8.9l.7 2.5h4l.7-2.5a7 7 0 001.8-.9l2.4 1 2-3.4-2-1.5c.1-.4.1-.8.1-1.2z"/></svg>`,
-  interact: `<svg viewBox="0 0 24 24" fill="none" stroke="#4a3528" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M8 13V5.5a1.5 1.5 0 013 0V12m0-5.5v-1a1.5 1.5 0 013 0V11m0-4.5a1.5 1.5 0 013 0V15a6 6 0 01-6 6h-1a8 8 0 01-4-1.5L4 18"/></svg>`
+  interact: `<svg viewBox="0 0 24 24" fill="none" stroke="#4a3528" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M8 13V5.5a1.5 1.5 0 013 0V12m0-5.5v-1a1.5 1.5 0 013 0V11m0-4.5a1.5 1.5 0 013 0V15a6 6 0 01-6 6h-1a8 8 0 01-4-1.5L4 18"/></svg>`,
+  period: `<svg viewBox="0 0 24 24" fill="none" stroke="#e88fb0" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="3" fill="#ff8fb0" stroke="none"/><path d="M12 9C12 6 10 5 9 3C8 5 6 6 6 9C6 12 9 14.5 12 16C15 14.5 18 12 18 9C18 6 16 5 15 3C14 5 12 6 12 9Z" fill="#ffb0c8" fill-opacity="0.5" stroke="#e88fb0"/></svg>`,
+  date: `<svg viewBox="0 0 24 24" fill="none" stroke="#4a3528" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 21C12 21 4 14.5 4 9.5C4 6.5 6.5 4.5 9 4.5C11 4.5 12 6 12 6C12 6 13 4.5 15 4.5C17.5 4.5 20 6.5 20 9.5C20 14.5 12 21 12 21Z" fill="#ffb0c8" fill-opacity="0.4"/><path d="M9 10l2 2 4-4" stroke="#ff3b5c" stroke-width="1.5" fill="none"/></svg>`,
+  pet: `<svg viewBox="0 0 24 24" fill="none" stroke="#4a3528" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="9" cy="9" r="3"/><circle cx="17" cy="10" r="2.5"/><path d="M3 12c2-3 5-4 8-4s6 1 9 4l-2 3-4-1-3 2-4-1-2 3z"/></svg>`,
+  plant: `<svg viewBox="0 0 24 24" fill="none" stroke="#4a3528" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 20v-6"/><path d="M12 14c0-4 2-7 6-8-1 4-3 7-6 8z"/><path d="M12 12c0-3-2-6-6-7 1 3 3 6 6 7z"/><path d="M8 20h8"/></svg>`
 };
 
 function renderBallGrid() {
@@ -1524,10 +1398,15 @@ function onBallItemClick(item) {
   else if (item.id === 'settings') openSettingsPanel();
   else if (item.id === 'heartbeat') openHeartPanel();
   else if (item.id === 'playback') openPlaybackPanel();
+  else if (item.id === 'wish') openWishPanel();
   else if (item.id === 'important') openImportantPanel();
   else if (item.id === 'attendance') openAttendancePanel();
   else if (item.id === 'memo') openMemoPanel();
   else if (item.id === 'bond') openBondPanel();
+  else if (item.id === 'period') openPeriodPanel();
+  else if (item.id === 'date') openDatePanel();
+  else if (item.id === 'pet') openPetPanel();
+  else if (item.id === 'plant') openPlantPanel();
   else showPlaceholder(item.name);
 }
 
@@ -1566,6 +1445,9 @@ function openWorldPanel() {
       <div class="ball-item" id="world-interact"><div class="icon-wrap">${ICONS.interact}</div><span>互动</span></div>
       <div class="ball-item" id="world-quiz"><div class="icon-wrap">${ICONS.stats}</div><span>问答题库</span></div>
       <div class="ball-item" id="world-remind"><div class="icon-wrap">${ICONS.memo}</div><span>提醒</span></div>
+      <div class="ball-item" id="world-period-cards"><div class="icon-wrap">${ICONS.period}</div><span>生理期字卡</span></div>
+      <div class="ball-item" id="world-date-cards"><div class="icon-wrap">${ICONS.date}</div><span>约会字卡</span></div>
+      <div class="ball-item" id="world-wish-cards"><div class="icon-wrap">${ICONS.wish}</div><span>TA心愿库</span></div>
     </div>`);
   overlay.querySelector('#world-card').addEventListener('click', () => { overlay.remove(); openCardPanel(); });
   overlay.querySelector('#world-sticker').addEventListener('click', () => { overlay.remove(); openStickerPanel(); });
@@ -1576,6 +1458,9 @@ function openWorldPanel() {
   overlay.querySelector('#world-interact').addEventListener('click', () => { overlay.remove(); openInteractManagePanel(); });
   overlay.querySelector('#world-quiz').addEventListener('click', () => { overlay.remove(); openQuizManagePanel(); });
   overlay.querySelector('#world-remind').addEventListener('click', () => { overlay.remove(); openRemindPanel(); });
+  overlay.querySelector('#world-period-cards').addEventListener('click', () => { overlay.remove(); openPeriodCardsPanel(); });
+  overlay.querySelector('#world-date-cards').addEventListener('click', () => { overlay.remove(); openDateCardsPanel(); });
+  overlay.querySelector('#world-wish-cards').addEventListener('click', () => { overlay.remove(); openWishCardsPanel(); });
 }
 
 // ========== 字卡面板 ==========
@@ -1885,7 +1770,7 @@ function openCardSearchPanel() {
   // ========== 贴纸面板 ==========
 function openStickerPanel() {
   const overlay = createModal(`
-    <div class="big-input-title">贴纸库</div>
+    <div class="big-input-title">贴纸库（共 <span id="sticker-count-num"></span> 张）</div>
     <div class="library-grid" id="sticker-library"></div>
     <button class="upload-btn" id="sticker-upload-btn">上传贴纸</button>
     <div style="margin-top:12px;font-size:13px;color:#4a3528;">TA发贴纸概率</div>
@@ -1900,23 +1785,23 @@ function openStickerPanel() {
     inp.type = 'file';
     inp.accept = 'image/*';
     inp.multiple = true;
-    inp.onchange = (e) => {
+    inp.onchange = async (e) => {
       const files = Array.from(e.target.files);
-      let loaded = 0;
-      files.forEach(file => {
-        const reader = new FileReader();
-        reader.onload = () => {
-          const lib = JSON.parse(localStorage.getItem('stickerLibrary') || '[]');
-          lib.push(reader.result);
-          localStorage.setItem('stickerLibrary', JSON.stringify(lib));
-          loaded++;
-          if (loaded === files.length) {
-            overlay.remove();
-            openStickerPanel();
-          }
-        };
-        reader.readAsDataURL(file);
-      });
+      if (!files.length) return;
+      const lib = JSON.parse(localStorage.getItem('stickerLibrary') || '[]');
+      for (const file of files) {
+        const dataUrl = await new Promise((resolve) => {
+          const reader = new FileReader();
+          reader.onload = () => resolve(reader.result);
+          reader.onerror = () => resolve(null);
+          reader.readAsDataURL(file);
+        });
+        if (dataUrl) lib.push(dataUrl);
+      }
+      localStorage.setItem('stickerLibrary', JSON.stringify(lib));
+      overlay.remove();
+      openStickerPanel();
+      showToast(`已添加 ${lib.length} 张贴纸`);
     };
     inp.click();
   });
@@ -1939,6 +1824,8 @@ function openStickerPanel() {
 
 function loadStickerLibrary(overlay) {
   const lib = JSON.parse(localStorage.getItem('stickerLibrary') || '[]');
+  const countEl = overlay.querySelector('#sticker-count-num');
+  if (countEl) countEl.textContent = lib.length;
   const grid = overlay.querySelector('#sticker-library');
   grid.innerHTML = '';
   lib.forEach((s, i) => {
@@ -2195,7 +2082,7 @@ function openNickEdit(who, panelOverlay) {
 // ========== TA自主换头像 ==========
 function scheduleTAAvatarChange() {
   setInterval(async () => {
-    if (Math.random() < 0.08) {
+    if (Math.random() < settings.taAvatarProb) {
       const lib = JSON.parse(localStorage.getItem('avatarLibrary') || '[]');
       if (!lib.length) return;
       const pool = lib.filter(a => a.tags && a.tags.includes('couple'));
@@ -2203,29 +2090,29 @@ function scheduleTAAvatarChange() {
       settings.taAvatar = pick.data;
       await saveSettings();
       applySettings();
-      showToast('TA换了一个头像');
-      const msg = { sender: 'ta', content: '我换了一个头像', timestamp: Date.now(), pinned: false, heartMark: null, quoteContent: null };
+      const msg = { sender: 'ta', content: '我换了一个头像', timestamp: Date.now(), pinned: false, pinBy: '', heartMark: null, quoteContent: null };
       const id = await idbPutReturnId('messages', msg);
       msg.id = id;
       appendMessage(msg);
+      sendNotification('我换了一个头像');
     }
   }, 1800000);
 }
 
 function scheduleTAGiveAvatar() {
   setInterval(async () => {
-    if (Math.random() < 0.05) {
+    if (Math.random() < settings.taAvatarProb * 0.6) {
       const lib = JSON.parse(localStorage.getItem('avatarLibrary') || '[]');
       if (!lib.length) return;
       const pick = lib[Math.floor(Math.random() * lib.length)];
       settings.meAvatar = pick.data;
       await saveSettings();
       applySettings();
-      showToast('TA给你换了一个头像');
-      const msg = { sender: 'ta', content: '我给你换了一个头像', timestamp: Date.now(), pinned: false, heartMark: null, quoteContent: null };
+      const msg = { sender: 'ta', content: '我给你换了一个头像', timestamp: Date.now(), pinned: false, pinBy: '', heartMark: null, quoteContent: null };
       const id = await idbPutReturnId('messages', msg);
       msg.id = id;
       appendMessage(msg);
+      sendNotification('我给你换了一个头像');
     }
   }, 3600000);
 }
@@ -2301,20 +2188,28 @@ function applyBG() {
   canvas.width = window.innerWidth;
   canvas.height = window.innerHeight;
   if (settings.bgCurrent) {
-    const img = new Image();
-    img.onload = () => {
+    if (cachedBGImage && cachedBGImage.complete && cachedBGImage.naturalWidth > 0) {
       ctx.clearRect(0, 0, canvas.width, canvas.height);
       ctx.globalAlpha = 0.85;
-      ctx.filter = 'none';
-      ctx.drawImage(img, 0, 0, canvas.width, canvas.height);
-      ctx.filter = 'none';
+      ctx.drawImage(cachedBGImage, 0, 0, canvas.width, canvas.height);
       ctx.globalAlpha = 1;
       ctx.fillStyle = 'rgba(255,255,255,0.12)';
       ctx.fillRect(0, 0, canvas.width, canvas.height);
-    };
-    img.onerror = () => drawDefaultBG(ctx, canvas.width, canvas.height);
-    img.src = settings.bgCurrent;
+    } else {
+      cachedBGImage = new Image();
+      cachedBGImage.onload = () => {
+        ctx.clearRect(0, 0, canvas.width, canvas.height);
+        ctx.globalAlpha = 0.85;
+        ctx.drawImage(cachedBGImage, 0, 0, canvas.width, canvas.height);
+        ctx.globalAlpha = 1;
+        ctx.fillStyle = 'rgba(255,255,255,0.12)';
+        ctx.fillRect(0, 0, canvas.width, canvas.height);
+      };
+      cachedBGImage.onerror = () => drawDefaultBG(ctx, canvas.width, canvas.height);
+      cachedBGImage.src = settings.bgCurrent;
+    }
   } else {
+    cachedBGImage = null;
     drawDefaultBG(ctx, canvas.width, canvas.height);
   }
 }
@@ -2331,23 +2226,22 @@ function drawDefaultBG(ctx, w, h) {
 
 function scheduleTABGChange() {
   setInterval(async () => {
-    if (Math.random() < 0.06) {
+    if (Math.random() < settings.taBGProb) {
       const lib = JSON.parse(localStorage.getItem('bgLibrary') || '[]');
       if (!lib.length) return;
       const pick = lib[Math.floor(Math.random() * lib.length)];
       settings.bgCurrent = pick;
       await saveSettings();
       applyBG();
-      showToast('TA换了一张背景');
-      const msg = { sender: 'ta', content: '我把背景换了一下', timestamp: Date.now(), pinned: false, heartMark: null, quoteContent: null };
+      const msg = { sender: 'ta', content: '我把背景换了一下', timestamp: Date.now(), pinned: false, pinBy: '', heartMark: null, quoteContent: null };
       const id = await idbPutReturnId('messages', msg);
       msg.id = id;
       appendMessage(msg);
+      sendNotification('我把背景换了一下');
     }
   }, 2400000);
 }
-
-// ========== 设置面板 ==========
+  // ========== 设置面板 ==========
 function openSettingsPanel() {
   const overlay = createModal(`
     <div style="margin-bottom:8px;font-size:13px;color:#4a3528;">回复速度</div>
@@ -2379,6 +2273,13 @@ function openSettingsPanel() {
         <span style="font-size:13px;color:#4a3528;">分钟</span>
       </div>
     </div>
+    <div style="margin-bottom:8px;font-size:13px;color:#4a3528;">TA主动行为概率</div>
+    <button class="mini-btn" id="set-autonomy-detail" style="width:100%;margin-bottom:8px;">详细设置</button>
+    <div style="margin-bottom:8px;font-size:13px;color:#4a3528;">TA带昵称概率</div>
+    <div style="display:flex;gap:8px;align-items:center;margin-bottom:8px;">
+      <input type="range" id="nickname-prob" min="0" max="100" value="${Math.round(settings.nicknameProb * 100)}" style="flex:1;">
+      <span id="nickname-prob-val" style="font-size:13px;color:#4a3528;">${Math.round(settings.nicknameProb * 100)}%</span>
+    </div>
     <div style="margin-bottom:8px;font-size:13px;color:#4a3528;">悬浮球图片</div>
     <button class="mini-btn" id="set-ball-image" style="width:100%;margin-bottom:8px;">上传悬浮球图片</button>
     <button class="mini-btn" id="set-ball-reset" style="width:100%;margin-bottom:8px;">恢复默认悬浮球</button>
@@ -2392,41 +2293,21 @@ function openSettingsPanel() {
       <input type="range" id="ball-size-custom" min="30" max="120" value="${settings.ballSize}" style="flex:1;">
       <span id="ball-size-val" style="font-size:13px;color:#4a3528;">${settings.ballSize}px</span>
     </div>
-    <div style="margin-bottom:8px;font-size:13px;color:#4a3528;">TA主动行为频率</div>
-    <div style="display:flex;gap:8px;margin-bottom:8px;">
-      <button class="mini-btn autonomy-tpl" data-tpl="low">少</button>
-      <button class="mini-btn autonomy-tpl" data-tpl="moderate">中</button>
-      <button class="mini-btn autonomy-tpl" data-tpl="high">多</button>
-    </div>
     <div style="margin-bottom:8px;font-size:13px;color:#4a3528;">全屏模式</div>
     <button class="mini-btn" id="set-fullscreen" style="width:100%;margin-bottom:8px;">开启/关闭全屏</button>
     <div style="margin-bottom:8px;font-size:13px;color:#4a3528;">桌面提醒</div>
     <button class="mini-btn" id="set-notif" style="width:100%;margin-bottom:8px;">请求通知权限</button>
     <button class="mini-btn" id="set-backup-now" style="width:100%;margin-bottom:8px;">立即备份数据</button>
+    <div style="font-size:11px;color:rgba(90,70,60,0.5);text-align:center;margin-bottom:8px;" id="last-backup-time">${settings.lastBackupTime ? '上次备份：' + settings.lastBackupTime : '还没有备份记录'}</div>
     <button class="mini-btn" id="set-clear-all" style="width:100%;margin-bottom:8px;color:#c33;">清空所有数据</button>
-    <div style="text-align:center;font-size:11px;color:rgba(90,70,60,0.5);margin-top:16px;">V2.5.0</div>`);
-  if (settings.replyTpl === 'custom') {
-    overlay.querySelector('#set-reply-custom').style.display = 'block';
-  }
-  if (settings.activeTpl === 'custom') {
-    overlay.querySelector('#active-custom').style.display = 'block';
-  }
+    <div style="text-align:center;font-size:11px;color:rgba(90,70,60,0.5);margin-top:16px;">V2.6.0</div>`);
+  if (settings.replyTpl === 'custom') overlay.querySelector('#set-reply-custom').style.display = 'block';
+  if (settings.activeTpl === 'custom') overlay.querySelector('#active-custom').style.display = 'block';
   overlay.querySelector('#set-reply-tpl-btn').addEventListener('click', () => openReplyTplDialog(overlay));
-  overlay.querySelector('#set-reply-min').addEventListener('change', (e) => {
-    settings.replyMin = Number(e.target.value);
-    settings.replyTpl = 'custom';
-    saveSettings();
-  });
-  overlay.querySelector('#set-reply-max').addEventListener('change', (e) => {
-    settings.replyMax = Number(e.target.value);
-    settings.replyTpl = 'custom';
-    saveSettings();
-  });
+  overlay.querySelector('#set-reply-min').addEventListener('change', (e) => { settings.replyMin = Number(e.target.value); settings.replyTpl = 'custom'; saveSettings(); });
+  overlay.querySelector('#set-reply-max').addEventListener('change', (e) => { settings.replyMax = Number(e.target.value); settings.replyTpl = 'custom'; saveSettings(); });
   overlay.querySelectorAll('.active-tpl').forEach(btn => {
-    if (btn.dataset.tpl === settings.activeTpl) {
-      btn.style.background = 'rgba(255,150,100,0.6)';
-      btn.style.color = '#fff';
-    }
+    if (btn.dataset.tpl === settings.activeTpl) { btn.style.background = 'rgba(255,150,100,0.6)'; btn.style.color = '#fff'; }
     btn.addEventListener('click', () => {
       settings.activeTpl = btn.dataset.tpl;
       if (btn.dataset.tpl === 'rare') { settings.activeMin = 86400000; settings.activeMax = 259200000; }
@@ -2437,16 +2318,15 @@ function openSettingsPanel() {
       openSettingsPanel();
     });
   });
-  overlay.querySelector('#active-min').addEventListener('change', (e) => {
-    settings.activeMin = Number(e.target.value) * 60000;
-    settings.activeTpl = 'custom';
-    saveSettings();
+  overlay.querySelector('#active-min').addEventListener('change', (e) => { settings.activeMin = Number(e.target.value) * 60000; settings.activeTpl = 'custom'; saveSettings(); });
+  overlay.querySelector('#active-max').addEventListener('change', (e) => { settings.activeMax = Number(e.target.value) * 60000; settings.activeTpl = 'custom'; saveSettings(); });
+  overlay.querySelector('#set-autonomy-detail').addEventListener('click', () => { overlay.remove(); openAutonomyDetailPanel(); });
+  overlay.querySelector('#nickname-prob').addEventListener('input', (e) => {
+    const val = Number(e.target.value);
+    settings.nicknameProb = val / 100;
+    overlay.querySelector('#nickname-prob-val').textContent = val + '%';
   });
-  overlay.querySelector('#active-max').addEventListener('change', (e) => {
-    settings.activeMax = Number(e.target.value) * 60000;
-    settings.activeTpl = 'custom';
-    saveSettings();
-  });
+  overlay.querySelector('#nickname-prob').addEventListener('change', () => saveSettings());
   overlay.querySelector('#set-ball-image').addEventListener('click', () => {
     const inp = document.createElement('input');
     inp.type = 'file';
@@ -2455,22 +2335,12 @@ function openSettingsPanel() {
       const file = e.target.files[0];
       if (!file) return;
       const reader = new FileReader();
-      reader.onload = () => {
-        settings.ballImage = reader.result;
-        saveSettings();
-        applySettings();
-        showToast('悬浮球图片已更换');
-      };
+      reader.onload = () => { settings.ballImage = reader.result; saveSettings(); applySettings(); showToast('悬浮球图片已更换'); };
       reader.readAsDataURL(file);
     };
     inp.click();
   });
-  overlay.querySelector('#set-ball-reset').addEventListener('click', () => {
-    settings.ballImage = '';
-    saveSettings();
-    applySettings();
-    showToast('悬浮球已恢复默认');
-  });
+  overlay.querySelector('#set-ball-reset').addEventListener('click', () => { settings.ballImage = ''; saveSettings(); applySettings(); showToast('悬浮球已恢复默认'); });
   overlay.querySelectorAll('.ball-size-btn').forEach(btn => {
     btn.addEventListener('click', () => {
       settings.ballSize = Number(btn.dataset.size);
@@ -2486,30 +2356,10 @@ function openSettingsPanel() {
     overlay.querySelector('#ball-size-val').textContent = val + 'px';
     applyBallSize();
   });
-  overlay.querySelector('#ball-size-custom').addEventListener('change', () => {
-    saveSettings();
-  });
-  overlay.querySelectorAll('.autonomy-tpl').forEach(btn => {
-    if (btn.dataset.tpl === settings.autonomyTpl) {
-      btn.style.background = 'rgba(255,150,100,0.6)';
-      btn.style.color = '#fff';
-    }
-    btn.addEventListener('click', () => {
-      settings.autonomyTpl = btn.dataset.tpl;
-      if (btn.dataset.tpl === 'low') settings.autonomyProb = 0.08;
-      if (btn.dataset.tpl === 'moderate') settings.autonomyProb = 0.2;
-      if (btn.dataset.tpl === 'high') settings.autonomyProb = 0.4;
-      saveSettings();
-      overlay.remove();
-      openSettingsPanel();
-    });
-  });
+  overlay.querySelector('#ball-size-custom').addEventListener('change', () => saveSettings());
   overlay.querySelector('#set-fullscreen').addEventListener('click', () => {
-    if (!document.fullscreenElement) {
-      document.documentElement.requestFullscreen().then(() => setTimeout(() => applyBG(), 300));
-    } else {
-      document.exitFullscreen().then(() => setTimeout(() => applyBG(), 300));
-    }
+    if (!document.fullscreenElement) document.documentElement.requestFullscreen().then(() => setTimeout(() => applyBG(), 300));
+    else document.exitFullscreen().then(() => setTimeout(() => applyBG(), 300));
   });
   overlay.querySelector('#set-notif').addEventListener('click', () => {
     if (!('Notification' in window)) return showToast('浏览器不支持通知');
@@ -2540,6 +2390,53 @@ function openSettingsPanel() {
   });
 }
 
+function openAutonomyDetailPanel() {
+  const overlay = createModal(`
+    <div class="big-input-title">TA主动行为概率</div>
+    <div style="font-size:13px;color:#4a3528;margin-bottom:4px;">发贴纸概率</div>
+    <div style="display:flex;gap:8px;margin-bottom:8px;">
+      <button class="mini-btn prob-btn" data-key="taStickerProb" data-val="0.02">偶尔</button>
+      <button class="mini-btn prob-btn" data-key="taStickerProb" data-val="0.07">正常</button>
+      <button class="mini-btn prob-btn" data-key="taStickerProb" data-val="0.15">经常</button>
+    </div>
+    <div style="font-size:13px;color:#4a3528;margin-bottom:4px;">送礼物概率</div>
+    <div style="display:flex;gap:8px;margin-bottom:8px;">
+      <button class="mini-btn prob-btn" data-key="taGiftProb" data-val="0.01">偶尔</button>
+      <button class="mini-btn prob-btn" data-key="taGiftProb" data-val="0.04">正常</button>
+      <button class="mini-btn prob-btn" data-key="taGiftProb" data-val="0.10">经常</button>
+    </div>
+    <div style="font-size:13px;color:#4a3528;margin-bottom:4px;">互动概率</div>
+    <div style="display:flex;gap:8px;margin-bottom:8px;">
+      <button class="mini-btn prob-btn" data-key="taInteractProb" data-val="0.02">偶尔</button>
+      <button class="mini-btn prob-btn" data-key="taInteractProb" data-val="0.05">正常</button>
+      <button class="mini-btn prob-btn" data-key="taInteractProb" data-val="0.12">经常</button>
+    </div>
+    <div style="font-size:13px;color:#4a3528;margin-bottom:4px;">换头像概率</div>
+    <div style="display:flex;gap:8px;margin-bottom:8px;">
+      <button class="mini-btn prob-btn" data-key="taAvatarProb" data-val="0.03">偶尔</button>
+      <button class="mini-btn prob-btn" data-key="taAvatarProb" data-val="0.08">正常</button>
+      <button class="mini-btn prob-btn" data-key="taAvatarProb" data-val="0.18">经常</button>
+    </div>
+    <div style="font-size:13px;color:#4a3528;margin-bottom:4px;">换背景概率</div>
+    <div style="display:flex;gap:8px;margin-bottom:8px;">
+      <button class="mini-btn prob-btn" data-key="taBGProb" data-val="0.02">偶尔</button>
+      <button class="mini-btn prob-btn" data-key="taBGProb" data-val="0.06">正常</button>
+      <button class="mini-btn prob-btn" data-key="taBGProb" data-val="0.15">经常</button>
+    </div>`);
+  overlay.querySelectorAll('.prob-btn').forEach(btn => {
+    if (Math.abs(settings[btn.dataset.key] - Number(btn.dataset.val)) < 0.001) {
+      btn.style.background = 'rgba(255,150,100,0.6)';
+      btn.style.color = '#fff';
+    }
+    btn.addEventListener('click', () => {
+      settings[btn.dataset.key] = Number(btn.dataset.val);
+      saveSettings();
+      overlay.remove();
+      openAutonomyDetailPanel();
+    });
+  });
+}
+
 function openReplyTplDialog(panelOverlay) {
   const overlay = createModal(`
     <div class="big-input-title">选择回复速度模板</div>
@@ -2550,11 +2447,7 @@ function openReplyTplDialog(panelOverlay) {
       <button class="mini-btn tpl-option" data-tpl="custom">自定义</button>
     </div>`);
   overlay.querySelectorAll('.tpl-option').forEach(btn => {
-    if (btn.dataset.tpl === settings.replyTpl) {
-      btn.style.background = 'rgba(255,150,100,0.6)';
-      btn.style.color = '#fff';
-      btn.style.borderColor = 'rgba(255,255,255,0.7)';
-    }
+    if (btn.dataset.tpl === settings.replyTpl) { btn.style.background = 'rgba(255,150,100,0.6)'; btn.style.color = '#fff'; }
     btn.addEventListener('click', () => {
       const tpl = btn.dataset.tpl;
       settings.replyTpl = tpl;
@@ -2616,6 +2509,14 @@ function createMessageEl(msg) {
   wrapper.appendChild(bubble);
   const meta = document.createElement('div');
   meta.className = 'msg-meta';
+  const timeSpan = document.createElement('span');
+  const d = new Date(msg.timestamp);
+  const hh = String(d.getHours()).padStart(2, '0');
+  const mm = String(d.getMinutes()).padStart(2, '0');
+  timeSpan.textContent = hh + ':' + mm;
+  timeSpan.style.fontSize = '10px';
+  timeSpan.style.color = 'rgba(120,100,90,0.5)';
+  meta.appendChild(timeSpan);
   if (msg.sender === 'me' && msg.readTime) {
     const read = document.createElement('span');
     read.className = 'msg-read';
@@ -2767,13 +2668,6 @@ async function triggerTAReply() {
   else if (recentMe >= 2) replyCount = 1 + Math.floor(Math.random() * 2);
   else replyCount = 1;
   if (Math.random() < 0.15) replyCount = Math.min(replyCount + 1, 5);
-  if (settings.accompanyMode === 'companion') {
-    if (settings.accompanyType === 'clingy') replyCount = Math.max(replyCount, 2);
-    if (settings.accompanyType === 'night') {
-      const h = new Date().getHours();
-      if (h >= 22 || h < 4) replyCount = Math.max(replyCount, 3);
-    }
-  }
   replyQueue = [];
   for (let i = 0; i < replyCount; i++) {
     const stickers = JSON.parse(localStorage.getItem('stickerLibrary') || '[]');
@@ -2791,9 +2685,13 @@ async function triggerTAReply() {
   showTyping(false);
   for (let i = 0; i < replyQueue.length; i++) {
     const item = replyQueue[i];
+    let content = item.type === 'sticker' ? '[贴纸]' : item.content;
+    if (item.type === 'text' && settings.meNick && Math.random() < settings.nicknameProb) {
+      content = settings.meNick + '，' + content;
+    }
     const msg = {
       sender: 'ta',
-      content: item.type === 'sticker' ? '[贴纸]' : item.content,
+      content,
       imageData: item.type === 'sticker' ? item.content : null,
       timestamp: Date.now(),
       pinned: false,
@@ -2807,6 +2705,7 @@ async function triggerTAReply() {
     settings.heartValue += 1;
     await saveSettings();
     updateHeartValue();
+    sendNotification(content);
     if (i < replyQueue.length - 1) await delay(600 + Math.random() * 1200);
   }
   replyQueue = [];
@@ -2836,14 +2735,16 @@ function scheduleTAActive() {
     const cards = await idbGetAll('cards');
     if (cards.length && !isReplying && !isArchiving) {
       const card = cards[Math.floor(Math.random() * cards.length)];
-      const msg = { sender: 'ta', content: card.content, timestamp: Date.now(), pinned: false, pinBy: '', heartMark: null, quoteContent: null };
+      let content = card.content;
+      if (settings.meNick && Math.random() < settings.nicknameProb) content = settings.meNick + '，' + content;
+      const msg = { sender: 'ta', content, timestamp: Date.now(), pinned: false, pinBy: '', heartMark: null, quoteContent: null };
       const id = await idbPutReturnId('messages', msg);
       msg.id = id;
       appendMessage(msg);
       settings.heartValue += 5;
       await saveSettings();
       updateHeartValue();
-      sendNotification(card.content);
+      sendNotification(content);
     }
     scheduleTAActive();
   }, next);
@@ -2933,25 +2834,26 @@ function scheduleTAAutonomy() {
       if (msgs.length) {
         const target = msgs[Math.floor(Math.random() * msgs.length)];
         const action = Math.random();
-        if (action < 0.3) {
+        if (action < 0.25) {
           target.pinned = !target.pinned;
           target.pinBy = target.pinned ? 'ta' : '';
           await idbPut('messages', target);
           renderMessages();
-        } else if (action < 0.55) {
+        } else if (action < 0.45) {
           target.heartMark = target.heartMark ? null : 'TA收藏';
           await idbPut('messages', target);
           renderMessages();
-        } else if (action < 0.7) {
+        } else if (action < 0.55) {
           target.heartMark = target.heartMark ? null : 'TA指定';
           await idbPut('messages', target);
           renderMessages();
-          showToast('TA希望你收藏这句话');
-        } else if (action < 0.85) {
+        } else if (action < 0.65) {
           await taQuoteMessage(target);
-        } else if (action < 0.93) {
+        } else if (action < 0.75) {
           await taChangeNick();
-        } else if (action < 0.97) {
+        } else if (action < 0.85) {
+          await taChangeMeNick();
+        } else if (action < 0.92) {
           await taSendSticker();
         } else {
           await taSendGift();
@@ -3011,6 +2913,7 @@ async function taSendSticker() {
   const id = await idbPutReturnId('messages', msg);
   msg.id = id;
   appendMessage(msg);
+  sendNotification('TA发了一张贴纸');
 }
 
 async function taSendGift() {
@@ -3029,6 +2932,7 @@ async function taSendGift() {
   const rid = await idbPutReturnId('messages', reply);
   reply.id = rid;
   appendMessage(reply);
+  sendNotification('TA送了你一个礼物');
 }
 
 async function taInteract() {
@@ -3040,6 +2944,23 @@ async function taInteract() {
   const id = await idbPutReturnId('messages', msg);
   msg.id = id;
   appendMessage(msg);
+  sendNotification(item.text);
+}
+
+function scheduleTAInteract() {
+  setInterval(async () => {
+    if (Math.random() < settings.taInteractProb && !isReplying && !isArchiving) {
+      await taInteract();
+    }
+  }, 2700000);
+}
+
+function scheduleTAMeNickChange() {
+  setInterval(async () => {
+    if (Math.random() < 0.04) {
+      await taChangeMeNick();
+    }
+  }, 3600000);
 }
   // ========== ⊕ 功能菜单 ==========
 function togglePlusMenu() {
@@ -3212,14 +3133,9 @@ function openGiftAddDialog(panelOverlay) {
   let giftType = 'icon';
   let giftIcon = '🎁';
   let giftImage = '';
-  
   overlay.querySelectorAll('.gift-type-btn').forEach(btn => {
-    btn.addEventListener('click', () => {
-      giftType = btn.dataset.type;
-      renderGiftTypeArea();
-    });
+    btn.addEventListener('click', () => { giftType = btn.dataset.type; renderGiftTypeArea(); });
   });
-  
   function renderGiftTypeArea() {
     const area = overlay.querySelector('#gift-type-area');
     if (giftType === 'icon') {
@@ -3234,10 +3150,7 @@ function openGiftAddDialog(panelOverlay) {
           const file = e.target.files[0];
           if (!file) return;
           const reader = new FileReader();
-          reader.onload = () => {
-            giftImage = reader.result;
-            area.querySelector('#gift-image-btn').textContent = '已选择图片';
-          };
+          reader.onload = () => { giftImage = reader.result; area.querySelector('#gift-image-btn').textContent = '已选择图片'; };
           reader.readAsDataURL(file);
         };
         inp.click();
@@ -3245,14 +3158,11 @@ function openGiftAddDialog(panelOverlay) {
     }
   }
   renderGiftTypeArea();
-  
   overlay.querySelector('#save-gift').addEventListener('click', () => {
     const name = overlay.querySelector('#gift-name-input').value.trim();
     const cost = Number(overlay.querySelector('#gift-cost-input').value);
     if (!name || !cost) return showToast('请填写名称和心意值');
-    if (giftType === 'icon') {
-      giftIcon = overlay.querySelector('#gift-icon-input')?.value || '🎁';
-    }
+    if (giftType === 'icon') giftIcon = overlay.querySelector('#gift-icon-input')?.value || '🎁';
     const gifts = JSON.parse(localStorage.getItem('giftLibrary') || '[]');
     gifts.push({ type: giftType, name, cost, icon: giftIcon, image: giftImage });
     localStorage.setItem('giftLibrary', JSON.stringify(gifts));
@@ -3262,7 +3172,6 @@ function openGiftAddDialog(panelOverlay) {
   });
 }
 
-// ========== 礼物发送 ==========
 function openGiftSendPanel() {
   const gifts = JSON.parse(localStorage.getItem('giftLibrary') || '[]');
   if (!gifts.length) return showToast('礼物库是空的，先去小世界添加');
@@ -3277,17 +3186,7 @@ function openGiftSendPanel() {
       settings.heartValue -= g.cost;
       await saveSettings();
       updateHeartValue();
-      const msg = {
-        sender: 'me',
-        content: '[礼物]',
-        giftData: g,
-        timestamp: Date.now(),
-        readTime: null,
-        pinned: false,
-        pinBy: '',
-        heartMark: null,
-        quoteContent: null
-      };
+      const msg = { sender: 'me', content: '[礼物]', giftData: g, timestamp: Date.now(), readTime: null, pinned: false, pinBy: '', heartMark: null, quoteContent: null };
       const id = await idbPutReturnId('messages', msg);
       msg.id = id;
       appendMessage(msg);
@@ -3368,7 +3267,6 @@ function openInteractAddDialog(tab, panelOverlay) {
   });
 }
 
-// ========== 互动发送 ==========
 function openInteractSendPanel() {
   const overlay = createModal(`
     <div class="heart-tabs">
@@ -3406,17 +3304,7 @@ function loadInteractSendList(overlay, tab) {
     div.className = 'card-item';
     div.innerHTML = `<div class="card-text">${item.icon ? item.icon + ' ' : ''}${escapeHtml(item.text)}</div>`;
     div.addEventListener('click', async () => {
-      const msg = {
-        sender: tab === 'ta2me' ? 'ta' : 'me',
-        content: '[互动]',
-        interactData: item,
-        timestamp: Date.now(),
-        readTime: null,
-        pinned: false,
-        pinBy: '',
-        heartMark: null,
-        quoteContent: null
-      };
+      const msg = { sender: tab === 'ta2me' ? 'ta' : 'me', content: '[互动]', interactData: item, timestamp: Date.now(), readTime: null, pinned: false, pinBy: '', heartMark: null, quoteContent: null };
       const id = await idbPutReturnId('messages', msg);
       msg.id = id;
       appendMessage(msg);
@@ -3424,15 +3312,12 @@ function loadInteractSendList(overlay, tab) {
       await saveSettings();
       updateHeartValue();
       overlay.remove();
-      if (tab === 'me2ta' || tab === 'couple') {
-        scheduleReadReceipt(msg);
-        resetStopTimer();
-      }
+      if (tab === 'me2ta' || tab === 'couple') { scheduleReadReceipt(msg); resetStopTimer(); }
     });
     list.appendChild(div);
   });
 }
-  // ========== 问答题库管理 ==========
+  // ========== 问答题库 ==========
 function openQuizManagePanel() {
   const overlay = createModal(`
     <div class="card-count-row"><span id="quiz-count"></span></div>
@@ -3447,10 +3332,7 @@ function loadQuizList(overlay) {
   overlay.querySelector('#quiz-count').textContent = `共 ${quizzes.length} 题`;
   const list = overlay.querySelector('#quiz-manage-list');
   list.innerHTML = '';
-  if (!quizzes.length) {
-    list.innerHTML = '<div class="placeholder-tip">还没有题目</div>';
-    return;
-  }
+  if (!quizzes.length) { list.innerHTML = '<div class="placeholder-tip">还没有题目</div>'; return; }
   quizzes.forEach((q, i) => {
     const div = document.createElement('div');
     div.className = 'card-item';
@@ -3488,10 +3370,9 @@ function openQuizAddDialog(panelOverlay) {
 
 // ========== 问答玩法 ==========
 async function startQuiz() {
-  const quizType = Math.random();
   const quizzes = JSON.parse(localStorage.getItem('quizLibrary') || '[]');
   const cards = await idbGetAll('cards');
-  if (quizType < 0.5 && quizzes.length) {
+  if (Math.random() < 0.5 && quizzes.length) {
     await startLibraryQuiz(quizzes);
   } else if (cards.length >= 2) {
     await startCardQuiz(cards);
@@ -3507,9 +3388,7 @@ async function startQuiz() {
 async function startLibraryQuiz(quizzes) {
   const quiz = quizzes[Math.floor(Math.random() * quizzes.length)];
   let content = '💫 问答：' + quiz.question + '\n';
-  quiz.options.forEach((opt, i) => {
-    content += String.fromCharCode(65 + i) + '：' + opt + '\n';
-  });
+  quiz.options.forEach((opt, i) => { content += String.fromCharCode(65 + i) + '：' + opt + '\n'; });
   content += '（请回复选项字母或内容）';
   const msg = { sender: 'ta', content, timestamp: Date.now(), pinned: false, pinBy: '', heartMark: null, isSystem: true };
   const id = await idbPutReturnId('messages', msg);
@@ -3521,9 +3400,7 @@ async function startLibraryQuiz(quizzes) {
 async function startCardQuiz(cards) {
   const shuffled = [...cards].sort(() => Math.random() - 0.5).slice(0, Math.min(4, cards.length));
   let content = '💫 问答：TA现在最想对你说哪句话？\n';
-  shuffled.forEach((card, i) => {
-    content += String.fromCharCode(65 + i) + '：' + card.content + '\n';
-  });
+  shuffled.forEach((card, i) => { content += String.fromCharCode(65 + i) + '：' + card.content + '\n'; });
   content += '（请回复选项字母或内容）';
   const msg = { sender: 'ta', content, timestamp: Date.now(), pinned: false, pinBy: '', heartMark: null, isSystem: true };
   const id = await idbPutReturnId('messages', msg);
@@ -3544,13 +3421,8 @@ async function checkQuizAnswer(myAnswer) {
     appendMessage(taMsg);
     const matched = taPick.content.includes(myAnswer) || myAnswer.includes(taPick.content);
     let result;
-    if (matched) {
-      result = '💗 你们想的一样！心意值+10';
-      settings.heartValue += 10;
-    } else {
-      result = '🤍 你们的答案不一样。心意值+2';
-      settings.heartValue += 2;
-    }
+    if (matched) { result = '💗 你们想的一样！心意值+10'; settings.heartValue += 10; }
+    else { result = '🤍 你们的答案不一样。心意值+2'; settings.heartValue += 2; }
     await saveSettings();
     updateHeartValue();
     const resultMsg = { sender: 'ta', content: result, timestamp: Date.now(), pinned: false, pinBy: '', heartMark: null, isSystem: true };
@@ -3566,13 +3438,8 @@ async function checkQuizAnswer(myAnswer) {
     appendMessage(taMsg);
     const matched = taPick.includes(myAnswer) || myAnswer.includes(taPick);
     let result;
-    if (matched) {
-      result = '💗 你们想的一样！心意值+10';
-      settings.heartValue += 10;
-    } else {
-      result = '🤍 你们的答案不一样。心意值+2';
-      settings.heartValue += 2;
-    }
+    if (matched) { result = '💗 你们想的一样！心意值+10'; settings.heartValue += 10; }
+    else { result = '🤍 你们的答案不一样。心意值+2'; settings.heartValue += 2; }
     await saveSettings();
     updateHeartValue();
     const resultMsg = { sender: 'ta', content: result, timestamp: Date.now(), pinned: false, pinBy: '', heartMark: null, isSystem: true };
@@ -3582,7 +3449,7 @@ async function checkQuizAnswer(myAnswer) {
   }
 }
 
-// ========== 提醒功能 ==========
+// ========== 提醒 ==========
 function openRemindPanel() {
   const overlay = createModal(`
     <div class="big-input-title">提醒</div>
@@ -3644,9 +3511,7 @@ function openAccompanyPanel() {
       <button class="mini-btn acc-type" data-type="night">深夜型</button>
     </div>
     <button class="save-btn-center" id="acc-stop" style="display:none;margin-top:14px;background:rgba(200,100,100,0.6);">结束陪伴</button>`);
-  if (settings.accompanyMode) {
-    overlay.querySelector('#acc-stop').style.display = 'block';
-  }
+  if (settings.accompanyMode) overlay.querySelector('#acc-stop').style.display = 'block';
   overlay.querySelector('#acc-sleep').addEventListener('click', () => {
     settings.accompanyMode = 'sleep';
     settings.accompanyStartTime = Date.now();
@@ -3663,15 +3528,9 @@ function openAccompanyPanel() {
     showToast('和TA一起发呆');
     scheduleDazeMessages();
   });
-  overlay.querySelector('#acc-stats').addEventListener('click', () => {
-    overlay.remove();
-    openAccompanyStats();
-  });
+  overlay.querySelector('#acc-stats').addEventListener('click', () => { overlay.remove(); openAccompanyStats(); });
   overlay.querySelectorAll('.acc-type').forEach(btn => {
-    if (btn.dataset.type === settings.accompanyType) {
-      btn.style.background = 'rgba(255,150,100,0.6)';
-      btn.style.color = '#fff';
-    }
+    if (btn.dataset.type === settings.accompanyType) { btn.style.background = 'rgba(255,150,100,0.6)'; btn.style.color = '#fff'; }
     btn.addEventListener('click', () => {
       settings.accompanyType = btn.dataset.type;
       settings.accompanyMode = 'companion';
@@ -3698,8 +3557,7 @@ function openAccompanyPanel() {
 }
 
 function applySleepMode() {
-  const app = document.getElementById('app');
-  app.style.filter = 'brightness(0.7) sepia(0.2)';
+  document.getElementById('app').style.filter = 'brightness(0.7) sepia(0.2)';
   scheduleSleepMessages();
 }
 
@@ -3764,9 +3622,7 @@ function scheduleCompanionMessages() {
 }
 
 function openAccompanyStats() {
-  const overlay = createModal(`
-    <div class="big-input-title">陪伴统计</div>
-    <div id="acc-stats-content"></div>`);
+  const overlay = createModal(`<div class="big-input-title">陪伴统计</div><div id="acc-stats-content"></div>`);
   const content = overlay.querySelector('#acc-stats-content');
   const stats = settings.accompanyStats || {};
   const names = { sleep: '陪睡', daze: '发呆', companion: '陪伴' };
@@ -3822,10 +3678,7 @@ async function renderHeartContent(overlay) {
   const container = overlay.querySelector('#heart-content');
   const items = await getHeartMessages();
   container.innerHTML = '';
-  if (!items.length) {
-    container.innerHTML = '<div class="placeholder-tip">还没有心动瞬间</div>';
-    return;
-  }
+  if (!items.length) { container.innerHTML = '<div class="placeholder-tip">还没有心动瞬间</div>'; return; }
   if (heartCurrentView === 'timeline') {
     const list = document.createElement('div');
     list.className = 'heart-list';
@@ -3852,10 +3705,7 @@ async function renderHeartContent(overlay) {
     container.appendChild(screen);
     let idx = 0;
     heartPlaybackTimer = setInterval(() => {
-      if (idx >= items.length) {
-        clearInterval(heartPlaybackTimer);
-        return;
-      }
+      if (idx >= items.length) { clearInterval(heartPlaybackTimer); return; }
       const m = items[idx];
       const pm = document.createElement('div');
       pm.className = 'playback-msg ' + m.sender;
@@ -3886,29 +3736,17 @@ function openPlaybackPanel() {
   overlay.querySelector('#playback-view-cards').addEventListener('click', () => switchPlaybackView('cards', overlay));
   overlay.querySelector('#playback-view-play').addEventListener('click', () => switchPlaybackView('play', overlay));
   overlay.querySelector('#playback-pause').addEventListener('click', () => {
-    if (playbackTimer) {
-      clearInterval(playbackTimer);
-      playbackTimer = null;
-      overlay.querySelector('#playback-pause').textContent = '继续';
-    } else {
-      startPlayback(overlay);
-      overlay.querySelector('#playback-pause').textContent = '暂停';
-    }
+    if (playbackTimer) { clearInterval(playbackTimer); playbackTimer = null; overlay.querySelector('#playback-pause').textContent = '继续'; }
+    else { startPlayback(overlay); overlay.querySelector('#playback-pause').textContent = '暂停'; }
   });
   overlay.querySelector('#playback-speed').addEventListener('click', (e) => {
     if (playbackSpeed === 1000) playbackSpeed = 500;
     else if (playbackSpeed === 500) playbackSpeed = 2000;
     else playbackSpeed = 1000;
     e.target.textContent = '速度 ' + (playbackSpeed === 1000 ? '1x' : playbackSpeed === 500 ? '2x' : '0.5x');
-    if (playbackTimer) {
-      clearInterval(playbackTimer);
-      startPlayback(overlay);
-    }
+    if (playbackTimer) { clearInterval(playbackTimer); startPlayback(overlay); }
   });
-  overlay.querySelector('#playback-exit').addEventListener('click', () => {
-    clearInterval(playbackTimer);
-    overlay.remove();
-  });
+  overlay.querySelector('#playback-exit').addEventListener('click', () => { clearInterval(playbackTimer); overlay.remove(); });
   loadPlaybackDates(overlay);
 }
 
@@ -3925,10 +3763,7 @@ async function loadPlaybackDates(overlay) {
   const dates = Object.keys(archives).sort().reverse();
   const container = overlay.querySelector('#playback-dates');
   container.innerHTML = '';
-  if (!dates.length) {
-    container.innerHTML = '<div class="placeholder-tip">还没有归档记录</div>';
-    return;
-  }
+  if (!dates.length) { container.innerHTML = '<div class="placeholder-tip">还没有归档记录</div>'; return; }
   dates.forEach(date => {
     const div = document.createElement('div');
     div.className = 'playback-date';
@@ -3952,10 +3787,7 @@ function renderPlaybackContent(dateStr, overlay) {
   const msgs = archives[dateStr] || [];
   const screen = overlay.querySelector('#playback-screen');
   screen.innerHTML = '';
-  if (!msgs.length) {
-    screen.innerHTML = '<div class="placeholder-tip">这一天没有消息</div>';
-    return;
-  }
+  if (!msgs.length) { screen.innerHTML = '<div class="placeholder-tip">这一天没有消息</div>'; return; }
   if (playbackView === 'timeline') {
     msgs.forEach(m => {
       const pm = document.createElement('div');
@@ -3987,17 +3819,10 @@ function startPlayback(overlay) {
   screen.innerHTML = '';
   const archives = JSON.parse(localStorage.getItem('archives') || '{}');
   const msgs = archives[currentPlayDate] || [];
-  if (!msgs.length) {
-    screen.innerHTML = '<div class="placeholder-tip">这一天没有消息</div>';
-    return;
-  }
+  if (!msgs.length) { screen.innerHTML = '<div class="placeholder-tip">这一天没有消息</div>'; return; }
   let idx = 0;
   playbackTimer = setInterval(() => {
-    if (idx >= msgs.length) {
-      clearInterval(playbackTimer);
-      overlay.querySelector('#playback-pause').textContent = '暂停';
-      return;
-    }
+    if (idx >= msgs.length) { clearInterval(playbackTimer); overlay.querySelector('#playback-pause').textContent = '暂停'; return; }
     const m = msgs[idx];
     const pm = document.createElement('div');
     pm.className = 'playback-msg ' + m.sender;
@@ -4025,10 +3850,7 @@ function loadImportantDays(overlay) {
   overlay.querySelector('#important-count').textContent = `共 ${days.length} 个重要日`;
   const list = overlay.querySelector('#important-list');
   list.innerHTML = '';
-  if (!days.length) {
-    list.innerHTML = '<div class="placeholder-tip">还没有重要日</div>';
-    return;
-  }
+  if (!days.length) { list.innerHTML = '<div class="placeholder-tip">还没有重要日</div>'; return; }
   days.forEach((d, i) => {
     const div = document.createElement('div');
     div.className = 'card-item';
@@ -4086,11 +3908,13 @@ function checkImportantDays() {
         idbPutReturnId('messages', msg).then(id => {
           msg.id = id;
           appendMessage(msg);
+          sendNotification(msg.content);
         });
       }
     }
   });
 }
+setInterval(checkImportantDays, 3600000);
 
 // ========== 出勤 ==========
 function openAttendancePanel() {
@@ -4159,20 +3983,15 @@ function loadAttendance(overlay) {
   overlay.querySelector('#attendance-summary').textContent = `本月 ${monthHours} 小时 ${monthWage} 元 ｜ 累计 ${totalHours} 小时 ${totalWage} 元`;
   const list = overlay.querySelector('#attendance-list');
   list.innerHTML = '';
-  if (!dates.length) {
-    list.innerHTML = '<div class="placeholder-tip">还没有出勤记录</div>';
-    return;
-  }
+  if (!dates.length) { list.innerHTML = '<div class="placeholder-tip">还没有出勤记录</div>'; return; }
   dates.forEach(date => {
     const r = records[date];
     const div = document.createElement('div');
     div.className = 'card-item';
     if (r.type === 'rest') {
-      div.innerHTML = `<div class="card-text">${date} - 休</div>
-        <div class="card-ops"><button class="attendance-del">✕</button></div>`;
+      div.innerHTML = `<div class="card-text">${date} - 休</div><div class="card-ops"><button class="attendance-del">✕</button></div>`;
     } else {
-      div.innerHTML = `<div class="card-text">${date} - ${r.hours} 小时 - ${r.hours * wage} 元</div>
-        <div class="card-ops"><button class="attendance-del">✕</button></div>`;
+      div.innerHTML = `<div class="card-text">${date} - ${r.hours} 小时 - ${r.hours * wage} 元</div><div class="card-ops"><button class="attendance-del">✕</button></div>`;
     }
     div.querySelector('.attendance-del').addEventListener('click', () => {
       delete records[date];
@@ -4230,10 +4049,7 @@ function openBondPanel() {
       <button class="save-btn-center" id="save-bond-name" style="margin-top:14px;">保存</button>`);
     renameOverlay.querySelector('#save-bond-name').addEventListener('click', () => {
       const val = renameOverlay.querySelector('#bond-name-input').value.trim();
-      if (val) {
-        settings.bondName = val;
-        saveSettings();
-      }
+      if (val) { settings.bondName = val; saveSettings(); }
       renameOverlay.remove();
       overlay.remove();
       openBondPanel();
@@ -4264,9 +4080,7 @@ function getBondLevel() {
 }
 
 function getBondTodayStatus() {
-  const today = new Date().toDateString();
-  if (settings.bondLastCheckDate === today) return '已聊 ✓';
-  return '未聊';
+  return settings.bondLastCheckDate === new Date().toDateString() ? '已聊 ✓' : '未聊';
 }
 
 function renderBondCalendar(overlay) {
@@ -4274,10 +4088,7 @@ function renderBondCalendar(overlay) {
   const dates = Object.keys(records).sort().reverse().slice(0, 30);
   const container = overlay.querySelector('#bond-calendar');
   container.innerHTML = '';
-  if (!dates.length) {
-    container.innerHTML = '<div class="placeholder-tip">还没有记录</div>';
-    return;
-  }
+  if (!dates.length) { container.innerHTML = '<div class="placeholder-tip">还没有记录</div>'; return; }
   dates.forEach(date => {
     const div = document.createElement('div');
     div.className = 'playback-date';
@@ -4292,17 +4103,13 @@ function checkBondDaily() {
   const today = new Date().toDateString();
   if (settings.bondLastCheckDate === today) return;
   if (settings.bondLastCheckDate && settings.bondDays > 0) {
-    const last = new Date(settings.bondLastCheckDate);
-    const now = new Date();
-    const diff = Math.floor((now - last) / 86400000);
+    const diff = Math.floor((new Date() - new Date(settings.bondLastCheckDate)) / 86400000);
     if (diff > 1) {
       if (settings.bondDays > 30 && !settings.bondProtectUsed) {
         settings.bondProtectUsed = true;
         showToast('熄灭保护已使用');
       } else {
-        if (settings.bondDays > settings.bondHistoryBest) {
-          settings.bondHistoryBest = settings.bondDays;
-        }
+        if (settings.bondDays > settings.bondHistoryBest) settings.bondHistoryBest = settings.bondDays;
         settings.bondDays = 0;
         settings.bondProtectUsed = false;
         showToast('羁绊熄灭了');
@@ -4327,8 +4134,7 @@ function checkArchive() {
   const now = new Date();
   const today = now.getFullYear() + '-' + (now.getMonth() + 1) + '-' + now.getDate();
   if (settings.lastArchiveDate && settings.lastArchiveDate !== today && !isArchiving) {
-    const prevDate = settings.lastArchiveDate;
-    performArchive(prevDate);
+    performArchive(settings.lastArchiveDate);
   }
   settings.lastArchiveDate = today;
   saveSettings();
@@ -4342,16 +4148,13 @@ async function performArchive(dateStr) {
   const all = await idbGetAll('messages');
   const dayMsgs = all.filter(m => {
     const d = new Date(m.timestamp);
-    const ds = d.getFullYear() + '-' + (d.getMonth() + 1) + '-' + d.getDate();
-    return ds === dateStr;
+    return d.getFullYear() + '-' + (d.getMonth() + 1) + '-' + d.getDate() === dateStr;
   });
   if (dayMsgs.length) {
     const archives = JSON.parse(localStorage.getItem('archives') || '{}');
     archives[dateStr] = dayMsgs;
     localStorage.setItem('archives', JSON.stringify(archives));
-    for (const m of dayMsgs) {
-      await idbDelete('messages', m.id);
-    }
+    for (const m of dayMsgs) await idbDelete('messages', m.id);
     await renderMessages();
   }
   isArchiving = false;
@@ -4361,14 +4164,12 @@ async function performArchive(dateStr) {
 }
 
 setInterval(checkArchive, 30000);
-setInterval(checkImportantDays, 3600000);
-
-// ========== 数据备份 ==========
+  // ========== 数据备份 ==========
 async function backupNow() {
   const cards = await idbGetAll('cards');
   const messages = await idbGetAll('messages');
   const data = {
-    version: '2.5.0',
+    version: '2.6.0',
     exportedAt: new Date().toISOString(),
     settings,
     cards,
@@ -4384,12 +4185,25 @@ async function backupNow() {
     importantDays: JSON.parse(localStorage.getItem('importantDays') || '[]'),
     attendanceRecords: JSON.parse(localStorage.getItem('attendanceRecords') || '{}'),
     memo: localStorage.getItem('memo') || '',
-    bondRecords: JSON.parse(localStorage.getItem('bondRecords') || '{}')
+    bondRecords: JSON.parse(localStorage.getItem('bondRecords') || '{}'),
+    periodRecords: JSON.parse(localStorage.getItem('periodRecords') || '[]'),
+    periodCards: JSON.parse(localStorage.getItem('periodCards') || '[]'),
+    dateRecords: JSON.parse(localStorage.getItem('dateRecords') || '[]'),
+    dateCards: JSON.parse(localStorage.getItem('dateCards') || '[]'),
+    petData: JSON.parse(localStorage.getItem('petData') || 'null'),
+    plantsData: JSON.parse(localStorage.getItem('plantsData') || '{"flowers":[],"trees":[]}'),
+    wishes: JSON.parse(localStorage.getItem('wishes') || '{"me":[],"ta":[],"common":[]}')
   };
   const json = JSON.stringify(data);
   downloadFile(json, '易遇♡夏雾凉-备份-' + new Date().toISOString().slice(0, 10) + '.json', 'application/json');
   localStorage.setItem('autoBackup', json);
+  settings.lastBackupTime = new Date().toLocaleString('zh-CN');
+  await saveSettings();
   showToast('备份完成');
+  const msg = { sender: 'ta', content: '📦 已自动备份数据', timestamp: Date.now(), pinned: false, pinBy: '', heartMark: null, isSystem: true };
+  const id = await idbPutReturnId('messages', msg);
+  msg.id = id;
+  appendMessage(msg);
 }
 
 function scheduleDailyBackup() {
@@ -4411,9 +4225,29 @@ function animateBG() {
   canvas.width = window.innerWidth;
   canvas.height = window.innerHeight;
   if (settings.bgCurrent) {
-    applyBG();
+    if (cachedBGImage && cachedBGImage.complete && cachedBGImage.naturalWidth > 0) {
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
+      ctx.globalAlpha = 0.85;
+      ctx.drawImage(cachedBGImage, 0, 0, canvas.width, canvas.height);
+      ctx.globalAlpha = 1;
+      ctx.fillStyle = 'rgba(255,255,255,0.12)';
+      ctx.fillRect(0, 0, canvas.width, canvas.height);
+    } else if (!cachedBGImage) {
+      cachedBGImage = new Image();
+      cachedBGImage.onload = () => {
+        ctx.clearRect(0, 0, canvas.width, canvas.height);
+        ctx.globalAlpha = 0.85;
+        ctx.drawImage(cachedBGImage, 0, 0, canvas.width, canvas.height);
+        ctx.globalAlpha = 1;
+        ctx.fillStyle = 'rgba(255,255,255,0.12)';
+        ctx.fillRect(0, 0, canvas.width, canvas.height);
+      };
+      cachedBGImage.src = settings.bgCurrent;
+    }
+    requestAnimationFrame(animateBG);
     return;
   }
+  cachedBGImage = null;
   bgHue = (bgHue + 0.15) % 360;
   const h1 = (bgHue + 15) % 360;
   const h2 = (bgHue + 45) % 360;
@@ -4433,7 +4267,6 @@ function startVideoCall() {
   videoCallType = 'outgoing';
   videoCallAnswered = false;
   videoCallStartTime = 0;
-  
   videoCallOverlay = document.createElement('div');
   videoCallOverlay.className = 'video-call-overlay';
   videoCallOverlay.innerHTML = `
@@ -4445,15 +4278,12 @@ function startVideoCall() {
       <button class="video-call-btn hangup" id="video-hangup-btn">挂断</button>
     </div>`;
   document.body.appendChild(videoCallOverlay);
-  
   videoCallOverlay.querySelector('#video-minimize-btn').addEventListener('click', minimizeVideoCall);
   videoCallOverlay.querySelector('#video-hangup-btn').addEventListener('click', () => hangupVideoCall());
-  
   const answerDelay = Math.random() * 19000 + 1000;
   videoCallTimer = setTimeout(() => {
     if (videoCallActive && !videoCallAnswered) {
-      const answered = Math.random() < 0.8;
-      if (answered) {
+      if (Math.random() < 0.8) {
         videoCallAnswered = true;
         videoCallStartTime = Date.now();
         updateVideoCallUI();
@@ -4472,7 +4302,6 @@ function incomingVideoCall() {
   videoCallIncoming = true;
   videoCallType = 'incoming';
   videoCallAnswered = false;
-  
   videoCallOverlay = document.createElement('div');
   videoCallOverlay.className = 'video-call-overlay';
   videoCallOverlay.innerHTML = `
@@ -4484,7 +4313,6 @@ function incomingVideoCall() {
       <button class="video-call-btn accept" id="video-accept-btn">接听</button>
     </div>`;
   document.body.appendChild(videoCallOverlay);
-  
   videoCallOverlay.querySelector('#video-accept-btn').addEventListener('click', () => {
     videoCallAnswered = true;
     videoCallIncoming = false;
@@ -4493,14 +4321,9 @@ function incomingVideoCall() {
     startVideoTimer();
     scheduleVideoTASpeak();
   });
-  videoCallOverlay.querySelector('#video-reject-btn').addEventListener('click', () => {
-    hangupVideoCall('你拒绝了TA的视频通话');
-  });
-  
+  videoCallOverlay.querySelector('#video-reject-btn').addEventListener('click', () => hangupVideoCall('你拒绝了TA的视频通话'));
   setTimeout(() => {
-    if (videoCallActive && !videoCallAnswered) {
-      hangupVideoCall('TA的视频通话未接听');
-    }
+    if (videoCallActive && !videoCallAnswered) hangupVideoCall('TA的视频通话未接听');
   }, 20000);
 }
 
@@ -4546,12 +4369,25 @@ async function scheduleVideoTASpeak() {
   const cards = await idbGetAll('cards');
   if (!cards.length) return;
   const card = cards[Math.floor(Math.random() * cards.length)];
+  let content = card.content;
+  if (settings.meNick && Math.random() < settings.nicknameProb) content = settings.meNick + '，' + content;
   const speakingEl = document.getElementById('video-ta-speaking');
-  if (speakingEl) speakingEl.textContent = card.content;
+  if (speakingEl) speakingEl.textContent = content;
+  if (videoCallMini) {
+    showDanmaku(content);
+  }
   const delayMs = 3000 + Math.random() * 5000;
   setTimeout(() => {
     if (videoCallActive && videoCallAnswered) scheduleVideoTASpeak();
   }, delayMs);
+}
+
+function showDanmaku(text) {
+  const danmaku = document.createElement('div');
+  danmaku.style.cssText = 'position:fixed;top:30%;left:100%;z-index:46;background:rgba(255,255,255,0.75);backdrop-filter:blur(12px);border:1px solid rgba(255,255,255,0.7);border-radius:16px;padding:8px 14px;font-size:13px;color:#4a3528;white-space:nowrap;animation:danmakuMove 6s linear;pointer-events:none;';
+  danmaku.textContent = text;
+  document.body.appendChild(danmaku);
+  setTimeout(() => danmaku.remove(), 6000);
 }
 
 function minimizeVideoCall() {
@@ -4567,11 +4403,34 @@ function minimizeVideoCall() {
     <span style="font-size:13px;color:#4a3528;" id="video-mini-timer">00:00</span>
     <button style="border:none;background:transparent;cursor:pointer;font-size:16px;color:#4a3528;" id="video-mini-close">✕</button>`;
   document.body.appendChild(videoCallMini);
+  videoCallMini.style.left = 'auto';
+  videoCallMini.style.right = '16px';
+  videoCallMini.style.top = '80px';
+  makeDraggable(videoCallMini);
   videoCallMini.addEventListener('click', (e) => {
     if (e.target.closest('#video-mini-close')) return;
     restoreVideoCall();
   });
   videoCallMini.querySelector('#video-mini-close').addEventListener('click', () => hangupVideoCall());
+}
+
+function makeDraggable(el) {
+  let drag = false, startX = 0, startY = 0, origX = 0, origY = 0;
+  el.addEventListener('pointerdown', (e) => {
+    drag = true;
+    startX = e.clientX;
+    startY = e.clientY;
+    const rect = el.getBoundingClientRect();
+    origX = rect.left;
+    origY = rect.top;
+    el.setPointerCapture(e.pointerId);
+  });
+  el.addEventListener('pointermove', (e) => {
+    if (!drag) return;
+    el.style.left = (origX + e.clientX - startX) + 'px';
+    el.style.top = (origY + e.clientY - startY) + 'px';
+  });
+  el.addEventListener('pointerup', () => { drag = false; });
 }
 
 function restoreVideoCall() {
@@ -4586,58 +4445,531 @@ function restoreVideoCall() {
 function hangupVideoCall(reason) {
   if (videoCallStartTime) {
     const duration = Math.floor((Date.now() - videoCallStartTime) / 1000);
-    const record = {
-      type: videoCallType,
-      startTime: videoCallStartTime,
-      duration,
-      answered: videoCallAnswered,
-      date: new Date().toISOString().slice(0, 10)
-    };
-    settings.videoRecords.push(record);
+    settings.videoRecords.push({ type: videoCallType, duration, answered: videoCallAnswered, date: new Date().toISOString().slice(0, 10) });
     saveSettings();
-    if (videoCallAnswered) {
-      showToast(`通话结束，时长 ${Math.floor(duration / 60)}分${duration % 60}秒`);
-    }
+    if (videoCallAnswered) showToast(`通话结束，时长 ${Math.floor(duration / 60)}分${duration % 60}秒`);
   }
   if (reason) {
     const msg = { sender: 'ta', content: reason, timestamp: Date.now(), pinned: false, pinBy: '', heartMark: null };
-    idbPutReturnId('messages', msg).then(id => {
-      msg.id = id;
-      appendMessage(msg);
-    });
+    idbPutReturnId('messages', msg).then(id => { msg.id = id; appendMessage(msg); });
   }
   clearInterval(videoCallTimer);
   videoCallActive = false;
   videoCallIncoming = false;
   videoCallAnswered = false;
   videoCallStartTime = 0;
-  if (videoCallOverlay) {
-    videoCallOverlay.remove();
-    videoCallOverlay = null;
-  }
-  if (videoCallMini) {
-    videoCallMini.remove();
-    videoCallMini = null;
-  }
+  if (videoCallOverlay) { videoCallOverlay.remove(); videoCallOverlay = null; }
+  if (videoCallMini) { videoCallMini.remove(); videoCallMini = null; }
 }
 
 function scheduleTAVideoCall() {
   setInterval(() => {
-    if (Math.random() < 0.03 && !videoCallActive) {
-      incomingVideoCall();
-    }
+    if (Math.random() < 0.03 && !videoCallActive) incomingVideoCall();
   }, 3600000);
 }
-  // ========== TA主动互动 ==========
+  // ========== 生理期 ==========
+function openPeriodPanel() {
+  const overlay = createModal(`
+    <div class="card-count-row"><span id="period-summary"></span></div>
+    <div style="display:flex;gap:8px;margin-bottom:12px;">
+      <input type="date" id="period-start-date" style="flex:1;background:rgba(255,255,255,0.5);border:1px solid rgba(255,255,255,0.6);border-radius:14px;padding:8px 10px;font-size:13px;color:#4a3f3a;outline:none;">
+      <button class="mini-btn" id="period-start-btn">开始</button>
+      <button class="mini-btn" id="period-end-btn">结束</button>
+    </div>
+    <div style="margin-bottom:8px;font-size:13px;color:#4a3528;">症状</div>
+    <div style="display:flex;flex-wrap:wrap;gap:8px;margin-bottom:12px;">
+      <button class="mini-btn symptom-btn" data-symptom="肚子疼">肚子疼</button>
+      <button class="mini-btn symptom-btn" data-symptom="头疼">头疼</button>
+      <button class="mini-btn symptom-btn" data-symptom="腰酸">腰酸</button>
+      <button class="mini-btn symptom-btn" data-symptom="累">累</button>
+      <button class="mini-btn symptom-btn" data-symptom="心情差">心情差</button>
+      <button class="mini-btn symptom-btn" data-symptom="失眠">失眠</button>
+    </div>
+    <div class="playback-dates" id="period-calendar"></div>
+    <div class="card-list" id="period-list"></div>`);
+  loadPeriodData(overlay);
+  overlay.querySelector('#period-start-btn').addEventListener('click', () => {
+    const date = overlay.querySelector('#period-start-date').value;
+    if (!date) return showToast('请选择日期');
+    const records = JSON.parse(localStorage.getItem('periodRecords') || '[]');
+    records.push({ type: 'start', date });
+    localStorage.setItem('periodRecords', JSON.stringify(records));
+    loadPeriodData(overlay);
+  });
+  overlay.querySelector('#period-end-btn').addEventListener('click', () => {
+    const date = overlay.querySelector('#period-start-date').value;
+    if (!date) return showToast('请选择日期');
+    const records = JSON.parse(localStorage.getItem('periodRecords') || '[]');
+    records.push({ type: 'end', date });
+    localStorage.setItem('periodRecords', JSON.stringify(records));
+    loadPeriodData(overlay);
+  });
+  overlay.querySelectorAll('.symptom-btn').forEach(btn => {
+    btn.addEventListener('click', () => {
+      const symptom = btn.dataset.symptom;
+      const today = new Date().toISOString().slice(0, 10);
+      const symptoms = JSON.parse(localStorage.getItem('periodSymptoms') || '{}');
+      if (!symptoms[today]) symptoms[today] = [];
+      if (symptoms[today].includes(symptom)) {
+        symptoms[today] = symptoms[today].filter(s => s !== symptom);
+      } else {
+        symptoms[today].push(symptom);
+      }
+      localStorage.setItem('periodSymptoms', JSON.stringify(symptoms));
+      loadPeriodData(overlay);
+    });
+  });
+}
+
+function loadPeriodData(overlay) {
+  const records = JSON.parse(localStorage.getItem('periodRecords') || '[]');
+  const starts = records.filter(r => r.type === 'start').map(r => r.date).sort();
+  const ends = records.filter(r => r.type === 'end').map(r => r.date).sort();
+  let summary = '还没有记录';
+  if (starts.length) {
+    const lastStart = starts[starts.length - 1];
+    summary = '上次开始：' + lastStart;
+    if (starts.length >= 2) {
+      const cycle1 = new Date(starts[starts.length - 1]) - new Date(starts[starts.length - 2]);
+      const cycleDays = Math.round(cycle1 / 86400000);
+      summary += ' ｜ 周期约 ' + cycleDays + ' 天';
+      const nextDate = new Date(starts[starts.length - 1]);
+      nextDate.setDate(nextDate.getDate() + cycleDays);
+      summary += ' ｜ 预测下次：' + nextDate.toISOString().slice(0, 10);
+    }
+  }
+  overlay.querySelector('#period-summary').textContent = summary;
+  const calendar = overlay.querySelector('#period-calendar');
+  calendar.innerHTML = '';
+  starts.forEach(date => {
+    const div = document.createElement('div');
+    div.className = 'playback-date';
+    div.textContent = date;
+    div.style.background = 'rgba(255,143,176,0.5)';
+    calendar.appendChild(div);
+  });
+  const list = overlay.querySelector('#period-list');
+  list.innerHTML = '';
+  records.slice().reverse().forEach(r => {
+    const div = document.createElement('div');
+    div.className = 'card-item';
+    div.innerHTML = `<div class="card-text">${r.date} - ${r.type === 'start' ? '开始' : '结束'}</div>`;
+    list.appendChild(div);
+  });
+}
+
+function openPeriodCardsPanel() {
+  const overlay = createModal(`
+    <div class="big-input-title">生理期字卡</div>
+    <textarea class="big-input-area" id="period-cards-input" placeholder="一行一条，TA会在生理期说这些" style="min-height:150px;">${(JSON.parse(localStorage.getItem('periodCards') || '[]')).join('\n')}</textarea>
+    <button class="save-btn-center" id="save-period-cards" style="margin-top:12px;">保存</button>`);
+  overlay.querySelector('#save-period-cards').addEventListener('click', () => {
+    const lines = overlay.querySelector('#period-cards-input').value.trim().split('\n').map(s => s.trim()).filter(Boolean);
+    localStorage.setItem('periodCards', JSON.stringify(lines));
+    showToast('生理期字卡已保存');
+    overlay.remove();
+  });
+}
+
+function checkPeriodCare() {
+  const today = new Date().toISOString().slice(0, 10);
+  const records = JSON.parse(localStorage.getItem('periodRecords') || '[]');
+  const starts = records.filter(r => r.type === 'start').map(r => r.date);
+  const ends = records.filter(r => r.type === 'end').map(r => r.date);
+  const lastStart = starts[starts.length - 1];
+  const lastEnd = ends[ends.length - 1];
+  if (!lastStart) return;
+  const isActive = !lastEnd || (new Date(lastEnd) < new Date(lastStart)) || (new Date(today) <= new Date(lastStart) + 7 * 86400000);
+  if (!isActive) return;
+  const checked = JSON.parse(localStorage.getItem('periodCareChecked') || '{}');
+  if (checked[today]) return;
+  checked[today] = true;
+  localStorage.setItem('periodCareChecked', JSON.stringify(checked));
+  const cards = JSON.parse(localStorage.getItem('periodCards') || '[]');
+  if (!cards.length) return;
+  const card = cards[Math.floor(Math.random() * cards.length)];
+  const symptoms = JSON.parse(localStorage.getItem('periodSymptoms') || '{}');
+  const todaySymptoms = symptoms[today] || [];
+  let content = card;
+  if (todaySymptoms.length) content += '（' + todaySymptoms.join('、') + '的话，多休息）';
+  const msg = { sender: 'ta', content, timestamp: Date.now(), pinned: false, pinBy: '', heartMark: null };
+  idbPutReturnId('messages', msg).then(id => {
+    msg.id = id;
+    appendMessage(msg);
+    sendNotification(content);
+  });
+}
+setInterval(checkPeriodCare, 3600000);
+  // ========== 梦境约会 ==========
+function openDatePanel() {
+  const overlay = createModal(`
+    <div class="card-count-row"><span id="date-summary"></span></div>
+    <div style="display:flex;gap:8px;margin-bottom:12px;">
+      <input type="date" id="date-record-date" style="flex:1;background:rgba(255,255,255,0.5);border:1px solid rgba(255,255,255,0.6);border-radius:14px;padding:8px 10px;font-size:13px;color:#4a3f3a;outline:none;">
+      <input type="text" id="date-record-place" placeholder="地点，如：云上" style="flex:1;background:rgba(255,255,255,0.5);border:1px solid rgba(255,255,255,0.6);border-radius:14px;padding:8px 10px;font-size:13px;color:#4a3f3a;outline:none;">
+      <button class="mini-btn" id="date-record-save">保存</button>
+    </div>
+    <div class="card-list" id="date-record-list"></div>`);
+  loadDateRecords(overlay);
+  overlay.querySelector('#date-record-save').addEventListener('click', () => {
+    const date = overlay.querySelector('#date-record-date').value;
+    const place = overlay.querySelector('#date-record-place').value.trim();
+    if (!date || !place) return showToast('请填写日期和地点');
+    const records = JSON.parse(localStorage.getItem('dateRecords') || '[]');
+    records.push({ date, place });
+    localStorage.setItem('dateRecords', JSON.stringify(records));
+    loadDateRecords(overlay);
+  });
+}
+
+function loadDateRecords(overlay) {
+  const records = JSON.parse(localStorage.getItem('dateRecords') || '[]');
+  overlay.querySelector('#date-summary').textContent = `共 ${records.length} 次约会`;
+  const list = overlay.querySelector('#date-record-list');
+  list.innerHTML = '';
+  if (!records.length) { list.innerHTML = '<div class="placeholder-tip">还没有约会记录</div>'; return; }
+  records.slice().reverse().forEach((r, i) => {
+    const div = document.createElement('div');
+    div.className = 'card-item';
+    div.innerHTML = `<div class="card-text">${r.date} - ${escapeHtml(r.place)}</div>
+      <div class="card-ops"><button class="date-del">✕</button></div>`;
+    div.querySelector('.date-del').addEventListener('click', () => {
+      records.splice(records.indexOf(r), 1);
+      localStorage.setItem('dateRecords', JSON.stringify(records));
+      loadDateRecords(overlay);
+    });
+    list.appendChild(div);
+  });
+}
+
+function openDateCardsPanel() {
+  const overlay = createModal(`
+    <div class="big-input-title">约会字卡</div>
+    <textarea class="big-input-area" id="date-cards-input" placeholder="一行一条，TA会用来邀请或回忆约会" style="min-height:150px;">${(JSON.parse(localStorage.getItem('dateCards') || '[]')).join('\n')}</textarea>
+    <button class="save-btn-center" id="save-date-cards" style="margin-top:12px;">保存</button>`);
+  overlay.querySelector('#save-date-cards').addEventListener('click', () => {
+    const lines = overlay.querySelector('#date-cards-input').value.trim().split('\n').map(s => s.trim()).filter(Boolean);
+    localStorage.setItem('dateCards', JSON.stringify(lines));
+    showToast('约会字卡已保存');
+    overlay.remove();
+  });
+}
+
+function scheduleDateInvite() {
+  setInterval(async () => {
+    if (Math.random() < 0.04 && !isReplying && !isArchiving) {
+      const cards = JSON.parse(localStorage.getItem('dateCards') || '[]');
+      if (!cards.length) return;
+      const card = cards[Math.floor(Math.random() * cards.length)];
+      const msg = { sender: 'ta', content: '今晚来梦里，' + card, timestamp: Date.now(), pinned: false, pinBy: '', heartMark: null };
+      const id = await idbPutReturnId('messages', msg);
+      msg.id = id;
+      appendMessage(msg);
+      sendNotification(msg.content);
+    }
+  }, 7200000);
+}
+
+function scheduleDateRecall() {
+  setInterval(async () => {
+    if (Math.random() < 0.03 && !isReplying && !isArchiving) {
+      const records = JSON.parse(localStorage.getItem('dateRecords') || '[]');
+      if (!records.length) return;
+      const r = records[Math.floor(Math.random() * records.length)];
+      const msg = { sender: 'ta', content: '还记得' + r.date + '我们在' + r.place + '吗？我很开心', timestamp: Date.now(), pinned: false, pinBy: '', heartMark: null };
+      const id = await idbPutReturnId('messages', msg);
+      msg.id = id;
+      appendMessage(msg);
+      sendNotification(msg.content);
+    }
+  }, 10800000);
+}
+
+// ========== 心愿单 ==========
+function openWishPanel() {
+  const overlay = createModal(`
+    <div class="heart-tabs">
+      <button class="heart-tab active" id="wish-tab-me">我的心愿</button>
+      <button class="heart-tab" id="wish-tab-ta">TA的心愿</button>
+      <button class="heart-tab" id="wish-tab-common">共同心愿</button>
+    </div>
+    <div class="card-list" id="wish-list"></div>
+    <button class="upload-btn" id="wish-add-btn">添加心愿</button>`);
+  let currentTab = 'me';
+  loadWishList(overlay, currentTab);
+  overlay.querySelector('#wish-tab-me').addEventListener('click', () => switchWishTab('me', overlay));
+  overlay.querySelector('#wish-tab-ta').addEventListener('click', () => switchWishTab('ta', overlay));
+  overlay.querySelector('#wish-tab-common').addEventListener('click', () => switchWishTab('common', overlay));
+  overlay.querySelector('#wish-add-btn').addEventListener('click', () => openWishAddDialog(currentTab, overlay));
+}
+
+function switchWishTab(tab, overlay) {
+  overlay.querySelectorAll('.heart-tab').forEach(t => t.classList.remove('active'));
+  if (tab === 'me') overlay.querySelector('#wish-tab-me').classList.add('active');
+  if (tab === 'ta') overlay.querySelector('#wish-tab-ta').classList.add('active');
+  if (tab === 'common') overlay.querySelector('#wish-tab-common').classList.add('active');
+  loadWishList(overlay, tab);
+}
+
+function loadWishList(overlay, tab) {
+  const wishes = JSON.parse(localStorage.getItem('wishes') || '{"me":[],"ta":[],"common":[]}');
+  const items = wishes[tab] || [];
+  const list = overlay.querySelector('#wish-list');
+  list.innerHTML = '';
+  if (!items.length) { list.innerHTML = '<div class="placeholder-tip">还没有心愿</div>'; return; }
+  items.forEach((w, i) => {
+    const div = document.createElement('div');
+    div.className = 'card-item';
+    div.innerHTML = `<div class="card-text">${escapeHtml(w.text)} ${w.done ? '✅' : '⭐'}</div>
+      <div class="card-ops"><button class="wish-done">✓</button><button class="wish-del">✕</button></div>`;
+    div.querySelector('.wish-done').addEventListener('click', () => {
+      wishes[tab][i].done = !wishes[tab][i].done;
+      localStorage.setItem('wishes', JSON.stringify(wishes));
+      loadWishList(overlay, tab);
+    });
+    div.querySelector('.wish-del').addEventListener('click', () => {
+      wishes[tab].splice(i, 1);
+      localStorage.setItem('wishes', JSON.stringify(wishes));
+      loadWishList(overlay, tab);
+    });
+    list.appendChild(div);
+  });
+}
+
+function openWishAddDialog(tab, panelOverlay) {
+  const overlay = createModal(`
+    <div class="big-input-title">添加心愿</div>
+    <input type="text" id="wish-input" placeholder="心愿内容" style="width:100%;background:rgba(255,255,255,0.5);border:1px solid rgba(255,255,255,0.6);border-radius:14px;padding:10px 14px;font-size:14px;color:#4a3f3a;outline:none;">
+    <button class="save-btn-center" id="save-wish" style="margin-top:14px;">保存</button>`);
+  overlay.querySelector('#save-wish').addEventListener('click', () => {
+    const text = overlay.querySelector('#wish-input').value.trim();
+    if (!text) return showToast('请输入心愿');
+    const wishes = JSON.parse(localStorage.getItem('wishes') || '{"me":[],"ta":[],"common":[]}');
+    wishes[tab].push({ text, done: false });
+    localStorage.setItem('wishes', JSON.stringify(wishes));
+    overlay.remove();
+    panelOverlay.remove();
+    openWishPanel();
+  });
+}
+
+function openWishCardsPanel() {
+  const overlay = createModal(`
+    <div class="big-input-title">TA心愿库</div>
+    <textarea class="big-input-area" id="wish-cards-input" placeholder="一行一个心愿" style="min-height:150px;">${(settings.taWishLibrary || []).join('\n')}</textarea>
+    <button class="save-btn-center" id="save-wish-cards" style="margin-top:12px;">保存</button>`);
+  overlay.querySelector('#save-wish-cards').addEventListener('click', () => {
+    const lines = overlay.querySelector('#wish-cards-input').value.trim().split('\n').map(s => s.trim()).filter(Boolean);
+    settings.taWishLibrary = lines;
+    saveSettings();
+    showToast('TA心愿库已保存');
+    overlay.remove();
+  });
+}
+  // ========== 宠物 ==========
+function openPetPanel() {
+  const pet = JSON.parse(localStorage.getItem('petData') || 'null');
+  if (!pet) {
+    const overlay = createModal(`
+      <div class="big-input-title">领养宠物</div>
+      <div style="display:flex;flex-wrap:wrap;gap:8px;justify-content:center;margin-bottom:12px;">
+        <button class="mini-btn pet-adopt-btn" data-type="cat">🐱 猫</button>
+        <button class="mini-btn pet-adopt-btn" data-type="dog">🐶 狗</button>
+        <button class="mini-btn pet-adopt-btn" data-type="rabbit">🐰 兔子</button>
+        <button class="mini-btn pet-adopt-btn" data-type="hamster">🐹 仓鼠</button>
+        <button class="mini-btn pet-adopt-btn" data-type="egg">🥚 蛋</button>
+        <button class="mini-btn pet-adopt-btn" data-type="custom">上传图片</button>
+      </div>
+      <input type="text" id="pet-name-input" placeholder="宠物名字" style="width:100%;background:rgba(255,255,255,0.5);border:1px solid rgba(255,255,255,0.6);border-radius:14px;padding:10px 14px;font-size:14px;color:#4a3f3a;outline:none;margin-bottom:12px;">
+      <button class="save-btn-center" id="adopt-pet-btn">领养</button>`);
+    let petType = 'cat';
+    let petImage = '';
+    overlay.querySelectorAll('.pet-adopt-btn').forEach(btn => {
+      btn.addEventListener('click', () => {
+        petType = btn.dataset.type;
+        if (petType === 'custom') {
+          const inp = document.createElement('input');
+          inp.type = 'file';
+          inp.accept = 'image/*';
+          inp.onchange = (e) => {
+            const file = e.target.files[0];
+            if (!file) return;
+            const reader = new FileReader();
+            reader.onload = () => { petImage = reader.result; btn.textContent = '已选择'; };
+            reader.readAsDataURL(file);
+          };
+          inp.click();
+        }
+      });
+    });
+    overlay.querySelector('#adopt-pet-btn').addEventListener('click', () => {
+      const name = overlay.querySelector('#pet-name-input').value.trim() || '小宠物';
+      const typeEmoji = { cat: '🐱', dog: '🐶', rabbit: '🐰', hamster: '🐹', egg: '🥚', custom: '🐾' };
+      const petData = {
+        name,
+        type: petType,
+        emoji: typeEmoji[petType],
+        image: petImage,
+        hunger: 8,
+        mood: 8,
+        clean: 8,
+        stage: petType === 'egg' ? 'egg' : 'young',
+        bornDate: new Date().toISOString().slice(0, 10)
+      };
+      localStorage.setItem('petData', JSON.stringify(petData));
+      overlay.remove();
+      openPetPanel();
+    });
+    return;
+  }
+  const overlay = createModal(`
+    <div style="text-align:center;margin-bottom:16px;">
+      <div style="font-size:64px;">${pet.image ? `<img src="${pet.image}" style="width:64px;height:64px;border-radius:50%;object-fit:cover;">` : pet.emoji}</div>
+      <div style="font-size:18px;font-weight:700;color:#4a3528;margin-top:8px;">${escapeHtml(pet.name)}</div>
+      <div style="font-size:13px;color:#8b6f60;">${pet.stage === 'egg' ? '蛋' : pet.stage === 'young' ? '幼年' : '成年'}</div>
+    </div>
+    <div style="font-size:13px;color:#4a3528;margin-bottom:4px;">饥饿：${'█'.repeat(Math.round(pet.hunger))}${'░'.repeat(10 - Math.round(pet.hunger))} ${pet.hunger}/10</div>
+    <div style="font-size:13px;color:#4a3528;margin-bottom:4px;">心情：${'█'.repeat(Math.round(pet.mood))}${'░'.repeat(10 - Math.round(pet.mood))} ${pet.mood}/10</div>
+    <div style="font-size:13px;color:#4a3528;margin-bottom:12px;">清洁：${'█'.repeat(Math.round(pet.clean))}${'░'.repeat(10 - Math.round(pet.clean))} ${pet.clean}/10</div>
+    <div style="display:flex;gap:8px;justify-content:center;">
+      <button class="mini-btn pet-action-btn" data-action="feed">喂食</button>
+      <button class="mini-btn pet-action-btn" data-action="play">陪玩</button>
+      <button class="mini-btn pet-action-btn" data-action="clean">清洁</button>
+    </div>`);
+  overlay.querySelectorAll('.pet-action-btn').forEach(btn => {
+    btn.addEventListener('click', () => {
+      const action = btn.dataset.action;
+      if (action === 'feed') pet.hunger = Math.min(10, pet.hunger + 3);
+      if (action === 'play') pet.mood = Math.min(10, pet.mood + 3);
+      if (action === 'clean') pet.clean = Math.min(10, pet.clean + 4);
+      localStorage.setItem('petData', JSON.stringify(pet));
+      overlay.remove();
+      openPetPanel();
+    });
+  });
+}
+
+function checkPetStatus() {
+  const pet = JSON.parse(localStorage.getItem('petData') || 'null');
+  if (!pet) return;
+  pet.hunger = Math.max(0, pet.hunger - 1);
+  pet.mood = Math.max(0, pet.mood - 1);
+  pet.clean = Math.max(0, pet.clean - 1);
+  if (pet.hunger < 3 || pet.mood < 3 || pet.clean < 3) {
+    const msg = { sender: 'ta', content: pet.name + '状态不太好，记得照顾它', timestamp: Date.now(), pinned: false, pinBy: '', heartMark: null };
+    idbPutReturnId('messages', msg).then(id => { msg.id = id; appendMessage(msg); sendNotification(msg.content); });
+  }
+  localStorage.setItem('petData', JSON.stringify(pet));
+}
+setInterval(checkPetStatus, 3600000);
+
+// ========== 种植 ==========
+function openPlantPanel() {
+  const overlay = createModal(`
+    <div class="heart-tabs">
+      <button class="heart-tab active" id="plant-tab-flower">花</button>
+      <button class="heart-tab" id="plant-tab-tree">树</button>
+    </div>
+    <div id="plant-content"></div>`);
+  let currentTab = 'flower';
+  loadPlantContent(overlay, currentTab);
+  overlay.querySelector('#plant-tab-flower').addEventListener('click', () => switchPlantTab('flower', overlay));
+  overlay.querySelector('#plant-tab-tree').addEventListener('click', () => switchPlantTab('tree', overlay));
+}
+
+function switchPlantTab(tab, overlay) {
+  overlay.querySelectorAll('.heart-tab').forEach(t => t.classList.remove('active'));
+  if (tab === 'flower') overlay.querySelector('#plant-tab-flower').classList.add('active');
+  if (tab === 'tree') overlay.querySelector('#plant-tab-tree').classList.add('active');
+  loadPlantContent(overlay, tab);
+}
+
+function loadPlantContent(overlay, tab) {
+  const plants = JSON.parse(localStorage.getItem('plantsData') || '{"flowers":[],"trees":[]}');
+  const items = tab === 'flower' ? plants.flowers : plants.trees;
+  const container = overlay.querySelector('#plant-content');
+  container.innerHTML = '';
+  if (!items.length) {
+    container.innerHTML = `<div class="placeholder-tip">还没有${tab === 'flower' ? '花' : '树'}</div>
+      <button class="upload-btn" id="plant-add-btn">种${tab === 'flower' ? '花' : '树'}</button>`;
+    container.querySelector('#plant-add-btn').addEventListener('click', () => addPlant(tab, overlay));
+    return;
+  }
+  items.forEach((p, i) => {
+    const stageEmoji = p.type === 'flower' ? ['🌰','🌱','🌷','🌸'] : ['🌰','🌱','🌿','🪴','🌳'];
+    const stageIdx = Math.min(p.stage, stageEmoji.length - 1);
+    const div = document.createElement('div');
+    div.className = 'card-item';
+    div.innerHTML = `
+      <div class="card-text">
+        <div style="font-size:32px;">${stageEmoji[stageIdx]}</div>
+        <div style="font-size:13px;color:#4a3528;">第 ${p.day} 天</div>
+        <div style="font-size:12px;color:#8b6f60;">水分${p.water}/10 养分${p.nutrient}/10 健康${p.health}/10</div>
+      </div>
+      <div class="card-ops">
+        <button class="plant-action-btn" data-action="water" data-idx="${i}">浇水</button>
+        <button class="plant-action-btn" data-action="fertilize" data-idx="${i}">施肥</button>
+        <button class="plant-action-btn" data-action="catch" data-idx="${i}">捉虫</button>
+      </div>`;
+    div.querySelectorAll('.plant-action-btn').forEach(btn => {
+      btn.addEventListener('click', () => {
+        const action = btn.dataset.action;
+        const idx = Number(btn.dataset.idx);
+        const plant = items[idx];
+        if (action === 'water') plant.water = Math.min(10, plant.water + 3);
+        if (action === 'fertilize') plant.nutrient = Math.min(10, plant.nutrient + 4);
+        if (action === 'catch') plant.health = Math.min(10, plant.health + 3);
+        plant.day += 1;
+        if (plant.water >= 5 && plant.nutrient >= 5 && plant.health >= 5) {
+          plant.stage = Math.min(plant.stage + 1, (plant.type === 'flower' ? 3 : 4));
+        }
+        items[idx] = plant;
+        localStorage.setItem('plantsData', JSON.stringify(plants));
+        loadPlantContent(overlay, tab);
+      });
+    });
+    container.appendChild(div);
+  });
+}
+
+function addPlant(type, panelOverlay) {
+  const overlay = createModal(`
+    <div class="big-input-title">种${type === 'flower' ? '花' : '树'}</div>
+    <button class="upload-btn" id="plant-image-btn">上传图片（可选）</button>
+    <button class="save-btn-center" id="save-plant" style="margin-top:12px;">种下</button>`);
+  let plantImage = '';
+  overlay.querySelector('#plant-image-btn').addEventListener('click', () => {
+    const inp = document.createElement('input');
+    inp.type = 'file';
+    inp.accept = 'image/*';
+    inp.onchange = (e) => {
+      const file = e.target.files[0];
+      if (!file) return;
+      const reader = new FileReader();
+      reader.onload = () => { plantImage = reader.result; overlay.querySelector('#plant-image-btn').textContent = '已选择'; };
+      reader.readAsDataURL(file);
+    };
+    inp.click();
+  });
+  overlay.querySelector('#save-plant').addEventListener('click', () => {
+    const plants = JSON.parse(localStorage.getItem('plantsData') || '{"flowers":[],"trees":[]}');
+    const key = type === 'flower' ? 'flowers' : 'trees';
+    plants[key].push({ type, stage: 0, day: 0, water: 5, nutrient: 5, health: 5, image: plantImage });
+    localStorage.setItem('plantsData', JSON.stringify(plants));
+    overlay.remove();
+    panelOverlay.remove();
+    openPlantPanel();
+  });
+}
+  // ========== TA主动互动定时器 ==========
 function scheduleTAInteract() {
   setInterval(async () => {
-    if (Math.random() < 0.05 && !isReplying && !isArchiving) {
+    if (Math.random() < settings.taInteractProb && !isReplying && !isArchiving) {
       await taInteract();
     }
   }, 2700000);
 }
 
-// ========== TA主动改你昵称 ==========
 function scheduleTAMeNickChange() {
   setInterval(async () => {
     if (Math.random() < 0.04) {
@@ -4662,8 +4994,12 @@ async function init() {
   scheduleTAMeNickChange();
   scheduleDailyBackup();
   scheduleTAVideoCall();
+  scheduleDateInvite();
+  scheduleDateRecall();
   checkArchive();
   checkImportantDays();
+  checkPeriodCare();
+  checkPetStatus();
   animateBG();
   updateSendBtn();
   const input = document.getElementById('chat-input');

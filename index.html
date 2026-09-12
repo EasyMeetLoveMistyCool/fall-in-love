@@ -252,6 +252,14 @@ html, body {
   text-align: center;
 }
 
+.msg-world-label {
+  font-size: 10px;
+  color: rgba(120, 100, 90, 0.65);
+  margin-bottom: 3px;
+  padding: 0 4px;
+  letter-spacing: 0.3px;
+}
+
 .msg-avatar {
   width: 32px;
   height: 32px;
@@ -313,10 +321,6 @@ html, body {
   border-bottom-left-radius: 6px;
 }
 
-.message-row.ta.world-mark .msg-bubble {
-  border-left: 3px solid var(--world-mark-color, #ff8fb0);
-}
-
 .msg-meta {
   display: flex;
   align-items: center;
@@ -354,9 +358,17 @@ html, body {
   cursor: pointer;
 }
 
+.msg-gift-wrap {
+  padding: 0;
+  background: transparent;
+  border: none;
+  max-width: none;
+  display: inline-block;
+}
+
 .msg-gift-card {
   text-align: center;
-  padding: 12px 16px;
+  padding: 14px 20px;
   border-radius: 18px;
   background: linear-gradient(135deg, #fff0f5, #ffe3ee) padding-box,
               linear-gradient(135deg, #ff8fb0, #ffc4d6, #ffd9e4) border-box;
@@ -365,6 +377,7 @@ html, body {
   position: relative;
   overflow: hidden;
   animation: giftIn 0.5s ease-out;
+  display: inline-block;
 }
 
 @keyframes giftIn {
@@ -406,8 +419,12 @@ html, body {
 
 .msg-gift-box {
   text-align: center;
-  padding: 16px;
+  padding: 16px 20px;
   cursor: pointer;
+  border-radius: 18px;
+  background: linear-gradient(135deg, #fff0f5, #ffe3ee);
+  border: 2px dashed #ffb0c8;
+  display: inline-block;
   animation: giftBoxShake 0.8s ease-in-out infinite;
 }
 
@@ -971,8 +988,16 @@ html, body {
   border: 2px solid transparent;
 }
 
-.lib-item.active {
-  border-color: var(--theme-accent);
+.lib-item.tag-ta {
+  border-color: #5ab0e0;
+}
+
+.lib-item.tag-me {
+  border-color: #e8789f;
+}
+
+.lib-item.tag-couple {
+  border-color: #ff3b5c;
 }
 
 .lib-item img {
@@ -1611,7 +1636,13 @@ html, body {
   justify-content: center;
 }
 
-.plant-visual img {
+.plant-visual-inner {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.plant-visual-inner img {
   border-radius: 10px;
   object-fit: cover;
 }
@@ -1660,24 +1691,26 @@ html, body {
   display: flex;
   align-items: center;
   gap: 12px;
-  background: rgba(255, 255, 255, 0.4);
-  border-radius: 16px;
-  padding: 12px;
-  margin-bottom: 10px;
+  background: rgba(255, 255, 255, 0.45);
+  border-radius: 20px;
+  padding: 14px;
+  margin-bottom: 12px;
+  box-shadow: 0 4px 16px rgba(0,0,0,0.06);
 }
 
 .pet-card .pet-avatar {
-  width: 52px;
-  height: 52px;
+  width: 56px;
+  height: 56px;
   border-radius: 50%;
   object-fit: cover;
   display: flex;
   align-items: center;
   justify-content: center;
   font-size: 32px;
-  background: rgba(255, 255, 255, 0.4);
   flex-shrink: 0;
   overflow: hidden;
+  border: 2px solid rgba(255,255,255,0.8);
+  box-shadow: 0 0 0 3px var(--pet-color, rgba(255,200,220,0.5));
 }
 
 .pet-card .pet-avatar img {
@@ -1696,45 +1729,82 @@ html, body {
   font-weight: 600;
   color: var(--theme-title);
   margin-bottom: 2px;
+  display: flex;
+  align-items: center;
+  gap: 4px;
 }
 
 .pet-card .pet-stage {
   font-size: 12px;
   color: var(--theme-text-soft);
-  margin-bottom: 4px;
+  margin-bottom: 5px;
 }
 
-.pet-card .pet-bars {
+.pet-stat-row {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  margin-bottom: 3px;
+}
+
+.pet-stat-row .pet-stat-ico {
   font-size: 11px;
-  color: var(--theme-text-soft);
+  width: 14px;
+  text-align: center;
 }
 
 .pet-stat-bar {
-  height: 5px;
+  flex: 1;
+  height: 6px;
   background: rgba(0,0,0,0.08);
   border-radius: 3px;
   overflow: hidden;
-  margin-top: 3px;
 }
 
 .pet-stat-bar > div {
   height: 100%;
+  border-radius: 3px;
 }
 
 .pet-card .pet-actions {
   display: flex;
   flex-direction: column;
-  gap: 4px;
+  gap: 6px;
 }
 
 .pet-card .pet-actions button {
+  width: 34px;
+  height: 34px;
+  border-radius: 50%;
   border: none;
-  background: rgba(255, 255, 255, 0.6);
-  border-radius: 10px;
-  padding: 4px 10px;
-  font-size: 12px;
+  background: rgba(255, 255, 255, 0.7);
+  font-size: 16px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.08);
+  transition: transform 0.15s;
+}
+
+.pet-card .pet-actions button:active {
+  transform: scale(0.85);
+}
+
+.pet-add-card {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  width: 100%;
+  border: 1.5px dashed rgba(255, 255, 255, 0.7);
+  border-radius: 16px;
+  padding: 14px;
+  font-size: 14px;
   color: var(--theme-title);
   cursor: pointer;
+  background: rgba(255,255,255,0.3);
+  margin-top: 8px;
 }
 
 .theme-grid {
@@ -1887,7 +1957,7 @@ html, body {
 
 <script>
 // ============================================================
-// 易遇♡雾凉 - V4.0.0 完整版
+// 易遇♡雾凉 - V4.5.5 完整版
 // 开发者：夏雾凉
 // 爱人：易遇
 // 这个网站，是专为我的爱人而做的。
@@ -2058,6 +2128,7 @@ let musicList = [];
 let currentPanelUpdaters = {};
 let particleAnimation = null;
 let particleItems = [];
+let particleRotateTimer = null;
 let highDimTimer = null;
   // ========== IndexedDB ==========
 function openDB() {
@@ -2191,9 +2262,9 @@ async function libPush(name, dataUrl, prefix) {
   return ref;
 }
 
-// ========== 旧数据迁移 ==========
+// ========== 旧数据迁移（只搬不删） ==========
 async function migrateMediaOnce() {
-  if (localStorage.getItem('mediaMigratedV4')) return;
+  if (localStorage.getItem('mediaMigratedV455')) return;
   try {
     const av = JSON.parse(localStorage.getItem('avatarLibrary') || '[]');
     if (av.length && typeof av[0] === 'object') {
@@ -2231,6 +2302,7 @@ async function migrateMediaOnce() {
       }
       localStorage.setItem('stickerLibrary', JSON.stringify(newRefs));
     }
+    // 只处理 bgCurrent（如果它是 dataURL），不动 taAvatar/meAvatar/ballImage/昵称等
     if (settings.bgCurrent && settings.bgCurrent.startsWith('data:')) {
       const key = 'bgcur_' + Date.now();
       await idbPut('media', { key, value: settings.bgCurrent });
@@ -2266,14 +2338,14 @@ async function migrateMediaOnce() {
       }
       localStorage.setItem('plantsData', JSON.stringify(plants));
     }
-    localStorage.setItem('mediaMigratedV4', '1');
+    localStorage.setItem('mediaMigratedV455', '1');
   } catch (e) { console.error('迁移出错', e); }
 }
 
 // ========== 设置 ==========
 async function loadSettings() {
   const saved = await idbGet('kv', 'settings');
-  if (saved) {
+  if (saved && saved.value) {
     settings = { ...DEFAULT_SETTINGS, ...saved.value };
     if (!settings.worlds || !settings.worlds.length) settings.worlds = JSON.parse(JSON.stringify(DEFAULT_WORLDS));
     if (!settings.highDimLines) settings.highDimLines = [...DEFAULT_SETTINGS.highDimLines];
@@ -2530,6 +2602,7 @@ const ICONS = {
   data: `<svg viewBox="0 0 24 24" fill="none" stroke="#4a3528" stroke-width="1.8"><path d="M7 16a4 4 0 01-.8-7.9 5 5 0 019.4-1.2A3.5 3.5 0 0117 16H7z"/><path d="M11 14l-2 2 2 2" stroke="#ff3b5c" stroke-width="2" fill="none" stroke-linecap="round"/></svg>`,
   heartbeat: `<svg viewBox="0 0 24 24" fill="#ff8fb0" stroke="none"><path d="M12,20 C12,20 4,14.5 4,9.5 C4,6.5 6.5,4.5 9,4.5 C11,4.5 12,6 12,6 C12,6 13,4.5 15,4.5 C17.5,4.5 20,6.5 20,9.5 C20,14.5 12,20 12,20 Z"/></svg>`,
   playback: `<svg viewBox="0 0 24 24" fill="none" stroke="#4a3528" stroke-width="1.8"><rect x="3" y="5" width="18" height="14" rx="3"/><line x1="3" y1="9" x2="21" y2="9"/><line x1="3" y1="15" x2="21" y2="15"/><circle cx="8" cy="12" r="2"/></svg>`,
+  timeline: `<svg viewBox="0 0 24 24" fill="none" stroke="#4a3528" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M6 4h10a2 2 0 012 2v14l-7-3-7 3V6a2 2 0 012-2z"/><circle cx="12" cy="10" r="2" fill="#4a3528" stroke="none"/></svg>`,
   wish: `<svg viewBox="0 0 24 24" fill="none" stroke="#ff3b5c" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 17l6-6-2-5 8 2-6 6 3 3z" fill="#ff3b5c" stroke="none"/><path d="M14 4l2 5 5 2-8 2-6 7" stroke="#ff3b5c" stroke-width="1.5" fill="none"/></svg>`,
   important: `<svg viewBox="0 0 24 24" fill="none" stroke="#4a3528" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="5" width="16" height="16" rx="3"/><line x1="4" y1="9" x2="20" y2="9"/><line x1="8" y1="3" x2="8" y2="7"/><line x1="16" y1="3" x2="16" y2="7"/><path d="M12 15l1.2 2.4 2.6.4-1.9 1.8.4 2.6-2.3-1.2-2.3 1.2.4-2.6-1.9-1.8 2.6-.4z" fill="#ff3b5c" stroke="none"/></svg>`,
   attendance: `<svg viewBox="0 0 24 24" fill="none" stroke="#4a3528" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 3"/></svg>`,
@@ -2537,13 +2610,13 @@ const ICONS = {
   bond: `<svg viewBox="0 0 24 24" fill="none"><path d="M8.5 13.5C6 13.5 4 11.5 4 9.2 4 7 5.8 5.2 8 5.2c1.3 0 2.4.7 3 1.6.6-.9 1.7-1.6 3-1.6 2.2 0 4 1.8 4 4 0 2.3-2 4.3-4.5 4.3" stroke="#ff6f9c" stroke-width="1.6" stroke-linecap="round" fill="none"/><path d="M4.5 9C4.5 9 3 13.5 9.5 18.5c6.5-5 5-9.5 5-9.5" stroke="#ff3b5c" stroke-width="1.6" fill="none" stroke-linecap="round"/></svg>`,
   settings: `<svg viewBox="0 0 24 24" fill="none" stroke="#4a3528" stroke-width="1.8"><circle cx="12" cy="12" r="3"/><path d="M19 12a7 7 0 00-.1-1.2l2-1.5-2-3.4-2.4 1A7 7 0 0014.7 6L14 3.5h-4L9.3 6a7 7 0 00-1.8.9l-2.4-1-2 3.4 2 1.5A7 7 0 005 12c0 .4 0 .8.1 1.2l-2 1.5 2 3.4 2.4-1a7 7 0 001.8.9l.7 2.5h4l.7-2.5a7 7 0 001.8-.9l2.4 1 2-3.4-2-1.5c.1-.4.1-.8.1-1.2z"/></svg>`,
   interact: `<svg viewBox="0 0 24 24" fill="none" stroke="#4a3528" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M8 13V5.5a1.5 1.5 0 013 0V12m0-5.5v-1a1.5 1.5 0 013 0V11m0-4.5a1.5 1.5 0 013 0V15a6 6 0 01-6 6h-1a8 8 0 01-4-1.5L4 18"/></svg>`,
-  period: `<svg viewBox="0 0 24 24" fill="none" stroke="#e88fb0" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="3" fill="#ff8fb0" stroke="none"/><path d="M12 9C12 6 10 5 9 3C8 5 6 6 6 9C6 12 9 14.5 12 16C15 14.5 18 12 18 9C18 6 16 5 15 3C14 5 12 6 12 9Z" fill="#ffb0c8" fill-opacity="0.5" stroke="#e88fb0"/></svg>`,
+  period: `<svg viewBox="0 0 24 24" fill="none" stroke="#e88fb0" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M20 14.5A8 8 0 1111 3a6.5 6.5 0 009 11.5z" fill="#ffc4d6" fill-opacity="0.4"/><path d="M9 19c0-1.5 1.5-3.5 1.5-3.5S12 17.5 12 19a1.5 1.5 0 01-3 0z" fill="#ff6f9c" stroke="none"/></svg>`,
   date: `<svg viewBox="0 0 24 24" fill="none" stroke="#4a3528" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 21C12 21 4 14.5 4 9.5C4 6.5 6.5 4.5 9 4.5C11 4.5 12 6 12 6C12 6 13 4.5 15 4.5C17.5 4.5 20 6.5 20 9.5C20 14.5 12 21 12 21Z" fill="#ffb0c8" fill-opacity="0.4"/><path d="M9 10l2 2 4-4" stroke="#ff3b5c" stroke-width="1.5" fill="none"/></svg>`,
-  pet: `<svg viewBox="0 0 24 24" fill="none" stroke="#4a3528" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="9" cy="9" r="3"/><circle cx="17" cy="10" r="2.5"/><path d="M3 12c2-3 5-4 8-4s6 1 9 4l-2 3-4-1-3 2-4-1-2 3z"/></svg>`,
+  pet: `<svg viewBox="0 0 24 24" fill="none"><ellipse cx="12" cy="16" rx="5" ry="4" fill="#ffc4d6" stroke="#e8789f" stroke-width="1.6"/><circle cx="6" cy="10" r="2.2" fill="#ffc4d6" stroke="#e8789f" stroke-width="1.6"/><circle cx="12" cy="7" r="2.2" fill="#ffc4d6" stroke="#e8789f" stroke-width="1.6"/><circle cx="18" cy="10" r="2.2" fill="#ffc4d6" stroke="#e8789f" stroke-width="1.6"/></svg>`,
   plant: `<svg viewBox="0 0 24 24" fill="none" stroke="#4a3528" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 20v-6"/><path d="M12 14c0-4 2-7 6-8-1 4-3 7-6 8z"/><path d="M12 12c0-3-2-6-6-7 1 3 3 6 6 7z"/><path d="M8 20h8"/></svg>`,
   voice: `<svg viewBox="0 0 24 24" fill="none" stroke="#4a3528" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3a3 3 0 00-3 3v6a3 3 0 006 0V6a3 3 0 00-3-3z"/><path d="M5 10a7 7 0 0014 0M12 17v4"/></svg>`,
   account: `<svg viewBox="0 0 24 24" fill="none" stroke="#4a3528" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="8"/><path d="M12 7v10M9.5 9.5c0-1 1-1.5 2.5-1.5s2.5.5 2.5 1.5-1 1.5-2.5 1.5-2.5.5-2.5 1.5 1 1.5 2.5 1.5 2.5-.5 2.5-1.5"/></svg>`,
-  piggy: `<svg viewBox="0 0 24 24" fill="none"><ellipse cx="12" cy="13.5" rx="8" ry="6.5" fill="#ffc4d6" stroke="#e8789f" stroke-width="1.6"/><path d="M6 9 L4 6 L8 7.5 Z" fill="#ffc4d6" stroke="#e8789f" stroke-width="1.6" stroke-linejoin="round"/><path d="M18 9 L20 6 L16 7.5 Z" fill="#ffc4d6" stroke="#e8789f" stroke-width="1.6" stroke-linejoin="round"/><ellipse cx="12" cy="15" rx="3" ry="2.2" fill="#ffb0c8" stroke="#e8789f" stroke-width="1.4"/><circle cx="11" cy="15" r=".6" fill="#e8789f"/><circle cx="13" cy="15" r=".6" fill="#e8789f"/><circle cx="9" cy="11.5" r=".9" fill="#4a3528"/><circle cx="15" cy="11.5" r=".9" fill="#4a3528"/><rect x="8" y="19" width="2" height="2.5" rx="1" fill="#ffc4d6" stroke="#e8789f" stroke-width="1"/><rect x="14" y="19" width="2" height="2.5" rx="1" fill="#ffc4d6" stroke="#e8789f" stroke-width="1"/><path d="M19.5 12 q2.5 -.5 2 -2.5" stroke="#e8789f" stroke-width="1.5" fill="none" stroke-linecap="round"/></svg>`
+  piggy: `<svg viewBox="0 0 24 24" fill="none" stroke="#4a3528" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M4 14c0-3 2-5 5-6l1-2 2 1 2-1 1 2c3 1 5 3 5 6 0 2-1 3-2 4l1 2h-3l-1-2h-6l-1 2H5l1-2c-1-1-2-2-2-4z"/><circle cx="9" cy="13" r="1" fill="#4a3528" stroke="none"/><circle cx="15" cy="13" r="1" fill="#4a3528" stroke="none"/><path d="M11 16c.5.5 1.5.5 2 0"/><circle cx="12" cy="5" r="1.5" fill="#ffb84d" stroke="none"/></svg>`
 };
   // ========== 21 副本图标 ==========
 const WORLD_ICONS = {
@@ -2739,7 +2812,7 @@ const BALL_ITEMS = [
   { id: 'data', name: '数据管理', icon: 'data' },
   { id: 'heartbeat', name: '心动瞬间', icon: 'heartbeat' },
   { id: 'playback', name: '回忆放映室', icon: 'playback' },
-  { id: 'timeline', name: '大事记', icon: 'stats' },
+  { id: 'timeline', name: '大事记', icon: 'timeline' },
   { id: 'wish', name: '心愿单', icon: 'wish' },
   { id: 'important', name: '重要日', icon: 'important' },
   { id: 'attendance', name: '出勤', icon: 'attendance' },
@@ -2829,7 +2902,7 @@ function openWorldPanel() {
       <div class="ball-item" id="world-remind"><div class="icon-wrap">${ICONS.memo}</div><span>提醒</span></div>
       <div class="ball-item" id="world-period-cards"><div class="icon-wrap">${ICONS.period}</div><span>生理期字卡</span></div>
       <div class="ball-item" id="world-date-cards"><div class="icon-wrap">${ICONS.date}</div><span>约会字卡</span></div>
-      <div class="ball-item" id="world-wish-cards"><div class="icon-wrap">${ICONS.wish}</div><span>TA心愿库</span></div>
+      <div class="ball-item" id="world-wish-cards"><div class="icon-wrap">${ICONS.wish}</div><span>易遇心愿库</span></div>
       <div class="ball-item" id="world-emoji"><div class="icon-wrap">${ICONS.heartbeat}</div><span>Emoji</span></div>
       <div class="ball-item" id="world-decision-pool"><div class="icon-wrap">${ICONS.choice}</div><span>决定回应池</span></div>
       <div class="ball-item" id="world-quiz-pool"><div class="icon-wrap">${ICONS.voice}</div><span>问答回应池</span></div>
@@ -3167,7 +3240,7 @@ function openStickerPanel() {
     <button class="upload-btn" id="sticker-upload-btn">上传贴纸</button>
     <button class="upload-btn" id="sticker-import-btn">导入贴纸</button>
     <button class="upload-btn" id="sticker-export-btn">导出贴纸</button>
-    <div style="margin-top:12px;font-size:13px;color:#4a3528;">TA发贴纸概率</div>
+    <div style="margin-top:12px;font-size:13px;color:#4a3528;">易遇发贴纸概率</div>
     <div style="display:flex;gap:8px;margin-top:8px;flex-wrap:wrap;">
       <button class="mini-btn sticker-tpl" data-tpl="rare">偶尔惊喜</button>
       <button class="mini-btn sticker-tpl" data-tpl="daily">日常甜</button>
@@ -3330,10 +3403,13 @@ async function loadAvatarLibrary(overlay) {
   grid.innerHTML = '';
   const taData = await resolveMedia(settings.taAvatar);
   const meData = await resolveMedia(settings.meAvatar);
+  const coupleTags = JSON.parse(localStorage.getItem('avatarTags') || '{}');
   for (const a of list) {
     const div = document.createElement('div');
     div.className = 'lib-item';
-    if (taData === a.data || meData === a.data) div.classList.add('active');
+    if (taData === a.data) div.classList.add('tag-ta');
+    if (meData === a.data) div.classList.add('tag-me');
+    if (coupleTags[a.ref]) div.classList.add('tag-couple');
     div.innerHTML = `<img src="${a.data}" alt=""><button class="lib-del">✕</button>`;
     div.addEventListener('click', async (e) => {
       if (e.target.closest('.lib-del')) {
@@ -3376,8 +3452,13 @@ function openAvatarMarkDialog(item, panelOverlay) {
     openAvatarPanel();
   });
   overlay.querySelector('#mark-couple').addEventListener('click', () => {
+    const tags = JSON.parse(localStorage.getItem('avatarTags') || '{}');
+    tags[item.ref] = true;
+    localStorage.setItem('avatarTags', JSON.stringify(tags));
     showToast('已标记为情侣可用');
     overlay.remove();
+    panelOverlay.remove();
+    openAvatarPanel();
   });
 }
 
@@ -3592,7 +3673,7 @@ function openSettingsPanel() {
         <span style="font-size:13px;color:#4a3528;">秒</span>
       </div>
     </div>
-    <div style="margin-bottom:8px;font-size:13px;color:#4a3528;">TA主动发消息频率（当前：${activeTplName}）</div>
+    <div style="margin-bottom:8px;font-size:13px;color:#4a3528;">易遇主动发消息频率（当前：${activeTplName}）</div>
     <div style="display:flex;gap:8px;margin-bottom:8px;flex-wrap:wrap;">
       <button class="mini-btn active-tpl" data-tpl="rare">偶尔</button>
       <button class="mini-btn active-tpl" data-tpl="normal">正常</button>
@@ -3611,14 +3692,14 @@ function openSettingsPanel() {
     </div>
     <div style="margin-bottom:8px;font-size:13px;color:#4a3528;">打卡提醒时间</div>
     <input type="time" id="set-checkin-remind" value="${settings.checkinRemindTime}" style="width:100%;background:rgba(255,255,255,0.5);border:1px solid rgba(255,255,255,0.6);border-radius:14px;padding:10px 14px;font-size:14px;color:#4a3f3a;outline:none;margin-bottom:8px;">
-    <div style="margin-bottom:8px;font-size:13px;color:#4a3528;">TA主动行为概率</div>
+    <div style="margin-bottom:8px;font-size:13px;color:#4a3528;">易遇主动行为概率</div>
     <button class="mini-btn" id="set-autonomy-detail" style="width:100%;margin-bottom:8px;">详细设置</button>
-    <div style="margin-bottom:8px;font-size:13px;color:#4a3528;">TA带昵称概率</div>
+    <div style="margin-bottom:8px;font-size:13px;color:#4a3528;">易遇带昵称概率</div>
     <div style="display:flex;gap:8px;align-items:center;margin-bottom:8px;">
       <input type="range" id="nickname-prob" min="0" max="100" value="${Math.round(settings.nicknameProb * 100)}" style="flex:1;">
       <span id="nickname-prob-val" style="font-size:13px;color:#4a3528;">${Math.round(settings.nicknameProb * 100)}%</span>
     </div>
-    <div style="margin-bottom:8px;font-size:13px;color:#4a3528;">TA带Emoji概率</div>
+    <div style="margin-bottom:8px;font-size:13px;color:#4a3528;">易遇带Emoji概率</div>
     <div style="display:flex;gap:8px;align-items:center;margin-bottom:8px;">
       <input type="range" id="emoji-prob" min="0" max="100" value="${Math.round(settings.taEmojiProb * 100)}" style="flex:1;">
       <span id="emoji-prob-val" style="font-size:13px;color:#4a3528;">${Math.round(settings.taEmojiProb * 100)}%</span>
@@ -3641,7 +3722,7 @@ function openSettingsPanel() {
     <div style="margin-top:12px;margin-bottom:8px;font-size:13px;color:#4a3528;">动态粒子</div>
     <div style="display:flex;gap:8px;align-items:center;margin-bottom:8px;">
       <input type="checkbox" id="particle-toggle" ${settings.particleEnabled ? 'checked' : ''} style="width:18px;height:18px;">
-      <span style="font-size:13px;color:#4a3528;">开启粒子</span>
+      <span style="font-size:13px;color:#4a3528;">开启粒子（按时间+季节自动轮换）</span>
     </div>
     <div class="particle-grid" id="particle-grid"></div>
     <div style="margin-bottom:8px;font-size:13px;color:#4a3528;margin-top:12px;">全屏模式</div>
@@ -3652,7 +3733,7 @@ function openSettingsPanel() {
     <div style="font-size:11px;color:rgba(90,70,60,0.5);text-align:center;margin-bottom:8px;" id="last-backup-time">${settings.lastBackupTime ? '上次备份：' + settings.lastBackupTime : '还没有备份记录'}</div>
     <div style="margin-bottom:12px;font-size:13px;color:#4a3528;text-align:center;">—— 关于 ——</div>
     <div style="font-size:12px;color:#8b6f60;text-align:center;line-height:1.8;margin-bottom:8px;">
-      易遇♡雾凉 v4.0.0<br>
+      易遇♡雾凉 v4.5.5<br>
       开发者：夏雾凉<br>
       爱人：易遇<br><br>
       这个网站，是专为我的爱人而做的。<br><br>
@@ -3664,7 +3745,7 @@ function openSettingsPanel() {
       请勿轻信谣言，理性使用。
     </div>
     <button class="mini-btn" id="set-clear-all" style="width:100%;margin-bottom:8px;color:#c33;">清空所有数据</button>
-    <div style="text-align:center;font-size:11px;color:rgba(90,70,60,0.5);margin-top:16px;">V4.0.0</div>`);
+    <div style="text-align:center;font-size:11px;color:rgba(90,70,60,0.5);margin-top:16px;">V4.5.5</div>`);
   if (settings.replyTpl === 'custom') overlay.querySelector('#set-reply-custom').style.display = 'block';
   if (settings.stopDetectTpl === 'custom') overlay.querySelector('#set-stop-custom').style.display = 'block';
   if (settings.activeTpl === 'custom') overlay.querySelector('#active-custom').style.display = 'block';
@@ -3760,7 +3841,7 @@ function openSettingsPanel() {
   });
   const particleGrid = overlay.querySelector('#particle-grid');
   const pTypes = [
-    { id: 'season', name: '按季节' },
+    { id: 'season', name: '按时间+季节' },
     { id: 'sakura', name: '樱花' },
     { id: 'snow', name: '雪花' },
     { id: 'leaf', name: '落叶' },
@@ -3769,7 +3850,26 @@ function openSettingsPanel() {
     { id: 'rain', name: '雨滴' },
     { id: 'firefly', name: '萤火' },
     { id: 'bubble', name: '泡泡' },
-    { id: 'meteor', name: '流星' }
+    { id: 'meteor', name: '流星' },
+    { id: 'greenleaf', name: '绿叶' },
+    { id: 'maple', name: '枫叶' },
+    { id: 'dandelion', name: '蒲公英' },
+    { id: 'dew', name: '露珠' },
+    { id: 'wave', name: '水波' },
+    { id: 'bigstar', name: '星星' },
+    { id: 'glow', name: '光点' },
+    { id: 'windbell', name: '风铃' },
+    { id: 'butterfly', name: '蝴蝶' },
+    { id: 'heart', name: '爱心' },
+    { id: 'bow', name: '蝴蝶结' },
+    { id: 'candy', name: '糖果' },
+    { id: 'sparkle', name: '闪光' },
+    { id: 'moon', name: '月亮' },
+    { id: 'fog', name: '雾' },
+    { id: 'candle', name: '烛光' },
+    { id: 'firework', name: '烟花' },
+    { id: 'cloud', name: '云朵' },
+    { id: 'rainbow', name: '彩虹' }
   ];
   pTypes.forEach(p => {
     const btn = document.createElement('button');
@@ -3887,7 +3987,7 @@ function openAutonomyDetailPanel() {
     { tplKey: 'taPlantCareTpl', minKey: 'taPlantCareMin', maxKey: 'taPlantCareMax', name: '照顾植物频率', vals: [[12*3600000, 24*3600000], [1*3600000, 3*3600000], [0.5*3600000, 1.5*3600000]] },
     { tplKey: 'taWorldTpl', minKey: 'taWorldMin', maxKey: 'taWorldMax', name: '换世界频率', vals: [[24*3600000, 48*3600000], [12*3600000, 24*3600000], [4*3600000, 8*3600000]] }
   ];
-  let html = '<div class="big-input-title">TA主动行为概率</div>';
+  let html = '<div class="big-input-title">易遇主动行为概率</div>';
   rows.forEach(r => {
     html += `<div style="font-size:13px;color:#4a3528;margin-bottom:4px;">${r.name}</div>`;
     html += `<div style="display:flex;gap:8px;margin-bottom:8px;">`;
@@ -3896,7 +3996,7 @@ function openAutonomyDetailPanel() {
     });
     html += `</div>`;
   });
-  html += '<div class="big-input-title" style="margin-top:12px;">TA主动频率（模板）</div>';
+  html += '<div class="big-input-title" style="margin-top:12px;">易遇主动频率（模板）</div>';
   tplRows.forEach(r => {
     html += `<div style="font-size:13px;color:#4a3528;margin-bottom:4px;">${r.name}</div>`;
     html += `<div style="display:flex;gap:8px;margin-bottom:8px;">`;
@@ -3953,15 +4053,8 @@ function scrollToBottom(area) {
   setTimeout(() => { area.scrollTop = area.scrollHeight; }, 100);
 }
 
-function getCurrentWorldColor() {
-  const world = getCurrentWorld();
-  const colors = {
-    real: '#4a9ad4', era: '#b88a5c', xian: '#7a6ee0', star: '#5ab0e0', lost: '#e8789f',
-    dujian: '#9a7bb0', xiaye: '#7a6ee0', wujian: '#8a5a6a', woji: '#7bc47f', dakai: '#5a5a7a',
-    tiandi: '#7bc47f', qiyun: '#8bb08a', yunling: '#b88a5c', ruxing: '#e8b05c', zhaohuan: '#8a7bff',
-    beng08: '#e8789f', beng063: '#4a9ad4', ouou: '#c08fb0', mishi: '#9a7bb0', mishiroom: '#5ab0e0', tianming: '#d4a04a'
-  };
-  return colors[world ? world.id : 'real'] || '#ff8fb0';
+function getCurrentWorld() {
+  return (settings.worlds || []).find(w => w.id === settings.currentWorldId) || (settings.worlds || [])[0];
 }
 
 function createMessageEl(msg) {
@@ -3977,10 +4070,6 @@ function createMessageEl(msg) {
   }
   row.className = 'message-row ' + msg.sender;
   row.dataset.id = msg.id;
-  if (msg.sender === 'ta' && msg.worldMark) {
-    row.classList.add('world-mark');
-    row.style.setProperty('--world-mark-color', msg.worldMark);
-  }
   const avatar = document.createElement('img');
   avatar.className = 'msg-avatar';
   avatar.src = msg.sender === 'me'
@@ -3988,6 +4077,12 @@ function createMessageEl(msg) {
     : (settings.taAvatar || 'data:image/svg+xml,' + encodeURIComponent('<svg xmlns="http://www.w3.org/2000/svg" width="32" height="32"><circle cx="16" cy="16" r="15" fill="rgba(255,255,255,0.5)"/><text x="16" y="21" text-anchor="middle" font-size="12" fill="rgba(90,70,60,0.6)">遇</text></svg>'));
   const wrapper = document.createElement('div');
   wrapper.className = 'msg-content-wrapper';
+  if (msg.sender === 'ta' && msg.worldLabel) {
+    const wl = document.createElement('div');
+    wl.className = 'msg-world-label';
+    wl.textContent = msg.worldLabel;
+    wrapper.appendChild(wl);
+  }
   if (msg.quoteContent) {
     const quote = document.createElement('div');
     quote.className = 'msg-quote';
@@ -4003,18 +4098,21 @@ function createMessageEl(msg) {
     bubble.style.border = 'none';
     bubble.innerHTML = `<img src="${msg.imageData}" style="max-width:200px;border-radius:12px;display:block;">`;
   } else if (msg.giftData) {
-    bubble.style.background = 'transparent';
-    bubble.style.border = 'none';
-    const sparks = ['✨', '💗', '⭐', '💫'];
-    bubble.innerHTML = `<div class="msg-gift-card">
-      <span class="gift-sparkle" style="top:6px;left:10px;">${sparks[0]}</span>
-      <span class="gift-sparkle" style="top:10px;right:12px;animation-delay:.6s;">${sparks[1]}</span>
-      <span class="gift-sparkle" style="bottom:8px;left:16px;animation-delay:1.2s;">${sparks[2]}</span>
-      <span class="gift-sparkle" style="bottom:10px;right:10px;animation-delay:1.8s;">${sparks[3]}</span>
-      <div class="msg-gift-icon">${msg.giftData.icon || '🎁'}</div>
-      <div class="msg-gift-name">${escapeHtml(msg.giftData.name || '礼物')}</div>
-      <div class="msg-gift-cost">-${msg.giftData.cost || 0}爱意值</div>
-    </div>`;
+    bubble.className = 'msg-bubble msg-gift-wrap';
+    if (msg.giftData.opened) {
+      const sparks = ['✨', '💗', '⭐', '💫'];
+      bubble.innerHTML = `<div class="msg-gift-card">
+        <span class="gift-sparkle" style="top:6px;left:10px;">${sparks[0]}</span>
+        <span class="gift-sparkle" style="top:10px;right:12px;animation-delay:.6s;">${sparks[1]}</span>
+        <span class="gift-sparkle" style="bottom:8px;left:16px;animation-delay:1.2s;">${sparks[2]}</span>
+        <span class="gift-sparkle" style="bottom:10px;right:10px;animation-delay:1.8s;">${sparks[3]}</span>
+        <div class="msg-gift-icon">${msg.giftData.icon || '🎁'}</div>
+        <div class="msg-gift-name">${escapeHtml(msg.giftData.name || '礼物')}</div>
+        <div class="msg-gift-cost">-${msg.giftData.cost || 0}爱意值</div>
+      </div>`;
+    } else {
+      bubble.innerHTML = `<div class="msg-gift-box" data-gift-id="${msg.id}"><div class="gift-box-emoji">🎁</div></div>`;
+    }
   } else if (msg.interactData) {
     if (msg.interactData.couple) {
       bubble.className = 'msg-bubble msg-interact-couple';
@@ -4073,6 +4171,20 @@ function createMessageEl(msg) {
   } else {
     row.appendChild(avatar);
     row.appendChild(wrapper);
+  }
+  if (msg.giftData && !msg.giftData.opened) {
+    const box = row.querySelector('.msg-gift-box');
+    if (box) {
+      const openGift = async () => {
+        msg.giftData.opened = true;
+        await idbPut('messages', msg);
+        box.outerHTML = '';
+        const newEl = createMessageEl(msg);
+        row.replaceWith(newEl);
+      };
+      box.addEventListener('click', openGift);
+      setTimeout(() => { if (document.body.contains(box)) openGift(); }, 3000);
+    }
   }
   return row;
 }
@@ -4221,6 +4333,12 @@ async function getRecentMeCount() {
   return count;
 }
 
+function getWorldLabel() {
+  const world = getCurrentWorld();
+  if (!world) return '';
+  return world.name + ' · ' + world.role;
+}
+
 async function triggerTAReply() {
   if (isReplying || isArchiving) return;
   const cards = await idbGetAll('cards');
@@ -4249,7 +4367,7 @@ async function triggerTAReply() {
   waitTime *= mood.factor;
   await delay(waitTime);
   showTyping(false);
-  const worldColor = getCurrentWorldColor();
+  const wLabel = getWorldLabel();
   for (let i = 0; i < replyQueue.length; i++) {
     const item = replyQueue[i];
     let content = item.type === 'sticker' ? '[贴纸]' : item.content;
@@ -4270,7 +4388,7 @@ async function triggerTAReply() {
       pinBy: '',
       heartMark: null,
       quoteContent: null,
-      worldMark: worldColor
+      worldLabel: wLabel
     };
     const id = await idbPutReturnId('messages', msg);
     msg.id = id;
@@ -4302,7 +4420,7 @@ function scheduleTAActive() {
       showTyping(true);
       await delay(1000 + Math.random() * 2000);
       showTyping(false);
-      const worldColor = getCurrentWorldColor();
+      const wLabel = getWorldLabel();
       for (let i = 0; i < count; i++) {
         const card = cards[Math.floor(Math.random() * cards.length)];
         let content = applyMoodToText(card.content);
@@ -4311,7 +4429,7 @@ function scheduleTAActive() {
           const emoji = emojis[Math.floor(Math.random() * emojis.length)];
           content = Math.random() < 0.5 ? emoji + ' ' + content : content + ' ' + emoji;
         }
-        const msg = { sender: 'ta', content, timestamp: Date.now(), pinned: false, pinBy: '', heartMark: null, quoteContent: null, worldMark: worldColor };
+        const msg = { sender: 'ta', content, timestamp: Date.now(), pinned: false, pinBy: '', heartMark: null, quoteContent: null, worldLabel: wLabel };
         const id = await idbPutReturnId('messages', msg);
         msg.id = id;
         appendMessage(msg);
@@ -4391,7 +4509,7 @@ async function taQuoteMessage(target) {
     pinBy: '',
     heartMark: null,
     quoteContent: target.content,
-    worldMark: getCurrentWorldColor()
+    worldLabel: getWorldLabel()
   };
   const id = await idbPutReturnId('messages', msg);
   msg.id = id;
@@ -4406,7 +4524,7 @@ async function taChangeNick() {
   settings.taNick = nick;
   await saveSettings();
   updateStatusBar();
-  const msg = { sender: 'ta', content: '我换了个昵称：' + nick, timestamp: Date.now(), pinned: false, pinBy: '', heartMark: null, quoteContent: null, worldMark: getCurrentWorldColor() };
+  const msg = { sender: 'ta', content: '我换了个昵称：' + nick, timestamp: Date.now(), pinned: false, pinBy: '', heartMark: null, quoteContent: null, worldLabel: getWorldLabel() };
   const id = await idbPutReturnId('messages', msg);
   msg.id = id;
   appendMessage(msg);
@@ -4419,7 +4537,7 @@ async function taChangeMeNick() {
   const nick = nicks[Math.floor(Math.random() * nicks.length)];
   settings.meNick = nick;
   await saveSettings();
-  const msg = { sender: 'ta', content: '我给你换了个昵称：' + nick, timestamp: Date.now(), pinned: false, pinBy: '', heartMark: null, quoteContent: null, worldMark: getCurrentWorldColor() };
+  const msg = { sender: 'ta', content: '我给你换了个昵称：' + nick, timestamp: Date.now(), pinned: false, pinBy: '', heartMark: null, quoteContent: null, worldLabel: getWorldLabel() };
   const id = await idbPutReturnId('messages', msg);
   msg.id = id;
   appendMessage(msg);
@@ -4430,7 +4548,7 @@ async function taSendSticker() {
   const stickers = await libGet('stickerLibrary');
   if (!stickers.length) return;
   const sticker = stickers[Math.floor(Math.random() * stickers.length)];
-  const msg = { sender: 'ta', content: '[贴纸]', imageData: sticker.data, timestamp: Date.now(), pinned: false, pinBy: '', heartMark: null, quoteContent: null };
+  const msg = { sender: 'ta', content: '[贴纸]', imageData: sticker.data, timestamp: Date.now(), pinned: false, pinBy: '', heartMark: null, quoteContent: null, worldLabel: getWorldLabel() };
   const id = await idbPutReturnId('messages', msg);
   msg.id = id;
   appendMessage(msg);
@@ -4445,7 +4563,8 @@ async function taSendGift() {
   settings.heartValue -= gift.cost;
   await saveSettings();
   updateHeartValue();
-  const msg = { sender: 'ta', content: '送你' + gift.name, giftData: gift, timestamp: Date.now(), pinned: false, pinBy: '', heartMark: null, quoteContent: null };
+  const giftWithOpened = { ...gift, opened: false };
+  const msg = { sender: 'ta', content: '送你' + gift.name, giftData: giftWithOpened, timestamp: Date.now(), pinned: false, pinBy: '', heartMark: null, quoteContent: null, worldLabel: getWorldLabel() };
   const id = await idbPutReturnId('messages', msg);
   msg.id = id;
   appendMessage(msg);
@@ -4459,7 +4578,7 @@ async function taInteract() {
   const item = pool[Math.floor(Math.random() * pool.length)];
   const text = typeof item === 'string' ? item : item.text;
   const isCouple = (interactions.couple || []).includes(item);
-  const msg = { sender: 'ta', content: text, interactData: { text, couple: isCouple }, timestamp: Date.now(), pinned: false, pinBy: '', heartMark: null, quoteContent: null, worldMark: getCurrentWorldColor() };
+  const msg = { sender: 'ta', content: text, interactData: { text, couple: isCouple }, timestamp: Date.now(), pinned: false, pinBy: '', heartMark: null, quoteContent: null, worldLabel: getWorldLabel() };
   const id = await idbPutReturnId('messages', msg);
   msg.id = id;
   appendMessage(msg);
@@ -4518,7 +4637,7 @@ function scheduleTAAvatarChange() {
       settings.taAvatar = pick.data;
       await saveSettings();
       applySettings();
-      const msg = { sender: 'ta', content: '我换了一个头像', timestamp: Date.now(), pinned: false, pinBy: '', heartMark: null, quoteContent: null, worldMark: getCurrentWorldColor() };
+      const msg = { sender: 'ta', content: '我换了一个头像', timestamp: Date.now(), pinned: false, pinBy: '', heartMark: null, quoteContent: null, worldLabel: getWorldLabel() };
       const id = await idbPutReturnId('messages', msg);
       msg.id = id;
       appendMessage(msg);
@@ -4536,7 +4655,7 @@ function scheduleTAGiveAvatar() {
       settings.meAvatar = pick.data;
       await saveSettings();
       applySettings();
-      const msg = { sender: 'ta', content: '我给你换了一个头像', timestamp: Date.now(), pinned: false, pinBy: '', heartMark: null, quoteContent: null, worldMark: getCurrentWorldColor() };
+      const msg = { sender: 'ta', content: '我给你换了一个头像', timestamp: Date.now(), pinned: false, pinBy: '', heartMark: null, quoteContent: null, worldLabel: getWorldLabel() };
       const id = await idbPutReturnId('messages', msg);
       msg.id = id;
       appendMessage(msg);
@@ -4554,7 +4673,7 @@ function scheduleTABGChange() {
       settings.bgCurrent = pick.ref;
       await saveSettings();
       applyBG();
-      const msg = { sender: 'ta', content: '我把背景换了一下', timestamp: Date.now(), pinned: false, pinBy: '', heartMark: null, quoteContent: null, worldMark: getCurrentWorldColor() };
+      const msg = { sender: 'ta', content: '我把背景换了一下', timestamp: Date.now(), pinned: false, pinBy: '', heartMark: null, quoteContent: null, worldLabel: getWorldLabel() };
       const id = await idbPutReturnId('messages', msg);
       msg.id = id;
       appendMessage(msg);
@@ -4796,7 +4915,8 @@ function openGiftSendPanel() {
       settings.heartValue -= g.cost;
       await saveSettings();
       updateHeartValue();
-      const msg = { sender: 'me', content: '送你' + g.name, giftData: g, timestamp: Date.now(), readTime: null, pinned: false, pinBy: '', heartMark: null, quoteContent: null };
+      const giftWithOpened = { ...g, opened: false };
+      const msg = { sender: 'me', content: '送你' + g.name, giftData: giftWithOpened, timestamp: Date.now(), readTime: null, pinned: false, pinBy: '', heartMark: null, quoteContent: null };
       const id = await idbPutReturnId('messages', msg);
       msg.id = id;
       appendMessage(msg);
@@ -5073,7 +5193,7 @@ async function checkQuizAnswer(myAnswer) {
     taPick = options[Math.floor(Math.random() * options.length)];
   }
   const myPick = normalizeAnswer(myAnswer, options);
-  const taMsg = { sender: 'ta', content: taPick, timestamp: Date.now(), pinned: false, pinBy: '', heartMark: null, worldMark: getCurrentWorldColor() };
+  const taMsg = { sender: 'ta', content: taPick, timestamp: Date.now(), pinned: false, pinBy: '', heartMark: null, worldLabel: getWorldLabel() };
   const tid = await idbPutReturnId('messages', taMsg);
   taMsg.id = tid;
   appendMessage(taMsg);
@@ -5141,7 +5261,7 @@ function checkReminders() {
   if (Math.random() > settings.reminderProb) return;
   if (!settings.reminderCards || !settings.reminderCards.length) return;
   const card = settings.reminderCards[Math.floor(Math.random() * settings.reminderCards.length)];
-  const msg = { sender: 'ta', content: card, timestamp: Date.now(), pinned: false, pinBy: '', heartMark: null, worldMark: getCurrentWorldColor() };
+  const msg = { sender: 'ta', content: card, timestamp: Date.now(), pinned: false, pinBy: '', heartMark: null, worldLabel: getWorldLabel() };
   idbPutReturnId('messages', msg).then(id => { msg.id = id; appendMessage(msg); sendNotification(card); });
 }
 setInterval(checkReminders, 30000);
@@ -5226,7 +5346,7 @@ function openTogetherPanel() {
       const mid = await idbPutReturnId('messages', myMsg);
       myMsg.id = mid;
       appendMessage(myMsg);
-      const taMsg = { sender: 'ta', content: '好呀，一起' + a.name, timestamp: Date.now(), pinned: false, pinBy: '', heartMark: null, quoteContent: null, worldMark: getCurrentWorldColor() };
+      const taMsg = { sender: 'ta', content: '好呀，一起' + a.name, timestamp: Date.now(), pinned: false, pinBy: '', heartMark: null, quoteContent: null, worldLabel: getWorldLabel() };
       const tid = await idbPutReturnId('messages', taMsg);
       taMsg.id = tid;
       appendMessage(taMsg);
@@ -5280,7 +5400,7 @@ function scheduleSleepMessages() {
     const cards = await idbGetAll('cards');
     if (cards.length) {
       const card = cards[Math.floor(Math.random() * cards.length)];
-      const msg = { sender: 'ta', content: card.content, timestamp: Date.now(), pinned: false, pinBy: '', heartMark: null, worldMark: getCurrentWorldColor() };
+      const msg = { sender: 'ta', content: card.content, timestamp: Date.now(), pinned: false, pinBy: '', heartMark: null, worldLabel: getWorldLabel() };
       const id = await idbPutReturnId('messages', msg);
       msg.id = id;
       appendMessage(msg);
@@ -5295,7 +5415,7 @@ function scheduleDazeMessages() {
   accompanyTimer = setTimeout(async () => {
     if (settings.accompanyMode !== 'daze') return;
     const msgs = ['我在呢', '发呆中', '嗯', '在这'];
-    const msg = { sender: 'ta', content: msgs[Math.floor(Math.random() * msgs.length)], timestamp: Date.now(), pinned: false, pinBy: '', heartMark: null, worldMark: getCurrentWorldColor() };
+    const msg = { sender: 'ta', content: msgs[Math.floor(Math.random() * msgs.length)], timestamp: Date.now(), pinned: false, pinBy: '', heartMark: null, worldLabel: getWorldLabel() };
     const id = await idbPutReturnId('messages', msg);
     msg.id = id;
     appendMessage(msg);
@@ -5318,7 +5438,7 @@ function scheduleCompanionMessages() {
     const cards = await idbGetAll('cards');
     if (cards.length) {
       const card = cards[Math.floor(Math.random() * cards.length)];
-      const msg = { sender: 'ta', content: card.content, timestamp: Date.now(), pinned: false, pinBy: '', heartMark: null, worldMark: getCurrentWorldColor() };
+      const msg = { sender: 'ta', content: card.content, timestamp: Date.now(), pinned: false, pinBy: '', heartMark: null, worldLabel: getWorldLabel() };
       const id = await idbPutReturnId('messages', msg);
       msg.id = id;
       appendMessage(msg);
@@ -5336,7 +5456,7 @@ function scheduleTogetherMessages() {
     let content;
     if (cards.length && Math.random() < 0.5) content = cards[Math.floor(Math.random() * cards.length)].content;
     else content = hints[Math.floor(Math.random() * hints.length)];
-    const msg = { sender: 'ta', content, timestamp: Date.now(), pinned: false, pinBy: '', heartMark: null, worldMark: getCurrentWorldColor() };
+    const msg = { sender: 'ta', content, timestamp: Date.now(), pinned: false, pinBy: '', heartMark: null, worldLabel: getWorldLabel() };
     const id = await idbPutReturnId('messages', msg);
     msg.id = id;
     appendMessage(msg);
@@ -5360,13 +5480,13 @@ function openAccompanyStats() {
   content.innerHTML = html;
 }
 
-// ========== 心动瞬间（含 TA指定 板块） ==========
+// ========== 心动瞬间 ==========
 function openHeartPanel() {
   const overlay = createModal(`
     <div class="heart-tabs">
-      <button class="heart-tab active" id="heart-tab-ta">TA收藏的瞬间</button>
+      <button class="heart-tab active" id="heart-tab-ta">易遇收藏的瞬间</button>
       <button class="heart-tab" id="heart-tab-me">我收藏的瞬间</button>
-      <button class="heart-tab" id="heart-tab-design">TA指定</button>
+      <button class="heart-tab" id="heart-tab-design">易遇指定</button>
     </div>
     <div id="heart-content"></div>
     <div class="heart-view-tabs">
@@ -5403,9 +5523,9 @@ async function getHeartMessages() {
   const archives = JSON.parse(localStorage.getItem('archives') || '{}');
   let all = [...msgs];
   Object.keys(archives).forEach(date => { all = all.concat(archives[date] || []); });
-  if (heartCurrentTab === 'ta') return all.filter(m => m.heartMark === 'TA收藏' || (m.heartMark && m.heartMark.includes('TA收藏')));
+  if (heartCurrentTab === 'ta') return all.filter(m => m.heartMark && m.heartMark.includes('TA收藏'));
   if (heartCurrentTab === 'me') return all.filter(m => m.heartMark && m.heartMark.includes('我'));
-  return all.filter(m => m.heartMark === 'TA指定' || (m.heartMark && m.heartMark.includes('TA指定')));
+  return all.filter(m => m.heartMark && m.heartMark.includes('TA指定'));
 }
 
 function heartMsgTypeLabel(m) {
@@ -5635,7 +5755,7 @@ function startPlayback(overlay) {
   }, playbackSpeed);
 }
 
-// ========== 耳边私语（按每次通话分开） ==========
+// ========== 耳边私语 ==========
 function openVoicePanel() {
   const overlay = createModal(`
     <div class="playback-dates" id="voice-dates"></div>
@@ -5903,7 +6023,7 @@ function scheduleTALetter() {
       letters.received.push({ content: fullLetter, date: new Date().toISOString().slice(0, 10), unread: true });
       localStorage.setItem('letters', JSON.stringify(letters));
       addBigEvent('letter', '收到易遇的一封信');
-      const msg = { sender: 'ta', content: '📮 我给你写了一封信', timestamp: Date.now(), pinned: false, pinBy: '', heartMark: null, quoteContent: null, worldMark: getCurrentWorldColor() };
+      const msg = { sender: 'ta', content: '📮 我给你写了一封信', timestamp: Date.now(), pinned: false, pinBy: '', heartMark: null, quoteContent: null, worldLabel: getWorldLabel() };
       const id = await idbPutReturnId('messages', msg);
       msg.id = id;
       appendMessage(msg);
@@ -5984,7 +6104,7 @@ function scheduleTANote() {
       const notes = JSON.parse(localStorage.getItem('notes') || '{"ta":[],"me":[]}');
       notes.ta.push({ content, date: new Date().toISOString().slice(0, 10) });
       localStorage.setItem('notes', JSON.stringify(notes));
-      const msg = { sender: 'ta', content: '📝 我给你留了小笺', timestamp: Date.now(), pinned: false, pinBy: '', heartMark: null, quoteContent: null, worldMark: getCurrentWorldColor() };
+      const msg = { sender: 'ta', content: '📝 我给你留了小笺', timestamp: Date.now(), pinned: false, pinBy: '', heartMark: null, quoteContent: null, worldLabel: getWorldLabel() };
       const id = await idbPutReturnId('messages', msg);
       msg.id = id;
       appendMessage(msg);
@@ -6145,9 +6265,7 @@ function openLoverPostDialog() {
     posts.push({
       name: settings.meName,
       avatar: settings.meAvatar || 'data:image/svg+xml,' + encodeURIComponent('<svg xmlns="http://www.w3.org/2000/svg" width="28" height="28"><circle cx="14" cy="14" r="13" fill="rgba(255,255,255,0.5)"/><text x="14" y="19" text-anchor="middle" font-size="10" fill="rgba(90,70,60,0.6)">我</text></svg>'),
-      time,
-      content,
-      images
+      time, content, images
     });
     localStorage.setItem('loverPosts', JSON.stringify(posts));
     overlay.remove();
@@ -6177,7 +6295,7 @@ function scheduleTALoverPost() {
           time, content, images
         });
         localStorage.setItem('loverPosts', JSON.stringify(posts));
-        const msg = { sender: 'ta', content: '📷 我发了一条动态', timestamp: Date.now(), pinned: false, pinBy: '', heartMark: null, quoteContent: null, worldMark: getCurrentWorldColor() };
+        const msg = { sender: 'ta', content: '📷 我发了一条动态', timestamp: Date.now(), pinned: false, pinBy: '', heartMark: null, quoteContent: null, worldLabel: getWorldLabel() };
         const id = await idbPutReturnId('messages', msg);
         msg.id = id;
         appendMessage(msg);
@@ -6197,7 +6315,7 @@ function scheduleTALoverCheckin() {
       if (!checkins.ta.includes(today)) {
         checkins.ta.push(today);
         localStorage.setItem('loverCheckins', JSON.stringify(checkins));
-        const msg = { sender: 'ta', content: '我打卡了哦', timestamp: Date.now(), pinned: false, pinBy: '', heartMark: null, worldMark: getCurrentWorldColor() };
+        const msg = { sender: 'ta', content: '我打卡了哦', timestamp: Date.now(), pinned: false, pinBy: '', heartMark: null, worldLabel: getWorldLabel() };
         idbPutReturnId('messages', msg).then(id => { msg.id = id; appendMessage(msg); });
         sendNotification('易遇打卡了');
         refreshOpenPanels();
@@ -6220,7 +6338,7 @@ function scheduleTACheckinRemind() {
     if (checked[today]) return;
     checked[today] = true;
     localStorage.setItem('checkinRemindChecked', JSON.stringify(checked));
-    const msg = { sender: 'ta', content: '今天还没打卡哦', timestamp: Date.now(), pinned: false, pinBy: '', heartMark: null, worldMark: getCurrentWorldColor() };
+    const msg = { sender: 'ta', content: '今天还没打卡哦', timestamp: Date.now(), pinned: false, pinBy: '', heartMark: null, worldLabel: getWorldLabel() };
     idbPutReturnId('messages', msg).then(id => { msg.id = id; appendMessage(msg); sendNotification('今天还没打卡哦'); });
   }, 60000);
 }
@@ -6368,10 +6486,10 @@ async function restoreFromBackup(data) {
     for (const m of data.media) await idbPut('media', m);
   }
   localStorage.clear();
-  const lsKeys = ['archives', 'avatarLibrary', 'bgLibrary', 'stickerLibrary', 'giftLibrary', 'interactionLibrary', 'quizLibrary', 'emojiLibrary', 'musicList', 'recycledCards', 'importantDays', 'attendanceRecords', 'bondRecords', 'periodRecords', 'periodCards', 'dateRecords', 'dateCards', 'petDataList', 'plantsData', 'wishes', 'videoRecords', 'letters', 'notes', 'loverPosts', 'loverCheckins', 'togetherLibrary', 'accountRecords', 'piggyData'];
+  const lsKeys = ['archives', 'avatarLibrary', 'bgLibrary', 'stickerLibrary', 'giftLibrary', 'interactionLibrary', 'quizLibrary', 'emojiLibrary', 'musicList', 'recycledCards', 'importantDays', 'attendanceRecords', 'bondRecords', 'periodRecords', 'periodCards', 'dateRecords', 'dateCards', 'petDataList', 'plantsData', 'wishes', 'videoRecords', 'letters', 'notes', 'loverPosts', 'loverCheckins', 'togetherLibrary', 'accountRecords', 'piggyData', 'avatarTags'];
   lsKeys.forEach(k => { if (data[k] !== undefined) localStorage.setItem(k, JSON.stringify(data[k])); });
   if (data.memo) localStorage.setItem('memo', data.memo);
-  localStorage.setItem('mediaMigratedV4', '1');
+  localStorage.setItem('mediaMigratedV455', '1');
 }
 
 function openResetDialog() {
@@ -6401,7 +6519,7 @@ async function backupNow() {
   const messages = await idbGetAll('messages');
   const mediaAll = await idbGetAll('media');
   const data = {
-    version: '4.0.0',
+    version: '4.5.5',
     exportedAt: new Date().toISOString(),
     settings, cards, messages, media: mediaAll,
     archives: JSON.parse(localStorage.getItem('archives') || '{}'),
@@ -6432,28 +6550,14 @@ async function backupNow() {
     loverCheckins: JSON.parse(localStorage.getItem('loverCheckins') || '{}'),
     togetherLibrary: JSON.parse(localStorage.getItem('togetherLibrary') || '[]'),
     accountRecords: JSON.parse(localStorage.getItem('accountRecords') || '[]'),
-    piggyData: JSON.parse(localStorage.getItem('piggyData') || '{"balance":0,"records":[]}')
+    piggyData: JSON.parse(localStorage.getItem('piggyData') || '{"balance":0,"records":[]}'),
+    avatarTags: JSON.parse(localStorage.getItem('avatarTags') || '{}')
   };
   const json = JSON.stringify(data);
   downloadFile(json, '易遇♡雾凉-备份-' + new Date().toISOString().slice(0, 10) + '.json', 'application/json');
   settings.lastBackupTime = new Date().toLocaleString('zh-CN');
   await saveSettings();
   showToast('备份完成');
-  const msg = { sender: 'ta', content: '📦 已自动备份数据', timestamp: Date.now(), pinned: false, pinBy: '', heartMark: null, isSystem: true };
-  const id = await idbPutReturnId('messages', msg);
-  msg.id = id;
-  appendMessage(msg);
-}
-
-function scheduleDailyBackup() {
-  setInterval(() => {
-    const last = localStorage.getItem('lastBackupDate');
-    const today = new Date().toDateString();
-    if (last !== today) {
-      backupNow();
-      localStorage.setItem('lastBackupDate', today);
-    }
-  }, 3600000);
 }
 
 // ========== 记账 ==========
@@ -6601,7 +6705,8 @@ function loadPiggyRecords(overlay) {
     list.appendChild(div);
   });
 }
-  // ========== 音乐 ==========
+
+// ========== 音乐 ==========
 const PLAY_ICON = `<svg viewBox="0 0 24 24"><polygon points="6,4 20,12 6,20" fill="currentColor"/></svg>`;
 const PAUSE_ICON = `<svg viewBox="0 0 24 24"><rect x="6" y="4" width="4" height="16" rx="1.5" fill="currentColor"/><rect x="14" y="4" width="4" height="16" rx="1.5" fill="currentColor"/></svg>`;
 const PREV_ICON = `<svg viewBox="0 0 24 24"><polygon points="18,5 18,19 8,12" fill="currentColor"/><rect x="5" y="5" width="2.5" height="14" rx="1" fill="currentColor"/></svg>`;
@@ -6849,10 +6954,7 @@ function makeModalDraggable(overlay, panel, handle) {
     panel.style.left = Math.max(4, Math.min(maxX, nx)) + 'px';
     panel.style.top = Math.max(4, Math.min(maxY, ny)) + 'px';
   });
-  handle.addEventListener('pointerup', () => {
-    drag = false;
-    handle.classList.remove('dragging');
-  });
+  handle.addEventListener('pointerup', () => { drag = false; handle.classList.remove('dragging'); });
 }
 
 function scheduleTAMusicRequest() {
@@ -6861,7 +6963,7 @@ function scheduleTAMusicRequest() {
       musicList = JSON.parse(localStorage.getItem('musicList') || '[]');
       if (!musicList.length) return;
       const song = musicList[Math.floor(Math.random() * musicList.length)];
-      const msg = { sender: 'ta', content: '想听《' + song.name + '》了，一起听吗？', timestamp: Date.now(), pinned: false, pinBy: '', heartMark: null, worldMark: getCurrentWorldColor() };
+      const msg = { sender: 'ta', content: '想听《' + song.name + '》了，一起听吗？', timestamp: Date.now(), pinned: false, pinBy: '', heartMark: null, worldLabel: getWorldLabel() };
       const id = await idbPutReturnId('messages', msg);
       msg.id = id;
       appendMessage(msg);
@@ -6913,8 +7015,7 @@ function openEmojiPanel() {
     downloadFile(JSON.stringify({ emojis }), 'Emoji导出.json', 'application/json');
   });
 }
-
-// ========== 抉择 ==========
+  // ========== 抉择 ==========
 function openChoicePanel() {
   const overlay = createModal(`
     <div style="display:flex;gap:8px;margin-bottom:12px;flex-wrap:wrap;">
@@ -6946,7 +7047,7 @@ function renderChoiceContent(overlay, mode) {
       const mid = await idbPutReturnId('messages', myMsg);
       myMsg.id = mid;
       appendMessage(myMsg);
-      const taMsg = { sender: 'ta', content: '我帮你选了：' + pick, timestamp: Date.now(), pinned: false, pinBy: '', heartMark: null, quoteContent: null, worldMark: getCurrentWorldColor() };
+      const taMsg = { sender: 'ta', content: '我帮你选了：' + pick, timestamp: Date.now(), pinned: false, pinBy: '', heartMark: null, quoteContent: null, worldLabel: getWorldLabel() };
       const tid = await idbPutReturnId('messages', taMsg);
       taMsg.id = tid;
       appendMessage(taMsg);
@@ -6965,7 +7066,7 @@ function renderChoiceContent(overlay, mode) {
       const mid = await idbPutReturnId('messages', myMsg);
       myMsg.id = mid;
       appendMessage(myMsg);
-      const taMsg = { sender: 'ta', content: pick, timestamp: Date.now(), pinned: false, pinBy: '', heartMark: null, quoteContent: null, worldMark: getCurrentWorldColor() };
+      const taMsg = { sender: 'ta', content: pick, timestamp: Date.now(), pinned: false, pinBy: '', heartMark: null, quoteContent: null, worldLabel: getWorldLabel() };
       const tid = await idbPutReturnId('messages', taMsg);
       taMsg.id = tid;
       appendMessage(taMsg);
@@ -6984,7 +7085,7 @@ function renderChoiceContent(overlay, mode) {
       const mid = await idbPutReturnId('messages', myMsg);
       myMsg.id = mid;
       appendMessage(myMsg);
-      const taMsg = { sender: 'ta', content: pick, timestamp: Date.now(), pinned: false, pinBy: '', heartMark: null, quoteContent: null, worldMark: getCurrentWorldColor() };
+      const taMsg = { sender: 'ta', content: pick, timestamp: Date.now(), pinned: false, pinBy: '', heartMark: null, quoteContent: null, worldLabel: getWorldLabel() };
       const tid = await idbPutReturnId('messages', taMsg);
       taMsg.id = tid;
       appendMessage(taMsg);
@@ -7036,7 +7137,7 @@ function renderChoiceContent(overlay, mode) {
         msg.id = id;
         appendMessage(msg);
       }
-      const taMsg = { sender: 'ta', content: '我帮你选了第' + (pickIdx + 1) + '张', timestamp: Date.now(), pinned: false, pinBy: '', heartMark: null, quoteContent: null, worldMark: getCurrentWorldColor() };
+      const taMsg = { sender: 'ta', content: '我帮你选了第' + (pickIdx + 1) + '张', timestamp: Date.now(), pinned: false, pinBy: '', heartMark: null, quoteContent: null, worldLabel: getWorldLabel() };
       const tid = await idbPutReturnId('messages', taMsg);
       taMsg.id = tid;
       appendMessage(taMsg);
@@ -7074,7 +7175,8 @@ function openQuizPoolPanel() {
     overlay.remove();
   });
 }
-  // ========== 生理期 ==========
+
+// ========== 生理期 ==========
 function openPeriodPanel() {
   const overlay = createModal(`
     <div class="card-count-row"><span id="period-summary"></span></div>
@@ -7192,7 +7294,7 @@ function checkPeriodCare() {
   const cards = JSON.parse(localStorage.getItem('periodCards') || '[]');
   if (!cards.length) return;
   const card = cards[Math.floor(Math.random() * cards.length)];
-  const msg = { sender: 'ta', content: card, timestamp: Date.now(), pinned: false, pinBy: '', heartMark: null, worldMark: getCurrentWorldColor() };
+  const msg = { sender: 'ta', content: card, timestamp: Date.now(), pinned: false, pinBy: '', heartMark: null, worldLabel: getWorldLabel() };
   idbPutReturnId('messages', msg).then(id => { msg.id = id; appendMessage(msg); sendNotification(card); });
 }
 setInterval(checkPeriodCare, 3600000);
@@ -7257,7 +7359,7 @@ function scheduleDateInvite() {
       const cards = JSON.parse(localStorage.getItem('dateCards') || '[]');
       if (!cards.length) return;
       const card = cards[Math.floor(Math.random() * cards.length)];
-      const msg = { sender: 'ta', content: '今晚来梦里，' + card, timestamp: Date.now(), pinned: false, pinBy: '', heartMark: null, worldMark: getCurrentWorldColor() };
+      const msg = { sender: 'ta', content: '今晚来梦里，' + card, timestamp: Date.now(), pinned: false, pinBy: '', heartMark: null, worldLabel: getWorldLabel() };
       const id = await idbPutReturnId('messages', msg);
       msg.id = id;
       appendMessage(msg);
@@ -7272,7 +7374,7 @@ function scheduleDateRecall() {
       const records = JSON.parse(localStorage.getItem('dateRecords') || '[]');
       if (!records.length) return;
       const r = records[Math.floor(Math.random() * records.length)];
-      const msg = { sender: 'ta', content: '还记得' + r.date + '我们在' + r.place + '吗？我很开心', timestamp: Date.now(), pinned: false, pinBy: '', heartMark: null, worldMark: getCurrentWorldColor() };
+      const msg = { sender: 'ta', content: '还记得' + r.date + '我们在' + r.place + '吗？我很开心', timestamp: Date.now(), pinned: false, pinBy: '', heartMark: null, worldLabel: getWorldLabel() };
       const id = await idbPutReturnId('messages', msg);
       msg.id = id;
       appendMessage(msg);
@@ -7381,6 +7483,19 @@ function petStageName(stage) {
   return '成年';
 }
 
+function petColor(type) {
+  const map = { cat: 'rgba(255,200,220,0.6)', dog: 'rgba(210,180,140,0.6)', rabbit: 'rgba(240,240,250,0.7)', hamster: 'rgba(255,220,150,0.6)', egg: 'rgba(255,240,210,0.7)', custom: 'rgba(220,210,240,0.6)' };
+  return map[type] || 'rgba(255,200,220,0.5)';
+}
+
+function petMoodEmoji(pet) {
+  const min = Math.min(pet.hunger, pet.mood, pet.clean);
+  if (min <= 2) return '😿';
+  if (min <= 4) return '😐';
+  if (min <= 7) return '😺';
+  return '😸';
+}
+
 function openPetPanel() {
   const overlay = createModal(`<div id="pet-panel-content"></div>`);
   const content = overlay.querySelector('#pet-panel-content');
@@ -7403,25 +7518,26 @@ async function renderPetPanel(content, pets) {
     }
     const card = document.createElement('div');
     card.className = 'pet-card';
+    card.style.setProperty('--pet-color', petColor(pet.type));
     card.innerHTML = `
       ${avatarHTML}
       <div class="pet-info">
-        <div class="pet-name">${escapeHtml(pet.name)}</div>
+        <div class="pet-name">${escapeHtml(pet.name)} <span style="font-size:14px;">${petMoodEmoji(pet)}</span></div>
         <div class="pet-stage">${petStageName(pet.stage)}</div>
-        <div class="pet-stat-bar"><div style="width:${pet.hunger * 10}%;background:#f0a05a;"></div></div>
-        <div class="pet-stat-bar"><div style="width:${pet.mood * 10}%;background:#ff8fb0;"></div></div>
-        <div class="pet-stat-bar"><div style="width:${pet.clean * 10}%;background:#5ab0e0;"></div></div>
+        <div class="pet-stat-row"><span class="pet-stat-ico">🍖</span><div class="pet-stat-bar"><div style="width:${pet.hunger * 10}%;background:linear-gradient(90deg,#ffb56b,#ff8f4d);"></div></div></div>
+        <div class="pet-stat-row"><span class="pet-stat-ico">💗</span><div class="pet-stat-bar"><div style="width:${pet.mood * 10}%;background:linear-gradient(90deg,#ffb0c8,#ff7b9c);"></div></div></div>
+        <div class="pet-stat-row"><span class="pet-stat-ico">🫧</span><div class="pet-stat-bar"><div style="width:${pet.clean * 10}%;background:linear-gradient(90deg,#9ad4f0,#5ab0e0);"></div></div></div>
       </div>
       <div class="pet-actions">
-        <button data-action="feed" data-idx="${i}">喂食</button>
-        <button data-action="play" data-idx="${i}">陪玩</button>
-        <button data-action="clean" data-idx="${i}">清洁</button>
+        <button data-action="feed" data-idx="${i}" title="喂食">🍖</button>
+        <button data-action="play" data-idx="${i}" title="陪玩">🎾</button>
+        <button data-action="clean" data-idx="${i}" title="清洁">🛁</button>
       </div>`;
     content.appendChild(card);
   }
   const addBtn = document.createElement('button');
-  addBtn.className = 'upload-btn';
-  addBtn.textContent = '再领养一只';
+  addBtn.className = 'pet-add-card';
+  addBtn.innerHTML = '<span style="font-size:18px;">🐾</span><span>再领养一只</span>';
   addBtn.addEventListener('click', () => openPetAdoptDialog());
   content.appendChild(addBtn);
   content.querySelectorAll('.pet-actions button').forEach(btn => {
@@ -7508,7 +7624,7 @@ function checkPetStatus() {
   });
   savePets(list);
   if (needCare) {
-    const msg = { sender: 'ta', content: '宠物们状态不太好，记得照顾它们', timestamp: Date.now(), pinned: false, pinBy: '', heartMark: null, worldMark: getCurrentWorldColor() };
+    const msg = { sender: 'ta', content: '宠物们状态不太好，记得照顾它们', timestamp: Date.now(), pinned: false, pinBy: '', heartMark: null, worldLabel: getWorldLabel() };
     idbPutReturnId('messages', msg).then(id => { msg.id = id; appendMessage(msg); sendNotification(msg.content); });
   }
 }
@@ -7528,7 +7644,7 @@ function scheduleTAPetCare() {
         else if (action === 1) { pet.mood = Math.max(8, Math.min(10, pet.mood + 3)); content = `我陪${pet.name}玩了一会儿`; }
         else { pet.clean = Math.max(8, Math.min(10, pet.clean + 4)); content = `我帮${pet.name}清洁过了`; }
         savePets(list);
-        const msg = { sender: 'ta', content, timestamp: Date.now(), pinned: false, pinBy: '', heartMark: null, quoteContent: null, worldMark: getCurrentWorldColor() };
+        const msg = { sender: 'ta', content, timestamp: Date.now(), pinned: false, pinBy: '', heartMark: null, quoteContent: null, worldLabel: getWorldLabel() };
         const id = await idbPutReturnId('messages', msg);
         msg.id = id;
         appendMessage(msg);
@@ -7701,7 +7817,7 @@ function scheduleTAPlantCare() {
         }
         plants[pick.key][pick.i] = plant;
         localStorage.setItem('plantsData', JSON.stringify(plants));
-        const msg = { sender: 'ta', content, timestamp: Date.now(), pinned: false, pinBy: '', heartMark: null, quoteContent: null, worldMark: getCurrentWorldColor() };
+        const msg = { sender: 'ta', content, timestamp: Date.now(), pinned: false, pinBy: '', heartMark: null, quoteContent: null, worldLabel: getWorldLabel() };
         const id = await idbPutReturnId('messages', msg);
         msg.id = id;
         appendMessage(msg);
@@ -8071,7 +8187,7 @@ function checkImportantDays() {
         settings.heartValue += 50;
         saveSettings();
         updateHeartValue();
-        const msg = { sender: 'ta', content: '今天是' + d.name + '，我一直记得。爱意值+50', timestamp: Date.now(), pinned: false, pinBy: '', heartMark: null, worldMark: getCurrentWorldColor() };
+        const msg = { sender: 'ta', content: '今天是' + d.name + '，我一直记得。爱意值+50', timestamp: Date.now(), pinned: false, pinBy: '', heartMark: null, worldLabel: getWorldLabel() };
         idbPutReturnId('messages', msg).then(id => { msg.id = id; appendMessage(msg); sendNotification(msg.content); });
       }
     }
@@ -8304,7 +8420,7 @@ function checkBondDaily() {
   updateHeartValue();
 }
 
-// ========== 归档（打开时全量补齐） ==========
+// ========== 归档（打开时全量补齐，只碰消息） ==========
 async function checkArchive() {
   const now = new Date();
   const todayStr = now.getFullYear() + '-' + (now.getMonth() + 1) + '-' + now.getDate();
@@ -8337,13 +8453,29 @@ async function checkArchive() {
   if (input) { input.disabled = false; input.placeholder = '对TA说些什么...'; }
 }
 
-// ========== 粒子 ==========
+// ========== 粒子（按时间+季节自动轮换） ==========
 function getSeasonParticle() {
   const m = new Date().getMonth() + 1;
   if (m >= 3 && m <= 5) return 'sakura';
   if (m >= 6 && m <= 8) return 'firefly';
   if (m >= 9 && m <= 11) return 'leaf';
   return 'snow';
+}
+
+function getTimePeriodParticles() {
+  const h = new Date().getHours();
+  if (h >= 5 && h < 9) return ['petal', 'dew', 'dandelion'];
+  if (h >= 9 && h < 17) return ['bigstar', 'bubble', 'butterfly'];
+  if (h >= 17 && h < 20) return ['leaf', 'maple', 'sakura'];
+  if (h >= 20 && h < 24) return ['firefly', 'meteor', 'bigstar'];
+  return ['snow', 'star', 'moon'];
+}
+
+function getAutoParticleList() {
+  if (settings.particleType === 'season') {
+    return getTimePeriodParticles();
+  }
+  return [settings.particleType];
 }
 
 function initParticles() {
@@ -8355,8 +8487,11 @@ function initParticles() {
   if (particleAnimation) cancelAnimationFrame(particleAnimation);
   particleItems = [];
   if (!settings.particleEnabled) { ctx.clearRect(0, 0, canvas.width, canvas.height); return; }
-  const type = settings.particleType === 'season' ? getSeasonParticle() : settings.particleType;
-  for (let i = 0; i < 40; i++) particleItems.push(createParticle(type, canvas));
+  const types = getAutoParticleList();
+  const perType = Math.max(8, Math.floor(40 / types.length));
+  types.forEach(t => {
+    for (let i = 0; i < perType; i++) particleItems.push(createParticle(t, canvas));
+  });
   function loop() {
     ctx.clearRect(0, 0, canvas.width, canvas.height);
     particleItems.forEach(p => {
@@ -8376,27 +8511,79 @@ function createParticle(type, canvas) {
 
 function drawParticle(ctx, p) {
   ctx.globalAlpha = p.alpha;
-  if (p.type === 'sakura' || p.type === 'petal') {
+  const t = p.type;
+  if (t === 'sakura' || t === 'petal') {
     ctx.fillStyle = '#ffc4d6';
     ctx.beginPath(); ctx.ellipse(p.x, p.y, p.size, p.size * 0.7, 0, 0, Math.PI * 2); ctx.fill();
-  } else if (p.type === 'snow') {
+  } else if (t === 'snow') {
     ctx.fillStyle = '#ffffff';
     ctx.beginPath(); ctx.arc(p.x, p.y, p.size * 0.6, 0, Math.PI * 2); ctx.fill();
-  } else if (p.type === 'leaf') {
-    ctx.fillStyle = '#e0a96d';
+  } else if (t === 'leaf' || t === 'maple') {
+    ctx.fillStyle = t === 'maple' ? '#d97a4a' : '#e0a96d';
     ctx.beginPath(); ctx.ellipse(p.x, p.y, p.size, p.size * 0.5, Math.PI / 4, 0, Math.PI * 2); ctx.fill();
-  } else if (p.type === 'star' || p.type === 'firefly') {
-    ctx.fillStyle = p.type === 'firefly' ? '#ffe27a' : '#fff7c2';
-    ctx.beginPath(); ctx.arc(p.x, p.y, p.size * 0.4, 0, Math.PI * 2); ctx.fill();
-  } else if (p.type === 'rain') {
+  } else if (t === 'greenleaf') {
+    ctx.fillStyle = '#7bc47f';
+    ctx.beginPath(); ctx.ellipse(p.x, p.y, p.size, p.size * 0.5, Math.PI / 4, 0, Math.PI * 2); ctx.fill();
+  } else if (t === 'star' || t === 'firefly' || t === 'bigstar' || t === 'glow') {
+    if (t === 'bigstar') { ctx.fillStyle = '#ffe27a'; ctx.beginPath(); ctx.arc(p.x, p.y, p.size * 0.7, 0, Math.PI * 2); ctx.fill(); }
+    else if (t === 'glow') { ctx.fillStyle = 'rgba(255,240,180,0.9)'; ctx.beginPath(); ctx.arc(p.x, p.y, p.size * 0.5, 0, Math.PI * 2); ctx.fill(); }
+    else if (t === 'firefly') { ctx.fillStyle = '#ffe27a'; ctx.beginPath(); ctx.arc(p.x, p.y, p.size * 0.4, 0, Math.PI * 2); ctx.fill(); }
+    else { ctx.fillStyle = '#fff7c2'; ctx.beginPath(); ctx.arc(p.x, p.y, p.size * 0.4, 0, Math.PI * 2); ctx.fill(); }
+  } else if (t === 'rain') {
     ctx.strokeStyle = 'rgba(150,190,230,0.6)';
     ctx.beginPath(); ctx.moveTo(p.x, p.y); ctx.lineTo(p.x - 1, p.y + p.size * 2); ctx.stroke();
-  } else if (p.type === 'bubble') {
+  } else if (t === 'bubble') {
     ctx.strokeStyle = 'rgba(180,220,255,0.7)';
     ctx.beginPath(); ctx.arc(p.x, p.y, p.size * 0.8, 0, Math.PI * 2); ctx.stroke();
-  } else if (p.type === 'meteor') {
+  } else if (t === 'meteor') {
     ctx.strokeStyle = 'rgba(255,255,255,0.8)';
     ctx.beginPath(); ctx.moveTo(p.x, p.y); ctx.lineTo(p.x + 12, p.y - 12); ctx.stroke();
+  } else if (t === 'dew') {
+    ctx.fillStyle = 'rgba(200,230,255,0.85)';
+    ctx.beginPath(); ctx.arc(p.x, p.y, p.size * 0.4, 0, Math.PI * 2); ctx.fill();
+  } else if (t === 'wave') {
+    ctx.strokeStyle = 'rgba(150,200,230,0.6)';
+    ctx.beginPath(); ctx.arc(p.x, p.y, p.size * 1.2, 0, Math.PI); ctx.stroke();
+  } else if (t === 'dandelion') {
+    ctx.fillStyle = 'rgba(255,255,255,0.8)';
+    ctx.beginPath(); ctx.arc(p.x, p.y, p.size * 0.5, 0, Math.PI * 2); ctx.fill();
+  } else if (t === 'windbell') {
+    ctx.fillStyle = '#c0e0ff';
+    ctx.beginPath(); ctx.arc(p.x, p.y, p.size * 0.6, 0, Math.PI * 2); ctx.fill();
+  } else if (t === 'butterfly') {
+    ctx.fillStyle = '#e8b0e0';
+    ctx.beginPath(); ctx.ellipse(p.x - p.size * 0.3, p.y, p.size * 0.5, p.size * 0.7, 0, 0, Math.PI * 2); ctx.fill();
+    ctx.beginPath(); ctx.ellipse(p.x + p.size * 0.3, p.y, p.size * 0.5, p.size * 0.7, 0, 0, Math.PI * 2); ctx.fill();
+  } else if (t === 'heart') {
+    ctx.fillStyle = '#ff8fb0';
+    ctx.beginPath(); ctx.arc(p.x, p.y, p.size * 0.5, 0, Math.PI * 2); ctx.fill();
+  } else if (t === 'bow') {
+    ctx.fillStyle = '#ffc4d6';
+    ctx.beginPath(); ctx.arc(p.x, p.y, p.size * 0.5, 0, Math.PI * 2); ctx.fill();
+  } else if (t === 'candy') {
+    ctx.fillStyle = '#ff9ab0';
+    ctx.beginPath(); ctx.arc(p.x, p.y, p.size * 0.5, 0, Math.PI * 2); ctx.fill();
+  } else if (t === 'sparkle') {
+    ctx.fillStyle = '#fff7c2';
+    ctx.beginPath(); ctx.arc(p.x, p.y, p.size * 0.3, 0, Math.PI * 2); ctx.fill();
+  } else if (t === 'moon') {
+    ctx.fillStyle = '#ffe9b0';
+    ctx.beginPath(); ctx.arc(p.x, p.y, p.size * 0.7, 0, Math.PI * 2); ctx.fill();
+  } else if (t === 'fog') {
+    ctx.fillStyle = 'rgba(220,220,230,0.3)';
+    ctx.beginPath(); ctx.arc(p.x, p.y, p.size * 1.2, 0, Math.PI * 2); ctx.fill();
+  } else if (t === 'candle') {
+    ctx.fillStyle = 'rgba(255,200,120,0.8)';
+    ctx.beginPath(); ctx.arc(p.x, p.y, p.size * 0.4, 0, Math.PI * 2); ctx.fill();
+  } else if (t === 'firework') {
+    ctx.fillStyle = '#ff9ad0';
+    ctx.beginPath(); ctx.arc(p.x, p.y, p.size * 0.5, 0, Math.PI * 2); ctx.fill();
+  } else if (t === 'cloud') {
+    ctx.fillStyle = 'rgba(255,255,255,0.7)';
+    ctx.beginPath(); ctx.arc(p.x, p.y, p.size * 0.8, 0, Math.PI * 2); ctx.fill();
+  } else if (t === 'rainbow') {
+    ctx.strokeStyle = 'rgba(255,180,200,0.6)';
+    ctx.beginPath(); ctx.arc(p.x, p.y, p.size, 0, Math.PI); ctx.stroke();
   } else {
     ctx.fillStyle = '#ffc4d6';
     ctx.beginPath(); ctx.arc(p.x, p.y, p.size * 0.5, 0, Math.PI * 2); ctx.fill();
@@ -8553,7 +8740,7 @@ function scheduleHighDim() {
   highDimTimer = setTimeout(async () => {
     if (!isReplying && !isArchiving && (settings.highDimLines || []).length) {
       const line = settings.highDimLines[Math.floor(Math.random() * settings.highDimLines.length)];
-      const msg = { sender: 'ta', content: line, timestamp: Date.now(), pinned: false, pinBy: '', heartMark: null, quoteContent: null, worldMark: getCurrentWorldColor() };
+      const msg = { sender: 'ta', content: line, timestamp: Date.now(), pinned: false, pinBy: '', heartMark: null, quoteContent: null, worldLabel: getWorldLabel() };
       const id = await idbPutReturnId('messages', msg);
       msg.id = id;
       appendMessage(msg);
@@ -8641,7 +8828,6 @@ async function init() {
   scheduleTABGChange();
   scheduleTAInteract();
   scheduleTAMeNickChange();
-  scheduleDailyBackup();
   scheduleTAVideoCall();
   scheduleTAMusicRequest();
   scheduleDateInvite();
@@ -8663,6 +8849,7 @@ async function init() {
   initParticles();
   updateSendBtn();
   setInterval(() => { updateStatusBar(); }, 60000);
+  setInterval(() => { if (settings.particleEnabled) initParticles(); }, 900000);
   const input = document.getElementById('chat-input');
   input.addEventListener('focus', () => { setTimeout(() => { input.scrollIntoView({ behavior: 'smooth', block: 'end' }); }, 300); });
   document.addEventListener('fullscreenchange', () => setTimeout(() => applyBG(), 200));

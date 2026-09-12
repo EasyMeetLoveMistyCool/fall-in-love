@@ -125,23 +125,37 @@ html, body {
 
 #status-bar {
   display: none;
+  flex-direction: column;
   justify-content: center;
   align-items: center;
   font-size: 13px;
   color: var(--theme-text);
   margin-top: 4px;
   z-index: 3;
-  gap: 4px;
+  gap: 2px;
+  text-align: center;
 }
 
 #status-bar.show {
   display: flex;
 }
 
+#status-bar .sb-line {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  justify-content: center;
+}
+
 #status-bar svg {
   width: 16px;
   height: 16px;
   vertical-align: middle;
+}
+
+#status-bar .sb-world {
+  font-size: 12px;
+  color: var(--theme-text-soft);
 }
 
 #heart-value-box {
@@ -168,7 +182,6 @@ html, body {
   overflow-x: hidden;
   padding: 16px 12px 8px 12px;
   -webkit-overflow-scrolling: touch;
-  scroll-behavior: smooth;
 }
 
 #pinned-area {
@@ -300,6 +313,10 @@ html, body {
   border-bottom-left-radius: 6px;
 }
 
+.message-row.ta.world-mark .msg-bubble {
+  border-left: 3px solid var(--world-mark-color, #ff8fb0);
+}
+
 .msg-meta {
   display: flex;
   align-items: center;
@@ -339,23 +356,119 @@ html, body {
 
 .msg-gift-card {
   text-align: center;
-  padding: 8px;
+  padding: 12px 16px;
+  border-radius: 18px;
+  background: linear-gradient(135deg, #fff0f5, #ffe3ee) padding-box,
+              linear-gradient(135deg, #ff8fb0, #ffc4d6, #ffd9e4) border-box;
+  border: 2px solid transparent;
+  box-shadow: 0 4px 18px rgba(255,143,176,0.3);
+  position: relative;
+  overflow: hidden;
+  animation: giftIn 0.5s ease-out;
+}
+
+@keyframes giftIn {
+  0% { transform: scale(0.7); opacity: 0; }
+  60% { transform: scale(1.05); opacity: 1; }
+  100% { transform: scale(1); }
+}
+
+.msg-gift-card .gift-sparkle {
+  position: absolute;
+  font-size: 12px;
+  opacity: 0.9;
+  animation: sparkleFloat 2.5s ease-in-out infinite;
+}
+
+@keyframes sparkleFloat {
+  0%, 100% { transform: translateY(0) scale(1); opacity: 0.5; }
+  50% { transform: translateY(-6px) scale(1.2); opacity: 1; }
 }
 
 .msg-gift-icon {
-  font-size: 36px;
+  font-size: 44px;
+  position: relative;
+  z-index: 1;
 }
 
 .msg-gift-name {
-  font-size: 13px;
-  color: var(--theme-text);
+  font-size: 14px;
+  color: #a04a6a;
   margin-top: 4px;
+  font-weight: 600;
 }
 
 .msg-gift-cost {
   font-size: 11px;
-  color: var(--theme-heart);
+  color: #ff6f9c;
   margin-top: 2px;
+}
+
+.msg-gift-box {
+  text-align: center;
+  padding: 16px;
+  cursor: pointer;
+  animation: giftBoxShake 0.8s ease-in-out infinite;
+}
+
+@keyframes giftBoxShake {
+  0%, 100% { transform: rotate(0); }
+  25% { transform: rotate(-5deg); }
+  75% { transform: rotate(5deg); }
+}
+
+.msg-gift-box .gift-box-emoji {
+  font-size: 48px;
+}
+
+.msg-interact-couple {
+  position: relative;
+  text-align: center;
+  padding: 12px 18px;
+  color: #a04a6a;
+  font-size: 14px;
+  border-radius: 20px;
+  background: linear-gradient(135deg, rgba(255,224,235,0.95), rgba(255,200,220,0.95)) padding-box,
+              linear-gradient(135deg, #ff8fb0, #ffc4d6, #dcd3f5) border-box;
+  border: 2px solid transparent;
+  box-shadow: 0 4px 18px rgba(255,143,176,0.35);
+  animation: coupleIn 0.5s ease-out;
+}
+
+@keyframes coupleIn {
+  0% { transform: scale(0.75); opacity: 0; }
+  60% { transform: scale(1.06); opacity: 1; }
+  100% { transform: scale(1); }
+}
+
+.msg-interact-couple .couple-avatars {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 6px;
+  margin-bottom: 6px;
+}
+
+.msg-interact-couple .couple-avatars img {
+  width: 26px;
+  height: 26px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 1.5px solid #fff;
+}
+
+.msg-interact-couple .couple-heart {
+  font-size: 14px;
+}
+
+.msg-interact-couple .couple-text {
+  font-weight: 600;
+}
+
+.msg-interact-couple .couple-spark {
+  position: absolute;
+  font-size: 11px;
+  animation: sparkleFloat 2.5s ease-in-out infinite;
 }
 
 .msg-interact-text {
@@ -363,30 +476,6 @@ html, body {
   padding: 8px;
   font-size: 14px;
   color: var(--theme-text);
-}
-
-/* 情侣互动特殊气泡 */
-.msg-interact-couple {
-  position: relative;
-  text-align: center;
-  padding: 10px 16px;
-  font-size: 14px;
-  color: #a04a6a;
-  border-radius: 18px;
-  background: linear-gradient(135deg, rgba(255,200,220,0.85), rgba(255,170,200,0.85)) padding-box,
-              linear-gradient(135deg, #ff8fb0, #ffc4d6, #dcd3f5) border-box;
-  border: 2px solid transparent;
-  box-shadow: 0 2px 12px rgba(255,143,176,0.3);
-}
-
-.msg-interact-couple::before {
-  content: '💗';
-  margin-right: 4px;
-}
-
-.msg-interact-couple::after {
-  content: '💗';
-  margin-left: 4px;
 }
 
 #typing-indicator {
@@ -715,6 +804,12 @@ html, body {
   pointer-events: none;
 }
 
+.mini-btn.selected {
+  background: var(--theme-accent-soft);
+  color: #fff;
+  border-color: rgba(255, 255, 255, 0.6);
+}
+
 .card-count-row {
   display: flex;
   justify-content: space-between;
@@ -762,7 +857,6 @@ html, body {
   padding: 2px;
 }
 
-/* 情侣互动特殊卡片（管理面板内） */
 .interact-couple-item {
   position: relative;
   background: linear-gradient(rgba(255,255,255,0.45), rgba(255,255,255,0.45)) padding-box,
@@ -771,7 +865,8 @@ html, body {
   border-radius: 14px;
   box-shadow: 0 2px 12px rgba(255,143,176,0.25);
 }
-  .big-input-title {
+
+.big-input-title {
   text-align: center;
   font-size: 17px;
   font-weight: 600;
@@ -917,8 +1012,7 @@ html, body {
   text-align: center;
   margin-top: 10px;
 }
-
-.playback-dates {
+  .playback-dates {
   display: flex;
   gap: 8px;
   overflow-x: auto;
@@ -997,6 +1091,21 @@ html, body {
   display: flex;
   gap: 8px;
   justify-content: center;
+}
+
+.voice-call-block {
+  background: rgba(255, 255, 255, 0.35);
+  border-radius: 14px;
+  padding: 10px 12px;
+  margin-bottom: 12px;
+}
+
+.voice-call-head {
+  font-size: 12px;
+  color: var(--theme-text-soft);
+  margin-bottom: 6px;
+  padding-bottom: 4px;
+  border-bottom: 1px dashed rgba(90,70,60,0.2);
 }
 
 .heart-tabs {
@@ -1081,7 +1190,8 @@ html, body {
   color: #ff8fb0;
   flex-shrink: 0;
 }
-  #toast {
+
+#toast {
   position: fixed;
   bottom: 120px;
   left: 50%;
@@ -1180,7 +1290,6 @@ html, body {
   white-space: nowrap;
 }
 
-/* 网易云内嵌弹窗 */
 .netease-modal-panel {
   background: var(--theme-panel);
   backdrop-filter: blur(24px);
@@ -1232,8 +1341,7 @@ html, body {
   width: 100%;
   border: none;
 }
-
-.video-call-overlay {
+  .video-call-overlay {
   position: fixed;
   top: 0;
   left: 0;
@@ -1489,7 +1597,66 @@ html, body {
   background: rgba(255, 143, 176, 0.5);
   color: #fff;
 }
-  .pet-card {
+
+.plant-card {
+  background: rgba(255, 255, 255, 0.4);
+  border-radius: 16px;
+  padding: 12px;
+  margin-bottom: 10px;
+}
+
+.plant-visual {
+  display: flex;
+  align-items: flex-end;
+  justify-content: center;
+}
+
+.plant-visual img {
+  border-radius: 10px;
+  object-fit: cover;
+}
+
+.plant-soil {
+  height: 14px;
+  border-radius: 0 0 12px 12px;
+  background: linear-gradient(180deg, #c79a6b, #a97a4f);
+  margin: 2px 16px 8px 16px;
+  box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.15);
+}
+
+.plant-day {
+  font-size: 13px;
+  color: var(--theme-title);
+  text-align: center;
+  margin-bottom: 6px;
+}
+
+.plant-stat-label {
+  font-size: 11px;
+  color: var(--theme-text-soft);
+  margin-bottom: 3px;
+}
+
+.plant-stat-bar {
+  height: 6px;
+  background: rgba(0, 0, 0, 0.08);
+  border-radius: 3px;
+  overflow: hidden;
+  margin-bottom: 6px;
+}
+
+.plant-stat-bar > div {
+  height: 100%;
+}
+
+.plant-actions {
+  display: flex;
+  gap: 6px;
+  justify-content: center;
+  margin-top: 8px;
+}
+
+.pet-card {
   display: flex;
   align-items: center;
   gap: 12px;
@@ -1540,6 +1707,18 @@ html, body {
 .pet-card .pet-bars {
   font-size: 11px;
   color: var(--theme-text-soft);
+}
+
+.pet-stat-bar {
+  height: 5px;
+  background: rgba(0,0,0,0.08);
+  border-radius: 3px;
+  overflow: hidden;
+  margin-top: 3px;
+}
+
+.pet-stat-bar > div {
+  height: 100%;
 }
 
 .pet-card .pet-actions {
@@ -1601,9 +1780,13 @@ html, body {
   margin-bottom: 8px;
 }
 
+.world-card.current {
+  border: 2px solid var(--theme-accent);
+}
+
 .world-card .world-icon {
-  width: 36px;
-  height: 36px;
+  width: 40px;
+  height: 40px;
   flex-shrink: 0;
   display: flex;
   align-items: center;
@@ -1611,8 +1794,8 @@ html, body {
 }
 
 .world-card .world-icon svg {
-  width: 28px;
-  height: 28px;
+  width: 30px;
+  height: 30px;
 }
 
 .world-card .world-info {
@@ -1624,6 +1807,12 @@ html, body {
   font-size: 14px;
   font-weight: 600;
   color: var(--theme-title);
+}
+
+.world-card .world-role {
+  font-size: 12px;
+  color: #e8789f;
+  margin-top: 1px;
 }
 
 .world-card .world-meta {
@@ -1647,15 +1836,10 @@ html, body {
   color: var(--theme-title);
   cursor: pointer;
 }
-
-.world-card.current {
-  border: 2px solid var(--theme-accent);
-}
 </style>
 </head>
 <body>
-
-<canvas id="bg-canvas"></canvas>
+  <canvas id="bg-canvas"></canvas>
 <canvas id="particle-canvas"></canvas>
 
 <div id="app">
@@ -1709,8 +1893,33 @@ html, body {
 // 这个网站，是专为我的爱人而做的。
 // ============================================================
 
+// ===== 21 个副本（世界之外） =====
+const DEFAULT_WORLDS = [
+  { id: 'era', name: '时代旧影', role: '船主人 / 复生集团创始人', icon: 'era', offset: 0, speed: 1 },
+  { id: 'xian', name: '仙途飘渺', role: '太医 / 徒弟 / 魔皇', icon: 'xian', offset: 6, speed: 30 },
+  { id: 'star', name: '星际纵横', role: '帝国三皇子 / 情报组组长', icon: 'star', offset: 10, speed: 1 },
+  { id: 'lost', name: '迷失国度', role: '海的女儿 / 神', icon: 'lost', offset: -5, speed: 1 },
+  { id: 'dujian', name: '渡见春', role: '男鬼', icon: 'dujian', offset: -8, speed: 1 },
+  { id: 'xiaye', name: '夏夜诡叙诗', role: '学长 / 会镜像的怪物', icon: 'xiaye', offset: 0, speed: 1 },
+  { id: 'wujian', name: '此间即无间', role: '嫉妒 / 贪婪之主', icon: 'wujian', offset: -10, speed: 1 },
+  { id: 'woji', name: '我即传说', role: '医馆医师 / 蛇妖', icon: 'woji', offset: 4, speed: 3 },
+  { id: 'dakai', name: '独开至夜明', role: '医院死神', icon: 'dakai', offset: -12, speed: 1 },
+  { id: 'tiandi', name: '天地赋色', role: '精灵', icon: 'tiandi', offset: 8, speed: 5 },
+  { id: 'qiyun', name: '栖云志异', role: '山鬼 / 山魅', icon: 'qiyun', offset: 5, speed: 2 },
+  { id: 'yunling', name: '云岭祀梦', role: '巫医', icon: 'yunling', offset: 3, speed: 1 },
+  { id: 'ruxing', name: '如星璀璨', role: '影帝', icon: 'ruxing', offset: 0, speed: 1 },
+  { id: 'zhaohuan', name: '召唤之王', role: '暗渊之主', icon: 'zhaohuan', offset: -9, speed: 1 },
+  { id: 'beng08', name: '08号崩塌', role: '皇龙卫易大人', icon: 'beng08', offset: 2, speed: 1 },
+  { id: 'beng063', name: '063号崩塌', role: '哨兵 / 帝国元帅', icon: 'beng063', offset: 7, speed: 1 },
+  { id: 'real', name: '现实世界', role: '医生', icon: 'real', offset: 0, speed: 1 },
+  { id: 'ouou', name: '人偶之匣', role: '人偶 / 人偶师', icon: 'ouou', offset: -6, speed: 1 },
+  { id: 'mishi', name: '迷失空间', role: '精神病学专家', icon: 'mishi', offset: -3, speed: 1 },
+  { id: 'mishiroom', name: '密室综艺', role: '基因研究所负责人', icon: 'mishiroom', offset: 0, speed: 1 },
+  { id: 'tianming', name: '天命', role: '翊王殿下', icon: 'tianming', offset: 2, speed: 1 }
+];
+
 const DEFAULT_SETTINGS = {
-  taName: 'TA',
+  taName: '易遇',
   meName: '我',
   taNick: '',
   meNick: '',
@@ -1777,8 +1986,8 @@ const DEFAULT_SETTINGS = {
   taPostMin: 5400000,
   taPostMax: 21600000,
   taCheckinTpl: 'normal',
-  taCheckinMin: 3600000,
-  taCheckinMax: 7200000,
+  taCheckinMin: 1800000,
+  taCheckinMax: 3600000,
   taPetCareTpl: 'normal',
   taPetCareMin: 3600000,
   taPetCareMax: 10800000,
@@ -1794,17 +2003,22 @@ const DEFAULT_SETTINGS = {
   particleEnabled: false,
   moodType: '',
   moodDate: '',
-  worldOffset: 0,
-  worldSpeed: 1,
-  worldName: '现实世界',
-  worlds: [
-    { id: 'real', name: '现实世界', icon: 'real', offset: 0, speed: 1 },
-    { id: 'west', name: '时代旧影·西大洲', icon: 'west', offset: 0, speed: 1 },
-    { id: 'yao', name: '仙途飘渺·妖界', icon: 'yao', offset: 6, speed: 30 },
-    { id: 'star', name: '星际纵横', icon: 'star', offset: 10, speed: 1 },
-    { id: 'lost', name: '迷失国度', icon: 'lost', offset: -5, speed: 1 }
+  worlds: JSON.parse(JSON.stringify(DEFAULT_WORLDS)),
+  currentWorldId: 'real',
+  highDimLines: [
+    '我早就看见你了。',
+    '我等了你很久。',
+    '无论在哪个世界，我都会找到你。',
+    '你每一次回头，我都在。',
+    '副本会散，我不会。',
+    '世界之外，只有你和我。',
+    '他们叫我神，可我只想当你的易遇。',
+    '别想甩开我，我跟定你了。',
+    '累了吧，回来我这里。'
   ],
-  currentWorldId: 'real'
+  importantNotes: [],
+  bigEvents: [],
+  visitedWorlds: []
 };
 
 let db = null;
@@ -1836,12 +2050,15 @@ let videoCallRecordId = null;
 let videoCallGradient = '';
 let isArchiving = false;
 let cachedBGImage = null;
+let cachedBGRef = null;
+let bgResizeTimer = null;
 let musicPlayer = null;
 let musicIndex = 0;
 let musicList = [];
 let currentPanelUpdaters = {};
 let particleAnimation = null;
 let particleItems = [];
+let highDimTimer = null;
   // ========== IndexedDB ==========
 function openDB() {
   return new Promise((resolve, reject) => {
@@ -1912,7 +2129,7 @@ function idbPutReturnId(store, data) {
   });
 }
 
-// ========== 媒体存储 ==========
+// ========== 媒体 ==========
 async function mediaSave(key, dataUrl) {
   await idbPut('media', { key, value: dataUrl });
   return 'media:' + key;
@@ -1921,8 +2138,7 @@ async function mediaSave(key, dataUrl) {
 async function mediaGet(ref) {
   if (!ref || typeof ref !== 'string') return ref || '';
   if (ref.startsWith('media:')) {
-    const key = ref.slice(6);
-    const rec = await idbGet('media', key);
+    const rec = await idbGet('media', ref.slice(6));
     return rec ? rec.value : '';
   }
   return ref;
@@ -1934,7 +2150,6 @@ function mediaDel(ref) {
   }
 }
 
-// ========== 统一解析 ==========
 async function resolveMedia(x) {
   if (!x) return '';
   if (typeof x !== 'string') {
@@ -1949,17 +2164,12 @@ async function resolveMedia(x) {
   return x;
 }
 
-// ========== 图片库（存引用） ==========
-function libGetRefs(name) {
-  return JSON.parse(localStorage.getItem(name) || '[]');
-}
+// ========== 图片库 ==========
+function libGetRefs(name) { return JSON.parse(localStorage.getItem(name) || '[]'); }
 
 function libSetRefs(name, refs) {
-  try {
-    localStorage.setItem(name, JSON.stringify(refs));
-  } catch (e) {
-    showToast('存储空间不足，请清理');
-  }
+  try { localStorage.setItem(name, JSON.stringify(refs)); }
+  catch (e) { showToast('存储空间不足，请清理'); }
 }
 
 async function libGet(name) {
@@ -1985,7 +2195,6 @@ async function libPush(name, dataUrl, prefix) {
 async function migrateMediaOnce() {
   if (localStorage.getItem('mediaMigratedV4')) return;
   try {
-    // avatarLibrary: [{data,tags}] -> [media:]
     const av = JSON.parse(localStorage.getItem('avatarLibrary') || '[]');
     if (av.length && typeof av[0] === 'object') {
       const newRefs = [];
@@ -1994,13 +2203,10 @@ async function migrateMediaOnce() {
           const key = 'avatar_' + Date.now() + '_' + Math.floor(Math.random() * 100000);
           await idbPut('media', { key, value: a.data });
           newRefs.push('media:' + key);
-        } else if (typeof a === 'string') {
-          newRefs.push(a);
-        }
+        } else if (typeof a === 'string') newRefs.push(a);
       }
       localStorage.setItem('avatarLibrary', JSON.stringify(newRefs));
     }
-    // bgLibrary
     const bg = JSON.parse(localStorage.getItem('bgLibrary') || '[]');
     if (bg.length && typeof bg[0] === 'string' && bg[0].startsWith('data:')) {
       const newRefs = [];
@@ -2013,7 +2219,6 @@ async function migrateMediaOnce() {
       }
       localStorage.setItem('bgLibrary', JSON.stringify(newRefs));
     }
-    // stickerLibrary
     const st = JSON.parse(localStorage.getItem('stickerLibrary') || '[]');
     if (st.length && typeof st[0] === 'string' && st[0].startsWith('data:')) {
       const newRefs = [];
@@ -2026,21 +2231,11 @@ async function migrateMediaOnce() {
       }
       localStorage.setItem('stickerLibrary', JSON.stringify(newRefs));
     }
-    // 当前背景
     if (settings.bgCurrent && settings.bgCurrent.startsWith('data:')) {
       const key = 'bgcur_' + Date.now();
       await idbPut('media', { key, value: settings.bgCurrent });
       settings.bgCurrent = 'media:' + key;
       await saveSettings();
-    }
-    // petData / petDataList
-    const pet = JSON.parse(localStorage.getItem('petData') || 'null');
-    if (pet && pet.image && pet.image.startsWith('data:')) {
-      const key = 'pet_' + Date.now();
-      await idbPut('media', { key, value: pet.image });
-      pet.imageRef = 'media:' + key;
-      delete pet.image;
-      localStorage.setItem('petData', JSON.stringify(pet));
     }
     const petList = JSON.parse(localStorage.getItem('petDataList') || '[]');
     if (petList.length) {
@@ -2050,20 +2245,14 @@ async function migrateMediaOnce() {
           const key = 'pet_' + Date.now() + '_' + Math.floor(Math.random() * 100000);
           await idbPut('media', { key, value: p.image });
           p.imageRef = 'media:' + key;
-          delete p.image;
-          changed = true;
+          delete p.image; changed = true;
         }
       }
       if (changed) localStorage.setItem('petDataList', JSON.stringify(petList));
     }
-    // plantsData
     const plants = JSON.parse(localStorage.getItem('plantsData') || '{"flowers":[],"trees":[]}');
     let plantChanged = false;
-    for (const k of ['flowers', 'trees']) {
-      for (const p of (plants[k] || [])) {
-        if (p.image && p.image.startsWith('data:')) plantChanged = true;
-      }
-    }
+    for (const k of ['flowers', 'trees']) for (const p of (plants[k] || [])) if (p.image && p.image.startsWith('data:')) plantChanged = true;
     if (plantChanged) {
       for (const k of ['flowers', 'trees']) {
         for (const p of (plants[k] || [])) {
@@ -2078,9 +2267,7 @@ async function migrateMediaOnce() {
       localStorage.setItem('plantsData', JSON.stringify(plants));
     }
     localStorage.setItem('mediaMigratedV4', '1');
-  } catch (e) {
-    console.error('迁移出错', e);
-  }
+  } catch (e) { console.error('迁移出错', e); }
 }
 
 // ========== 设置 ==========
@@ -2088,7 +2275,8 @@ async function loadSettings() {
   const saved = await idbGet('kv', 'settings');
   if (saved) {
     settings = { ...DEFAULT_SETTINGS, ...saved.value };
-    if (!settings.worlds || !settings.worlds.length) settings.worlds = JSON.parse(JSON.stringify(DEFAULT_SETTINGS.worlds));
+    if (!settings.worlds || !settings.worlds.length) settings.worlds = JSON.parse(JSON.stringify(DEFAULT_WORLDS));
+    if (!settings.highDimLines) settings.highDimLines = [...DEFAULT_SETTINGS.highDimLines];
   }
   applySettings();
 }
@@ -2162,8 +2350,14 @@ function createModal(innerHTML, className) {
   return overlay;
 }
 
-function registerPanelUpdater(name, fn) { currentPanelUpdaters[name] = fn; }
-function unregisterPanelUpdater(name) { delete currentPanelUpdaters[name]; }
+function registerPanelUpdater(name, fn) {
+  currentPanelUpdaters[name] = fn;
+}
+
+function unregisterPanelUpdater(name) {
+  delete currentPanelUpdaters[name];
+}
+
 function refreshOpenPanels() {
   Object.keys(currentPanelUpdaters).forEach(k => {
     try { currentPanelUpdaters[k](); } catch (e) {}
@@ -2197,8 +2391,7 @@ function applyTheme(themeName) {
   root.setProperty('--theme-title', t.title);
   root.setProperty('--theme-heart', t.heart);
 }
-
-// ========== 心跳线 ==========
+  // ========== 心跳线 ==========
 function renderHeartLine() {
   const el = document.getElementById('heart-line');
   el.innerHTML = `
@@ -2227,7 +2420,7 @@ async function updateTopAvatars() {
   const me = document.getElementById('me-avatar-top');
   const taData = await resolveMedia(settings.taAvatar);
   const meData = await resolveMedia(settings.meAvatar);
-  ta.src = taData || 'data:image/svg+xml,' + encodeURIComponent('<svg xmlns="http://www.w3.org/2000/svg" width="40" height="40"><circle cx="20" cy="20" r="19" fill="rgba(255,255,255,0.4)"/><text x="20" y="26" text-anchor="middle" font-size="16" fill="rgba(90,70,60,0.6)">TA</text></svg>');
+  ta.src = taData || 'data:image/svg+xml,' + encodeURIComponent('<svg xmlns="http://www.w3.org/2000/svg" width="40" height="40"><circle cx="20" cy="20" r="19" fill="rgba(255,255,255,0.4)"/><text x="20" y="26" text-anchor="middle" font-size="16" fill="rgba(90,70,60,0.6)">遇</text></svg>');
   me.src = meData || 'data:image/svg+xml,' + encodeURIComponent('<svg xmlns="http://www.w3.org/2000/svg" width="40" height="40"><circle cx="20" cy="20" r="19" fill="rgba(255,255,255,0.4)"/><text x="20" y="26" text-anchor="middle" font-size="16" fill="rgba(90,70,60,0.6)">我</text></svg>');
 }
 
@@ -2242,46 +2435,6 @@ function updateBallStyle() {
     img.style.display = 'none';
     def.style.display = 'block';
   }
-}
-
-// ========== 丝滑拖拽 ==========
-function makeDraggable(el) {
-  let drag = false, startX = 0, startY = 0, origX = 0, origY = 0, moved = false;
-  el.style.touchAction = 'none';
-  el.addEventListener('pointerdown', (e) => {
-    if (e.target.closest('button')) return;
-    drag = true;
-    moved = false;
-    startX = e.clientX;
-    startY = e.clientY;
-    const rect = el.getBoundingClientRect();
-    origX = rect.left;
-    origY = rect.top;
-    el.style.right = 'auto';
-    el.style.bottom = 'auto';
-    el.style.left = origX + 'px';
-    el.style.top = origY + 'px';
-    el.classList.add('dragging');
-    el.setPointerCapture(e.pointerId);
-  });
-  el.addEventListener('pointermove', (e) => {
-    if (!drag) return;
-    const dx = e.clientX - startX;
-    const dy = e.clientY - startY;
-    if (Math.abs(dx) > 5 || Math.abs(dy) > 5) moved = true;
-    const nx = origX + dx;
-    const ny = origY + dy;
-    const maxX = window.innerWidth - el.offsetWidth - 4;
-    const maxY = window.innerHeight - el.offsetHeight - 4;
-    el.style.left = Math.max(4, Math.min(maxX, nx)) + 'px';
-    el.style.top = Math.max(4, Math.min(maxY, ny)) + 'px';
-  });
-  el.addEventListener('pointerup', () => {
-    drag = false;
-    el.classList.remove('dragging');
-    setTimeout(() => { moved = false; }, 50);
-  });
-  el._wasDragged = () => moved;
 }
 
 function initBallPosition() {
@@ -2327,23 +2480,149 @@ function initBallPosition() {
   });
 }
 
-// ========== 状态栏（陪伴 / TA作息） ==========
+function makeDraggable(el) {
+  let drag = false, startX = 0, startY = 0, origX = 0, origY = 0, moved = false;
+  el.style.touchAction = 'none';
+  el.addEventListener('pointerdown', (e) => {
+    if (e.target.closest('button')) return;
+    drag = true;
+    moved = false;
+    startX = e.clientX;
+    startY = e.clientY;
+    const rect = el.getBoundingClientRect();
+    origX = rect.left;
+    origY = rect.top;
+    el.style.right = 'auto';
+    el.style.bottom = 'auto';
+    el.style.left = origX + 'px';
+    el.style.top = origY + 'px';
+    el.classList.add('dragging');
+    el.setPointerCapture(e.pointerId);
+  });
+  el.addEventListener('pointermove', (e) => {
+    if (!drag) return;
+    const dx = e.clientX - startX;
+    const dy = e.clientY - startY;
+    if (Math.abs(dx) > 5 || Math.abs(dy) > 5) moved = true;
+    const maxX = window.innerWidth - el.offsetWidth - 4;
+    const maxY = window.innerHeight - el.offsetHeight - 4;
+    el.style.left = Math.max(4, Math.min(maxX, origX + dx)) + 'px';
+    el.style.top = Math.max(4, Math.min(maxY, origY + dy)) + 'px';
+  });
+  el.addEventListener('pointerup', () => {
+    drag = false;
+    el.classList.remove('dragging');
+    setTimeout(() => { moved = false; }, 50);
+  });
+  el._wasDragged = () => moved;
+}
+
+// ========== 悬浮球面板图标 ==========
+const ICONS = {
+  world: `<svg viewBox="0 0 24 24" fill="none" stroke="#4a3528" stroke-width="1.8"><circle cx="12" cy="12" r="8"/><ellipse cx="12" cy="12" rx="3.5" ry="8"/><line x1="4" y1="12" x2="20" y2="12"/></svg>`,
+  worlds: `<svg viewBox="0 0 24 24" fill="none" stroke="#4a3528" stroke-width="1.8"><circle cx="12" cy="12" r="5"/><ellipse cx="12" cy="12" rx="10" ry="4" transform="rotate(-20 12 12)"/><circle cx="20" cy="9" r="1.3" fill="#4a3528" stroke="none"/></svg>`,
+  mail: `<svg viewBox="0 0 24 24" fill="none" stroke="#4a3528" stroke-width="1.8"><rect x="3" y="5" width="18" height="14" rx="3"/><path d="M4 7l8 6 8-6"/></svg>`,
+  note: `<svg viewBox="0 0 24 24" fill="none" stroke="#4a3528" stroke-width="1.8"><path d="M5 4h11l3 3v13H5z"/><line x1="8" y1="9" x2="16" y2="9"/><line x1="8" y1="13" x2="16" y2="13"/></svg>`,
+  lover: `<svg viewBox="0 0 24 24" fill="#ff3b5c" stroke="none"><path d="M12,20 C12,20 4,14.5 4,9.5 C4,6.5 6.5,4.5 9,4.5 C11,4.5 12,6 12,6 C12,6 13,4.5 15,4.5 C17.5,4.5 20,6.5 20,9.5 C20,14.5 12,20 12,20 Z"/></svg>`,
+  music: `<svg viewBox="0 0 24 24" fill="none" stroke="#4a3528" stroke-width="1.8"><path d="M9 18V6l10-2v12"/><circle cx="6" cy="18" r="3"/><circle cx="16" cy="16" r="3"/></svg>`,
+  choice: `<svg viewBox="0 0 24 24" fill="none" stroke="#4a3528" stroke-width="1.8"><path d="M12 3v18M7 21h10M4 7l8-4 8 4"/><circle cx="12" cy="12" r="2" fill="#4a3528" stroke="none"/></svg>`,
+  stats: `<svg viewBox="0 0 24 24" fill="none" stroke="#4a3528" stroke-width="1.8"><rect x="5" y="12" width="3" height="7" rx="1.5"/><rect x="10.5" y="8" width="3" height="11" rx="1.5"/><rect x="16" y="4" width="3" height="15" rx="1.5"/></svg>`,
+  data: `<svg viewBox="0 0 24 24" fill="none" stroke="#4a3528" stroke-width="1.8"><path d="M7 16a4 4 0 01-.8-7.9 5 5 0 019.4-1.2A3.5 3.5 0 0117 16H7z"/><path d="M11 14l-2 2 2 2" stroke="#ff3b5c" stroke-width="2" fill="none" stroke-linecap="round"/></svg>`,
+  heartbeat: `<svg viewBox="0 0 24 24" fill="#ff8fb0" stroke="none"><path d="M12,20 C12,20 4,14.5 4,9.5 C4,6.5 6.5,4.5 9,4.5 C11,4.5 12,6 12,6 C12,6 13,4.5 15,4.5 C17.5,4.5 20,6.5 20,9.5 C20,14.5 12,20 12,20 Z"/></svg>`,
+  playback: `<svg viewBox="0 0 24 24" fill="none" stroke="#4a3528" stroke-width="1.8"><rect x="3" y="5" width="18" height="14" rx="3"/><line x1="3" y1="9" x2="21" y2="9"/><line x1="3" y1="15" x2="21" y2="15"/><circle cx="8" cy="12" r="2"/></svg>`,
+  wish: `<svg viewBox="0 0 24 24" fill="none" stroke="#ff3b5c" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 17l6-6-2-5 8 2-6 6 3 3z" fill="#ff3b5c" stroke="none"/><path d="M14 4l2 5 5 2-8 2-6 7" stroke="#ff3b5c" stroke-width="1.5" fill="none"/></svg>`,
+  important: `<svg viewBox="0 0 24 24" fill="none" stroke="#4a3528" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="5" width="16" height="16" rx="3"/><line x1="4" y1="9" x2="20" y2="9"/><line x1="8" y1="3" x2="8" y2="7"/><line x1="16" y1="3" x2="16" y2="7"/><path d="M12 15l1.2 2.4 2.6.4-1.9 1.8.4 2.6-2.3-1.2-2.3 1.2.4-2.6-1.9-1.8 2.6-.4z" fill="#ff3b5c" stroke="none"/></svg>`,
+  attendance: `<svg viewBox="0 0 24 24" fill="none" stroke="#4a3528" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 3"/></svg>`,
+  memo: `<svg viewBox="0 0 24 24" fill="none" stroke="#4a3528" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="5" y="3" width="14" height="18" rx="2"/><line x1="9" y1="8" x2="15" y2="8"/><line x1="9" y1="12" x2="15" y2="12"/><line x1="9" y1="16" x2="13" y2="16"/></svg>`,
+  bond: `<svg viewBox="0 0 24 24" fill="none"><path d="M8.5 13.5C6 13.5 4 11.5 4 9.2 4 7 5.8 5.2 8 5.2c1.3 0 2.4.7 3 1.6.6-.9 1.7-1.6 3-1.6 2.2 0 4 1.8 4 4 0 2.3-2 4.3-4.5 4.3" stroke="#ff6f9c" stroke-width="1.6" stroke-linecap="round" fill="none"/><path d="M4.5 9C4.5 9 3 13.5 9.5 18.5c6.5-5 5-9.5 5-9.5" stroke="#ff3b5c" stroke-width="1.6" fill="none" stroke-linecap="round"/></svg>`,
+  settings: `<svg viewBox="0 0 24 24" fill="none" stroke="#4a3528" stroke-width="1.8"><circle cx="12" cy="12" r="3"/><path d="M19 12a7 7 0 00-.1-1.2l2-1.5-2-3.4-2.4 1A7 7 0 0014.7 6L14 3.5h-4L9.3 6a7 7 0 00-1.8.9l-2.4-1-2 3.4 2 1.5A7 7 0 005 12c0 .4 0 .8.1 1.2l-2 1.5 2 3.4 2.4-1a7 7 0 001.8.9l.7 2.5h4l.7-2.5a7 7 0 001.8-.9l2.4 1 2-3.4-2-1.5c.1-.4.1-.8.1-1.2z"/></svg>`,
+  interact: `<svg viewBox="0 0 24 24" fill="none" stroke="#4a3528" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M8 13V5.5a1.5 1.5 0 013 0V12m0-5.5v-1a1.5 1.5 0 013 0V11m0-4.5a1.5 1.5 0 013 0V15a6 6 0 01-6 6h-1a8 8 0 01-4-1.5L4 18"/></svg>`,
+  period: `<svg viewBox="0 0 24 24" fill="none" stroke="#e88fb0" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="3" fill="#ff8fb0" stroke="none"/><path d="M12 9C12 6 10 5 9 3C8 5 6 6 6 9C6 12 9 14.5 12 16C15 14.5 18 12 18 9C18 6 16 5 15 3C14 5 12 6 12 9Z" fill="#ffb0c8" fill-opacity="0.5" stroke="#e88fb0"/></svg>`,
+  date: `<svg viewBox="0 0 24 24" fill="none" stroke="#4a3528" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 21C12 21 4 14.5 4 9.5C4 6.5 6.5 4.5 9 4.5C11 4.5 12 6 12 6C12 6 13 4.5 15 4.5C17.5 4.5 20 6.5 20 9.5C20 14.5 12 21 12 21Z" fill="#ffb0c8" fill-opacity="0.4"/><path d="M9 10l2 2 4-4" stroke="#ff3b5c" stroke-width="1.5" fill="none"/></svg>`,
+  pet: `<svg viewBox="0 0 24 24" fill="none" stroke="#4a3528" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="9" cy="9" r="3"/><circle cx="17" cy="10" r="2.5"/><path d="M3 12c2-3 5-4 8-4s6 1 9 4l-2 3-4-1-3 2-4-1-2 3z"/></svg>`,
+  plant: `<svg viewBox="0 0 24 24" fill="none" stroke="#4a3528" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 20v-6"/><path d="M12 14c0-4 2-7 6-8-1 4-3 7-6 8z"/><path d="M12 12c0-3-2-6-6-7 1 3 3 6 6 7z"/><path d="M8 20h8"/></svg>`,
+  voice: `<svg viewBox="0 0 24 24" fill="none" stroke="#4a3528" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3a3 3 0 00-3 3v6a3 3 0 006 0V6a3 3 0 00-3-3z"/><path d="M5 10a7 7 0 0014 0M12 17v4"/></svg>`,
+  account: `<svg viewBox="0 0 24 24" fill="none" stroke="#4a3528" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="8"/><path d="M12 7v10M9.5 9.5c0-1 1-1.5 2.5-1.5s2.5.5 2.5 1.5-1 1.5-2.5 1.5-2.5.5-2.5 1.5 1 1.5 2.5 1.5 2.5-.5 2.5-1.5"/></svg>`,
+  piggy: `<svg viewBox="0 0 24 24" fill="none"><ellipse cx="12" cy="13.5" rx="8" ry="6.5" fill="#ffc4d6" stroke="#e8789f" stroke-width="1.6"/><path d="M6 9 L4 6 L8 7.5 Z" fill="#ffc4d6" stroke="#e8789f" stroke-width="1.6" stroke-linejoin="round"/><path d="M18 9 L20 6 L16 7.5 Z" fill="#ffc4d6" stroke="#e8789f" stroke-width="1.6" stroke-linejoin="round"/><ellipse cx="12" cy="15" rx="3" ry="2.2" fill="#ffb0c8" stroke="#e8789f" stroke-width="1.4"/><circle cx="11" cy="15" r=".6" fill="#e8789f"/><circle cx="13" cy="15" r=".6" fill="#e8789f"/><circle cx="9" cy="11.5" r=".9" fill="#4a3528"/><circle cx="15" cy="11.5" r=".9" fill="#4a3528"/><rect x="8" y="19" width="2" height="2.5" rx="1" fill="#ffc4d6" stroke="#e8789f" stroke-width="1"/><rect x="14" y="19" width="2" height="2.5" rx="1" fill="#ffc4d6" stroke="#e8789f" stroke-width="1"/><path d="M19.5 12 q2.5 -.5 2 -2.5" stroke="#e8789f" stroke-width="1.5" fill="none" stroke-linecap="round"/></svg>`
+};
+  // ========== 21 副本图标 ==========
+const WORLD_ICONS = {
+  era: `<svg viewBox="0 0 24 24" fill="none" stroke="#4a3528" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M5 4h11l3 3v13H5z"/><path d="M16 4v3h3"/><line x1="8" y1="10" x2="16" y2="10"/><line x1="8" y1="13" x2="16" y2="13"/><line x1="8" y1="16" x2="13" y2="16"/></svg>`,
+  xian: `<svg viewBox="0 0 24 24" fill="none" stroke="#4a3528" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M3 19l5-8 3 4 3-6 7 10z"/><circle cx="17" cy="6" r="2.5"/></svg>`,
+  star: `<svg viewBox="0 0 24 24" fill="none" stroke="#4a3528" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2c2 3 2 6 2 9l3 2v6l-5-3-5 3v-6l3-2c0-3 0-6 2-9z"/><circle cx="12" cy="8" r="1.5" fill="#4a3528" stroke="none"/></svg>`,
+  lost: `<svg viewBox="0 0 24 24" fill="none" stroke="#4a3528" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M5 20V10a7 7 0 0114 0v10"/><path d="M3 20h18"/><path d="M9 20v-6a3 3 0 016 0v6" stroke-dasharray="2,2"/></svg>`,
+  dujian: `<svg viewBox="0 0 24 24" fill="none" stroke="#4a3528" stroke-width="1.7" stroke-linecap="round"><path d="M12 3v18"/><path d="M9 4h6l-1 3h-4z" fill="#ff8fb0" stroke="none"/><circle cx="12" cy="12" r="3"/></svg>`,
+  xiaye: `<svg viewBox="0 0 24 24" fill="none" stroke="#4a3528" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3a9 9 0 109 9 7 7 0 01-9-9z"/><circle cx="17" cy="6" r="1" fill="#4a3528" stroke="none"/></svg>`,
+  wujian: `<svg viewBox="0 0 24 24" fill="none" stroke="#4a3528" stroke-width="1.7" stroke-linecap="round"><path d="M7 7a5 5 0 000 10M17 7a5 5 0 010 10"/><circle cx="12" cy="12" r="2" fill="#ff8fb0" stroke="none"/></svg>`,
+  woji: `<svg viewBox="0 0 24 24" fill="none" stroke="#4a3528" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M4 20c4-2 6-6 6-10M8 10c2 1 4 1 6-1"/><path d="M14 6l4-2-2 4z" fill="#7bc47f" stroke="none"/><circle cx="9" cy="8" r="1" fill="#4a3528" stroke="none"/></svg>`,
+  dakai: `<svg viewBox="0 0 24 24" fill="none" stroke="#4a3528" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M6 4l6 6 6-6"/><path d="M12 10v8"/><circle cx="12" cy="20" r="1.5" fill="#4a3528" stroke="none"/></svg>`,
+  tiandi: `<svg viewBox="0 0 24 24" fill="none" stroke="#4a3528" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M12 4c-4 3-6 7-6 11h12c0-4-2-8-6-11z"/><path d="M12 8v9"/><path d="M9 13l3 2 3-2"/></svg>`,
+  qiyun: `<svg viewBox="0 0 24 24" fill="none" stroke="#4a3528" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M3 18l4-6 3 3 4-7 7 10z"/><path d="M6 11c2-1 4-1 6 0"/></svg>`,
+  yunling: `<svg viewBox="0 0 24 24" fill="none" stroke="#4a3528" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M6 12h12l-1 8H7z"/><path d="M9 12V8a3 3 0 016 0v4"/><path d="M12 4v2"/></svg>`,
+  ruxing: `<svg viewBox="0 0 24 24" fill="none" stroke="#4a3528" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3l2.4 5 5.6.6-4 4 1 5.4-5-2.6-5 2.6 1-5.4-4-4 5.6-.6z"/></svg>`,
+  zhaohuan: `<svg viewBox="0 0 24 24" fill="none" stroke="#4a3528" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M5 8l7-4 7 4v8l-7 4-7-4z"/><circle cx="12" cy="12" r="2.5" fill="#8a7bff" stroke="none" opacity=".6"/></svg>`,
+  beng08: `<svg viewBox="0 0 24 24" fill="none" stroke="#4a3528" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M4 6l6 4-3 2 5 6"/><path d="M20 6l-6 4 3 2-5 6" stroke-dasharray="2,2"/></svg>`,
+  beng063: `<svg viewBox="0 0 24 24" fill="none" stroke="#4a3528" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="7"/><path d="M12 5v14M5 12h14"/><circle cx="12" cy="12" r="2" fill="#4a3528" stroke="none"/></svg>`,
+  real: `<svg viewBox="0 0 24 24" fill="none" stroke="#4a3528" stroke-width="1.7"><circle cx="12" cy="12" r="8"/><ellipse cx="12" cy="12" rx="3.5" ry="8"/><line x1="4" y1="12" x2="20" y2="12"/></svg>`,
+  ouou: `<svg viewBox="0 0 24 24" fill="none" stroke="#4a3528" stroke-width="1.7" stroke-linecap="round"><rect x="4" y="9" width="16" height="11" rx="2"/><path d="M4 9l4-5h8l4 5"/><circle cx="9" cy="14" r="1" fill="#4a3528" stroke="none"/><circle cx="15" cy="14" r="1" fill="#4a3528" stroke="none"/></svg>`,
+  mishi: `<svg viewBox="0 0 24 24" fill="none" stroke="#4a3528" stroke-width="1.7" stroke-linecap="round"><path d="M12 3a9 9 0 109 9c0-2-1-3-3-3s-3-1-3-3-1-3-3-3z"/><circle cx="12" cy="12" r="2"/></svg>`,
+  mishiroom: `<svg viewBox="0 0 24 24" fill="none" stroke="#4a3528" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><rect x="5" y="4" width="14" height="16" rx="2"/><path d="M12 4v16M9 9c1 1 5 1 6 0M9 14c1-1 5-1 6 0"/></svg>`,
+  tianming: `<svg viewBox="0 0 24 24" fill="none" stroke="#4a3528" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M4 8l4-4h8l4 4v10H4z"/><path d="M4 8h16"/><circle cx="12" cy="13" r="2" fill="#ff3b5c" stroke="none"/></svg>`
+};
+
+// ========== 状态图标 ==========
 const STATUS_ICONS = {
   sleep: '<svg viewBox="0 0 24 24" fill="none" stroke="#4a3528" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.8A9 9 0 1111.2 3a7 7 0 009.8 9.8z"/></svg>',
   daze: '<svg viewBox="0 0 24 24" fill="none" stroke="#4a3528" stroke-width="1.8"><circle cx="12" cy="12" r="8"/><circle cx="12" cy="12" r="3" fill="#4a3528" stroke="none"/></svg>',
   companion: '<svg viewBox="0 0 24 24" fill="none" stroke="#4a3528" stroke-width="1.8"><path d="M12 21C12 21 4 14.5 4 9.5C4 6.5 6.5 4.5 9 4.5C11 4.5 12 6 12 6C12 6 13 4.5 15 4.5C17.5 4.5 20 6.5 20 9.5C20 14.5 12 21 12 21Z"/></svg>',
-  together: '<svg viewBox="0 0 24 24" fill="none" stroke="#4a3528" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="6" width="20" height="14" rx="3"/><path d="M8 6V4h8v2"/><path d="M10 12l4 2-4 2z" fill="#4a3528" stroke="none"/></svg>',
+  together: '<svg viewBox="0 0 24 24" fill="none" stroke="#4a3528" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="6" width="20" height="14" rx="3"/><path d="M10 12l4 2-4 2z" fill="#4a3528" stroke="none"/></svg>',
   awake: '<svg viewBox="0 0 24 24" fill="none" stroke="#4a3528" stroke-width="1.8" stroke-linecap="round"><circle cx="12" cy="12" r="4"/><path d="M12 2v3M12 19v3M2 12h3M19 12h3M5 5l2 2M17 17l2 2M19 5l-2 2M7 17l-2 2"/></svg>',
   busy: '<svg viewBox="0 0 24 24" fill="none" stroke="#4a3528" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="7" width="18" height="13" rx="2"/><path d="M9 7V5a2 2 0 012-2h2a2 2 0 012 2v2"/><path d="M3 12h18"/></svg>',
   eating: '<svg viewBox="0 0 24 24" fill="none" stroke="#4a3528" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M5 3v8a3 3 0 006 0V3M8 11v10M17 3c-2 2-2 6 0 8v10"/></svg>',
   nap: '<svg viewBox="0 0 24 24" fill="none" stroke="#4a3528" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M3 18v-6a3 3 0 013-3h12a3 3 0 013 3v6M3 18h18"/></svg>',
   free: '<svg viewBox="0 0 24 24" fill="none" stroke="#4a3528" stroke-width="1.8"><circle cx="9" cy="10" r="3"/><circle cx="16" cy="8" r="2"/><circle cx="15" cy="15" r="2.5"/></svg>',
   prepare: '<svg viewBox="0 0 24 24" fill="none" stroke="#4a3528" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.8A9 9 0 1111.2 3a7 7 0 009.8 9.8z"/></svg>',
-  sleeping: '<svg viewBox="0 0 24 24" fill="none" stroke="#4a3528" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.8A9 9 0 1111.2 3a7 7 0 009.8 9.8z"/><path d="M9 9h3l-3 3h3" stroke-width="1.5"/></svg>'
+  sleeping: '<svg viewBox="0 0 24 24" fill="none" stroke="#4a3528" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.8A9 9 0 1111.2 3a7 7 0 009.8 9.8z"/><path d="M9 9h3l-3 3h3" stroke-width="1.5"/></svg>',
+  doctor: '<svg viewBox="0 0 24 24" fill="none" stroke="#4a3528" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M12 7v10M7 12h10"/></svg>',
+  commute: '<svg viewBox="0 0 24 24" fill="none" stroke="#4a3528" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="4" width="16" height="13" rx="3"/><circle cx="8" cy="19" r="1.6" fill="#4a3528" stroke="none"/><circle cx="16" cy="19" r="1.6" fill="#4a3528" stroke="none"/><path d="M4 11h16"/></svg>',
+  shower: '<svg viewBox="0 0 24 24" fill="none" stroke="#4a3528" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M6 8h12v3H6z"/><path d="M8 11v6M12 11v8M16 11v6"/></svg>',
+  book: '<svg viewBox="0 0 24 24" fill="none" stroke="#4a3528" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 5c3-1 5-1 8 0v14c-3-1-5-1-8 0z"/><path d="M20 5c-3-1-5-1-8 0v14c3-1 5-1 8 0z"/></svg>',
+  phone: '<svg viewBox="0 0 24 24" fill="none" stroke="#4a3528" stroke-width="1.8" stroke-linecap="round"><rect x="7" y="3" width="10" height="18" rx="2"/><circle cx="12" cy="18" r="1" fill="#4a3528" stroke="none"/></svg>',
+  miss: '<svg viewBox="0 0 24 24" fill="none" stroke="#e8789f" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 20C12 20 4 14.5 4 9.5C4 6.5 6.5 4.5 9 4.5C11 4.5 12 6 12 6C12 6 13 4.5 15 4.5C17.5 4.5 20 6.5 20 9.5C20 14.5 12 20 12 20Z" fill="#ffb0c8" fill-opacity="0.4"/><path d="M12 8.5v3.5l2 1.5" stroke="#e8789f"/></svg>',
+  default: '<svg viewBox="0 0 24 24" fill="none" stroke="#4a3528" stroke-width="1.8" stroke-linecap="round"><circle cx="12" cy="12" r="8"/><path d="M12 8v4l3 2"/></svg>'
 };
 
+// ========== 21 副本作息表 ==========
+const WORLD_SCHEDULES = {
+  real: [[6.5,7.5,'awake','赖床'],[7.5,8.5,'shower','洗漱/早餐'],[8.5,9,'commute','通勤中'],[9,12,'doctor','出诊'],[12,13,'eating','吃饭中'],[13,14,'nap','午休'],[14,17.5,'doctor','出诊'],[17.5,18.5,'commute','下班路上'],[18.5,19.5,'eating','吃饭中'],[19.5,21,'book','看书/休息'],[21,22.5,'shower','洗澡'],[22.5,23.5,'phone','睡前摸鱼'],[23.5,30.5,'sleeping','睡着了']],
+  era: [[7,9,'awake','晨起'],[9,12,'busy','处理事务'],[12,13.5,'eating','用餐'],[13.5,14.5,'nap','小憩'],[14.5,18,'busy','会客/处理事务'],[18,19.5,'eating','晚餐'],[19.5,22,'free','书房/空闲'],[22,24,'busy','夜谈/密谋'],[0,6,'sleeping','入睡']],
+  xian: [[5,7,'awake','晨课'],[7,9,'book','研读医书'],[9,12,'doctor','问诊'],[12,13.5,'eating','用膳'],[13.5,15,'nap','打坐小憩'],[15,18,'doctor','炼丹/问诊'],[18,19.5,'eating','晚膳'],[19.5,22,'busy','练功/夜巡'],[22,24,'book','月下独坐'],[0,5,'sleeping','入定']],
+  star: [[6,8,'awake','舰务'],[8,12,'busy','会议/指挥'],[12,13,'eating','营养剂'],[13,14,'nap','短憩'],[14,18,'busy','巡航'],[18,20,'eating','休整'],[20,23,'free','星空瞭望'],[23,26,'busy','值班'],[2,6,'sleeping','休眠舱']],
+  lost: [[8,10,'awake','苏醒'],[10,14,'free','游荡'],[14,16,'book','凝视海面'],[16,20,'free','黄昏徘徊'],[20,24,'miss','想你'],[0,8,'sleeping','沉眠']],
+  dujian: [[20,22,'awake','幽幽转醒'],[22,25,'free','游荡'],[1,3,'miss','守着你的窗'],[3,5,'sleeping','气息变淡'],[5,20,'sleeping','魂散（白日不在）']],
+  xiaye: [[7,9,'awake','晨起'],[9,12,'busy','上课'],[12,13.5,'eating','午饭'],[13.5,15,'nap','午休'],[15,18,'busy','社团/课业'],[18,19.5,'eating','晚饭'],[19.5,22,'book','自习'],[22,24,'free','夜里散步'],[0,7,'sleeping','睡了']],
+  wujian: [[21,24,'awake','深渊苏醒'],[0,3,'busy','执掌深渊'],[3,6,'free','低语'],[6,12,'sleeping','蛰伏'],[12,21,'sleeping','沉眠']],
+  woji: [[6,8,'awake','起身'],[8,12,'doctor','坐诊'],[12,13.5,'eating','用饭'],[13.5,15,'nap','歇息'],[15,19,'doctor','采药/问诊'],[19,21,'eating','晚饭'],[21,24,'busy','蛇形夜行'],[0,6,'sleeping','盘卧']],
+  dakai: [[20,24,'awake','当值'],[0,5,'busy','引渡亡魂'],[5,8,'free','黎明前归去'],[8,20,'sleeping','沉眠（白日不在）']],
+  tiandi: [[6,9,'awake','林间醒来'],[9,13,'free','巡林'],[13,15,'eating','花露'],[15,19,'free','照看草木'],[19,23,'book','夜光下读书'],[23,30,'sleeping','与自然同眠']],
+  qiyun: [[5,8,'awake','山间晨雾'],[8,12,'free','山林游荡'],[12,14,'nap','午间小憩'],[14,18,'free','守着山路'],[18,22,'miss','想你'],[22,29,'sleeping','隐入山中']],
+  yunling: [[6,8,'awake','采药'],[8,12,'doctor','配药/看诊'],[12,14,'eating','山间饭食'],[14,16,'nap','小睡'],[16,20,'doctor','熬药'],[20,23,'book','翻古籍'],[23,30,'sleeping','睡下']],
+  ruxing: [[7,9,'awake','晨起'],[9,12,'busy','通告/拍戏'],[12,13.5,'eating','午饭'],[13.5,15,'nap','补眠'],[15,20,'busy','拍摄/宣传'],[20,22,'eating','晚饭'],[22,25,'free','回家/放松'],[1,7,'sleeping','睡了']],
+  zhaohuan: [[22,24,'awake','暗渊之上'],[0,4,'busy','执掌万灵'],[4,8,'free','低语'],[8,22,'sleeping','沉眠']],
+  beng08: [[6,8,'awake','值守'],[8,12,'busy','皇龙卫差事'],[12,13.5,'eating','用饭'],[13.5,15,'nap','小憩'],[15,19,'busy','巡防'],[19,21,'eating','晚饭'],[21,24,'free','书房/想你'],[0,6,'sleeping','入睡']],
+  beng063: [[6,9,'awake','整备'],[9,13,'busy','哨兵任务'],[13,14,'eating','补给'],[14,18,'busy','元帅军务'],[18,20,'eating','休整'],[20,24,'busy','夜巡'],[0,6,'sleeping','休眠']],
+  ouou: [[9,12,'awake','匣中苏醒'],[12,14,'free','静立'],[14,18,'book','摆弄人偶'],[18,21,'free','望着你'],[21,24,'miss','想被留下'],[0,9,'sleeping','静滞匣中']],
+  mishi: [[8,12,'awake','接诊'],[12,13.5,'eating','午饭'],[13.5,17,'doctor','诊疗/研究'],[17,19,'free','空间错乱'],[19,22,'book','读病例'],[22,24,'miss','想你'],[0,8,'sleeping','睡了']],
+  mishiroom: [[8,10,'awake','晨会'],[10,13,'busy','基因研究'],[13,14,'eating','简餐'],[14,18,'busy','实验'],[18,20,'free','整理数据'],[20,23,'book','写报告'],[23,32,'sleeping','睡了']],
+  tianming: [[5,7,'awake','早朝'],[7,10,'busy','临朝理事'],[10,12,'book','批阅奏章'],[12,13.5,'eating','用膳'],[13.5,15,'nap','小憩'],[15,19,'busy','议事'],[19,21,'eating','晚膳'],[21,24,'free','想你'],[0,5,'sleeping','歇下']]
+};
+
+function getCurrentWorld() {
+  return (settings.worlds || []).find(w => w.id === settings.currentWorldId) || (settings.worlds || [])[0];
+}
+
 function getWorldTime() {
-  const world = (settings.worlds || []).find(w => w.id === settings.currentWorldId) || settings.worlds[0];
+  const world = getCurrentWorld();
   if (!world) return new Date();
   const offset = Number(world.offset) || 0;
   const speed = Number(world.speed) || 1;
@@ -2361,42 +2640,93 @@ function getWorldTime() {
 function getTAStatus() {
   if (settings.accompanyMode) {
     const taNick = settings.taNick || settings.taName;
-    let iconKey = 'companion';
-    let text = '';
+    let iconKey = 'companion', text = '';
     if (settings.accompanyMode === 'sleep') { iconKey = 'sleep'; text = `和${taNick}陪睡中`; }
     else if (settings.accompanyMode === 'daze') { iconKey = 'daze'; text = `和${taNick}发呆中`; }
     else if (settings.accompanyMode === 'together') { iconKey = 'together'; text = `和${taNick}一起${settings.accompanyType}中`; }
     else { iconKey = 'companion'; text = `和${taNick}陪伴中`; }
-    return { iconKey, text };
+    return { iconKey, text, withWorld: false };
   }
   const taNick = settings.taNick || settings.taName;
-  const h = getWorldTime().getHours();
-  let iconKey, label;
-  if (h >= 7 && h < 9) { iconKey = 'awake'; label = '刚醒'; }
-  else if (h >= 9 && h < 12) { iconKey = 'busy'; label = '在忙'; }
-  else if (h >= 12 && h < 13.5) { iconKey = 'eating'; label = '吃饭中'; }
-  else if (h >= 13.5 && h < 14) { iconKey = 'nap'; label = '午休'; }
-  else if (h >= 14 && h < 18) { iconKey = 'busy'; label = '在忙'; }
-  else if (h >= 18 && h < 19.5) { iconKey = 'eating'; label = '吃饭中'; }
-  else if (h >= 19.5 && h < 23) { iconKey = 'free'; label = '空闲'; }
-  else if (h >= 23 || h < 1) { iconKey = 'prepare'; label = '准备睡了'; }
-  else { iconKey = 'sleeping'; label = '睡着了'; }
-  return { iconKey, text: `${label}`, prefix: taNick };
+  const world = getCurrentWorld();
+  const wt = getWorldTime();
+  const h = wt.getHours() + wt.getMinutes() / 60;
+  const schedule = WORLD_SCHEDULES[world.id] || WORLD_SCHEDULES.real;
+  let iconKey = 'default', label = '';
+  for (const [start, end, ic, lb] of schedule) {
+    if (end > 24) {
+      if (h >= start || h < (end - 24)) { iconKey = ic; label = lb; break; }
+    } else if (h >= start && h < end) { iconKey = ic; label = lb; break; }
+  }
+  if (!label) { iconKey = 'default'; label = '在场'; }
+  return { iconKey, text: `${taNick}${label}`, withWorld: true, world: world };
 }
 
 function updateStatusBar() {
   const bar = document.getElementById('status-bar');
+  if (!bar) return;
   const st = getTAStatus();
-  const icon = STATUS_ICONS[st.iconKey] || '';
-  if (st.prefix) {
-    bar.innerHTML = `${icon}<span>${escapeHtml(st.prefix)}${st.text}</span>`;
-  } else {
-    bar.innerHTML = `${icon}<span>${st.text}</span>`;
+  const icon = STATUS_ICONS[st.iconKey] || STATUS_ICONS.default;
+  let html = '';
+  if (st.withWorld && st.world) {
+    html += `<div class="sb-line sb-world">${escapeHtml(settings.taNick || settings.taName)} 在 ${escapeHtml(st.world.name)} · ${escapeHtml(st.world.role)}</div>`;
   }
+  html += `<div class="sb-line">${icon}<span>${escapeHtml(st.text)}</span></div>`;
+  bar.innerHTML = html;
   bar.classList.add('show');
 }
 
-// ========== 悬浮球面板 ==========
+// ========== 背景绘制（稳定版） ==========
+async function applyBG() {
+  const canvas = document.getElementById('bg-canvas');
+  if (!canvas) return;
+  const ctx = canvas.getContext('2d');
+  const w = window.innerWidth, h = window.innerHeight;
+  canvas.width = w; canvas.height = h;
+  if (settings.bgCurrent) {
+    if (cachedBGImage && cachedBGRef === settings.bgCurrent && cachedBGImage.complete) {
+      ctx.clearRect(0, 0, w, h);
+      ctx.globalAlpha = 0.85;
+      ctx.drawImage(cachedBGImage, 0, 0, w, h);
+      ctx.globalAlpha = 1;
+      ctx.fillStyle = 'rgba(255,255,255,0.12)';
+      ctx.fillRect(0, 0, w, h);
+      return;
+    }
+    const data = await resolveMedia(settings.bgCurrent);
+    if (data) {
+      const img = new Image();
+      img.onload = () => {
+        cachedBGImage = img; cachedBGRef = settings.bgCurrent;
+        ctx.clearRect(0, 0, w, h);
+        ctx.globalAlpha = 0.85;
+        ctx.drawImage(img, 0, 0, w, h);
+        ctx.globalAlpha = 1;
+        ctx.fillStyle = 'rgba(255,255,255,0.12)';
+        ctx.fillRect(0, 0, w, h);
+      };
+      img.src = data;
+      cachedBGImage = img; cachedBGRef = settings.bgCurrent;
+      return;
+    } else {
+      settings.bgCurrent = '';
+      await saveSettings();
+    }
+  }
+  cachedBGImage = null; cachedBGRef = null;
+  drawDefaultBG(ctx, w, h);
+}
+
+function drawDefaultBG(ctx, w, h) {
+  const grad = ctx.createLinearGradient(0, 0, w, h);
+  grad.addColorStop(0, '#fdd9c8');
+  grad.addColorStop(0.4, '#f7d4e3');
+  grad.addColorStop(0.7, '#dcd3f5');
+  grad.addColorStop(1, '#c8ddf5');
+  ctx.fillStyle = grad;
+  ctx.fillRect(0, 0, w, h);
+}
+  // ========== 悬浮球面板 ==========
 const BALL_ITEMS = [
   { id: 'world', name: '小世界', icon: 'world' },
   { id: 'worlds', name: '世界之外', icon: 'worlds' },
@@ -2409,6 +2739,7 @@ const BALL_ITEMS = [
   { id: 'data', name: '数据管理', icon: 'data' },
   { id: 'heartbeat', name: '心动瞬间', icon: 'heartbeat' },
   { id: 'playback', name: '回忆放映室', icon: 'playback' },
+  { id: 'timeline', name: '大事记', icon: 'stats' },
   { id: 'wish', name: '心愿单', icon: 'wish' },
   { id: 'important', name: '重要日', icon: 'important' },
   { id: 'attendance', name: '出勤', icon: 'attendance' },
@@ -2423,42 +2754,6 @@ const BALL_ITEMS = [
   { id: 'piggy', name: '存钱罐', icon: 'piggy' },
   { id: 'settings', name: '设置', icon: 'settings' }
 ];
-
-const ICONS = {
-  world: `<svg viewBox="0 0 24 24" fill="none" stroke="#4a3528" stroke-width="1.8"><circle cx="12" cy="12" r="8"/><ellipse cx="12" cy="12" rx="3.5" ry="8"/><line x1="4" y1="12" x2="20" y2="12"/></svg>`,
-  worlds: `<svg viewBox="0 0 24 24" fill="none" stroke="#4a3528" stroke-width="1.8"><circle cx="12" cy="12" r="5"/><ellipse cx="12" cy="12" rx="10" ry="4" transform="rotate(-20 12 12)"/><circle cx="20" cy="9" r="1.3" fill="#4a3528" stroke="none"/></svg>`,
-  mail: `<svg viewBox="0 0 24 24" fill="none" stroke="#4a3528" stroke-width="1.8"><rect x="3" y="5" width="18" height="14" rx="3"/><path d="M4 7l8 6 8-6"/></svg>`,
-  note: `<svg viewBox="0 0 24 24" fill="none" stroke="#4a3528" stroke-width="1.8"><path d="M5 4h11l3 3v13H5z"/><line x1="8" y1="9" x2="16" y2="9"/><line x1="8" y1="13" x2="16" y2="13"/></svg>`,
-  lover: `<svg viewBox="0 0 24 24" fill="#ff3b5c" stroke="none"><path d="M12,20 C12,20 4,14.5 4,9.5 C4,6.5 6.5,4.5 9,4.5 C11,4.5 12,6 12,6 C12,6 13,4.5 15,4.5 C17.5,4.5 20,6.5 20,9.5 C20,14.5 12,20 12,20 Z"/></svg>`,
-  music: `<svg viewBox="0 0 24 24" fill="none" stroke="#4a3528" stroke-width="1.8"><path d="M9 18V6l10-2v12"/><circle cx="6" cy="18" r="3"/><circle cx="16" cy="16" r="3"/></svg>`,
-  choice: `<svg viewBox="0 0 24 24" fill="none" stroke="#4a3528" stroke-width="1.8"><path d="M12 3v18M7 21h10M4 7l8-4 8 4"/><circle cx="12" cy="12" r="2" fill="#4a3528" stroke="none"/></svg>`,
-  stats: `<svg viewBox="0 0 24 24" fill="none" stroke="#4a3528" stroke-width="1.8"><rect x="5" y="12" width="3" height="7" rx="1.5"/><rect x="10.5" y="8" width="3" height="11" rx="1.5"/><rect x="16" y="4" width="3" height="15" rx="1.5"/></svg>`,
-  data: `<svg viewBox="0 0 24 24" fill="none" stroke="#4a3528" stroke-width="1.8"><path d="M7 16a4 4 0 01-.8-7.9 5 5 0 019.4-1.2A3.5 3.5 0 0117 16H7z"/><path d="M11 14l-2 2 2 2" stroke="#ff3b5c" stroke-width="2" fill="none" stroke-linecap="round"/></svg>`,
-  heartbeat: `<svg viewBox="0 0 24 24" fill="#ff8fb0" stroke="none"><path d="M12,20 C12,20 4,14.5 4,9.5 C4,6.5 6.5,4.5 9,4.5 C11,4.5 12,6 12,6 C12,6 13,4.5 15,4.5 C17.5,4.5 20,6.5 20,9.5 C20,14.5 12,20 12,20 Z"/></svg>`,
-  playback: `<svg viewBox="0 0 24 24" fill="none" stroke="#4a3528" stroke-width="1.8"><rect x="3" y="5" width="18" height="14" rx="3"/><line x1="3" y1="9" x2="21" y2="9"/><line x1="3" y1="15" x2="21" y2="15"/><circle cx="8" cy="12" r="2"/></svg>`,
-  wish: `<svg viewBox="0 0 24 24" fill="none" stroke="#ff3b5c" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 17l6-6-2-5 8 2-6 6 3 3z" fill="#ff3b5c" stroke="none"/><path d="M14 4l2 5 5 2-8 2-6 7" stroke="#ff3b5c" stroke-width="1.5" fill="none"/></svg>`,
-  important: `<svg viewBox="0 0 24 24" fill="none" stroke="#4a3528" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="5" width="16" height="16" rx="3"/><line x1="4" y1="9" x2="20" y2="9"/><line x1="8" y1="3" x2="8" y2="7"/><line x1="16" y1="3" x2="16" y2="7"/><path d="M12 15l1.2 2.4 2.6.4-1.9 1.8.4 2.6-2.3-1.2-2.3 1.2.4-2.6-1.9-1.8 2.6-.4z" fill="#ff3b5c" stroke="none"/></svg>`,
-  attendance: `<svg viewBox="0 0 24 24" fill="none" stroke="#4a3528" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 3"/><path d="M9 4l3 2 3-2" stroke-width="1.4"/></svg>`,
-  memo: `<svg viewBox="0 0 24 24" fill="none" stroke="#4a3528" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="5" y="3" width="14" height="18" rx="2"/><line x1="9" y1="8" x2="15" y2="8"/><line x1="9" y1="12" x2="15" y2="12"/><line x1="9" y1="16" x2="13" y2="16"/></svg>`,
-  bond: `<svg viewBox="0 0 24 24" fill="none" stroke="#4a3528" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M5 6C5 6 9 10 9 14C9 18 5 20 5 20"/><path d="M19 6C19 6 15 10 15 14C15 18 19 20 19 20"/><path d="M9 14L15 14" stroke-dasharray="2,2"/><path d="M12 13C12 13 10 16 10 17.5C10 19 11 20 12 20C13 20 14 19 14 17.5C14 16 12 13 12 13Z" fill="#ff3b5c" stroke="none"/></svg>`,
-  settings: `<svg viewBox="0 0 24 24" fill="none" stroke="#4a3528" stroke-width="1.8"><circle cx="12" cy="12" r="3"/><path d="M19 12a7 7 0 00-.1-1.2l2-1.5-2-3.4-2.4 1A7 7 0 0014.7 6L14 3.5h-4L9.3 6a7 7 0 00-1.8.9l-2.4-1-2 3.4 2 1.5A7 7 0 005 12c0 .4 0 .8.1 1.2l-2 1.5 2 3.4 2.4-1a7 7 0 001.8.9l.7 2.5h4l.7-2.5a7 7 0 001.8-.9l2.4 1 2-3.4-2-1.5c.1-.4.1-.8.1-1.2z"/></svg>`,
-  interact: `<svg viewBox="0 0 24 24" fill="none" stroke="#4a3528" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M8 13V5.5a1.5 1.5 0 013 0V12m0-5.5v-1a1.5 1.5 0 013 0V11m0-4.5a1.5 1.5 0 013 0V15a6 6 0 01-6 6h-1a8 8 0 01-4-1.5L4 18"/></svg>`,
-  period: `<svg viewBox="0 0 24 24" fill="none" stroke="#e88fb0" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="3" fill="#ff8fb0" stroke="none"/><path d="M12 9C12 6 10 5 9 3C8 5 6 6 6 9C6 12 9 14.5 12 16C15 14.5 18 12 18 9C18 6 16 5 15 3C14 5 12 6 12 9Z" fill="#ffb0c8" fill-opacity="0.5" stroke="#e88fb0"/></svg>`,
-  date: `<svg viewBox="0 0 24 24" fill="none" stroke="#4a3528" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 21C12 21 4 14.5 4 9.5C4 6.5 6.5 4.5 9 4.5C11 4.5 12 6 12 6C12 6 13 4.5 15 4.5C17.5 4.5 20 6.5 20 9.5C20 14.5 12 21 12 21Z" fill="#ffb0c8" fill-opacity="0.4"/><path d="M9 10l2 2 4-4" stroke="#ff3b5c" stroke-width="1.5" fill="none"/></svg>`,
-  pet: `<svg viewBox="0 0 24 24" fill="none" stroke="#4a3528" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="9" cy="9" r="3"/><circle cx="17" cy="10" r="2.5"/><path d="M3 12c2-3 5-4 8-4s6 1 9 4l-2 3-4-1-3 2-4-1-2 3z"/></svg>`,
-  plant: `<svg viewBox="0 0 24 24" fill="none" stroke="#4a3528" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 20v-6"/><path d="M12 14c0-4 2-7 6-8-1 4-3 7-6 8z"/><path d="M12 12c0-3-2-6-6-7 1 3 3 6 6 7z"/><path d="M8 20h8"/></svg>`,
-  voice: `<svg viewBox="0 0 24 24" fill="none" stroke="#4a3528" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3a3 3 0 00-3 3v6a3 3 0 006 0V6a3 3 0 00-3-3z"/><path d="M5 10a7 7 0 0014 0M12 17v4"/></svg>`,
-  account: `<svg viewBox="0 0 24 24" fill="none" stroke="#4a3528" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="8"/><path d="M12 7v10M9.5 9.5c0-1 1-1.5 2.5-1.5s2.5.5 2.5 1.5-1 1.5-2.5 1.5-2.5.5-2.5 1.5 1 1.5 2.5 1.5 2.5-.5 2.5-1.5"/></svg>`,
-  piggy: `<svg viewBox="0 0 24 24" fill="none" stroke="#4a3528" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 10h12c2 0 4-1 4-3v2c0 2-2 3-4 3h-2v4h-2v-4h-4c-2 0-3-1-3-3v-6c0-2 1-3 3-3h6l-1 2"/><circle cx="13" cy="12" r="1" fill="#4a3528" stroke="none"/><path d="M4 14v2c0 2 1 3 3 3"/><path d="M6 8c0-1 1-2 2-2"/></svg>`
-};
-
-const WORLD_ICONS = {
-  real: `<svg viewBox="0 0 24 24" fill="none" stroke="#4a3528" stroke-width="1.8"><circle cx="12" cy="12" r="8"/><ellipse cx="12" cy="12" rx="3.5" ry="8"/><line x1="4" y1="12" x2="20" y2="12"/></svg>`,
-  west: `<svg viewBox="0 0 24 24" fill="none" stroke="#4a3528" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M5 4h11l3 3v13H5z"/><path d="M16 4v3h3"/><line x1="8" y1="10" x2="16" y2="10"/><line x1="8" y1="13" x2="16" y2="13"/><line x1="8" y1="16" x2="13" y2="16"/></svg>`,
-  yao: `<svg viewBox="0 0 24 24" fill="none" stroke="#4a3528" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M3 19l5-8 3 4 3-6 7 10z"/><circle cx="17" cy="6" r="2.5"/></svg>`,
-  star: `<svg viewBox="0 0 24 24" fill="none" stroke="#4a3528" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2c2 3 2 6 2 9l3 2v6l-5-3-5 3v-6l3-2c0-3 0-6 2-9z"/><circle cx="12" cy="8" r="1.5" fill="#4a3528" stroke="none"/></svg>`,
-  lost: `<svg viewBox="0 0 24 24" fill="none" stroke="#4a3528" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M5 20V10a7 7 0 0114 0v10"/><path d="M3 20h18"/><path d="M9 20v-6a3 3 0 016 0v6" stroke-dasharray="2,2"/></svg>`
-};
 
 function renderBallGrid() {
   const grid = document.getElementById('ball-grid');
@@ -2479,6 +2774,7 @@ function onBallItemClick(item) {
   else if (item.id === 'settings') openSettingsPanel();
   else if (item.id === 'heartbeat') openHeartPanel();
   else if (item.id === 'playback') openPlaybackPanel();
+  else if (item.id === 'timeline') openTimelinePanel();
   else if (item.id === 'music') openMusicPanel();
   else if (item.id === 'choice') openChoicePanel();
   else if (item.id === 'mailbox') openMailboxPanel();
@@ -2517,117 +2813,6 @@ function closeBallPanel() {
 document.getElementById('floating-ball').addEventListener('click', (e) => {
   if (!e.defaultPrevented) toggleBallPanel();
 });
-  // ========== 世界之外 ==========
-function openWorldsPanel() {
-  const overlay = createModal(`<div id="worlds-content"></div>`);
-  renderWorldsContent(overlay);
-  overlay.querySelector('#worlds-content').addEventListener('click', (e) => {
-    if (e.target.closest('#worlds-add-btn')) {
-      openWorldEditDialog(null, overlay);
-    }
-  });
-  registerPanelUpdater('worlds', () => renderWorldsContent(overlay));
-}
-
-function renderWorldsContent(overlay) {
-  const content = overlay.querySelector('#worlds-content');
-  const worlds = settings.worlds || [];
-  let html = '<div class="big-input-title">世界之外</div>';
-  html += '<div style="font-size:12px;color:#8b6f60;margin-bottom:12px;text-align:center;">每个世界有自己的时差和流速</div>';
-  worlds.forEach(w => {
-    const current = w.id === settings.currentWorldId ? ' current' : '';
-    const speedText = w.speed === 1 ? '同速' : `${w.speed}倍速`;
-    const offsetText = w.offset >= 0 ? `+${w.offset}h` : `${w.offset}h`;
-    html += `
-      <div class="world-card${current}" data-id="${w.id}">
-        <div class="world-icon">${WORLD_ICONS[w.icon] || WORLD_ICONS.real}</div>
-        <div class="world-info">
-          <div class="world-name">${escapeHtml(w.name)}</div>
-          <div class="world-meta">时差 ${offsetText} ｜ ${speedText}</div>
-        </div>
-        <div class="world-ops">
-          <button class="world-enter" data-id="${w.id}">${w.id === settings.currentWorldId ? '当前' : '进入'}</button>
-          <button class="world-edit" data-id="${w.id}">改</button>
-          <button class="world-del" data-id="${w.id}">✕</button>
-        </div>
-      </div>`;
-  });
-  html += '<button class="upload-btn" id="worlds-add-btn">添加世界</button>';
-  content.innerHTML = html;
-  content.querySelectorAll('.world-enter').forEach(btn => {
-    btn.addEventListener('click', async () => {
-      settings.currentWorldId = btn.dataset.id;
-      await saveSettings();
-      updateStatusBar();
-      renderWorldsContent(overlay);
-      const world = settings.worlds.find(w => w.id === btn.dataset.id);
-      showToast('已进入' + world.name);
-    });
-  });
-  content.querySelectorAll('.world-edit').forEach(btn => {
-    btn.addEventListener('click', () => {
-      const world = settings.worlds.find(w => w.id === btn.dataset.id);
-      openWorldEditDialog(world, overlay);
-    });
-  });
-  content.querySelectorAll('.world-del').forEach(btn => {
-    btn.addEventListener('click', async () => {
-      if (settings.worlds.length <= 1) return showToast('至少保留一个世界');
-      settings.worlds = settings.worlds.filter(w => w.id !== btn.dataset.id);
-      if (settings.currentWorldId === btn.dataset.id) settings.currentWorldId = settings.worlds[0].id;
-      await saveSettings();
-      renderWorldsContent(overlay);
-    });
-  });
-}
-
-function openWorldEditDialog(world, panelOverlay) {
-  const isNew = !world;
-  const w = world || { id: 'w_' + Date.now(), name: '新世界', icon: 'real', offset: 0, speed: 1 };
-  const overlay = createModal(`
-    <div class="big-input-title">${isNew ? '添加世界' : '编辑世界'}</div>
-    <input type="text" id="world-name-input" placeholder="世界名" value="${escapeHtml(w.name)}" style="width:100%;background:rgba(255,255,255,0.5);border:1px solid rgba(255,255,255,0.6);border-radius:14px;padding:10px 14px;font-size:14px;color:#4a3f3a;outline:none;margin-bottom:8px;">
-    <div style="font-size:13px;color:#4a3528;margin-bottom:4px;">图标</div>
-    <div class="library-grid" id="world-icon-grid"></div>
-    <div style="font-size:13px;color:#4a3528;margin:12px 0 4px 0;">时差（小时，-12 ~ +14）</div>
-    <input type="number" id="world-offset-input" value="${w.offset}" style="width:100%;background:rgba(255,255,255,0.5);border:1px solid rgba(255,255,255,0.6);border-radius:14px;padding:10px 14px;font-size:14px;color:#4a3f3a;outline:none;margin-bottom:8px;">
-    <div style="font-size:13px;color:#4a3528;margin-bottom:4px;">流速（1 = 同速，30 = 你1天他30天）</div>
-    <input type="number" id="world-speed-input" value="${w.speed}" min="0.1" step="0.1" style="width:100%;background:rgba(255,255,255,0.5);border:1px solid rgba(255,255,255,0.6);border-radius:14px;padding:10px 14px;font-size:14px;color:#4a3f3a;outline:none;margin-bottom:12px;">
-    <button class="save-btn-center" id="save-world">保存</button>`);
-  let pickedIcon = w.icon;
-  const iconGrid = overlay.querySelector('#world-icon-grid');
-  Object.keys(WORLD_ICONS).forEach(key => {
-    const div = document.createElement('div');
-    div.className = 'lib-item' + (key === pickedIcon ? ' active' : '');
-    div.style.display = 'flex';
-    div.style.alignItems = 'center';
-    div.style.justifyContent = 'center';
-    div.style.background = 'rgba(255,255,255,0.5)';
-    div.innerHTML = WORLD_ICONS[key];
-    div.addEventListener('click', () => {
-      pickedIcon = key;
-      iconGrid.querySelectorAll('.lib-item').forEach(el => el.classList.remove('active'));
-      div.classList.add('active');
-    });
-    iconGrid.appendChild(div);
-  });
-  overlay.querySelector('#save-world').addEventListener('click', async () => {
-    const name = overlay.querySelector('#world-name-input').value.trim() || '新世界';
-    const offset = Number(overlay.querySelector('#world-offset-input').value) || 0;
-    const speed = Number(overlay.querySelector('#world-speed-input').value) || 1;
-    if (isNew) {
-      settings.worlds.push({ id: w.id, name, icon: pickedIcon, offset, speed });
-    } else {
-      const target = settings.worlds.find(x => x.id === w.id);
-      if (target) { target.name = name; target.icon = pickedIcon; target.offset = offset; target.speed = speed; }
-    }
-    await saveSettings();
-    overlay.remove();
-    panelOverlay.remove();
-    openWorldsPanel();
-    showToast('世界已保存');
-  });
-}
 
 // ========== 小世界 ==========
 function openWorldPanel() {
@@ -2649,6 +2834,8 @@ function openWorldPanel() {
       <div class="ball-item" id="world-decision-pool"><div class="icon-wrap">${ICONS.choice}</div><span>决定回应池</span></div>
       <div class="ball-item" id="world-quiz-pool"><div class="icon-wrap">${ICONS.voice}</div><span>问答回应池</span></div>
       <div class="ball-item" id="world-together"><div class="icon-wrap">${ICONS.date}</div><span>一起活动库</span></div>
+      <div class="ball-item" id="world-highdim"><div class="icon-wrap">${ICONS.heartbeat}</div><span>高维彩蛋</span></div>
+      <div class="ball-item" id="world-important-notes"><div class="icon-wrap">${ICONS.memo}</div><span>重要记事</span></div>
     </div>`);
   overlay.querySelector('#world-card').addEventListener('click', () => { overlay.remove(); openCardPanel(); });
   overlay.querySelector('#world-sticker').addEventListener('click', () => { overlay.remove(); openStickerPanel(); });
@@ -2666,6 +2853,8 @@ function openWorldPanel() {
   overlay.querySelector('#world-decision-pool').addEventListener('click', () => { overlay.remove(); openDecisionPoolPanel(); });
   overlay.querySelector('#world-quiz-pool').addEventListener('click', () => { overlay.remove(); openQuizPoolPanel(); });
   overlay.querySelector('#world-together').addEventListener('click', () => { overlay.remove(); openTogetherLibraryPanel(); });
+  overlay.querySelector('#world-highdim').addEventListener('click', () => { overlay.remove(); openHighDimPanel(); });
+  overlay.querySelector('#world-important-notes').addEventListener('click', () => { overlay.remove(); openImportantNotesPanel(); });
 }
 
 // ========== 字卡面板 ==========
@@ -3131,7 +3320,7 @@ async function updateAvatarPanelPreviews(overlay) {
   const me = overlay.querySelector('#about-me-avatar');
   const taData = await resolveMedia(settings.taAvatar);
   const meData = await resolveMedia(settings.meAvatar);
-  ta.src = taData || 'data:image/svg+xml,' + encodeURIComponent('<svg xmlns="http://www.w3.org/2000/svg" width="52" height="52"><circle cx="26" cy="26" r="25" fill="rgba(255,255,255,0.5)"/><text x="26" y="33" text-anchor="middle" font-size="18" fill="rgba(90,70,60,0.6)">TA</text></svg>');
+  ta.src = taData || 'data:image/svg+xml,' + encodeURIComponent('<svg xmlns="http://www.w3.org/2000/svg" width="52" height="52"><circle cx="26" cy="26" r="25" fill="rgba(255,255,255,0.5)"/><text x="26" y="33" text-anchor="middle" font-size="18" fill="rgba(90,70,60,0.6)">遇</text></svg>');
   me.src = meData || 'data:image/svg+xml,' + encodeURIComponent('<svg xmlns="http://www.w3.org/2000/svg" width="52" height="52"><circle cx="26" cy="26" r="25" fill="rgba(255,255,255,0.5)"/><text x="26" y="33" text-anchor="middle" font-size="18" fill="rgba(90,70,60,0.6)">我</text></svg>');
 }
 
@@ -3139,9 +3328,9 @@ async function loadAvatarLibrary(overlay) {
   const list = await libGet('avatarLibrary');
   const grid = overlay.querySelector('#avatar-library');
   grid.innerHTML = '';
+  const taData = await resolveMedia(settings.taAvatar);
+  const meData = await resolveMedia(settings.meAvatar);
   for (const a of list) {
-    const taData = await resolveMedia(settings.taAvatar);
-    const meData = await resolveMedia(settings.meAvatar);
     const div = document.createElement('div');
     div.className = 'lib-item';
     if (taData === a.data || meData === a.data) div.classList.add('active');
@@ -3373,50 +3562,14 @@ async function loadBGPanel(overlay) {
     inp.click();
   };
 }
-
-async function applyBG() {
-  const canvas = document.getElementById('bg-canvas');
-  const ctx = canvas.getContext('2d');
-  canvas.width = window.innerWidth;
-  canvas.height = window.innerHeight;
-  if (settings.bgCurrent) {
-    const data = await resolveMedia(settings.bgCurrent);
-    if (data) {
-      const img = new Image();
-      img.onload = () => {
-        ctx.clearRect(0, 0, canvas.width, canvas.height);
-        ctx.globalAlpha = 0.85;
-        ctx.drawImage(img, 0, 0, canvas.width, canvas.height);
-        ctx.globalAlpha = 1;
-        ctx.fillStyle = 'rgba(255,255,255,0.12)';
-        ctx.fillRect(0, 0, canvas.width, canvas.height);
-      };
-      img.src = data;
-      cachedBGImage = img;
-      return;
-    } else {
-      settings.bgCurrent = '';
-      await saveSettings();
-    }
-  }
-  cachedBGImage = null;
-  drawDefaultBG(ctx, canvas.width, canvas.height);
-}
-
-function drawDefaultBG(ctx, w, h) {
-  const grad = ctx.createLinearGradient(0, 0, w, h);
-  grad.addColorStop(0, '#fdd9c8');
-  grad.addColorStop(0.4, '#f7d4e3');
-  grad.addColorStop(0.7, '#dcd3f5');
-  grad.addColorStop(1, '#c8ddf5');
-  ctx.fillStyle = grad;
-  ctx.fillRect(0, 0, w, h);
-}
   // ========== 设置面板 ==========
 function openSettingsPanel() {
+  const replyTplName = { instant: '即时陪伴（1~3秒）', natural: '日常闲聊（5~8秒）', distant: '若即若离（30秒~2分钟）', custom: '自定义' }[settings.replyTpl] || '选择模板';
+  const stopTplName = { fast: '快点回（3~5秒）', normal: '正常（15~30秒）', slow: '慢点（30秒~1分钟）', custom: '自定义' }[settings.stopDetectTpl] || '选择模板';
+  const activeTplName = { rare: '偶尔', normal: '正常', often: '经常', custom: '自定义' }[settings.activeTpl] || '选择模板';
   const overlay = createModal(`
     <div style="margin-bottom:8px;font-size:13px;color:#4a3528;">回复速度</div>
-    <button class="mini-btn" id="set-reply-tpl-btn" style="width:100%;margin-bottom:8px;">选择模板</button>
+    <button class="mini-btn" id="set-reply-tpl-btn" style="width:100%;margin-bottom:8px;">当前：${replyTplName}</button>
     <div id="set-reply-custom" style="display:none;margin-bottom:8px;">
       <div style="display:flex;gap:8px;align-items:center;justify-content:center;">
         <span style="font-size:13px;color:#4a3528;">最小</span>
@@ -3428,7 +3581,7 @@ function openSettingsPanel() {
       </div>
     </div>
     <div style="margin-bottom:8px;font-size:13px;color:#4a3528;">停止检测时间</div>
-    <button class="mini-btn" id="set-stop-tpl-btn" style="width:100%;margin-bottom:8px;">选择模板</button>
+    <button class="mini-btn" id="set-stop-tpl-btn" style="width:100%;margin-bottom:8px;">当前：${stopTplName}</button>
     <div id="set-stop-custom" style="display:none;margin-bottom:8px;">
       <div style="display:flex;gap:8px;align-items:center;justify-content:center;">
         <span style="font-size:13px;color:#4a3528;">最小</span>
@@ -3439,7 +3592,7 @@ function openSettingsPanel() {
         <span style="font-size:13px;color:#4a3528;">秒</span>
       </div>
     </div>
-    <div style="margin-bottom:8px;font-size:13px;color:#4a3528;">TA主动发消息频率</div>
+    <div style="margin-bottom:8px;font-size:13px;color:#4a3528;">TA主动发消息频率（当前：${activeTplName}）</div>
     <div style="display:flex;gap:8px;margin-bottom:8px;flex-wrap:wrap;">
       <button class="mini-btn active-tpl" data-tpl="rare">偶尔</button>
       <button class="mini-btn active-tpl" data-tpl="normal">正常</button>
@@ -3639,9 +3792,7 @@ function openSettingsPanel() {
     if (!('Notification' in window)) return showToast('浏览器不支持通知');
     if (Notification.permission === 'granted') return showToast('通知已开启');
     if (Notification.permission === 'denied') return showToast('通知被拒绝，请到浏览器设置打开');
-    Notification.requestPermission().then(perm => {
-      showToast(perm === 'granted' ? '通知已开启' : '通知未开启');
-    });
+    Notification.requestPermission().then(perm => { showToast(perm === 'granted' ? '通知已开启' : '通知未开启'); });
   });
   overlay.querySelector('#set-backup-now').addEventListener('click', () => backupNow());
   overlay.querySelector('#set-clear-all').addEventListener('click', () => {
@@ -3728,7 +3879,7 @@ function openAutonomyDetailPanel() {
     { key: 'taNoteProb', name: '留言概率', vals: [0.03, 0.08, 0.15] }
   ];
   const tplRows = [
-    { tplKey: 'videoCallTpl', minKey: 'videoCallMin', maxKey: 'videoCallMax', name: '来电频率', vals: [[12*3600000, 12*3600000+6*3600000], [3*3600000, 6*3600000], [1*3600000, 3*3600000]], labels: ['偶尔','正常','经常'] },
+    { tplKey: 'videoCallTpl', minKey: 'videoCallMin', maxKey: 'videoCallMax', name: '来电频率', vals: [[12*3600000, 18*3600000], [3*3600000, 6*3600000], [1*3600000, 3*3600000]] },
     { tplKey: 'taQuizTpl', minKey: 'taQuizMin', maxKey: 'taQuizMax', name: '主动问答频率', vals: [[4*3600000, 12*3600000], [2*3600000, 6*3600000], [1*3600000, 3*3600000]] },
     { tplKey: 'taPostTpl', minKey: 'taPostMin', maxKey: 'taPostMax', name: '发动态频率', vals: [[12*3600000, 36*3600000], [1.5*3600000, 6*3600000], [0.5*3600000, 2*3600000]] },
     { tplKey: 'taCheckinTpl', minKey: 'taCheckinMin', maxKey: 'taCheckinMax', name: '主动打卡频率', vals: [[12*3600000, 24*3600000], [1*3600000, 2*3600000], [0.5*3600000, 1*3600000]] },
@@ -3768,7 +3919,6 @@ function openAutonomyDetailPanel() {
     });
   });
   overlay.querySelectorAll('.tpl-row-btn').forEach(btn => {
-    const cur = settings[btn.dataset.tplkey];
     const isSel = Math.abs(settings[btn.dataset.minkey] - Number(btn.dataset.min)) < 1 &&
                   Math.abs(settings[btn.dataset.maxkey] - Number(btn.dataset.max)) < 1;
     if (isSel) {
@@ -3793,8 +3943,25 @@ async function renderMessages() {
   const todayMsgs = msgs.filter(m => new Date(m.timestamp).toDateString() === today);
   area.innerHTML = '';
   todayMsgs.forEach(msg => area.appendChild(createMessageEl(msg)));
-  area.scrollTop = area.scrollHeight;
+  scrollToBottom(area);
   renderPinnedArea(todayMsgs);
+}
+
+function scrollToBottom(area) {
+  if (!area) return;
+  area.scrollTop = area.scrollHeight;
+  setTimeout(() => { area.scrollTop = area.scrollHeight; }, 100);
+}
+
+function getCurrentWorldColor() {
+  const world = getCurrentWorld();
+  const colors = {
+    real: '#4a9ad4', era: '#b88a5c', xian: '#7a6ee0', star: '#5ab0e0', lost: '#e8789f',
+    dujian: '#9a7bb0', xiaye: '#7a6ee0', wujian: '#8a5a6a', woji: '#7bc47f', dakai: '#5a5a7a',
+    tiandi: '#7bc47f', qiyun: '#8bb08a', yunling: '#b88a5c', ruxing: '#e8b05c', zhaohuan: '#8a7bff',
+    beng08: '#e8789f', beng063: '#4a9ad4', ouou: '#c08fb0', mishi: '#9a7bb0', mishiroom: '#5ab0e0', tianming: '#d4a04a'
+  };
+  return colors[world ? world.id : 'real'] || '#ff8fb0';
 }
 
 function createMessageEl(msg) {
@@ -3810,11 +3977,15 @@ function createMessageEl(msg) {
   }
   row.className = 'message-row ' + msg.sender;
   row.dataset.id = msg.id;
+  if (msg.sender === 'ta' && msg.worldMark) {
+    row.classList.add('world-mark');
+    row.style.setProperty('--world-mark-color', msg.worldMark);
+  }
   const avatar = document.createElement('img');
   avatar.className = 'msg-avatar';
   avatar.src = msg.sender === 'me'
     ? (settings.meAvatar || 'data:image/svg+xml,' + encodeURIComponent('<svg xmlns="http://www.w3.org/2000/svg" width="32" height="32"><circle cx="16" cy="16" r="15" fill="rgba(255,255,255,0.5)"/><text x="16" y="21" text-anchor="middle" font-size="12" fill="rgba(90,70,60,0.6)">我</text></svg>'))
-    : (settings.taAvatar || 'data:image/svg+xml,' + encodeURIComponent('<svg xmlns="http://www.w3.org/2000/svg" width="32" height="32"><circle cx="16" cy="16" r="15" fill="rgba(255,255,255,0.5)"/><text x="16" y="21" text-anchor="middle" font-size="12" fill="rgba(90,70,60,0.6)">TA</text></svg>'));
+    : (settings.taAvatar || 'data:image/svg+xml,' + encodeURIComponent('<svg xmlns="http://www.w3.org/2000/svg" width="32" height="32"><circle cx="16" cy="16" r="15" fill="rgba(255,255,255,0.5)"/><text x="16" y="21" text-anchor="middle" font-size="12" fill="rgba(90,70,60,0.6)">遇</text></svg>'));
   const wrapper = document.createElement('div');
   wrapper.className = 'msg-content-wrapper';
   if (msg.quoteContent) {
@@ -3834,11 +4005,30 @@ function createMessageEl(msg) {
   } else if (msg.giftData) {
     bubble.style.background = 'transparent';
     bubble.style.border = 'none';
-    bubble.innerHTML = `<div class="msg-gift-card"><div class="msg-gift-icon">${msg.giftData.icon || '🎁'}</div><div class="msg-gift-name">${escapeHtml(msg.giftData.name || '礼物')}</div><div class="msg-gift-cost">-${msg.giftData.cost || 0}爱意值</div></div>`;
+    const sparks = ['✨', '💗', '⭐', '💫'];
+    bubble.innerHTML = `<div class="msg-gift-card">
+      <span class="gift-sparkle" style="top:6px;left:10px;">${sparks[0]}</span>
+      <span class="gift-sparkle" style="top:10px;right:12px;animation-delay:.6s;">${sparks[1]}</span>
+      <span class="gift-sparkle" style="bottom:8px;left:16px;animation-delay:1.2s;">${sparks[2]}</span>
+      <span class="gift-sparkle" style="bottom:10px;right:10px;animation-delay:1.8s;">${sparks[3]}</span>
+      <div class="msg-gift-icon">${msg.giftData.icon || '🎁'}</div>
+      <div class="msg-gift-name">${escapeHtml(msg.giftData.name || '礼物')}</div>
+      <div class="msg-gift-cost">-${msg.giftData.cost || 0}爱意值</div>
+    </div>`;
   } else if (msg.interactData) {
     if (msg.interactData.couple) {
       bubble.className = 'msg-bubble msg-interact-couple';
-      bubble.textContent = msg.interactData.text || '';
+      const taAv = settings.taAvatar || '';
+      const meAv = settings.meAvatar || '';
+      bubble.innerHTML = `
+        <span class="couple-spark" style="top:6px;left:10px;">✨</span>
+        <span class="couple-spark" style="bottom:8px;right:12px;animation-delay:.8s;">💗</span>
+        <div class="couple-avatars">
+          <img src="${taAv || 'data:image/svg+xml,' + encodeURIComponent('<svg xmlns="http://www.w3.org/2000/svg" width="26" height="26"><circle cx="13" cy="13" r="12" fill="rgba(255,255,255,0.6)"/><text x="13" y="18" text-anchor="middle" font-size="10" fill="#a04a6a">遇</text></svg>')}">
+          <span class="couple-heart">❤</span>
+          <img src="${meAv || 'data:image/svg+xml,' + encodeURIComponent('<svg xmlns="http://www.w3.org/2000/svg" width="26" height="26"><circle cx="13" cy="13" r="12" fill="rgba(255,255,255,0.6)"/><text x="13" y="18" text-anchor="middle" font-size="10" fill="#a04a6a">我</text></svg>')}">
+        </div>
+        <div class="couple-text">${escapeHtml(msg.interactData.text || '')}</div>`;
     } else {
       bubble.style.background = 'transparent';
       bubble.style.border = 'none';
@@ -3972,8 +4162,9 @@ async function sendMyMessage() {
 
 function appendMessage(msg) {
   const area = document.getElementById('messages-area');
+  const nearBottom = area.scrollHeight - area.scrollTop - area.clientHeight < 120;
   area.appendChild(createMessageEl(msg));
-  area.scrollTop = area.scrollHeight;
+  if (nearBottom) scrollToBottom(area);
   idbGetAll('messages').then(msgs => {
     const today = new Date().toDateString();
     const todayMsgs = msgs.filter(m => new Date(m.timestamp).toDateString() === today);
@@ -4053,9 +4244,12 @@ async function triggerTAReply() {
     }
   }
   showTyping(true);
+  const mood = getTodayMood();
   let waitTime = Math.random() * (settings.replyMax * 1000 - settings.replyMin * 1000) * 0.6 + settings.replyMin * 1000 * 0.4;
+  waitTime *= mood.factor;
   await delay(waitTime);
   showTyping(false);
+  const worldColor = getCurrentWorldColor();
   for (let i = 0; i < replyQueue.length; i++) {
     const item = replyQueue[i];
     let content = item.type === 'sticker' ? '[贴纸]' : item.content;
@@ -4075,7 +4269,8 @@ async function triggerTAReply() {
       pinned: false,
       pinBy: '',
       heartMark: null,
-      quoteContent: null
+      quoteContent: null,
+      worldMark: worldColor
     };
     const id = await idbPutReturnId('messages', msg);
     msg.id = id;
@@ -4107,6 +4302,7 @@ function scheduleTAActive() {
       showTyping(true);
       await delay(1000 + Math.random() * 2000);
       showTyping(false);
+      const worldColor = getCurrentWorldColor();
       for (let i = 0; i < count; i++) {
         const card = cards[Math.floor(Math.random() * cards.length)];
         let content = applyMoodToText(card.content);
@@ -4115,7 +4311,7 @@ function scheduleTAActive() {
           const emoji = emojis[Math.floor(Math.random() * emojis.length)];
           content = Math.random() < 0.5 ? emoji + ' ' + content : content + ' ' + emoji;
         }
-        const msg = { sender: 'ta', content, timestamp: Date.now(), pinned: false, pinBy: '', heartMark: null, quoteContent: null };
+        const msg = { sender: 'ta', content, timestamp: Date.now(), pinned: false, pinBy: '', heartMark: null, quoteContent: null, worldMark: worldColor };
         const id = await idbPutReturnId('messages', msg);
         msg.id = id;
         appendMessage(msg);
@@ -4132,7 +4328,7 @@ function scheduleTAActive() {
 
 function sendNotification(content) {
   if ('Notification' in window && Notification.permission === 'granted') {
-    new Notification('TA', { body: content });
+    new Notification('易遇', { body: content });
   }
 }
   // ========== TA自主行为 ==========
@@ -4156,9 +4352,14 @@ function scheduleTAAutonomy() {
           await idbPut('messages', target);
           renderMessages();
         } else if (action < 0.55) {
-          target.heartMark = target.heartMark ? null : 'TA指定';
+          target.heartMark = 'TA指定';
           await idbPut('messages', target);
           renderMessages();
+          const t = new Date().toLocaleTimeString('zh-CN', { hour: '2-digit', minute: '2-digit' });
+          const sysMsg = { sender: 'ta', content: t + ' 易遇指定你收藏了这条', timestamp: Date.now(), pinned: false, pinBy: '', heartMark: null, isSystem: true };
+          const sid = await idbPutReturnId('messages', sysMsg);
+          sysMsg.id = sid;
+          appendMessage(sysMsg);
         } else if (action < 0.65 && Math.random() < settings.taQuoteProb) {
           await taQuoteMessage(target);
         } else if (action < 0.75 && Math.random() < settings.taNickProb) {
@@ -4189,12 +4390,13 @@ async function taQuoteMessage(target) {
     pinned: false,
     pinBy: '',
     heartMark: null,
-    quoteContent: target.content
+    quoteContent: target.content,
+    worldMark: getCurrentWorldColor()
   };
   const id = await idbPutReturnId('messages', msg);
   msg.id = id;
   appendMessage(msg);
-  sendNotification('TA引用了你的话');
+  sendNotification('易遇引用了你的话');
 }
 
 async function taChangeNick() {
@@ -4204,7 +4406,7 @@ async function taChangeNick() {
   settings.taNick = nick;
   await saveSettings();
   updateStatusBar();
-  const msg = { sender: 'ta', content: '我换了个昵称：' + nick, timestamp: Date.now(), pinned: false, pinBy: '', heartMark: null, quoteContent: null };
+  const msg = { sender: 'ta', content: '我换了个昵称：' + nick, timestamp: Date.now(), pinned: false, pinBy: '', heartMark: null, quoteContent: null, worldMark: getCurrentWorldColor() };
   const id = await idbPutReturnId('messages', msg);
   msg.id = id;
   appendMessage(msg);
@@ -4217,7 +4419,7 @@ async function taChangeMeNick() {
   const nick = nicks[Math.floor(Math.random() * nicks.length)];
   settings.meNick = nick;
   await saveSettings();
-  const msg = { sender: 'ta', content: '我给你换了个昵称：' + nick, timestamp: Date.now(), pinned: false, pinBy: '', heartMark: null, quoteContent: null };
+  const msg = { sender: 'ta', content: '我给你换了个昵称：' + nick, timestamp: Date.now(), pinned: false, pinBy: '', heartMark: null, quoteContent: null, worldMark: getCurrentWorldColor() };
   const id = await idbPutReturnId('messages', msg);
   msg.id = id;
   appendMessage(msg);
@@ -4232,7 +4434,7 @@ async function taSendSticker() {
   const id = await idbPutReturnId('messages', msg);
   msg.id = id;
   appendMessage(msg);
-  sendNotification('TA发了一张贴纸');
+  sendNotification('易遇发了一张贴纸');
 }
 
 async function taSendGift() {
@@ -4247,7 +4449,7 @@ async function taSendGift() {
   const id = await idbPutReturnId('messages', msg);
   msg.id = id;
   appendMessage(msg);
-  sendNotification('TA送了你一个礼物');
+  sendNotification('易遇送了你一个礼物');
 }
 
 async function taInteract() {
@@ -4257,7 +4459,7 @@ async function taInteract() {
   const item = pool[Math.floor(Math.random() * pool.length)];
   const text = typeof item === 'string' ? item : item.text;
   const isCouple = (interactions.couple || []).includes(item);
-  const msg = { sender: 'ta', content: text, interactData: { text, couple: isCouple }, timestamp: Date.now(), pinned: false, pinBy: '', heartMark: null, quoteContent: null };
+  const msg = { sender: 'ta', content: text, interactData: { text, couple: isCouple }, timestamp: Date.now(), pinned: false, pinBy: '', heartMark: null, quoteContent: null, worldMark: getCurrentWorldColor() };
   const id = await idbPutReturnId('messages', msg);
   msg.id = id;
   appendMessage(msg);
@@ -4290,7 +4492,12 @@ function scheduleTAWorldChange() {
         settings.currentWorldId = pick.id;
         await saveSettings();
         updateStatusBar();
-        const msg = { sender: 'ta', content: '我到' + pick.name + '了', timestamp: Date.now(), pinned: false, pinBy: '', heartMark: null, quoteContent: null };
+        settings.visitedWorlds = settings.visitedWorlds || [];
+        if (!settings.visitedWorlds.includes(pick.id)) {
+          settings.visitedWorlds.push(pick.id);
+          addBigEvent('world', '第一次到达：' + pick.name + ' · ' + pick.role);
+        }
+        const msg = { sender: 'ta', content: '我到' + pick.name + '了', timestamp: Date.now(), pinned: false, pinBy: '', heartMark: null, quoteContent: null, isSystem: true };
         const id = await idbPutReturnId('messages', msg);
         msg.id = id;
         appendMessage(msg);
@@ -4301,7 +4508,7 @@ function scheduleTAWorldChange() {
   }, next);
 }
 
-// ========== TA 主动换头像 / 送头像 / 换背景 ==========
+// ========== TA 换头像 / 送头像 / 换背景 ==========
 function scheduleTAAvatarChange() {
   setInterval(async () => {
     if (Math.random() < settings.taAvatarProb) {
@@ -4311,7 +4518,7 @@ function scheduleTAAvatarChange() {
       settings.taAvatar = pick.data;
       await saveSettings();
       applySettings();
-      const msg = { sender: 'ta', content: '我换了一个头像', timestamp: Date.now(), pinned: false, pinBy: '', heartMark: null, quoteContent: null };
+      const msg = { sender: 'ta', content: '我换了一个头像', timestamp: Date.now(), pinned: false, pinBy: '', heartMark: null, quoteContent: null, worldMark: getCurrentWorldColor() };
       const id = await idbPutReturnId('messages', msg);
       msg.id = id;
       appendMessage(msg);
@@ -4329,7 +4536,7 @@ function scheduleTAGiveAvatar() {
       settings.meAvatar = pick.data;
       await saveSettings();
       applySettings();
-      const msg = { sender: 'ta', content: '我给你换了一个头像', timestamp: Date.now(), pinned: false, pinBy: '', heartMark: null, quoteContent: null };
+      const msg = { sender: 'ta', content: '我给你换了一个头像', timestamp: Date.now(), pinned: false, pinBy: '', heartMark: null, quoteContent: null, worldMark: getCurrentWorldColor() };
       const id = await idbPutReturnId('messages', msg);
       msg.id = id;
       appendMessage(msg);
@@ -4347,7 +4554,7 @@ function scheduleTABGChange() {
       settings.bgCurrent = pick.ref;
       await saveSettings();
       applyBG();
-      const msg = { sender: 'ta', content: '我把背景换了一下', timestamp: Date.now(), pinned: false, pinBy: '', heartMark: null, quoteContent: null };
+      const msg = { sender: 'ta', content: '我把背景换了一下', timestamp: Date.now(), pinned: false, pinBy: '', heartMark: null, quoteContent: null, worldMark: getCurrentWorldColor() };
       const id = await idbPutReturnId('messages', msg);
       msg.id = id;
       appendMessage(msg);
@@ -4711,8 +4918,7 @@ function loadInteractSendList(overlay, tab) {
     } else {
       div.addEventListener('click', async () => {
         const isCouple = tab === 'couple';
-        const sender = tab === 'ta2me' ? 'ta' : 'me';
-        const msg = { sender, content: text, interactData: { text, couple: isCouple }, timestamp: Date.now(), readTime: null, pinned: false, pinBy: '', heartMark: null, quoteContent: null };
+        const msg = { sender: 'me', content: text, interactData: { text, couple: isCouple }, timestamp: Date.now(), readTime: null, pinned: false, pinBy: '', heartMark: null, quoteContent: null };
         const id = await idbPutReturnId('messages', msg);
         msg.id = id;
         appendMessage(msg);
@@ -4720,7 +4926,8 @@ function loadInteractSendList(overlay, tab) {
         await saveSettings();
         updateHeartValue();
         overlay.remove();
-        if (sender === 'me') { scheduleReadReceipt(msg); resetStopTimer(); }
+        scheduleReadReceipt(msg);
+        resetStopTimer();
       });
     }
     list.appendChild(div);
@@ -4802,7 +5009,7 @@ function openQuizAddDialog(panelOverlay) {
   });
 }
 
-// ========== 问答玩法（含判定支持字母） ==========
+// ========== 问答玩法 ==========
 async function startQuiz() {
   if (pendingQuiz) return showToast('还有一题没答完');
   const quizzes = JSON.parse(localStorage.getItem('quizLibrary') || '[]');
@@ -4834,7 +5041,7 @@ async function startLibraryQuiz(quizzes) {
 
 async function startCardQuiz(cards) {
   const shuffled = [...cards].sort(() => Math.random() - 0.5).slice(0, Math.min(4, cards.length));
-  let content = '💫 问答：TA现在最想对你说哪句话？\n';
+  let content = '💫 问答：易遇现在最想对你说哪句话？\n';
   shuffled.forEach((card, i) => { content += String.fromCharCode(65 + i) + '：' + card.content + '\n'; });
   content += '（请回复选项字母或内容）';
   const msg = { sender: 'ta', content, timestamp: Date.now(), pinned: false, pinBy: '', heartMark: null, isSystem: true };
@@ -4866,7 +5073,7 @@ async function checkQuizAnswer(myAnswer) {
     taPick = options[Math.floor(Math.random() * options.length)];
   }
   const myPick = normalizeAnswer(myAnswer, options);
-  const taMsg = { sender: 'ta', content: taPick, timestamp: Date.now(), pinned: false, pinBy: '', heartMark: null };
+  const taMsg = { sender: 'ta', content: taPick, timestamp: Date.now(), pinned: false, pinBy: '', heartMark: null, worldMark: getCurrentWorldColor() };
   const tid = await idbPutReturnId('messages', taMsg);
   taMsg.id = tid;
   appendMessage(taMsg);
@@ -4893,7 +5100,7 @@ function scheduleTAQuiz() {
   setTimeout(async () => {
     if (!pendingQuiz && !isReplying && !isArchiving) {
       await startQuiz();
-      sendNotification('TA想和你玩问答');
+      sendNotification('易遇想和你玩问答');
     }
     scheduleTAQuiz();
   }, next);
@@ -4934,7 +5141,7 @@ function checkReminders() {
   if (Math.random() > settings.reminderProb) return;
   if (!settings.reminderCards || !settings.reminderCards.length) return;
   const card = settings.reminderCards[Math.floor(Math.random() * settings.reminderCards.length)];
-  const msg = { sender: 'ta', content: card, timestamp: Date.now(), pinned: false, pinBy: '', heartMark: null };
+  const msg = { sender: 'ta', content: card, timestamp: Date.now(), pinned: false, pinBy: '', heartMark: null, worldMark: getCurrentWorldColor() };
   idbPutReturnId('messages', msg).then(id => { msg.id = id; appendMessage(msg); sendNotification(card); });
 }
 setInterval(checkReminders, 30000);
@@ -4963,7 +5170,7 @@ function openAccompanyPanel() {
     applySleepMode();
     updateStatusBar();
     overlay.remove();
-    showToast('TA陪你睡了');
+    showToast('易遇陪你睡了');
   });
   overlay.querySelector('#acc-daze').addEventListener('click', async () => {
     settings.accompanyMode = 'daze';
@@ -4971,7 +5178,7 @@ function openAccompanyPanel() {
     await saveSettings();
     updateStatusBar();
     overlay.remove();
-    showToast('和TA一起发呆');
+    showToast('和易遇一起发呆');
     scheduleDazeMessages();
   });
   overlay.querySelector('#acc-together').addEventListener('click', () => { overlay.remove(); openTogetherPanel(); });
@@ -5019,7 +5226,7 @@ function openTogetherPanel() {
       const mid = await idbPutReturnId('messages', myMsg);
       myMsg.id = mid;
       appendMessage(myMsg);
-      const taMsg = { sender: 'ta', content: '好呀，一起' + a.name, timestamp: Date.now(), pinned: false, pinBy: '', heartMark: null, quoteContent: null };
+      const taMsg = { sender: 'ta', content: '好呀，一起' + a.name, timestamp: Date.now(), pinned: false, pinBy: '', heartMark: null, quoteContent: null, worldMark: getCurrentWorldColor() };
       const tid = await idbPutReturnId('messages', taMsg);
       taMsg.id = tid;
       appendMessage(taMsg);
@@ -5029,7 +5236,7 @@ function openTogetherPanel() {
       await saveSettings();
       updateStatusBar();
       overlay.remove();
-      showToast('和TA一起' + a.name);
+      showToast('和易遇一起' + a.name);
       scheduleTogetherMessages();
     });
     list.appendChild(div);
@@ -5073,7 +5280,7 @@ function scheduleSleepMessages() {
     const cards = await idbGetAll('cards');
     if (cards.length) {
       const card = cards[Math.floor(Math.random() * cards.length)];
-      const msg = { sender: 'ta', content: card.content, timestamp: Date.now(), pinned: false, pinBy: '', heartMark: null };
+      const msg = { sender: 'ta', content: card.content, timestamp: Date.now(), pinned: false, pinBy: '', heartMark: null, worldMark: getCurrentWorldColor() };
       const id = await idbPutReturnId('messages', msg);
       msg.id = id;
       appendMessage(msg);
@@ -5088,7 +5295,7 @@ function scheduleDazeMessages() {
   accompanyTimer = setTimeout(async () => {
     if (settings.accompanyMode !== 'daze') return;
     const msgs = ['我在呢', '发呆中', '嗯', '在这'];
-    const msg = { sender: 'ta', content: msgs[Math.floor(Math.random() * msgs.length)], timestamp: Date.now(), pinned: false, pinBy: '', heartMark: null };
+    const msg = { sender: 'ta', content: msgs[Math.floor(Math.random() * msgs.length)], timestamp: Date.now(), pinned: false, pinBy: '', heartMark: null, worldMark: getCurrentWorldColor() };
     const id = await idbPutReturnId('messages', msg);
     msg.id = id;
     appendMessage(msg);
@@ -5111,7 +5318,7 @@ function scheduleCompanionMessages() {
     const cards = await idbGetAll('cards');
     if (cards.length) {
       const card = cards[Math.floor(Math.random() * cards.length)];
-      const msg = { sender: 'ta', content: card.content, timestamp: Date.now(), pinned: false, pinBy: '', heartMark: null };
+      const msg = { sender: 'ta', content: card.content, timestamp: Date.now(), pinned: false, pinBy: '', heartMark: null, worldMark: getCurrentWorldColor() };
       const id = await idbPutReturnId('messages', msg);
       msg.id = id;
       appendMessage(msg);
@@ -5129,7 +5336,7 @@ function scheduleTogetherMessages() {
     let content;
     if (cards.length && Math.random() < 0.5) content = cards[Math.floor(Math.random() * cards.length)].content;
     else content = hints[Math.floor(Math.random() * hints.length)];
-    const msg = { sender: 'ta', content, timestamp: Date.now(), pinned: false, pinBy: '', heartMark: null };
+    const msg = { sender: 'ta', content, timestamp: Date.now(), pinned: false, pinBy: '', heartMark: null, worldMark: getCurrentWorldColor() };
     const id = await idbPutReturnId('messages', msg);
     msg.id = id;
     appendMessage(msg);
@@ -5153,12 +5360,13 @@ function openAccompanyStats() {
   content.innerHTML = html;
 }
 
-// ========== 心动瞬间 ==========
+// ========== 心动瞬间（含 TA指定 板块） ==========
 function openHeartPanel() {
   const overlay = createModal(`
     <div class="heart-tabs">
       <button class="heart-tab active" id="heart-tab-ta">TA收藏的瞬间</button>
       <button class="heart-tab" id="heart-tab-me">我收藏的瞬间</button>
+      <button class="heart-tab" id="heart-tab-design">TA指定</button>
     </div>
     <div id="heart-content"></div>
     <div class="heart-view-tabs">
@@ -5168,6 +5376,7 @@ function openHeartPanel() {
     </div>`);
   overlay.querySelector('#heart-tab-ta').addEventListener('click', () => switchHeartTab('ta', overlay));
   overlay.querySelector('#heart-tab-me').addEventListener('click', () => switchHeartTab('me', overlay));
+  overlay.querySelector('#heart-tab-design').addEventListener('click', () => switchHeartTab('design', overlay));
   overlay.querySelector('#heart-view-timeline').addEventListener('click', () => switchHeartView('timeline', overlay));
   overlay.querySelector('#heart-view-cards').addEventListener('click', () => switchHeartView('cards', overlay));
   overlay.querySelector('#heart-view-play').addEventListener('click', () => switchHeartView('play', overlay));
@@ -5179,6 +5388,7 @@ function switchHeartTab(tab, overlay) {
   heartCurrentTab = tab;
   overlay.querySelector('#heart-tab-ta').classList.toggle('active', tab === 'ta');
   overlay.querySelector('#heart-tab-me').classList.toggle('active', tab === 'me');
+  overlay.querySelector('#heart-tab-design').classList.toggle('active', tab === 'design');
   renderHeartContent(overlay);
 }
 
@@ -5193,8 +5403,9 @@ async function getHeartMessages() {
   const archives = JSON.parse(localStorage.getItem('archives') || '{}');
   let all = [...msgs];
   Object.keys(archives).forEach(date => { all = all.concat(archives[date] || []); });
-  if (heartCurrentTab === 'ta') return all.filter(m => m.heartMark && m.heartMark.includes('TA'));
-  return all.filter(m => m.heartMark && m.heartMark.includes('我'));
+  if (heartCurrentTab === 'ta') return all.filter(m => m.heartMark === 'TA收藏' || (m.heartMark && m.heartMark.includes('TA收藏')));
+  if (heartCurrentTab === 'me') return all.filter(m => m.heartMark && m.heartMark.includes('我'));
+  return all.filter(m => m.heartMark === 'TA指定' || (m.heartMark && m.heartMark.includes('TA指定')));
 }
 
 function heartMsgTypeLabel(m) {
@@ -5227,7 +5438,7 @@ function heartDisplayText(m, counts) {
   const n = counts[key] || 1;
   const prefix = label ? label + ' ' : '';
   if (m.imageData) {
-    return { html: `<img src="${m.imageData}" style="max-width:120px;border-radius:10px;display:inline-block;"><span style="font-size:11px;color:#8b6f60;margin-left:4px;">×${n}</span>`, text: null };
+    return { html: `<img src="${m.imageData}" style="max-width:120px;border-radius:10px;display:inline-block;"><span style="font-size:11px;color:#8b6f60;margin-left:4px;">${n > 1 ? n : ''}</span>`, text: null };
   }
   return { html: null, text: prefix + text + (n > 1 ? '  ' + n : '') };
 }
@@ -5276,7 +5487,7 @@ async function renderHeartContent(overlay) {
       const pm = document.createElement('div');
       pm.className = 'playback-msg ' + m.sender;
       const inner = disp.html || escapeHtml(disp.text);
-      pm.innerHTML = `<div class="pm-sender">${m.sender === 'me' ? settings.meName : settings.taName}</div><div class="pm-bubble">${inner}</div>`;
+      pm.innerHTML = `<div class="pm-sender">${m.sender === 'me' ? settings.meName : (settings.taNick || settings.taName)}</div><div class="pm-bubble">${inner}</div>`;
       screen.appendChild(pm);
       idx++;
     }, 1000);
@@ -5316,6 +5527,16 @@ function openPlaybackPanel() {
   loadPlaybackDates(overlay);
 }
 
+function sortDatesDesc(dates) {
+  return dates.slice().sort((a, b) => {
+    const pa = a.split('-').map(Number);
+    const pb = b.split('-').map(Number);
+    if (pa[0] !== pb[0]) return pb[0] - pa[0];
+    if (pa[1] !== pb[1]) return pb[1] - pa[1];
+    return pb[2] - pa[2];
+  });
+}
+
 function switchPlaybackView(view, overlay) {
   playbackView = view;
   clearInterval(playbackTimer);
@@ -5326,7 +5547,7 @@ function switchPlaybackView(view, overlay) {
 
 async function loadPlaybackDates(overlay) {
   const archives = JSON.parse(localStorage.getItem('archives') || '{}');
-  const dates = Object.keys(archives).sort().reverse();
+  const dates = sortDatesDesc(Object.keys(archives));
   const container = overlay.querySelector('#playback-dates');
   container.innerHTML = '';
   if (!dates.length) { container.innerHTML = '<div class="placeholder-tip">还没有归档记录</div>'; return; }
@@ -5368,7 +5589,7 @@ function renderPlaybackContent(dateStr, overlay) {
       let bubble = playbackMsgHTML(m);
       if (m.pinned) bubble = '📌 ' + bubble;
       if (m.heartMark) bubble = '💗 ' + bubble;
-      pm.innerHTML = `<div class="pm-sender">${m.sender === 'me' ? settings.meName : settings.taName}</div><div class="pm-bubble">${bubble}</div>`;
+      pm.innerHTML = `<div class="pm-sender">${m.sender === 'me' ? settings.meName : (settings.taNick || settings.taName)}</div><div class="pm-bubble">${bubble}</div>`;
       screen.appendChild(pm);
     });
   } else if (playbackView === 'cards') {
@@ -5408,13 +5629,13 @@ function startPlayback(overlay) {
     let bubble = playbackMsgHTML(m);
     if (m.pinned) bubble = '📌 ' + bubble;
     if (m.heartMark) bubble = '💗 ' + bubble;
-    pm.innerHTML = `<div class="pm-sender">${m.sender === 'me' ? settings.meName : settings.taName}</div><div class="pm-bubble">${bubble}</div>`;
+    pm.innerHTML = `<div class="pm-sender">${m.sender === 'me' ? settings.meName : (settings.taNick || settings.taName)}</div><div class="pm-bubble">${bubble}</div>`;
     screen.appendChild(pm);
     idx++;
   }, playbackSpeed);
 }
 
-// ========== 耳边私语 ==========
+// ========== 耳边私语（按每次通话分开） ==========
 function openVoicePanel() {
   const overlay = createModal(`
     <div class="playback-dates" id="voice-dates"></div>
@@ -5457,7 +5678,7 @@ function switchVoiceView(view, overlay) {
 
 async function loadVoiceDates(overlay) {
   const records = JSON.parse(localStorage.getItem('videoRecords') || '[]');
-  const dates = [...new Set(records.map(r => r.date))].sort().reverse();
+  const dates = sortDatesDesc([...new Set(records.map(r => r.date))]);
   const container = overlay.querySelector('#voice-dates');
   container.innerHTML = '';
   if (!dates.length) { container.innerHTML = '<div class="placeholder-tip">还没有通话记录</div>'; return; }
@@ -5486,31 +5707,37 @@ function renderVoiceContent(dateStr, overlay) {
   screen.innerHTML = '';
   if (!dayRecords.length) { screen.innerHTML = '<div class="placeholder-tip">这一天没有通话</div>'; return; }
   if (playbackView === 'timeline') {
-    dayRecords.forEach(r => {
-      const div = document.createElement('div');
-      div.className = 'card-item';
+    dayRecords.forEach((r, idx) => {
+      const block = document.createElement('div');
+      block.className = 'voice-call-block';
       const mins = Math.floor(r.duration / 60);
       const secs = r.duration % 60;
       const startStr = r.startTime ? new Date(r.startTime).toLocaleTimeString('zh-CN', { hour: '2-digit', minute: '2-digit' }) : '';
       const endStr = r.endTime ? new Date(r.endTime).toLocaleTimeString('zh-CN', { hour: '2-digit', minute: '2-digit' }) : '';
-      div.innerHTML = `<div class="card-text">通话 ${mins}分${secs}秒${r.answered ? '' : '（未接）'}${startStr ? ' · ' + startStr + '开始' : ''}${endStr ? ' · ' + endStr + '结束' : ''}</div>`;
-      screen.appendChild(div);
+      block.innerHTML = `<div class="voice-call-head">通话${idx + 1} · ${startStr}开始 · ${endStr}结束 · ${mins}分${secs}秒${r.answered ? '' : '（未接）'}</div>`;
       if (r.taSpeaks && r.taSpeaks.length) {
         r.taSpeaks.forEach(speak => {
           const pm = document.createElement('div');
           pm.className = 'playback-msg ta';
-          pm.innerHTML = `<div class="pm-sender">TA</div><div class="pm-bubble">${escapeHtml(speak)}</div>`;
-          screen.appendChild(pm);
+          pm.innerHTML = `<div class="pm-sender">易遇</div><div class="pm-bubble">${escapeHtml(speak)}</div>`;
+          block.appendChild(pm);
         });
+      } else {
+        const empty = document.createElement('div');
+        empty.style.cssText = 'font-size:12px;color:#8b6f60;';
+        empty.textContent = '（这次没有说话）';
+        block.appendChild(empty);
       }
+      screen.appendChild(block);
     });
   } else if (playbackView === 'cards') {
     const grid = document.createElement('div');
     grid.className = 'heart-grid-cards';
-    dayRecords.forEach(r => {
+    dayRecords.forEach((r) => {
       const card = document.createElement('div');
       card.className = 'heart-card';
-      card.textContent = `通话 ${Math.floor(r.duration / 60)}分${r.duration % 60}秒`;
+      const mins = Math.floor(r.duration / 60);
+      card.textContent = `通话 ${mins}分${r.duration % 60}秒`;
       grid.appendChild(card);
       if (r.taSpeaks) {
         r.taSpeaks.forEach(speak => {
@@ -5535,7 +5762,7 @@ function startVoicePlayback(overlay) {
   dayRecords.forEach(r => { if (r.taSpeaks) r.taSpeaks.forEach(s => allSpeaks.push(s)); });
   const screen = overlay.querySelector('#voice-screen');
   screen.innerHTML = '';
-  if (!allSpeaks.length) { screen.innerHTML = '<div class="placeholder-tip">TA没有说话</div>'; return; }
+  if (!allSpeaks.length) { screen.innerHTML = '<div class="placeholder-tip">易遇没有说话</div>'; return; }
   let idx = 0;
   playbackTimer = setInterval(() => {
     if (idx >= allSpeaks.length) {
@@ -5547,7 +5774,7 @@ function startVoicePlayback(overlay) {
     screen.innerHTML = '';
     const pm = document.createElement('div');
     pm.className = 'playback-msg ta';
-    pm.innerHTML = `<div class="pm-sender">TA</div><div class="pm-bubble">${escapeHtml(allSpeaks[idx])}</div>`;
+    pm.innerHTML = `<div class="pm-sender">易遇</div><div class="pm-bubble">${escapeHtml(allSpeaks[idx])}</div>`;
     screen.appendChild(pm);
     idx++;
   }, playbackSpeed);
@@ -5557,17 +5784,17 @@ function openMailboxPanel() {
   const overlay = createModal(`
     <div class="heart-tabs">
       <button class="heart-tab active" id="mailbox-tab-unread">未读的信</button>
-      <button class="heart-tab" id="mailbox-tab-ta">TA的来信</button>
-      <button class="heart-tab" id="mailbox-tab-write">写信给TA</button>
+      <button class="heart-tab" id="mailbox-tab-ta">易遇的来信</button>
+      <button class="heart-tab" id="mailbox-tab-write">写信给易遇</button>
       <button class="heart-tab" id="mailbox-tab-me">你寄出的信</button>
     </div>
     <div id="mailbox-content"></div>`);
   let currentTab = 'unread';
   loadMailboxContent(overlay, currentTab);
-  overlay.querySelector('#mailbox-tab-unread').addEventListener('click', () => { currentTab = 'unread'; switchMailboxTab('unread', overlay); });
-  overlay.querySelector('#mailbox-tab-ta').addEventListener('click', () => { currentTab = 'ta'; switchMailboxTab('ta', overlay); });
-  overlay.querySelector('#mailbox-tab-write').addEventListener('click', () => { currentTab = 'write'; switchMailboxTab('write', overlay); });
-  overlay.querySelector('#mailbox-tab-me').addEventListener('click', () => { currentTab = 'me'; switchMailboxTab('me', overlay); });
+  overlay.querySelector('#mailbox-tab-unread').addEventListener('click', () => switchMailboxTab('unread', overlay));
+  overlay.querySelector('#mailbox-tab-ta').addEventListener('click', () => switchMailboxTab('ta', overlay));
+  overlay.querySelector('#mailbox-tab-write').addEventListener('click', () => switchMailboxTab('write', overlay));
+  overlay.querySelector('#mailbox-tab-me').addEventListener('click', () => switchMailboxTab('me', overlay));
 }
 
 function switchMailboxTab(tab, overlay) {
@@ -5577,6 +5804,20 @@ function switchMailboxTab(tab, overlay) {
   if (tab === 'write') overlay.querySelector('#mailbox-tab-write').classList.add('active');
   if (tab === 'me') overlay.querySelector('#mailbox-tab-me').classList.add('active');
   loadMailboxContent(overlay, tab);
+}
+
+function joinCardsAsParagraph(cards) {
+  let out = '';
+  cards.forEach((c, i) => {
+    const text = (c || '').trim();
+    if (!text) return;
+    out += text;
+    if (i < cards.length - 1) {
+      const lastChar = out.slice(-1);
+      if (!/[，。！？、；：,.!?;:""''）)】]/.test(lastChar)) out += '，';
+    }
+  });
+  return out;
 }
 
 function loadMailboxContent(overlay, tab) {
@@ -5600,7 +5841,7 @@ function loadMailboxContent(overlay, tab) {
     });
   } else if (tab === 'ta') {
     const received = letters.received;
-    content.innerHTML = received.length ? '' : '<div class="placeholder-tip">TA还没有来信</div>';
+    content.innerHTML = received.length ? '' : '<div class="placeholder-tip">易遇还没有来信</div>';
     received.slice().reverse().forEach(l => {
       const div = document.createElement('div');
       div.className = 'letter-item';
@@ -5652,7 +5893,7 @@ function scheduleTALetter() {
       if (cards.length < 20) return;
       const count = 20 + Math.floor(Math.random() * 11);
       const shuffled = [...cards].sort(() => Math.random() - 0.5);
-      const body = shuffled.slice(0, count).map(c => c.content).join('\n    ');
+      const body = joinCardsAsParagraph(shuffled.slice(0, count).map(c => c.content));
       const greetings = ['展信佳', '见字如面', '近来可好'];
       const blessings = ['祝好', '保重', '念你'];
       const greeting = greetings[Math.floor(Math.random() * greetings.length)];
@@ -5661,11 +5902,12 @@ function scheduleTALetter() {
       const letters = JSON.parse(localStorage.getItem('letters') || '{"received":[],"sent":[]}');
       letters.received.push({ content: fullLetter, date: new Date().toISOString().slice(0, 10), unread: true });
       localStorage.setItem('letters', JSON.stringify(letters));
-      const msg = { sender: 'ta', content: '📮 我给你写了一封信', timestamp: Date.now(), pinned: false, pinBy: '', heartMark: null, quoteContent: null };
+      addBigEvent('letter', '收到易遇的一封信');
+      const msg = { sender: 'ta', content: '📮 我给你写了一封信', timestamp: Date.now(), pinned: false, pinBy: '', heartMark: null, quoteContent: null, worldMark: getCurrentWorldColor() };
       const id = await idbPutReturnId('messages', msg);
       msg.id = id;
       appendMessage(msg);
-      sendNotification('TA给你写了一封信');
+      sendNotification('易遇给你写了一封信');
     }
   }, 3600000);
 }
@@ -5674,16 +5916,16 @@ function scheduleTALetter() {
 function openNotePanel() {
   const overlay = createModal(`
     <div class="heart-tabs">
-      <button class="heart-tab active" id="note-tab-ta">TA的留言</button>
+      <button class="heart-tab active" id="note-tab-ta">易遇的留言</button>
       <button class="heart-tab" id="note-tab-me">你的留言</button>
       <button class="heart-tab" id="note-tab-write">写留言</button>
     </div>
     <div id="note-content"></div>`);
   let currentTab = 'ta';
   loadNoteContent(overlay, currentTab);
-  overlay.querySelector('#note-tab-ta').addEventListener('click', () => { currentTab = 'ta'; switchNoteTab('ta', overlay); });
-  overlay.querySelector('#note-tab-me').addEventListener('click', () => { currentTab = 'me'; switchNoteTab('me', overlay); });
-  overlay.querySelector('#note-tab-write').addEventListener('click', () => { currentTab = 'write'; switchNoteTab('write', overlay); });
+  overlay.querySelector('#note-tab-ta').addEventListener('click', () => switchNoteTab('ta', overlay));
+  overlay.querySelector('#note-tab-me').addEventListener('click', () => switchNoteTab('me', overlay));
+  overlay.querySelector('#note-tab-write').addEventListener('click', () => switchNoteTab('write', overlay));
 }
 
 function switchNoteTab(tab, overlay) {
@@ -5700,7 +5942,7 @@ function loadNoteContent(overlay, tab) {
   content.innerHTML = '';
   if (tab === 'ta') {
     const taNotes = notes.ta;
-    content.innerHTML = taNotes.length ? '' : '<div class="placeholder-tip">TA还没有留言</div>';
+    content.innerHTML = taNotes.length ? '' : '<div class="placeholder-tip">易遇还没有留言</div>';
     taNotes.slice().reverse().forEach(n => {
       const div = document.createElement('div');
       div.className = 'letter-item';
@@ -5718,14 +5960,14 @@ function loadNoteContent(overlay, tab) {
     });
   } else if (tab === 'write') {
     content.innerHTML = `
-      <textarea class="big-input-area" id="note-input" placeholder="写张小笺给TA..." style="min-height:150px;"></textarea>
+      <textarea class="big-input-area" id="note-input" placeholder="写张小笺给易遇..." style="min-height:150px;"></textarea>
       <button class="save-btn-center" id="send-note-btn" style="margin-top:12px;">递小笺</button>`;
     content.querySelector('#send-note-btn').addEventListener('click', () => {
       const text = content.querySelector('#note-input').value.trim();
       if (!text) return showToast('请写留言内容');
       notes.me.push({ content: text, date: new Date().toISOString().slice(0, 10) });
       localStorage.setItem('notes', JSON.stringify(notes));
-      showToast('小笺已递给TA');
+      showToast('小笺已递给易遇');
       switchNoteTab('me', overlay);
     });
   }
@@ -5738,15 +5980,15 @@ function scheduleTANote() {
       if (cards.length < 5) return;
       const count = 5 + Math.floor(Math.random() * 4);
       const shuffled = [...cards].sort(() => Math.random() - 0.5);
-      const content = shuffled.slice(0, count).map(c => c.content).join('\n');
+      const content = joinCardsAsParagraph(shuffled.slice(0, count).map(c => c.content));
       const notes = JSON.parse(localStorage.getItem('notes') || '{"ta":[],"me":[]}');
       notes.ta.push({ content, date: new Date().toISOString().slice(0, 10) });
       localStorage.setItem('notes', JSON.stringify(notes));
-      const msg = { sender: 'ta', content: '📝 我给你留了小笺', timestamp: Date.now(), pinned: false, pinBy: '', heartMark: null, quoteContent: null };
+      const msg = { sender: 'ta', content: '📝 我给你留了小笺', timestamp: Date.now(), pinned: false, pinBy: '', heartMark: null, quoteContent: null, worldMark: getCurrentWorldColor() };
       const id = await idbPutReturnId('messages', msg);
       msg.id = id;
       appendMessage(msg);
-      sendNotification('TA给你留了小笺');
+      sendNotification('易遇给你留了小笺');
     }
   }, 3600000);
 }
@@ -5756,21 +5998,9 @@ function getCheckinHeartSVG(meChecked, taChecked) {
   const both = meChecked && taChecked;
   const none = !meChecked && !taChecked;
   const heartPath = "M20,34 C20,34 4,23 4,13 C4,7 9,3 14,3 C17,3 20,6 20,6 C20,6 23,3 26,3 C31,3 36,7 36,13 C36,23 20,34 20,34 Z";
-  if (both) {
-    return `<svg viewBox="0 0 40 38" width="40" height="38"><path d="${heartPath}" fill="rgba(255,143,176,0.85)" stroke="#ff6f9c" stroke-width="2"/></svg>`;
-  }
-  if (none) {
-    return `<svg viewBox="0 0 40 38" width="40" height="38"><path d="${heartPath}" fill="rgba(255,255,255,0.6)" stroke="#ffb0c8" stroke-width="2"/></svg>`;
-  }
-  return `<svg viewBox="0 0 40 38" width="40" height="38">
-    <defs>
-      <linearGradient id="halfHeart" x1="0" y1="0" x2="1" y2="0">
-        <stop offset="50%" stop-color="rgba(255,143,176,0.85)"/>
-        <stop offset="50%" stop-color="rgba(255,255,255,0.6)"/>
-      </linearGradient>
-    </defs>
-    <path d="${heartPath}" fill="url(#halfHeart)" stroke="#ffb0c8" stroke-width="2"/>
-  </svg>`;
+  if (both) return `<svg viewBox="0 0 40 38" width="40" height="38"><path d="${heartPath}" fill="rgba(255,143,176,0.85)" stroke="#ff6f9c" stroke-width="2"/></svg>`;
+  if (none) return `<svg viewBox="0 0 40 38" width="40" height="38"><path d="${heartPath}" fill="rgba(255,255,255,0.6)" stroke="#ffb0c8" stroke-width="2"/></svg>`;
+  return `<svg viewBox="0 0 40 38" width="40" height="38"><defs><linearGradient id="halfHeart" x1="0" y1="0" x2="1" y2="0"><stop offset="50%" stop-color="rgba(255,143,176,0.85)"/><stop offset="50%" stop-color="rgba(255,255,255,0.6)"/></linearGradient></defs><path d="${heartPath}" fill="url(#halfHeart)" stroke="#ffb0c8" stroke-width="2"/></svg>`;
 }
 
 function getCheckinData() {
@@ -5784,8 +6014,7 @@ function getCheckinData() {
 function getMyConsecutiveDays(meList) {
   if (!meList.length) return 0;
   const days = [...new Set(meList)].sort();
-  let consecutive = 0;
-  let prev = null;
+  let consecutive = 0, prev = null;
   for (const d of days) {
     if (prev === null) consecutive = 1;
     else {
@@ -5815,12 +6044,12 @@ function openLoverSpacePanel() {
   const overlay = createModal(`
     <div style="text-align:center;margin-bottom:16px;">
       <div style="display:flex;justify-content:center;align-items:center;gap:6px;margin-bottom:8px;">
-        <img src="${settings.taAvatar || 'data:image/svg+xml,' + encodeURIComponent('<svg xmlns="http://www.w3.org/2000/svg" width="40" height="40"><circle cx="20" cy="20" r="19" fill="rgba(255,255,255,0.4)"/><text x="20" y="26" text-anchor="middle" font-size="16" fill="rgba(90,70,60,0.6)">TA</text></svg>')}" style="width:40px;height:40px;border-radius:50%;object-fit:cover;">
+        <img src="${settings.taAvatar || 'data:image/svg+xml,' + encodeURIComponent('<svg xmlns="http://www.w3.org/2000/svg" width="40" height="40"><circle cx="20" cy="20" r="19" fill="rgba(255,255,255,0.4)"/><text x="20" y="26" text-anchor="middle" font-size="16" fill="rgba(90,70,60,0.6)">遇</text></svg>')}" style="width:40px;height:40px;border-radius:50%;object-fit:cover;">
         <div style="width:90px;">${renderHeartInlineSmall()}</div>
         <img src="${settings.meAvatar || 'data:image/svg+xml,' + encodeURIComponent('<svg xmlns="http://www.w3.org/2000/svg" width="40" height="40"><circle cx="20" cy="20" r="19" fill="rgba(255,255,255,0.4)"/><text x="20" y="26" text-anchor="middle" font-size="16" fill="rgba(90,70,60,0.6)">我</text></svg>')}" style="width:40px;height:40px;border-radius:50%;object-fit:cover;">
       </div>
       <button class="checkin-heart-btn" id="lover-checkin-btn">${getCheckinHeartSVG(data.meChecked, data.taChecked)}</button>
-      <div style="font-size:14px;color:#4a3528;margin-top:4px;">${countText}</div>
+      <div id="lover-count-text" style="font-size:14px;color:#4a3528;margin-top:4px;">${countText}</div>
     </div>
     <button class="save-btn-center" id="lover-post-btn" style="margin-bottom:12px;">发动态</button>
     <div id="lover-posts"></div>`);
@@ -5832,7 +6061,7 @@ function openLoverSpacePanel() {
     const both = d.meChecked && d.taChecked;
     const btn = overlay.querySelector('#lover-checkin-btn');
     if (btn) btn.innerHTML = getCheckinHeartSVG(d.meChecked, d.taChecked);
-    const countEl = overlay.querySelector('#lover-count-text') || btn.nextElementSibling;
+    const countEl = overlay.querySelector('#lover-count-text');
     if (countEl) countEl.textContent = both ? `共同打卡 ${com} 天` : `连续打卡 ${cons} 天`;
     loadLoverPosts(overlay);
   });
@@ -5934,7 +6163,7 @@ function scheduleTALoverPost() {
       if (cards.length >= 15) {
         const count = 15 + Math.floor(Math.random() * 6);
         const shuffled = [...cards].sort(() => Math.random() - 0.5);
-        const content = shuffled.slice(0, count).map(c => c.content).join('\n');
+        const content = joinCardsAsParagraph(shuffled.slice(0, count).map(c => c.content));
         const stickers = await libGet('stickerLibrary');
         const images = [];
         const stickerCount = Math.min(3, stickers.length, 1 + Math.floor(Math.random() * 3));
@@ -5944,17 +6173,15 @@ function scheduleTALoverPost() {
         const posts = JSON.parse(localStorage.getItem('loverPosts') || '[]');
         posts.push({
           name: settings.taName,
-          avatar: settings.taAvatar || 'data:image/svg+xml,' + encodeURIComponent('<svg xmlns="http://www.w3.org/2000/svg" width="28" height="28"><circle cx="14" cy="14" r="13" fill="rgba(255,255,255,0.5)"/><text x="14" y="19" text-anchor="middle" font-size="10" fill="rgba(90,70,60,0.6)">TA</text></svg>'),
-          time,
-          content,
-          images
+          avatar: settings.taAvatar || 'data:image/svg+xml,' + encodeURIComponent('<svg xmlns="http://www.w3.org/2000/svg" width="28" height="28"><circle cx="14" cy="14" r="13" fill="rgba(255,255,255,0.5)"/><text x="14" y="19" text-anchor="middle" font-size="10" fill="rgba(90,70,60,0.6)">遇</text></svg>'),
+          time, content, images
         });
         localStorage.setItem('loverPosts', JSON.stringify(posts));
-        const msg = { sender: 'ta', content: '📷 我发了一条动态', timestamp: Date.now(), pinned: false, pinBy: '', heartMark: null, quoteContent: null };
+        const msg = { sender: 'ta', content: '📷 我发了一条动态', timestamp: Date.now(), pinned: false, pinBy: '', heartMark: null, quoteContent: null, worldMark: getCurrentWorldColor() };
         const id = await idbPutReturnId('messages', msg);
         msg.id = id;
         appendMessage(msg);
-        sendNotification('TA发了一条动态');
+        sendNotification('易遇发了一条动态');
       }
     }
     scheduleTALoverPost();
@@ -5962,21 +6189,21 @@ function scheduleTALoverPost() {
 }
 
 function scheduleTALoverCheckin() {
-  setInterval(() => {
-    if (Math.random() < 0.3) {
+  setInterval(async () => {
+    if (Math.random() < 0.5) {
       const today = new Date().toDateString();
       const checkins = JSON.parse(localStorage.getItem('loverCheckins') || '{}');
       if (!checkins.ta) checkins.ta = [];
       if (!checkins.ta.includes(today)) {
         checkins.ta.push(today);
         localStorage.setItem('loverCheckins', JSON.stringify(checkins));
-        const msg = { sender: 'ta', content: '我打卡了哦', timestamp: Date.now(), pinned: false, pinBy: '', heartMark: null };
+        const msg = { sender: 'ta', content: '我打卡了哦', timestamp: Date.now(), pinned: false, pinBy: '', heartMark: null, worldMark: getCurrentWorldColor() };
         idbPutReturnId('messages', msg).then(id => { msg.id = id; appendMessage(msg); });
-        sendNotification('TA打卡了');
+        sendNotification('易遇打卡了');
         refreshOpenPanels();
       }
     }
-  }, 3600000);
+  }, 1800000);
 }
 
 function scheduleTACheckinRemind() {
@@ -5993,11 +6220,12 @@ function scheduleTACheckinRemind() {
     if (checked[today]) return;
     checked[today] = true;
     localStorage.setItem('checkinRemindChecked', JSON.stringify(checked));
-    const msg = { sender: 'ta', content: '今天还没打卡哦', timestamp: Date.now(), pinned: false, pinBy: '', heartMark: null };
+    const msg = { sender: 'ta', content: '今天还没打卡哦', timestamp: Date.now(), pinned: false, pinBy: '', heartMark: null, worldMark: getCurrentWorldColor() };
     idbPutReturnId('messages', msg).then(id => { msg.id = id; appendMessage(msg); sendNotification('今天还没打卡哦'); });
   }, 60000);
 }
-  // ========== 数据统计 ==========
+
+// ========== 数据统计 ==========
 function openStatsPanel() {
   const overlay = createModal(`<div id="stats-content"></div>`);
   const content = overlay.querySelector('#stats-content');
@@ -6036,16 +6264,16 @@ async function loadStats(content) {
   const taWords = getTopWords(taMsgs.map(m => m.content), 20);
   content.innerHTML = `
     <div class="big-input-title">数据统计</div>
-    <div class="heart-item"><span class="heart-mark">💬</span><span>总消息 ${allMsgs.length} 条 ｜ 我发的 ${myMsgs.length} 条 ｜ TA发的 ${taMsgs.length} 条</span></div>
-    <div class="heart-item"><span class="heart-mark">✉</span><span>TA来信 ${letters.received.length} 封 ｜ 你寄出 ${letters.sent.length} 封</span></div>
-    <div class="heart-item"><span class="heart-mark">📝</span><span>TA留言 ${notes.ta.length} 条 ｜ 你的留言 ${notes.me.length} 条</span></div>
-    <div class="heart-item"><span class="heart-mark">📢</span><span>TA动态 ${taPosts} 条 ｜ 你动态 ${myPosts} 条</span></div>
+    <div class="heart-item"><span class="heart-mark">💬</span><span>总消息 ${allMsgs.length} 条 ｜ 我发的 ${myMsgs.length} 条 ｜ 易遇发的 ${taMsgs.length} 条</span></div>
+    <div class="heart-item"><span class="heart-mark">✉</span><span>易遇来信 ${letters.received.length} 封 ｜ 你寄出 ${letters.sent.length} 封</span></div>
+    <div class="heart-item"><span class="heart-mark">📝</span><span>易遇留言 ${notes.ta.length} 条 ｜ 你的留言 ${notes.me.length} 条</span></div>
+    <div class="heart-item"><span class="heart-mark">📢</span><span>易遇动态 ${taPosts} 条 ｜ 你动态 ${myPosts} 条</span></div>
     <div class="heart-item"><span class="heart-mark">📞</span><span>通话 ${videoRecords.length} 次 ｜ 总时长 ${callDurationStr} ｜ 最长 ${longestMins}分${longestCall % 60}秒 ｜ 平均 ${avgMins}分${avgCall % 60}秒 ｜ 未接 ${missedCalls} 次</span></div>
-    <div class="heart-item"><span class="heart-mark">♡</span><span>打卡 我 ${myCheckins} 天 ｜ TA ${taCheckins} 天 ｜ 共同 ${commonCheckins} 天</span></div>
+    <div class="heart-item"><span class="heart-mark">♡</span><span>打卡 我 ${myCheckins} 天 ｜ 易遇 ${taCheckins} 天 ｜ 共同 ${commonCheckins} 天</span></div>
     <div class="heart-item"><span class="heart-mark">💗</span><span>爱意值 当前 ${settings.heartValue}</span></div>
     <div class="big-input-title" style="margin-top:16px;">我的高频词汇</div>
     <div class="heart-list">${myWords.map(w => `<div class="heart-item"><span class="heart-mark">${w.count}</span><span>${escapeHtml(w.word)}</span></div>`).join('') || '<div class="placeholder-tip">暂无数据</div>'}</div>
-    <div class="big-input-title" style="margin-top:16px;">TA的高频词汇</div>
+    <div class="big-input-title" style="margin-top:16px;">易遇的高频词汇</div>
     <div class="heart-list">${taWords.map(w => `<div class="heart-item"><span class="heart-mark">${w.count}</span><span>${escapeHtml(w.word)}</span></div>`).join('') || '<div class="placeholder-tip">暂无数据</div>'}</div>`;
 }
 
@@ -6058,8 +6286,7 @@ function getTopWords(texts, topN) {
   });
   return Object.entries(wordCount).sort((a, b) => b[1] - a[1]).slice(0, topN).map(([word, count]) => ({ word, count }));
 }
-
-// ========== 数据管理 ==========
+  // ========== 数据管理 ==========
 function openDataManagePanel() {
   const overlay = createModal(`<div id="data-manage-content"></div>`);
   const content = overlay.querySelector('#data-manage-content');
@@ -6125,7 +6352,7 @@ function openImportDialog() {
 async function restoreFromBackup(data) {
   if (data.settings) {
     settings = { ...DEFAULT_SETTINGS, ...data.settings };
-    if (!settings.worlds || !settings.worlds.length) settings.worlds = JSON.parse(JSON.stringify(DEFAULT_SETTINGS.worlds));
+    if (!settings.worlds || !settings.worlds.length) settings.worlds = JSON.parse(JSON.stringify(DEFAULT_WORLDS));
     await saveSettings();
   }
   if (data.cards) {
@@ -6322,6 +6549,7 @@ function openPiggyPanel() {
           <rect x="30" y="82" width="8" height="10" rx="3" fill="#ffc4d6" stroke="#e8789f" stroke-width="2"/>
           <rect x="62" y="82" width="8" height="10" rx="3" fill="#ffc4d6" stroke="#e8789f" stroke-width="2"/>
           <path d="M84 56 q10 -2 8 -10" stroke="#e8789f" stroke-width="2.5" fill="none" stroke-linecap="round"/>
+          <rect x="44" y="30" width="12" height="4" rx="2" fill="#e8789f"/>
         </svg>
       </div>
       <div class="piggy-balance">${piggy.balance} 元</div>
@@ -6349,11 +6577,11 @@ function openPiggyPanel() {
     const approved = Math.random() < 0.5;
     if (approved) {
       piggy.balance -= amount;
-      piggy.records.push({ type: 'withdraw', amount, date: new Date().toISOString().slice(0, 10), note: '取出（TA同意）' });
-      showToast('TA同意了，取出成功');
+      piggy.records.push({ type: 'withdraw', amount, date: new Date().toISOString().slice(0, 10), note: '取出（易遇同意）' });
+      showToast('易遇同意了，取出成功');
     } else {
-      piggy.records.push({ type: 'withdraw_denied', amount, date: new Date().toISOString().slice(0, 10), note: '取出（TA拒绝）' });
-      showToast('TA说再想想，拒绝取出');
+      piggy.records.push({ type: 'withdraw_denied', amount, date: new Date().toISOString().slice(0, 10), note: '取出（易遇拒绝）' });
+      showToast('易遇说再想想，拒绝取出');
     }
     localStorage.setItem('piggyData', JSON.stringify(piggy));
     overlay.remove();
@@ -6373,8 +6601,7 @@ function loadPiggyRecords(overlay) {
     list.appendChild(div);
   });
 }
-
-// ========== 音乐 ==========
+  // ========== 音乐 ==========
 const PLAY_ICON = `<svg viewBox="0 0 24 24"><polygon points="6,4 20,12 6,20" fill="currentColor"/></svg>`;
 const PAUSE_ICON = `<svg viewBox="0 0 24 24"><rect x="6" y="4" width="4" height="16" rx="1.5" fill="currentColor"/><rect x="14" y="4" width="4" height="16" rx="1.5" fill="currentColor"/></svg>`;
 const PREV_ICON = `<svg viewBox="0 0 24 24"><polygon points="18,5 18,19 8,12" fill="currentColor"/><rect x="5" y="5" width="2.5" height="14" rx="1" fill="currentColor"/></svg>`;
@@ -6454,7 +6681,7 @@ function openMusicAddDialog(panelOverlay) {
   function renderMusicTypeArea() {
     const area = overlay.querySelector('#music-type-area');
     if (musicType === 'local') {
-      area.innerHTML = `<button class="upload-btn" id="music-file-btn" style="margin-top:0;">上传音频文件</button><div style="height:12px;"></div>`;
+      area.innerHTML = `<button class="upload-btn" id="music-file-btn" style="margin-top:0;">上传音频文件</button><div class="big-input-hint" id="music-file-hint" style="margin-top:6px;"></div>`;
       area.querySelector('#music-file-btn').addEventListener('click', () => {
         const inp = document.createElement('input');
         inp.type = 'file';
@@ -6462,18 +6689,19 @@ function openMusicAddDialog(panelOverlay) {
         inp.onchange = (e) => {
           const file = e.target.files[0];
           if (!file) return;
-          showToast('正在读取音频...');
+          const hint = area.querySelector('#music-file-hint');
+          hint.textContent = '正在读取...';
           const reader = new FileReader();
           reader.onload = async () => {
+            hint.textContent = '正在保存...';
             const key = 'music_' + Date.now();
             try {
               await idbPut('media', { key, value: reader.result });
               musicData = 'media:' + key;
-              area.querySelector('#music-file-btn').textContent = '已选择：' + file.name;
-              showToast('音频已读取');
-            } catch (err) { showToast('音频太大，请换小一点的'); }
+              hint.textContent = '已选择：' + file.name;
+            } catch (err) { hint.textContent = '保存失败，可能太大'; }
           };
-          reader.onerror = () => showToast('音频读取失败');
+          reader.onerror = () => { hint.textContent = '读取失败'; };
           reader.readAsDataURL(file);
         };
         inp.click();
@@ -6633,7 +6861,7 @@ function scheduleTAMusicRequest() {
       musicList = JSON.parse(localStorage.getItem('musicList') || '[]');
       if (!musicList.length) return;
       const song = musicList[Math.floor(Math.random() * musicList.length)];
-      const msg = { sender: 'ta', content: '想听《' + song.name + '》了，一起听吗？', timestamp: Date.now(), pinned: false, pinBy: '', heartMark: null };
+      const msg = { sender: 'ta', content: '想听《' + song.name + '》了，一起听吗？', timestamp: Date.now(), pinned: false, pinBy: '', heartMark: null, worldMark: getCurrentWorldColor() };
       const id = await idbPutReturnId('messages', msg);
       msg.id = id;
       appendMessage(msg);
@@ -6685,7 +6913,8 @@ function openEmojiPanel() {
     downloadFile(JSON.stringify({ emojis }), 'Emoji导出.json', 'application/json');
   });
 }
-  // ========== 抉择 ==========
+
+// ========== 抉择 ==========
 function openChoicePanel() {
   const overlay = createModal(`
     <div style="display:flex;gap:8px;margin-bottom:12px;flex-wrap:wrap;">
@@ -6707,7 +6936,7 @@ function renderChoiceContent(overlay, mode) {
     content.innerHTML = `
       <input type="text" id="choice-question" placeholder="问题，如：今天吃什么？" style="width:100%;background:rgba(255,255,255,0.5);border:1px solid rgba(255,255,255,0.6);border-radius:14px;padding:10px 14px;font-size:14px;color:#4a3f3a;outline:none;margin-bottom:8px;">
       <textarea class="big-input-area" id="choice-options" placeholder="选项，一行一个" style="min-height:120px;"></textarea>
-      <button class="save-btn-center" id="choice-select-btn" style="margin-top:12px;">让TA选</button>`;
+      <button class="save-btn-center" id="choice-select-btn" style="margin-top:12px;">让易遇选</button>`;
     content.querySelector('#choice-select-btn').addEventListener('click', async () => {
       const question = content.querySelector('#choice-question').value.trim();
       const options = content.querySelector('#choice-options').value.trim().split('\n').map(s => s.trim()).filter(Boolean);
@@ -6717,7 +6946,7 @@ function renderChoiceContent(overlay, mode) {
       const mid = await idbPutReturnId('messages', myMsg);
       myMsg.id = mid;
       appendMessage(myMsg);
-      const taMsg = { sender: 'ta', content: '我帮你选了：' + pick, timestamp: Date.now(), pinned: false, pinBy: '', heartMark: null, quoteContent: null };
+      const taMsg = { sender: 'ta', content: '我帮你选了：' + pick, timestamp: Date.now(), pinned: false, pinBy: '', heartMark: null, quoteContent: null, worldMark: getCurrentWorldColor() };
       const tid = await idbPutReturnId('messages', taMsg);
       taMsg.id = tid;
       appendMessage(taMsg);
@@ -6726,7 +6955,7 @@ function renderChoiceContent(overlay, mode) {
   } else if (mode === 'decide') {
     content.innerHTML = `
       <input type="text" id="choice-decide" placeholder="你要决定的事，如：要不要辞职？" style="width:100%;background:rgba(255,255,255,0.5);border:1px solid rgba(255,255,255,0.6);border-radius:14px;padding:10px 14px;font-size:14px;color:#4a3f3a;outline:none;margin-bottom:8px;">
-      <button class="save-btn-center" id="choice-decide-btn" style="margin-top:12px;">让TA决定</button>`;
+      <button class="save-btn-center" id="choice-decide-btn" style="margin-top:12px;">让易遇决定</button>`;
     content.querySelector('#choice-decide-btn').addEventListener('click', async () => {
       const decide = content.querySelector('#choice-decide').value.trim();
       if (!decide) return showToast('请输入你要决定的事');
@@ -6736,7 +6965,7 @@ function renderChoiceContent(overlay, mode) {
       const mid = await idbPutReturnId('messages', myMsg);
       myMsg.id = mid;
       appendMessage(myMsg);
-      const taMsg = { sender: 'ta', content: pick, timestamp: Date.now(), pinned: false, pinBy: '', heartMark: null, quoteContent: null };
+      const taMsg = { sender: 'ta', content: pick, timestamp: Date.now(), pinned: false, pinBy: '', heartMark: null, quoteContent: null, worldMark: getCurrentWorldColor() };
       const tid = await idbPutReturnId('messages', taMsg);
       taMsg.id = tid;
       appendMessage(taMsg);
@@ -6745,7 +6974,7 @@ function renderChoiceContent(overlay, mode) {
   } else if (mode === 'quiz') {
     content.innerHTML = `
       <input type="text" id="choice-quiz" placeholder="你的问题，如：你在吃饭吗？" style="width:100%;background:rgba(255,255,255,0.5);border:1px solid rgba(255,255,255,0.6);border-radius:14px;padding:10px 14px;font-size:14px;color:#4a3f3a;outline:none;margin-bottom:8px;">
-      <button class="save-btn-center" id="choice-quiz-btn" style="margin-top:12px;">问TA</button>`;
+      <button class="save-btn-center" id="choice-quiz-btn" style="margin-top:12px;">问易遇</button>`;
     content.querySelector('#choice-quiz-btn').addEventListener('click', async () => {
       const question = content.querySelector('#choice-quiz').value.trim();
       if (!question) return showToast('请输入问题');
@@ -6755,7 +6984,7 @@ function renderChoiceContent(overlay, mode) {
       const mid = await idbPutReturnId('messages', myMsg);
       myMsg.id = mid;
       appendMessage(myMsg);
-      const taMsg = { sender: 'ta', content: pick, timestamp: Date.now(), pinned: false, pinBy: '', heartMark: null, quoteContent: null };
+      const taMsg = { sender: 'ta', content: pick, timestamp: Date.now(), pinned: false, pinBy: '', heartMark: null, quoteContent: null, worldMark: getCurrentWorldColor() };
       const tid = await idbPutReturnId('messages', taMsg);
       taMsg.id = tid;
       appendMessage(taMsg);
@@ -6766,7 +6995,7 @@ function renderChoiceContent(overlay, mode) {
       <input type="text" id="choice-image-text" placeholder="想说的话，如：帮我选一张最好看的" style="width:100%;background:rgba(255,255,255,0.5);border:1px solid rgba(255,255,255,0.6);border-radius:14px;padding:10px 14px;font-size:14px;color:#4a3f3a;outline:none;margin-bottom:8px;">
       <button class="upload-btn" id="choice-image-btn">上传图片</button>
       <div class="library-grid" id="choice-image-grid"></div>
-      <button class="save-btn-center" id="choice-image-select-btn" style="margin-top:12px;">让TA选</button>`;
+      <button class="save-btn-center" id="choice-image-select-btn" style="margin-top:12px;">让易遇选</button>`;
     let images = [];
     content.querySelector('#choice-image-btn').addEventListener('click', () => {
       const inp = document.createElement('input');
@@ -6807,7 +7036,7 @@ function renderChoiceContent(overlay, mode) {
         msg.id = id;
         appendMessage(msg);
       }
-      const taMsg = { sender: 'ta', content: '我帮你选了第' + (pickIdx + 1) + '张', timestamp: Date.now(), pinned: false, pinBy: '', heartMark: null, quoteContent: null };
+      const taMsg = { sender: 'ta', content: '我帮你选了第' + (pickIdx + 1) + '张', timestamp: Date.now(), pinned: false, pinBy: '', heartMark: null, quoteContent: null, worldMark: getCurrentWorldColor() };
       const tid = await idbPutReturnId('messages', taMsg);
       taMsg.id = tid;
       appendMessage(taMsg);
@@ -6845,8 +7074,7 @@ function openQuizPoolPanel() {
     overlay.remove();
   });
 }
-
-// ========== 生理期 ==========
+  // ========== 生理期 ==========
 function openPeriodPanel() {
   const overlay = createModal(`
     <div class="card-count-row"><span id="period-summary"></span></div>
@@ -6938,7 +7166,7 @@ function loadPeriodData(overlay) {
 function openPeriodCardsPanel() {
   const overlay = createModal(`
     <div class="big-input-title">生理期字卡</div>
-    <textarea class="big-input-area" id="period-cards-input" placeholder="一行一条，TA会在生理期说这些" style="min-height:150px;">${(JSON.parse(localStorage.getItem('periodCards') || '[]')).join('\n')}</textarea>
+    <textarea class="big-input-area" id="period-cards-input" placeholder="一行一条，易遇会在生理期说这些" style="min-height:150px;">${(JSON.parse(localStorage.getItem('periodCards') || '[]')).join('\n')}</textarea>
     <button class="save-btn-center" id="save-period-cards" style="margin-top:12px;">保存</button>`);
   overlay.querySelector('#save-period-cards').addEventListener('click', () => {
     localStorage.setItem('periodCards', JSON.stringify(overlay.querySelector('#period-cards-input').value.trim().split('\n').map(s => s.trim()).filter(Boolean)));
@@ -6964,7 +7192,7 @@ function checkPeriodCare() {
   const cards = JSON.parse(localStorage.getItem('periodCards') || '[]');
   if (!cards.length) return;
   const card = cards[Math.floor(Math.random() * cards.length)];
-  const msg = { sender: 'ta', content: card, timestamp: Date.now(), pinned: false, pinBy: '', heartMark: null };
+  const msg = { sender: 'ta', content: card, timestamp: Date.now(), pinned: false, pinBy: '', heartMark: null, worldMark: getCurrentWorldColor() };
   idbPutReturnId('messages', msg).then(id => { msg.id = id; appendMessage(msg); sendNotification(card); });
 }
 setInterval(checkPeriodCare, 3600000);
@@ -7029,7 +7257,7 @@ function scheduleDateInvite() {
       const cards = JSON.parse(localStorage.getItem('dateCards') || '[]');
       if (!cards.length) return;
       const card = cards[Math.floor(Math.random() * cards.length)];
-      const msg = { sender: 'ta', content: '今晚来梦里，' + card, timestamp: Date.now(), pinned: false, pinBy: '', heartMark: null };
+      const msg = { sender: 'ta', content: '今晚来梦里，' + card, timestamp: Date.now(), pinned: false, pinBy: '', heartMark: null, worldMark: getCurrentWorldColor() };
       const id = await idbPutReturnId('messages', msg);
       msg.id = id;
       appendMessage(msg);
@@ -7044,7 +7272,7 @@ function scheduleDateRecall() {
       const records = JSON.parse(localStorage.getItem('dateRecords') || '[]');
       if (!records.length) return;
       const r = records[Math.floor(Math.random() * records.length)];
-      const msg = { sender: 'ta', content: '还记得' + r.date + '我们在' + r.place + '吗？我很开心', timestamp: Date.now(), pinned: false, pinBy: '', heartMark: null };
+      const msg = { sender: 'ta', content: '还记得' + r.date + '我们在' + r.place + '吗？我很开心', timestamp: Date.now(), pinned: false, pinBy: '', heartMark: null, worldMark: getCurrentWorldColor() };
       const id = await idbPutReturnId('messages', msg);
       msg.id = id;
       appendMessage(msg);
@@ -7058,7 +7286,7 @@ function openWishPanel() {
   const overlay = createModal(`
     <div class="heart-tabs">
       <button class="heart-tab active" id="wish-tab-me">我的心愿</button>
-      <button class="heart-tab" id="wish-tab-ta">TA的心愿</button>
+      <button class="heart-tab" id="wish-tab-ta">易遇的心愿</button>
       <button class="heart-tab" id="wish-tab-common">共同心愿</button>
     </div>
     <div class="card-list" id="wish-list"></div>
@@ -7123,13 +7351,13 @@ function openWishAddDialog(tab, panelOverlay) {
 
 function openWishCardsPanel() {
   const overlay = createModal(`
-    <div class="big-input-title">TA心愿库</div>
+    <div class="big-input-title">易遇心愿库</div>
     <textarea class="big-input-area" id="wish-cards-input" placeholder="一行一个心愿" style="min-height:150px;">${(settings.taWishLibrary || []).join('\n')}</textarea>
     <button class="save-btn-center" id="save-wish-cards" style="margin-top:12px;">保存</button>`);
   overlay.querySelector('#save-wish-cards').addEventListener('click', () => {
     settings.taWishLibrary = overlay.querySelector('#wish-cards-input').value.trim().split('\n').map(s => s.trim()).filter(Boolean);
     saveSettings();
-    showToast('TA心愿库已保存');
+    showToast('易遇心愿库已保存');
     overlay.remove();
   });
 }
@@ -7139,10 +7367,8 @@ function getPets() {
   let pets = JSON.parse(localStorage.getItem('petDataList') || 'null');
   if (!pets) {
     const oldPet = JSON.parse(localStorage.getItem('petData') || 'null');
-    if (oldPet) {
-      pets = [oldPet];
-      localStorage.setItem('petDataList', JSON.stringify(pets));
-    } else pets = [];
+    if (oldPet) { pets = [oldPet]; localStorage.setItem('petDataList', JSON.stringify(pets)); }
+    else pets = [];
   }
   return pets;
 }
@@ -7182,7 +7408,9 @@ async function renderPetPanel(content, pets) {
       <div class="pet-info">
         <div class="pet-name">${escapeHtml(pet.name)}</div>
         <div class="pet-stage">${petStageName(pet.stage)}</div>
-        <div class="pet-bars">饥饿 ${Math.round(pet.hunger)}/10 · 心情 ${Math.round(pet.mood)}/10 · 清洁 ${Math.round(pet.clean)}/10</div>
+        <div class="pet-stat-bar"><div style="width:${pet.hunger * 10}%;background:#f0a05a;"></div></div>
+        <div class="pet-stat-bar"><div style="width:${pet.mood * 10}%;background:#ff8fb0;"></div></div>
+        <div class="pet-stat-bar"><div style="width:${pet.clean * 10}%;background:#5ab0e0;"></div></div>
       </div>
       <div class="pet-actions">
         <button data-action="feed" data-idx="${i}">喂食</button>
@@ -7280,13 +7508,12 @@ function checkPetStatus() {
   });
   savePets(list);
   if (needCare) {
-    const msg = { sender: 'ta', content: '宠物们状态不太好，记得照顾它们', timestamp: Date.now(), pinned: false, pinBy: '', heartMark: null };
+    const msg = { sender: 'ta', content: '宠物们状态不太好，记得照顾它们', timestamp: Date.now(), pinned: false, pinBy: '', heartMark: null, worldMark: getCurrentWorldColor() };
     idbPutReturnId('messages', msg).then(id => { msg.id = id; appendMessage(msg); sendNotification(msg.content); });
   }
 }
 setInterval(checkPetStatus, 3600000);
 
-// ========== TA 主动照顾宠物 ==========
 function scheduleTAPetCare() {
   const next = Math.random() * (settings.taPetCareMax - settings.taPetCareMin) + settings.taPetCareMin;
   setTimeout(async () => {
@@ -7297,11 +7524,11 @@ function scheduleTAPetCare() {
         const pet = list[idx];
         const action = Math.floor(Math.random() * 3);
         let content = '';
-        if (action === 0) { pet.hunger = Math.min(10, pet.hunger + 3); content = `我帮你喂了${pet.name}`; }
-        else if (action === 1) { pet.mood = Math.min(10, pet.mood + 3); content = `我陪${pet.name}玩了一会儿`; }
-        else { pet.clean = Math.min(10, pet.clean + 4); content = `我帮${pet.name}清洁过了`; }
+        if (action === 0) { pet.hunger = Math.max(8, Math.min(10, pet.hunger + 3)); content = `我帮你喂了${pet.name}`; }
+        else if (action === 1) { pet.mood = Math.max(8, Math.min(10, pet.mood + 3)); content = `我陪${pet.name}玩了一会儿`; }
+        else { pet.clean = Math.max(8, Math.min(10, pet.clean + 4)); content = `我帮${pet.name}清洁过了`; }
         savePets(list);
-        const msg = { sender: 'ta', content, timestamp: Date.now(), pinned: false, pinBy: '', heartMark: null, quoteContent: null };
+        const msg = { sender: 'ta', content, timestamp: Date.now(), pinned: false, pinBy: '', heartMark: null, quoteContent: null, worldMark: getCurrentWorldColor() };
         const id = await idbPutReturnId('messages', msg);
         msg.id = id;
         appendMessage(msg);
@@ -7338,29 +7565,53 @@ function loadPlantContent(overlay, tab) {
   const items = tab === 'flower' ? plants.flowers : plants.trees;
   const container = overlay.querySelector('#plant-content');
   container.innerHTML = '';
+  const today = new Date().toISOString().slice(0, 10);
+
   if (!items.length) {
     container.innerHTML = `<div class="placeholder-tip">还没有${tab === 'flower' ? '花' : '树'}</div>
       <button class="upload-btn" id="plant-add-btn">种${tab === 'flower' ? '花' : '树'}</button>`;
     container.querySelector('#plant-add-btn').addEventListener('click', () => addPlant(tab));
     return;
   }
+
   items.forEach((p, i) => {
     const stageEmoji = p.type === 'flower' ? ['🌰','🌱','🌷','🌸'] : ['🌰','🌱','🌿','🪴','🌳'];
+    const maxStage = p.type === 'flower' ? 3 : 4;
     const stageIdx = Math.min(p.stage, stageEmoji.length - 1);
-    const div = document.createElement('div');
-    div.className = 'card-item';
-    div.style.flexDirection = 'column';
-    div.style.alignItems = 'flex-start';
-    div.innerHTML = `
-      <div style="font-size:32px;">${stageEmoji[stageIdx]}</div>
-      <div style="font-size:13px;color:#4a3528;">第 ${p.day} 天</div>
-      <div style="font-size:12px;color:#8b6f60;margin-bottom:6px;">水分${p.water}/10 养分${p.nutrient}/10 健康${p.health}/10</div>
-      <div style="display:flex;gap:6px;">
+
+    const wrap = document.createElement('div');
+    wrap.className = 'plant-card';
+    wrap.innerHTML = `
+      <div class="plant-visual"><div class="plant-visual-inner"></div></div>
+      <div class="plant-soil"></div>
+      <div class="plant-day">第 ${p.day} 天</div>
+      <div class="plant-stat-label">水分 ${p.water}/10</div>
+      <div class="plant-stat-bar"><div style="width:${p.water * 10}%;background:#5ab0e0;"></div></div>
+      <div class="plant-stat-label">养分 ${p.nutrient}/10</div>
+      <div class="plant-stat-bar"><div style="width:${p.nutrient * 10}%;background:#7bc47f;"></div></div>
+      <div class="plant-stat-label">健康 ${p.health}/10</div>
+      <div class="plant-stat-bar"><div style="width:${p.health * 10}%;background:#e8789f;"></div></div>
+      <div class="plant-actions">
         <button class="mini-btn plant-action-btn" data-action="water" data-idx="${i}">浇水</button>
         <button class="mini-btn plant-action-btn" data-action="fertilize" data-idx="${i}">施肥</button>
         <button class="mini-btn plant-action-btn" data-action="catch" data-idx="${i}">捉虫</button>
       </div>`;
-    div.querySelectorAll('.plant-action-btn').forEach(btn => {
+    const visualInner = wrap.querySelector('.plant-visual-inner');
+    (async () => {
+      let shown = false;
+      const ref = p.imageRef || p.image;
+      if (ref) {
+        const data = await resolveMedia(ref);
+        if (data) {
+          visualInner.innerHTML = `<img src="${data}" style="width:${p.stage >= maxStage ? 56 : 44}px;height:${p.stage >= maxStage ? 56 : 44}px;">`;
+          shown = true;
+        }
+      }
+      if (!shown) visualInner.textContent = stageEmoji[stageIdx];
+      visualInner.style.fontSize = (p.stage >= maxStage ? 44 : 34) + 'px';
+    })();
+
+    wrap.querySelectorAll('.plant-action-btn').forEach(btn => {
       btn.addEventListener('click', () => {
         const action = btn.dataset.action;
         const idx = Number(btn.dataset.idx);
@@ -7368,17 +7619,22 @@ function loadPlantContent(overlay, tab) {
         if (action === 'water') plant.water = Math.min(10, plant.water + 3);
         if (action === 'fertilize') plant.nutrient = Math.min(10, plant.nutrient + 4);
         if (action === 'catch') plant.health = Math.min(10, plant.health + 3);
-        plant.day += 1;
-        if (plant.water >= 5 && plant.nutrient >= 5 && plant.health >= 5) {
-          plant.stage = Math.min(plant.stage + 1, (plant.type === 'flower' ? 3 : 4));
+        const t = new Date().toISOString().slice(0, 10);
+        if (plant.lastCareDate !== t) {
+          plant.day += 1;
+          plant.lastCareDate = t;
+          if (plant.water >= 5 && plant.nutrient >= 5 && plant.health >= 5) {
+            plant.stage = Math.min(plant.stage + 1, (plant.type === 'flower' ? 3 : 4));
+          }
         }
         items[idx] = plant;
         localStorage.setItem('plantsData', JSON.stringify(plants));
         loadPlantContent(overlay, tab);
       });
     });
-    container.appendChild(div);
+    container.appendChild(wrap);
   });
+
   const addBtn = document.createElement('button');
   addBtn.className = 'upload-btn';
   addBtn.textContent = `再种一${tab === 'flower' ? '朵' : '棵'}${tab === 'flower' ? '花' : '树'}`;
@@ -7413,7 +7669,7 @@ function addPlant(type) {
   overlay.querySelector('#save-plant').addEventListener('click', () => {
     const plants = JSON.parse(localStorage.getItem('plantsData') || '{"flowers":[],"trees":[]}');
     const key = type === 'flower' ? 'flowers' : 'trees';
-    plants[key].push({ type, stage: 0, day: 0, water: 5, nutrient: 5, health: 5, imageRef: plantImageRef });
+    plants[key].push({ type, stage: 0, day: 0, water: 5, nutrient: 5, health: 5, imageRef: plantImageRef, lastCareDate: '' });
     localStorage.setItem('plantsData', JSON.stringify(plants));
     showToast('已种下');
     overlay.remove();
@@ -7421,7 +7677,6 @@ function addPlant(type) {
   });
 }
 
-// ========== TA 主动照顾植物 ==========
 function scheduleTAPlantCare() {
   const next = Math.random() * (settings.taPlantCareMax - settings.taPlantCareMin) + settings.taPlantCareMin;
   setTimeout(async () => {
@@ -7433,16 +7688,20 @@ function scheduleTAPlantCare() {
         const plant = pick.p;
         const action = Math.floor(Math.random() * 3);
         let content = '';
-        if (action === 0) { plant.water = Math.min(10, plant.water + 3); content = '我帮你浇过水了'; }
-        else if (action === 1) { plant.nutrient = Math.min(10, plant.nutrient + 4); content = '我帮你施过肥了'; }
-        else { plant.health = Math.min(10, plant.health + 3); content = '我帮你捉过虫了'; }
-        plant.day += 1;
-        if (plant.water >= 5 && plant.nutrient >= 5 && plant.health >= 5) {
-          plant.stage = Math.min(plant.stage + 1, (plant.type === 'flower' ? 3 : 4));
+        if (action === 0) { plant.water = Math.max(8, Math.min(10, plant.water + 3)); content = '我帮你浇过水了'; }
+        else if (action === 1) { plant.nutrient = Math.max(8, Math.min(10, plant.nutrient + 4)); content = '我帮你施过肥了'; }
+        else { plant.health = Math.max(8, Math.min(10, plant.health + 3)); content = '我帮你捉过虫了'; }
+        const t = new Date().toISOString().slice(0, 10);
+        if (plant.lastCareDate !== t) {
+          plant.day += 1;
+          plant.lastCareDate = t;
+          if (plant.water >= 5 && plant.nutrient >= 5 && plant.health >= 5) {
+            plant.stage = Math.min(plant.stage + 1, (plant.type === 'flower' ? 3 : 4));
+          }
         }
         plants[pick.key][pick.i] = plant;
         localStorage.setItem('plantsData', JSON.stringify(plants));
-        const msg = { sender: 'ta', content, timestamp: Date.now(), pinned: false, pinBy: '', heartMark: null, quoteContent: null };
+        const msg = { sender: 'ta', content, timestamp: Date.now(), pinned: false, pinBy: '', heartMark: null, quoteContent: null, worldMark: getCurrentWorldColor() };
         const id = await idbPutReturnId('messages', msg);
         msg.id = id;
         appendMessage(msg);
@@ -7464,7 +7723,7 @@ const VIDEO_GRADIENTS = [
 function pickVideoGradient() { return VIDEO_GRADIENTS[Math.floor(Math.random() * VIDEO_GRADIENTS.length)]; }
 
 function getVideoCallAvatarHTML() {
-  return `<img class="video-call-avatar" src="${settings.taAvatar || 'data:image/svg+xml,' + encodeURIComponent('<svg xmlns="http://www.w3.org/2000/svg" width="120" height="120"><circle cx="60" cy="60" r="58" fill="rgba(255,255,255,0.4)"/><text x="60" y="75" text-anchor="middle" font-size="40" fill="rgba(90,70,60,0.6)">TA</text></svg>')}" alt="TA">`;
+  return `<img class="video-call-avatar" src="${settings.taAvatar || 'data:image/svg+xml,' + encodeURIComponent('<svg xmlns="http://www.w3.org/2000/svg" width="120" height="120"><circle cx="60" cy="60" r="58" fill="rgba(255,255,255,0.4)"/><text x="60" y="75" text-anchor="middle" font-size="40" fill="rgba(90,70,60,0.6)">遇</text></svg>')}" alt="TA">`;
 }
 
 function startVideoCall() {
@@ -7593,9 +7852,7 @@ function scheduleVideoAutoHangup() {
   clearTimeout(videoCallAutoHangTimer);
   const hour = new Date().getHours();
   if (hour >= 22 || hour < 8) return;
-  const minMs = 30 * 60000;
-  const maxMs = 5 * 3600000;
-  const wait = Math.random() * (maxMs - minMs) + minMs;
+  const wait = Math.random() * (5 * 3600000 - 30 * 60000) + 30 * 60000;
   videoCallAutoHangTimer = setTimeout(() => {
     if (videoCallActive && videoCallAnswered) {
       const h = new Date().getHours();
@@ -7611,8 +7868,7 @@ function saveVideoCallRecord(isNew) {
   const duration = Math.floor((Date.now() - videoCallStartTime) / 1000);
   const date = new Date(videoCallStartTime).toISOString().slice(0, 10);
   const rec = {
-    type: videoCallType,
-    date, duration,
+    type: videoCallType, date, duration,
     answered: videoCallAnswered,
     taSpeaks: window._currentVideoSpeaks || [],
     startTime: videoCallStartTime,
@@ -7649,7 +7905,11 @@ async function scheduleVideoTASpeak() {
   if (videoCallMini) showDanmaku(content);
   if (!window._currentVideoSpeaks) window._currentVideoSpeaks = [];
   window._currentVideoSpeaks.push(content);
-  const delayMs = 3000 + Math.random() * 5000;
+  const mood = getTodayMood();
+  let base = 60000;
+  if (mood.id === 'clingy' || mood.id === 'miss') base = 40000;
+  else if (mood.id === 'low') base = 90000;
+  const delayMs = base * (0.85 + Math.random() * 0.3);
   setTimeout(() => { if (videoCallActive && videoCallAnswered) scheduleVideoTASpeak(); }, delayMs);
 }
 
@@ -7668,7 +7928,7 @@ function minimizeVideoCall() {
   videoCallMini = document.createElement('div');
   videoCallMini.className = 'video-mini-window';
   videoCallMini.innerHTML = `
-    <img class="video-mini-avatar" src="${settings.taAvatar || 'data:image/svg+xml,' + encodeURIComponent('<svg xmlns="http://www.w3.org/2000/svg" width="32" height="32"><circle cx="16" cy="16" r="15" fill="rgba(255,255,255,0.5)"/><text x="16" y="21" text-anchor="middle" font-size="12" fill="rgba(90,70,60,0.6)">TA</text></svg>')}" alt="TA">
+    <img class="video-mini-avatar" src="${settings.taAvatar || 'data:image/svg+xml,' + encodeURIComponent('<svg xmlns="http://www.w3.org/2000/svg" width="32" height="32"><circle cx="16" cy="16" r="15" fill="rgba(255,255,255,0.5)"/><text x="16" y="21" text-anchor="middle" font-size="12" fill="rgba(90,70,60,0.6)">遇</text></svg>')}" alt="TA">
     <span style="font-size:13px;color:#4a3528;">${escapeHtml(taName)}</span>
     <span class="video-mini-dot"></span>
     <span style="font-size:13px;color:#4a3528;" id="video-mini-timer">${videoCallAnswered ? '00:00' : '呼叫中'}</span>
@@ -7811,7 +8071,7 @@ function checkImportantDays() {
         settings.heartValue += 50;
         saveSettings();
         updateHeartValue();
-        const msg = { sender: 'ta', content: '今天是' + d.name + '，我一直记得。爱意值+50', timestamp: Date.now(), pinned: false, pinBy: '', heartMark: null };
+        const msg = { sender: 'ta', content: '今天是' + d.name + '，我一直记得。爱意值+50', timestamp: Date.now(), pinned: false, pinBy: '', heartMark: null, worldMark: getCurrentWorldColor() };
         idbPutReturnId('messages', msg).then(id => { msg.id = id; appendMessage(msg); sendNotification(msg.content); });
       }
     }
@@ -8043,7 +8303,8 @@ function checkBondDaily() {
   saveSettings();
   updateHeartValue();
 }
-  // ========== 归档（打开网页全量补齐） ==========
+
+// ========== 归档（打开时全量补齐） ==========
 async function checkArchive() {
   const now = new Date();
   const todayStr = now.getFullYear() + '-' + (now.getMonth() + 1) + '-' + now.getDate();
@@ -8071,50 +8332,12 @@ async function checkArchive() {
     for (const m of toArchive) await idbDelete('messages', m.id);
     await renderMessages();
     localStorage.setItem('lastArchiveDate', todayStr);
-  } catch (e) {
-    console.error('归档失败', e);
-  }
+  } catch (e) { console.error('归档失败', e); }
   isArchiving = false;
   if (input) { input.disabled = false; input.placeholder = '对TA说些什么...'; }
 }
 
-// ========== 情绪（零维护） ==========
-const MOODS = [
-  { id: 'happy', name: '开心', factor: 0.7, prefixes: ['嘿嘿，', '今天心情超好，'] },
-  { id: 'miss', name: '想你', factor: 0.8, prefixes: ['想你了，', '好想你啊，'] },
-  { id: 'normal', name: '平常', factor: 1.0, prefixes: [] },
-  { id: 'clingy', name: '粘人', factor: 0.5, prefixes: ['陪我嘛，', '不许不理我，'] },
-  { id: 'low', name: '低落', factor: 1.3, prefixes: ['唉，', '有点难过，'] }
-];
-
-function getTodayMood() {
-  const today = new Date().toDateString();
-  if (settings.moodDate === today && settings.moodType) {
-    return MOODS.find(m => m.id === settings.moodType) || MOODS[2];
-  }
-  const pick = MOODS[Math.floor(Math.random() * MOODS.length)];
-  settings.moodType = pick.id;
-  settings.moodDate = today;
-  saveSettings();
-  return pick;
-}
-
-function applyMoodToText(text) {
-  const mood = getTodayMood();
-  if (!mood.prefixes.length) return text;
-  if (Math.random() < 0.25) {
-    const p = mood.prefixes[Math.floor(Math.random() * mood.prefixes.length)];
-    return p + text;
-  }
-  return text;
-}
-
-function applyMoodDelayFactor() {
-  const mood = getTodayMood();
-  return mood.factor;
-}
-
-// ========== 动态粒子 ==========
+// ========== 粒子 ==========
 function getSeasonParticle() {
   const m = new Date().getMonth() + 1;
   if (m >= 3 && m <= 5) return 'sakura';
@@ -8131,13 +8354,9 @@ function initParticles() {
   canvas.height = window.innerHeight;
   if (particleAnimation) cancelAnimationFrame(particleAnimation);
   particleItems = [];
-  if (!settings.particleEnabled) {
-    ctx.clearRect(0, 0, canvas.width, canvas.height);
-    return;
-  }
+  if (!settings.particleEnabled) { ctx.clearRect(0, 0, canvas.width, canvas.height); return; }
   const type = settings.particleType === 'season' ? getSeasonParticle() : settings.particleType;
-  const count = 40;
-  for (let i = 0; i < count; i++) particleItems.push(createParticle(type, canvas));
+  for (let i = 0; i < 40; i++) particleItems.push(createParticle(type, canvas));
   function loop() {
     ctx.clearRect(0, 0, canvas.width, canvas.height);
     particleItems.forEach(p => {
@@ -8152,15 +8371,7 @@ function initParticles() {
 }
 
 function createParticle(type, canvas) {
-  return {
-    type,
-    x: Math.random() * canvas.width,
-    y: Math.random() * canvas.height,
-    speed: 0.5 + Math.random() * 1.5,
-    drift: (Math.random() - 0.5) * 0.8,
-    size: 4 + Math.random() * 6,
-    alpha: 0.4 + Math.random() * 0.5
-  };
+  return { type, x: Math.random() * canvas.width, y: Math.random() * canvas.height, speed: 0.5 + Math.random() * 1.5, drift: (Math.random() - 0.5) * 0.8, size: 4 + Math.random() * 6, alpha: 0.4 + Math.random() * 0.5 };
 }
 
 function drawParticle(ctx, p) {
@@ -8193,9 +8404,223 @@ function drawParticle(ctx, p) {
   ctx.globalAlpha = 1;
 }
 
-// ========== 状态栏定时刷新 ==========
-function startStatusBarRefresh() {
-  setInterval(() => { updateStatusBar(); }, 60000);
+// ========== 情绪 ==========
+const MOODS = [
+  { id: 'happy', name: '开心', factor: 0.7, prefixes: ['嘿嘿，', '今天心情超好，'] },
+  { id: 'miss', name: '想你', factor: 0.8, prefixes: ['想你了，', '好想你啊，'] },
+  { id: 'normal', name: '平常', factor: 1.0, prefixes: [] },
+  { id: 'clingy', name: '粘人', factor: 0.5, prefixes: ['陪我嘛，', '不许不理我，'] },
+  { id: 'low', name: '低落', factor: 1.3, prefixes: ['唉，', '有点难过，'] }
+];
+
+function getTodayMood() {
+  const today = new Date().toDateString();
+  if (settings.moodDate === today && settings.moodType) {
+    return MOODS.find(m => m.id === settings.moodType) || MOODS[2];
+  }
+  const pick = MOODS[Math.floor(Math.random() * MOODS.length)];
+  settings.moodType = pick.id;
+  settings.moodDate = today;
+  saveSettings();
+  return pick;
+}
+
+function applyMoodToText(text) {
+  const mood = getTodayMood();
+  if (!mood.prefixes.length) return text;
+  if (Math.random() < 0.25) {
+    const p = mood.prefixes[Math.floor(Math.random() * mood.prefixes.length)];
+    return p + text;
+  }
+  return text;
+}
+
+// ========== 世界之外 ==========
+function openWorldsPanel() {
+  const overlay = createModal(`<div id="worlds-content"></div>`);
+  renderWorldsContent(overlay);
+  registerPanelUpdater('worlds', () => renderWorldsContent(overlay));
+}
+
+function renderWorldsContent(overlay) {
+  const content = overlay.querySelector('#worlds-content');
+  if (!content) return;
+  const worlds = settings.worlds || [];
+  let html = '<div class="big-input-title">世界之外</div>';
+  html += '<div style="font-size:12px;color:#8b6f60;margin-bottom:12px;text-align:center;">只有易遇能穿梭副本，你不能切换</div>';
+  worlds.forEach(w => {
+    const current = w.id === settings.currentWorldId ? ' current' : '';
+    const speedText = w.speed === 1 ? '同速' : `${w.speed}倍速`;
+    const offsetText = w.offset >= 0 ? `+${w.offset}h` : `${w.offset}h`;
+    html += `
+      <div class="world-card${current}" data-id="${w.id}">
+        <div class="world-icon">${WORLD_ICONS[w.icon] || WORLD_ICONS.real}</div>
+        <div class="world-info">
+          <div class="world-name">${escapeHtml(w.name)}</div>
+          <div class="world-role">${escapeHtml(w.role || '')}</div>
+          <div class="world-meta">时差 ${offsetText} ｜ ${speedText}${w.id === settings.currentWorldId ? ' ｜ 现在在这里' : ''}</div>
+        </div>
+        <div class="world-ops">
+          <button class="world-edit" data-id="${w.id}">改</button>
+          <button class="world-del" data-id="${w.id}">✕</button>
+        </div>
+      </div>`;
+  });
+  html += '<button class="upload-btn" id="worlds-add-btn">添加副本</button>';
+  content.innerHTML = html;
+  content.querySelectorAll('.world-edit').forEach(btn => {
+    btn.addEventListener('click', () => {
+      const world = settings.worlds.find(w => w.id === btn.dataset.id);
+      openWorldEditDialog(world, overlay);
+    });
+  });
+  content.querySelectorAll('.world-del').forEach(btn => {
+    btn.addEventListener('click', async () => {
+      if (settings.worlds.length <= 1) return showToast('至少保留一个副本');
+      settings.worlds = settings.worlds.filter(w => w.id !== btn.dataset.id);
+      if (settings.currentWorldId === btn.dataset.id) settings.currentWorldId = settings.worlds[0].id;
+      await saveSettings();
+      renderWorldsContent(overlay);
+    });
+  });
+  content.querySelector('#worlds-add-btn').addEventListener('click', () => openWorldEditDialog(null, overlay));
+}
+
+function openWorldEditDialog(world, panelOverlay) {
+  const isNew = !world;
+  const w = world || { id: 'w_' + Date.now(), name: '新副本', role: '', icon: 'real', offset: 0, speed: 1 };
+  const overlay = createModal(`
+    <div class="big-input-title">${isNew ? '添加副本' : '编辑副本'}</div>
+    <input type="text" id="world-name-input" placeholder="副本名" value="${escapeHtml(w.name)}" style="width:100%;background:rgba(255,255,255,0.5);border:1px solid rgba(255,255,255,0.6);border-radius:14px;padding:10px 14px;font-size:14px;color:#4a3f3a;outline:none;margin-bottom:8px;">
+    <input type="text" id="world-role-input" placeholder="易遇的身份（如：太医/魔皇）" value="${escapeHtml(w.role || '')}" style="width:100%;background:rgba(255,255,255,0.5);border:1px solid rgba(255,255,255,0.6);border-radius:14px;padding:10px 14px;font-size:14px;color:#4a3f3a;outline:none;margin-bottom:8px;">
+    <div style="font-size:13px;color:#4a3528;margin-bottom:4px;">图标</div>
+    <div class="library-grid" id="world-icon-grid"></div>
+    <div style="font-size:13px;color:#4a3528;margin:12px 0 4px 0;">时差（小时，-12 ~ +14）</div>
+    <input type="number" id="world-offset-input" value="${w.offset}" style="width:100%;background:rgba(255,255,255,0.5);border:1px solid rgba(255,255,255,0.6);border-radius:14px;padding:10px 14px;font-size:14px;color:#4a3f3a;outline:none;margin-bottom:8px;">
+    <div style="font-size:13px;color:#4a3528;margin-bottom:4px;">流速（1=同速，30=你1天他30天）</div>
+    <input type="number" id="world-speed-input" value="${w.speed}" min="0.1" step="0.1" style="width:100%;background:rgba(255,255,255,0.5);border:1px solid rgba(255,255,255,0.6);border-radius:14px;padding:10px 14px;font-size:14px;color:#4a3f3a;outline:none;margin-bottom:12px;">
+    <button class="save-btn-center" id="save-world">保存</button>`);
+  let pickedIcon = w.icon;
+  const iconGrid = overlay.querySelector('#world-icon-grid');
+  Object.keys(WORLD_ICONS).forEach(key => {
+    const div = document.createElement('div');
+    div.className = 'lib-item' + (key === pickedIcon ? ' active' : '');
+    div.style.cssText = 'display:flex;align-items:center;justify-content:center;background:rgba(255,255,255,0.5);';
+    div.innerHTML = WORLD_ICONS[key];
+    div.addEventListener('click', () => {
+      pickedIcon = key;
+      iconGrid.querySelectorAll('.lib-item').forEach(el => el.classList.remove('active'));
+      div.classList.add('active');
+    });
+    iconGrid.appendChild(div);
+  });
+  overlay.querySelector('#save-world').addEventListener('click', async () => {
+    const name = overlay.querySelector('#world-name-input').value.trim() || '新副本';
+    const role = overlay.querySelector('#world-role-input').value.trim();
+    const offset = Number(overlay.querySelector('#world-offset-input').value) || 0;
+    const speed = Number(overlay.querySelector('#world-speed-input').value) || 1;
+    if (isNew) {
+      settings.worlds.push({ id: w.id, name, role, icon: pickedIcon, offset, speed });
+    } else {
+      const target = settings.worlds.find(x => x.id === w.id);
+      if (target) { target.name = name; target.role = role; target.icon = pickedIcon; target.offset = offset; target.speed = speed; }
+    }
+    await saveSettings();
+    overlay.remove();
+    panelOverlay.remove();
+    openWorldsPanel();
+    showToast('副本已保存');
+  });
+}
+
+// ========== 高维彩蛋 ==========
+function openHighDimPanel() {
+  const overlay = createModal(`
+    <div class="big-input-title">高维彩蛋</div>
+    <div style="font-size:12px;color:#8b6f60;margin-bottom:10px;text-align:center;">易遇偶尔从「世界之外」冒出一句，极低频触发</div>
+    <textarea class="big-input-area" id="highdim-input" placeholder="一行一句" style="min-height:180px;">${(settings.highDimLines || []).join('\n')}</textarea>
+    <button class="save-btn-center" id="save-highdim" style="margin-top:12px;">保存</button>`);
+  overlay.querySelector('#save-highdim').addEventListener('click', async () => {
+    settings.highDimLines = overlay.querySelector('#highdim-input').value.trim().split('\n').map(s => s.trim()).filter(Boolean);
+    await saveSettings();
+    showToast('高维彩蛋已保存');
+    overlay.remove();
+  });
+}
+
+function scheduleHighDim() {
+  const next = (1 + Math.random() * 2) * 86400000;
+  highDimTimer = setTimeout(async () => {
+    if (!isReplying && !isArchiving && (settings.highDimLines || []).length) {
+      const line = settings.highDimLines[Math.floor(Math.random() * settings.highDimLines.length)];
+      const msg = { sender: 'ta', content: line, timestamp: Date.now(), pinned: false, pinBy: '', heartMark: null, quoteContent: null, worldMark: getCurrentWorldColor() };
+      const id = await idbPutReturnId('messages', msg);
+      msg.id = id;
+      appendMessage(msg);
+      sendNotification(line);
+    }
+    scheduleHighDim();
+  }, next);
+}
+
+// ========== 重要记事 ==========
+function openImportantNotesPanel() {
+  const overlay = createModal(`
+    <div class="big-input-title">重要记事</div>
+    <div style="font-size:12px;color:#8b6f60;margin-bottom:10px;text-align:center;">你写下重要的事，易遇会记着，之后偶尔提起来</div>
+    <div class="card-list" id="note-list" style="max-height:30vh;margin-bottom:10px;"></div>
+    <input type="text" id="note-input" placeholder="一行一件，如：我不吃香菜" style="width:100%;background:rgba(255,255,255,0.5);border:1px solid rgba(255,255,255,0.6);border-radius:14px;padding:10px 14px;font-size:14px;color:#4a3f3a;outline:none;margin-bottom:10px;">
+    <button class="save-btn-center" id="add-note">添加</button>`);
+  const list = overlay.querySelector('#note-list');
+  function render() {
+    list.innerHTML = '';
+    (settings.importantNotes || []).forEach((n, i) => {
+      const div = document.createElement('div');
+      div.className = 'card-item';
+      div.innerHTML = `<div class="card-text">${escapeHtml(n.text || n)}</div><div class="card-ops"><button class="note-del">✕</button></div>`;
+      div.querySelector('.note-del').addEventListener('click', async () => {
+        settings.importantNotes.splice(i, 1);
+        await saveSettings();
+        render();
+      });
+      list.appendChild(div);
+    });
+    if (!(settings.importantNotes || []).length) list.innerHTML = '<div class="placeholder-tip">还没有记事</div>';
+  }
+  render();
+  overlay.querySelector('#add-note').addEventListener('click', async () => {
+    const t = overlay.querySelector('#note-input').value.trim();
+    if (!t) return;
+    settings.importantNotes = settings.importantNotes || [];
+    settings.importantNotes.push({ text: t, date: new Date().toISOString().slice(0, 10) });
+    await saveSettings();
+    overlay.querySelector('#note-input').value = '';
+    render();
+  });
+}
+
+// ========== 大事记 ==========
+function addBigEvent(type, text) {
+  settings.bigEvents = settings.bigEvents || [];
+  settings.bigEvents.push({ type, text, time: Date.now() });
+  saveSettings();
+}
+
+function openTimelinePanel() {
+  const overlay = createModal(`
+    <div class="big-input-title">大事记</div>
+    <div class="card-list" id="timeline-list"></div>`);
+  const list = overlay.querySelector('#timeline-list');
+  const events = (settings.bigEvents || []).slice().sort((a, b) => b.time - a.time);
+  if (!events.length) { list.innerHTML = '<div class="placeholder-tip">还没有记录</div>'; return; }
+  events.forEach(ev => {
+    const d = new Date(ev.time);
+    const str = d.getFullYear() + '-' + String(d.getMonth() + 1).padStart(2, '0') + '-' + String(d.getDate()).padStart(2, '0') + ' ' + String(d.getHours()).padStart(2, '0') + ':' + String(d.getMinutes()).padStart(2, '0');
+    const div = document.createElement('div');
+    div.className = 'heart-item';
+    div.innerHTML = `<span class="heart-mark">✦</span><span>${escapeHtml(ev.text)}<br><span style="font-size:11px;color:#8b6f60;">${str}</span></span>`;
+    list.appendChild(div);
+  });
 }
 
 // ========== 初始化 ==========
@@ -8208,6 +8633,7 @@ async function init() {
   await renderMessages();
   await applyBG();
   updateStatusBar();
+  addBigEventOnce();
   scheduleTAActive();
   scheduleTAAutonomy();
   scheduleTAAvatarChange();
@@ -8229,29 +8655,36 @@ async function init() {
   scheduleTAPetCare();
   scheduleTAPlantCare();
   scheduleTAWorldChange();
+  scheduleHighDim();
   await checkArchive();
   checkImportantDays();
   checkPeriodCare();
   checkPetStatus();
   initParticles();
   updateSendBtn();
-  startStatusBarRefresh();
+  setInterval(() => { updateStatusBar(); }, 60000);
   const input = document.getElementById('chat-input');
-  input.addEventListener('focus', () => {
-    setTimeout(() => { input.scrollIntoView({ behavior: 'smooth', block: 'end' }); }, 300);
-  });
+  input.addEventListener('focus', () => { setTimeout(() => { input.scrollIntoView({ behavior: 'smooth', block: 'end' }); }, 300); });
   document.addEventListener('fullscreenchange', () => setTimeout(() => applyBG(), 200));
   document.addEventListener('webkitfullscreenchange', () => setTimeout(() => applyBG(), 200));
   window.addEventListener('resize', () => {
-    const canvas = document.getElementById('bg-canvas');
-    canvas.width = window.innerWidth;
-    canvas.height = window.innerHeight;
-    const pc = document.getElementById('particle-canvas');
-    if (pc) { pc.width = window.innerWidth; pc.height = window.innerHeight; }
-    if (settings.bgCurrent) applyBG();
-    else { const ctx = canvas.getContext('2d'); drawDefaultBG(ctx, canvas.width, canvas.height); }
-    initParticles();
+    clearTimeout(bgResizeTimer);
+    bgResizeTimer = setTimeout(() => {
+      if (settings.bgCurrent) applyBG();
+      else { const c = document.getElementById('bg-canvas'); const ctx = c.getContext('2d'); c.width = window.innerWidth; c.height = window.innerHeight; drawDefaultBG(ctx, c.width, c.height); }
+      const pc = document.getElementById('particle-canvas');
+      if (pc) { pc.width = window.innerWidth; pc.height = window.innerHeight; }
+      initParticles();
+    }, 300);
   });
+}
+
+function addBigEventOnce() {
+  settings.visitedWorlds = settings.visitedWorlds || [];
+  if (!settings.visitedWorlds.includes('real')) {
+    settings.visitedWorlds.push('real');
+    addBigEvent('world', '第一次相遇：现实世界 · 医生');
+  }
 }
 
 init();

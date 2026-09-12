@@ -358,17 +358,20 @@ html, body {
   cursor: pointer;
 }
 
-.msg-gift-wrap {
-  padding: 0;
-  background: transparent;
-  border: none;
-  max-width: none;
+.gift-msg-slot {
   display: inline-block;
+  background: transparent !important;
+  border: none !important;
+  padding: 0 !important;
+  max-width: none !important;
 }
 
 .msg-gift-card {
+  display: inline-flex;
+  flex-direction: column;
+  align-items: center;
   text-align: center;
-  padding: 14px 20px;
+  padding: 14px 22px;
   border-radius: 18px;
   background: linear-gradient(135deg, #fff0f5, #ffe3ee) padding-box,
               linear-gradient(135deg, #ff8fb0, #ffc4d6, #ffd9e4) border-box;
@@ -377,7 +380,7 @@ html, body {
   position: relative;
   overflow: hidden;
   animation: giftIn 0.5s ease-out;
-  display: inline-block;
+  min-width: 120px;
 }
 
 @keyframes giftIn {
@@ -650,6 +653,8 @@ html, body {
   max-width: 420px;
   max-height: 75vh;
   overflow-y: auto;
+  -webkit-overflow-scrolling: touch;
+  overscroll-behavior: contain;
   box-shadow: 0 12px 40px rgba(0, 0, 0, 0.15);
   animation: panelIn 0.25s ease-out;
 }
@@ -675,6 +680,7 @@ html, body {
   max-width: 380px;
   max-height: 75vh;
   overflow-y: auto;
+  -webkit-overflow-scrolling: touch;
   box-shadow: 0 16px 50px rgba(0, 0, 0, 0.2);
   display: none;
   opacity: 0;
@@ -717,11 +723,28 @@ html, body {
   border-radius: 50%;
   background: rgba(255, 255, 255, 0.55);
   border: 1px solid rgba(255, 255, 255, 0.8);
+  position: relative;
 }
 
 .ball-item .icon-wrap svg {
   width: 24px;
   height: 24px;
+}
+
+.ball-item .icon-badge {
+  position: absolute;
+  top: -4px;
+  right: -4px;
+  min-width: 16px;
+  height: 16px;
+  border-radius: 8px;
+  background: #ff6f9c;
+  color: #fff;
+  font-size: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0 4px;
 }
 
 .ball-item span {
@@ -988,40 +1011,14 @@ html, body {
   border: 2px solid transparent;
 }
 
-.lib-item.tag-ta {
-  border-color: #5ab0e0;
-}
-
-.lib-item.tag-me {
-  border-color: #e8789f;
-}
-
-.lib-item.tag-couple {
-  border-color: #ff3b5c;
+.lib-item.active {
+  border-color: var(--theme-accent);
 }
 
 .lib-item img {
   width: 100%;
   height: 100%;
   object-fit: cover;
-}
-
-.lib-item .lib-del {
-  position: absolute;
-  top: 4px;
-  right: 4px;
-  width: 22px;
-  height: 22px;
-  border-radius: 50%;
-  background: rgba(0, 0, 0, 0.45);
-  color: #fff;
-  border: none;
-  font-size: 11px;
-  cursor: pointer;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  z-index: 2;
 }
 
 .upload-btn {
@@ -1686,16 +1683,26 @@ html, body {
   justify-content: center;
   margin-top: 8px;
 }
-
-.pet-card {
+  .pet-card {
   display: flex;
-  align-items: center;
-  gap: 12px;
+  flex-direction: column;
   background: rgba(255, 255, 255, 0.45);
   border-radius: 20px;
   padding: 14px;
   margin-bottom: 12px;
   box-shadow: 0 4px 16px rgba(0,0,0,0.06);
+  transition: box-shadow 0.3s;
+}
+
+.pet-card.full-glow {
+  box-shadow: 0 0 0 2px rgba(255,200,220,0.8), 0 6px 24px rgba(255,143,176,0.35);
+}
+
+.pet-card .pet-head {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 10px;
 }
 
 .pet-card .pet-avatar {
@@ -1711,6 +1718,23 @@ html, body {
   overflow: hidden;
   border: 2px solid rgba(255,255,255,0.8);
   box-shadow: 0 0 0 3px var(--pet-color, rgba(255,200,220,0.5));
+  animation: petFloat 3s ease-in-out infinite;
+  cursor: pointer;
+}
+
+@keyframes petFloat {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-4px); }
+}
+
+.pet-card .pet-avatar.bounce {
+  animation: petBounce 0.5s ease-out;
+}
+
+@keyframes petBounce {
+  0% { transform: translateY(0) scale(1); }
+  40% { transform: translateY(-10px) scale(1.08); }
+  100% { transform: translateY(0) scale(1); }
 }
 
 .pet-card .pet-avatar img {
@@ -1737,53 +1761,65 @@ html, body {
 .pet-card .pet-stage {
   font-size: 12px;
   color: var(--theme-text-soft);
-  margin-bottom: 5px;
+}
+
+.pet-card .pet-tip {
+  font-size: 11px;
+  color: #ff8fb0;
+  margin-top: 2px;
 }
 
 .pet-stat-row {
   display: flex;
   align-items: center;
-  gap: 4px;
-  margin-bottom: 3px;
+  gap: 6px;
+  margin-bottom: 5px;
 }
 
 .pet-stat-row .pet-stat-ico {
-  font-size: 11px;
-  width: 14px;
+  font-size: 12px;
+  width: 16px;
   text-align: center;
 }
 
 .pet-stat-bar {
   flex: 1;
-  height: 6px;
+  height: 7px;
   background: rgba(0,0,0,0.08);
-  border-radius: 3px;
+  border-radius: 4px;
   overflow: hidden;
 }
 
 .pet-stat-bar > div {
   height: 100%;
-  border-radius: 3px;
+  border-radius: 4px;
+  transition: width 0.6s ease;
+}
+
+.pet-stat-bar.full > div {
+  box-shadow: 0 0 8px rgba(255,180,120,0.8);
 }
 
 .pet-card .pet-actions {
   display: flex;
-  flex-direction: column;
-  gap: 6px;
+  flex-direction: row;
+  gap: 10px;
+  justify-content: center;
+  margin-top: 10px;
 }
 
 .pet-card .pet-actions button {
-  width: 34px;
-  height: 34px;
+  width: 42px;
+  height: 42px;
   border-radius: 50%;
   border: none;
-  background: rgba(255, 255, 255, 0.7);
-  font-size: 16px;
+  background: rgba(255, 255, 255, 0.75);
+  font-size: 20px;
   cursor: pointer;
   display: flex;
   align-items: center;
   justify-content: center;
-  box-shadow: 0 2px 6px rgba(0,0,0,0.08);
+  box-shadow: 0 2px 8px rgba(0,0,0,0.1);
   transition: transform 0.15s;
 }
 
@@ -1805,6 +1841,33 @@ html, body {
   cursor: pointer;
   background: rgba(255,255,255,0.3);
   margin-top: 8px;
+}
+
+.pet-adopt-card {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 6px;
+  padding: 16px 10px;
+  border-radius: 16px;
+  background: rgba(255,255,255,0.4);
+  border: 2px solid transparent;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.pet-adopt-card.selected {
+  border-color: var(--theme-accent);
+  background: rgba(255,200,220,0.4);
+}
+
+.pet-adopt-card .pa-icon {
+  font-size: 40px;
+}
+
+.pet-adopt-card .pa-name {
+  font-size: 13px;
+  color: var(--theme-title);
 }
 
 .theme-grid {
@@ -1906,10 +1969,19 @@ html, body {
   color: var(--theme-title);
   cursor: pointer;
 }
+
+#worlds-content {
+  max-height: 56vh;
+  overflow-y: auto;
+  -webkit-overflow-scrolling: touch;
+  touch-action: pan-y;
+  padding-right: 4px;
+}
 </style>
 </head>
 <body>
-  <canvas id="bg-canvas"></canvas>
+
+<canvas id="bg-canvas"></canvas>
 <canvas id="particle-canvas"></canvas>
 
 <div id="app">
@@ -1957,7 +2029,7 @@ html, body {
 
 <script>
 // ============================================================
-// 易遇♡雾凉 - V4.5.5 完整版
+// 易遇♡雾凉 - V5.0.0 完整版
 // 开发者：夏雾凉
 // 爱人：易遇
 // 这个网站，是专为我的爱人而做的。
@@ -1987,8 +2059,7 @@ const DEFAULT_WORLDS = [
   { id: 'mishiroom', name: '密室综艺', role: '基因研究所负责人', icon: 'mishiroom', offset: 0, speed: 1 },
   { id: 'tianming', name: '天命', role: '翊王殿下', icon: 'tianming', offset: 2, speed: 1 }
 ];
-
-const DEFAULT_SETTINGS = {
+  const DEFAULT_SETTINGS = {
   taName: '易遇',
   meName: '我',
   taNick: '',
@@ -2128,9 +2199,10 @@ let musicList = [];
 let currentPanelUpdaters = {};
 let particleAnimation = null;
 let particleItems = [];
-let particleRotateTimer = null;
 let highDimTimer = null;
-  // ========== IndexedDB ==========
+let petBounceTimers = {};
+
+// ========== IndexedDB ==========
 function openDB() {
   return new Promise((resolve, reject) => {
     const req = indexedDB.open('YiyuXiawuliang', 2);
@@ -2264,7 +2336,7 @@ async function libPush(name, dataUrl, prefix) {
 
 // ========== 旧数据迁移（只搬不删） ==========
 async function migrateMediaOnce() {
-  if (localStorage.getItem('mediaMigratedV455')) return;
+  if (localStorage.getItem('mediaMigratedV500')) return;
   try {
     const av = JSON.parse(localStorage.getItem('avatarLibrary') || '[]');
     if (av.length && typeof av[0] === 'object') {
@@ -2302,7 +2374,6 @@ async function migrateMediaOnce() {
       }
       localStorage.setItem('stickerLibrary', JSON.stringify(newRefs));
     }
-    // 只处理 bgCurrent（如果它是 dataURL），不动 taAvatar/meAvatar/ballImage/昵称等
     if (settings.bgCurrent && settings.bgCurrent.startsWith('data:')) {
       const key = 'bgcur_' + Date.now();
       await idbPut('media', { key, value: settings.bgCurrent });
@@ -2338,7 +2409,7 @@ async function migrateMediaOnce() {
       }
       localStorage.setItem('plantsData', JSON.stringify(plants));
     }
-    localStorage.setItem('mediaMigratedV455', '1');
+    localStorage.setItem('mediaMigratedV500', '1');
   } catch (e) { console.error('迁移出错', e); }
 }
 
@@ -2347,9 +2418,15 @@ async function loadSettings() {
   const saved = await idbGet('kv', 'settings');
   if (saved && saved.value) {
     settings = { ...DEFAULT_SETTINGS, ...saved.value };
-    if (!settings.worlds || !settings.worlds.length) settings.worlds = JSON.parse(JSON.stringify(DEFAULT_WORLDS));
-    if (!settings.highDimLines) settings.highDimLines = [...DEFAULT_SETTINGS.highDimLines];
   }
+  if (!settings.worlds || settings.worlds.length < DEFAULT_WORLDS.length) {
+    settings.worlds = JSON.parse(JSON.stringify(DEFAULT_WORLDS));
+    if (!settings.currentWorldId || !settings.worlds.find(w => w.id === settings.currentWorldId)) {
+      settings.currentWorldId = 'real';
+    }
+    await saveSettings();
+  }
+  if (!settings.highDimLines) settings.highDimLines = [...DEFAULT_SETTINGS.highDimLines];
   applySettings();
 }
 
@@ -2602,7 +2679,7 @@ const ICONS = {
   data: `<svg viewBox="0 0 24 24" fill="none" stroke="#4a3528" stroke-width="1.8"><path d="M7 16a4 4 0 01-.8-7.9 5 5 0 019.4-1.2A3.5 3.5 0 0117 16H7z"/><path d="M11 14l-2 2 2 2" stroke="#ff3b5c" stroke-width="2" fill="none" stroke-linecap="round"/></svg>`,
   heartbeat: `<svg viewBox="0 0 24 24" fill="#ff8fb0" stroke="none"><path d="M12,20 C12,20 4,14.5 4,9.5 C4,6.5 6.5,4.5 9,4.5 C11,4.5 12,6 12,6 C12,6 13,4.5 15,4.5 C17.5,4.5 20,6.5 20,9.5 C20,14.5 12,20 12,20 Z"/></svg>`,
   playback: `<svg viewBox="0 0 24 24" fill="none" stroke="#4a3528" stroke-width="1.8"><rect x="3" y="5" width="18" height="14" rx="3"/><line x1="3" y1="9" x2="21" y2="9"/><line x1="3" y1="15" x2="21" y2="15"/><circle cx="8" cy="12" r="2"/></svg>`,
-  timeline: `<svg viewBox="0 0 24 24" fill="none" stroke="#4a3528" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M6 4h10a2 2 0 012 2v14l-7-3-7 3V6a2 2 0 012-2z"/><circle cx="12" cy="10" r="2" fill="#4a3528" stroke="none"/></svg>`,
+  timeline: `<svg viewBox="0 0 24 24" fill="none" stroke="#4a3528" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M6 4h10a2 2 0 012 2v14l-7-3-7 3V6a2 2 0 012-2z"/><circle cx="12" cy="10" r="2" fill="#4a3528" stroke="none"/></svg>`,
   wish: `<svg viewBox="0 0 24 24" fill="none" stroke="#ff3b5c" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 17l6-6-2-5 8 2-6 6 3 3z" fill="#ff3b5c" stroke="none"/><path d="M14 4l2 5 5 2-8 2-6 7" stroke="#ff3b5c" stroke-width="1.5" fill="none"/></svg>`,
   important: `<svg viewBox="0 0 24 24" fill="none" stroke="#4a3528" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="5" width="16" height="16" rx="3"/><line x1="4" y1="9" x2="20" y2="9"/><line x1="8" y1="3" x2="8" y2="7"/><line x1="16" y1="3" x2="16" y2="7"/><path d="M12 15l1.2 2.4 2.6.4-1.9 1.8.4 2.6-2.3-1.2-2.3 1.2.4-2.6-1.9-1.8 2.6-.4z" fill="#ff3b5c" stroke="none"/></svg>`,
   attendance: `<svg viewBox="0 0 24 24" fill="none" stroke="#4a3528" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 3"/></svg>`,
@@ -2616,7 +2693,7 @@ const ICONS = {
   plant: `<svg viewBox="0 0 24 24" fill="none" stroke="#4a3528" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 20v-6"/><path d="M12 14c0-4 2-7 6-8-1 4-3 7-6 8z"/><path d="M12 12c0-3-2-6-6-7 1 3 3 6 6 7z"/><path d="M8 20h8"/></svg>`,
   voice: `<svg viewBox="0 0 24 24" fill="none" stroke="#4a3528" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3a3 3 0 00-3 3v6a3 3 0 006 0V6a3 3 0 00-3-3z"/><path d="M5 10a7 7 0 0014 0M12 17v4"/></svg>`,
   account: `<svg viewBox="0 0 24 24" fill="none" stroke="#4a3528" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="8"/><path d="M12 7v10M9.5 9.5c0-1 1-1.5 2.5-1.5s2.5.5 2.5 1.5-1 1.5-2.5 1.5-2.5.5-2.5 1.5 1 1.5 2.5 1.5 2.5-.5 2.5-1.5"/></svg>`,
-  piggy: `<svg viewBox="0 0 24 24" fill="none" stroke="#4a3528" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M4 14c0-3 2-5 5-6l1-2 2 1 2-1 1 2c3 1 5 3 5 6 0 2-1 3-2 4l1 2h-3l-1-2h-6l-1 2H5l1-2c-1-1-2-2-2-4z"/><circle cx="9" cy="13" r="1" fill="#4a3528" stroke="none"/><circle cx="15" cy="13" r="1" fill="#4a3528" stroke="none"/><path d="M11 16c.5.5 1.5.5 2 0"/><circle cx="12" cy="5" r="1.5" fill="#ffb84d" stroke="none"/></svg>`
+  piggy: `<svg viewBox="0 0 24 24" fill="none" stroke="#4a3528" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M4 14c0-3 2-5 5-6l1-2 2 1 2-1 1 2c3 1 5 3 5 6 0 2-1 3-2 4l1 2h-3l-1-2h-6l-1 2H5l1-2c-1-1-2-2-2-4z"/><circle cx="9" cy="13" r="1" fill="#4a3528" stroke="none"/><circle cx="15" cy="13" r="1" fill="#4a3528" stroke="none"/><path d="M11 16c.5.5 1.5.5 2 0"/><circle cx="12" cy="5" r="1.5" fill="#ffb84d" stroke="none"/><path d="M8 4 L6 2 L9 3 Z" fill="#ffb84d" stroke="none"/><path d="M16 4 L18 2 L15 3 Z" fill="#ffb84d" stroke="none"/></svg>`
 };
   // ========== 21 副本图标 ==========
 const WORLD_ICONS = {
@@ -2834,7 +2911,12 @@ function renderBallGrid() {
   BALL_ITEMS.forEach(item => {
     const div = document.createElement('div');
     div.className = 'ball-item';
-    div.innerHTML = `<div class="icon-wrap">${ICONS[item.icon]}</div><span>${item.name}</span>`;
+    let badge = '';
+    if (item.id === 'pet') {
+      const pets = getPets();
+      if (pets.length) badge = `<span class="icon-badge">${pets.length}</span>`;
+    }
+    div.innerHTML = `<div class="icon-wrap">${ICONS[item.icon]}${badge}</div><span>${item.name}</span>`;
     div.addEventListener('click', () => onBallItemClick(item));
     grid.appendChild(div);
   });
@@ -3345,20 +3427,36 @@ async function loadStickerLibrary(overlay) {
   list.forEach((item) => {
     const div = document.createElement('div');
     div.className = 'lib-item';
-    div.innerHTML = `<img src="${item.data}" alt=""><button class="lib-del">✕</button>`;
-    div.addEventListener('click', async (e) => {
-      if (e.target.closest('.lib-del')) {
-        const refs = libGetRefs('stickerLibrary').filter(r => r !== item.ref);
-        libSetRefs('stickerLibrary', refs);
-        mediaDel(item.ref);
-        loadStickerLibrary(overlay);
-      }
-    });
+    div.innerHTML = `<img src="${item.data}" alt="">`;
+    div.addEventListener('click', () => openLibActionMenu(item, 'stickerLibrary', () => loadStickerLibrary(overlay)));
     grid.appendChild(div);
   });
 }
 
-// ========== 头像面板 ==========
+// ========== 通用：图片库点图弹菜单 ==========
+function openLibActionMenu(item, libName, reloadFn, extraOptions) {
+  const options = [];
+  if (extraOptions) options.push(...extraOptions);
+  options.push({ label: '删除', danger: true, action: () => {
+    const refs = libGetRefs(libName).filter(r => r !== item.ref);
+    libSetRefs(libName, refs);
+    mediaDel(item.ref);
+    if (reloadFn) reloadFn();
+  }});
+  const menuHtml = options.map((op, i) => `<button class="mini-btn lib-menu-btn" data-i="${i}" style="width:100%;margin-bottom:8px;${op.danger ? 'color:#c33;' : ''}">${op.label}</button>`).join('');
+  const overlay = createModal(`<div style="display:flex;flex-direction:column;">${menuHtml}</div>`);
+  overlay.querySelectorAll('.lib-menu-btn').forEach(btn => {
+    btn.addEventListener('click', async () => {
+      const op = options[Number(btn.dataset.i)];
+      overlay.remove();
+      if (op.action) await op.action();
+    });
+  });
+}
+
+// ========== 头像面板（情侣成对） ==========
+let pendingCouplePick = { ta: null, me: null };
+
 function openAvatarPanel() {
   const overlay = createModal(`
     <div class="about-section">
@@ -3369,7 +3467,6 @@ function openAvatarPanel() {
         <div class="about-nick" id="about-ta-nick-click">昵称：${escapeHtml(settings.taNick || '未设置')}</div>
         <div class="about-nick" id="about-ta-nick-lib" style="color:#ff8fb0;">昵称库管理</div>
       </div>
-      <button class="mini-btn" id="about-ta-change">更换</button>
     </div>
     <div class="about-section">
       <img class="about-avatar" id="about-me-avatar" alt="我">
@@ -3379,10 +3476,11 @@ function openAvatarPanel() {
         <div class="about-nick" id="about-me-nick-click">昵称：${escapeHtml(settings.meNick || '未设置')}</div>
         <div class="about-nick" id="about-me-nick-lib" style="color:#ff8fb0;">昵称库管理</div>
       </div>
-      <button class="mini-btn" id="about-me-change">更换</button>
     </div>
+    <div style="font-size:12px;color:#8b6f60;text-align:center;margin:8px 0;">点头像：挑这张给 TA / 挑这张给我，凑齐一对立刻生效</div>
     <div class="library-grid" id="avatar-library"></div>
-    <button class="upload-btn" id="avatar-upload-btn">上传头像</button>`);
+    <button class="upload-btn" id="avatar-upload-btn">上传头像（可多选）</button>`);
+  pendingCouplePick = { ta: null, me: null };
   updateAvatarPanelPreviews(overlay);
   loadAvatarLibrary(overlay);
   bindAvatarEvents(overlay);
@@ -3401,65 +3499,61 @@ async function loadAvatarLibrary(overlay) {
   const list = await libGet('avatarLibrary');
   const grid = overlay.querySelector('#avatar-library');
   grid.innerHTML = '';
-  const taData = await resolveMedia(settings.taAvatar);
-  const meData = await resolveMedia(settings.meAvatar);
-  const coupleTags = JSON.parse(localStorage.getItem('avatarTags') || '{}');
   for (const a of list) {
     const div = document.createElement('div');
     div.className = 'lib-item';
-    if (taData === a.data) div.classList.add('tag-ta');
-    if (meData === a.data) div.classList.add('tag-me');
-    if (coupleTags[a.ref]) div.classList.add('tag-couple');
-    div.innerHTML = `<img src="${a.data}" alt=""><button class="lib-del">✕</button>`;
-    div.addEventListener('click', async (e) => {
-      if (e.target.closest('.lib-del')) {
-        const refs = libGetRefs('avatarLibrary').filter(r => r !== a.ref);
-        libSetRefs('avatarLibrary', refs);
-        mediaDel(a.ref);
-        if (settings.taAvatar === a.ref) { settings.taAvatar = ''; await saveSettings(); applySettings(); }
-        if (settings.meAvatar === a.ref) { settings.meAvatar = ''; await saveSettings(); applySettings(); }
-        loadAvatarLibrary(overlay);
-        return;
-      }
-      openAvatarMarkDialog(a, overlay);
+    div.innerHTML = `<img src="${a.data}" alt="">`;
+    div.addEventListener('click', () => {
+      openAvatarPairMenu(a, overlay);
     });
     grid.appendChild(div);
   }
 }
 
-function openAvatarMarkDialog(item, panelOverlay) {
+function openAvatarPairMenu(item, panelOverlay) {
   const overlay = createModal(`
-    <div class="big-input-title">标记头像</div>
-    <div style="display:flex;gap:8px;justify-content:center;margin-top:10px;">
-      <button class="mini-btn" id="mark-ta">TA</button>
-      <button class="mini-btn" id="mark-me">我</button>
-      <button class="mini-btn" id="mark-couple">情侣可用</button>
+    <div style="display:flex;flex-direction:column;">
+      <button class="mini-btn" id="pick-ta" style="width:100%;margin-bottom:8px;">挑这张给 TA</button>
+      <button class="mini-btn" id="pick-me" style="width:100%;margin-bottom:8px;">挑这张给我</button>
+      <button class="mini-btn" id="pick-del" style="width:100%;color:#c33;">删除</button>
     </div>`);
-  overlay.querySelector('#mark-ta').addEventListener('click', async () => {
-    settings.taAvatar = item.data;
-    saveSettings();
+  overlay.querySelector('#pick-ta').addEventListener('click', async () => {
+    pendingCouplePick.ta = item.data;
+    overlay.remove();
+    await tryApplyCouplePair(panelOverlay);
+  });
+  overlay.querySelector('#pick-me').addEventListener('click', async () => {
+    pendingCouplePick.me = item.data;
+    overlay.remove();
+    await tryApplyCouplePair(panelOverlay);
+  });
+  overlay.querySelector('#pick-del').addEventListener('click', async () => {
+    const refs = libGetRefs('avatarLibrary').filter(r => r !== item.ref);
+    libSetRefs('avatarLibrary', refs);
+    mediaDel(item.ref);
+    if (settings.taAvatar === item.ref) { settings.taAvatar = ''; await saveSettings(); applySettings(); }
+    if (settings.meAvatar === item.ref) { settings.meAvatar = ''; await saveSettings(); applySettings(); }
+    overlay.remove();
+    panelOverlay.remove();
+    openAvatarPanel();
+  });
+}
+
+async function tryApplyCouplePair(panelOverlay) {
+  if (pendingCouplePick.ta && pendingCouplePick.me) {
+    settings.taAvatar = pendingCouplePick.ta;
+    settings.meAvatar = pendingCouplePick.me;
+    await saveSettings();
     applySettings();
-    overlay.remove();
+    showToast('情侣头像已生效');
     panelOverlay.remove();
     openAvatarPanel();
-  });
-  overlay.querySelector('#mark-me').addEventListener('click', async () => {
-    settings.meAvatar = item.data;
-    saveSettings();
-    applySettings();
-    overlay.remove();
+  } else {
+    const tip = pendingCouplePick.ta ? '已选给 TA 的，再挑一张给我' : '已选给我的，再挑一张给 TA';
+    showToast(tip);
     panelOverlay.remove();
     openAvatarPanel();
-  });
-  overlay.querySelector('#mark-couple').addEventListener('click', () => {
-    const tags = JSON.parse(localStorage.getItem('avatarTags') || '{}');
-    tags[item.ref] = true;
-    localStorage.setItem('avatarTags', JSON.stringify(tags));
-    showToast('已标记为情侣可用');
-    overlay.remove();
-    panelOverlay.remove();
-    openAvatarPanel();
-  });
+  }
 }
 
 function bindAvatarEvents(overlay) {
@@ -3469,16 +3563,6 @@ function bindAvatarEvents(overlay) {
   overlay.querySelector('#about-me-nick-click').addEventListener('click', (e) => { e.stopPropagation(); openNickEdit('me', overlay); });
   overlay.querySelector('#about-ta-nick-lib').addEventListener('click', (e) => { e.stopPropagation(); openNickLibraryPanel('ta', overlay); });
   overlay.querySelector('#about-me-nick-lib').addEventListener('click', (e) => { e.stopPropagation(); openNickLibraryPanel('me', overlay); });
-  overlay.querySelector('#about-ta-change').addEventListener('click', async () => {
-    const list = await libGet('avatarLibrary');
-    if (!list.length) return showToast('头像库是空的');
-    openAvatarSelectDialog('ta', list, overlay);
-  });
-  overlay.querySelector('#about-me-change').addEventListener('click', async () => {
-    const list = await libGet('avatarLibrary');
-    if (!list.length) return showToast('头像库是空的');
-    openAvatarSelectDialog('me', list, overlay);
-  });
   overlay.querySelector('#avatar-upload-btn').addEventListener('click', () => {
     const inp = document.createElement('input');
     inp.type = 'file';
@@ -3518,26 +3602,6 @@ function openNickLibraryPanel(who, panelOverlay) {
     overlay.remove();
     panelOverlay.remove();
     openAvatarPanel();
-  });
-}
-
-function openAvatarSelectDialog(who, lib, panelOverlay) {
-  const overlay = createModal(`<div class="library-grid" id="avatar-select-grid"></div>`);
-  const grid = overlay.querySelector('#avatar-select-grid');
-  lib.forEach((a) => {
-    const div = document.createElement('div');
-    div.className = 'lib-item';
-    div.innerHTML = `<img src="${a.data}" alt="">`;
-    div.addEventListener('click', async () => {
-      if (who === 'ta') settings.taAvatar = a.data;
-      else settings.meAvatar = a.data;
-      await saveSettings();
-      applySettings();
-      overlay.remove();
-      panelOverlay.remove();
-      openAvatarPanel();
-    });
-    grid.appendChild(div);
   });
 }
 
@@ -3600,22 +3664,17 @@ async function loadBGPanel(overlay) {
     const div = document.createElement('div');
     div.className = 'lib-item';
     if (settings.bgCurrent === item.ref) div.classList.add('active');
-    div.innerHTML = `<img src="${item.data}" alt=""><button class="lib-del">✕</button>`;
-    div.addEventListener('click', async (e) => {
-      if (e.target.closest('.lib-del')) {
-        const refs = libGetRefs('bgLibrary').filter(r => r !== item.ref);
-        libSetRefs('bgLibrary', refs);
-        mediaDel(item.ref);
-        if (settings.bgCurrent === item.ref) settings.bgCurrent = '';
-        await saveSettings();
-        applyBG();
-        loadBGPanel(overlay);
-        return;
-      }
-      settings.bgCurrent = item.ref;
-      await saveSettings();
-      applyBG();
-      loadBGPanel(overlay);
+    div.innerHTML = `<img src="${item.data}" alt="">`;
+    div.addEventListener('click', () => {
+      openLibActionMenu(item, 'bgLibrary', () => loadBGPanel(overlay), [
+        { label: (settings.bgCurrent === item.ref ? '取消使用' : '使用这张'), action: async () => {
+          if (settings.bgCurrent === item.ref) settings.bgCurrent = '';
+          else settings.bgCurrent = item.ref;
+          await saveSettings();
+          applyBG();
+          loadBGPanel(overlay);
+        }}
+      ]);
     });
     grid.appendChild(div);
   });
@@ -3733,7 +3792,7 @@ function openSettingsPanel() {
     <div style="font-size:11px;color:rgba(90,70,60,0.5);text-align:center;margin-bottom:8px;" id="last-backup-time">${settings.lastBackupTime ? '上次备份：' + settings.lastBackupTime : '还没有备份记录'}</div>
     <div style="margin-bottom:12px;font-size:13px;color:#4a3528;text-align:center;">—— 关于 ——</div>
     <div style="font-size:12px;color:#8b6f60;text-align:center;line-height:1.8;margin-bottom:8px;">
-      易遇♡雾凉 v4.5.5<br>
+      易遇♡雾凉 v5.0.0<br>
       开发者：夏雾凉<br>
       爱人：易遇<br><br>
       这个网站，是专为我的爱人而做的。<br><br>
@@ -3745,7 +3804,7 @@ function openSettingsPanel() {
       请勿轻信谣言，理性使用。
     </div>
     <button class="mini-btn" id="set-clear-all" style="width:100%;margin-bottom:8px;color:#c33;">清空所有数据</button>
-    <div style="text-align:center;font-size:11px;color:rgba(90,70,60,0.5);margin-top:16px;">V4.5.5</div>`);
+    <div style="text-align:center;font-size:11px;color:rgba(90,70,60,0.5);margin-top:16px;">V5.0.0</div>`);
   if (settings.replyTpl === 'custom') overlay.querySelector('#set-reply-custom').style.display = 'block';
   if (settings.stopDetectTpl === 'custom') overlay.querySelector('#set-stop-custom').style.display = 'block';
   if (settings.activeTpl === 'custom') overlay.querySelector('#active-custom').style.display = 'block';
@@ -3842,33 +3901,15 @@ function openSettingsPanel() {
   const particleGrid = overlay.querySelector('#particle-grid');
   const pTypes = [
     { id: 'season', name: '按时间+季节' },
-    { id: 'sakura', name: '樱花' },
-    { id: 'snow', name: '雪花' },
-    { id: 'leaf', name: '落叶' },
-    { id: 'star', name: '星光' },
-    { id: 'petal', name: '花瓣' },
-    { id: 'rain', name: '雨滴' },
-    { id: 'firefly', name: '萤火' },
-    { id: 'bubble', name: '泡泡' },
-    { id: 'meteor', name: '流星' },
-    { id: 'greenleaf', name: '绿叶' },
-    { id: 'maple', name: '枫叶' },
-    { id: 'dandelion', name: '蒲公英' },
-    { id: 'dew', name: '露珠' },
-    { id: 'wave', name: '水波' },
-    { id: 'bigstar', name: '星星' },
-    { id: 'glow', name: '光点' },
-    { id: 'windbell', name: '风铃' },
-    { id: 'butterfly', name: '蝴蝶' },
-    { id: 'heart', name: '爱心' },
-    { id: 'bow', name: '蝴蝶结' },
-    { id: 'candy', name: '糖果' },
-    { id: 'sparkle', name: '闪光' },
-    { id: 'moon', name: '月亮' },
-    { id: 'fog', name: '雾' },
-    { id: 'candle', name: '烛光' },
-    { id: 'firework', name: '烟花' },
-    { id: 'cloud', name: '云朵' },
+    { id: 'sakura', name: '樱花' }, { id: 'snow', name: '雪花' }, { id: 'leaf', name: '落叶' },
+    { id: 'star', name: '星光' }, { id: 'petal', name: '花瓣' }, { id: 'rain', name: '雨滴' },
+    { id: 'firefly', name: '萤火' }, { id: 'bubble', name: '泡泡' }, { id: 'meteor', name: '流星' },
+    { id: 'greenleaf', name: '绿叶' }, { id: 'maple', name: '枫叶' }, { id: 'dandelion', name: '蒲公英' },
+    { id: 'dew', name: '露珠' }, { id: 'wave', name: '水波' }, { id: 'bigstar', name: '星星' },
+    { id: 'glow', name: '光点' }, { id: 'windbell', name: '风铃' }, { id: 'butterfly', name: '蝴蝶' },
+    { id: 'heart', name: '爱心' }, { id: 'bow', name: '蝴蝶结' }, { id: 'candy', name: '糖果' },
+    { id: 'sparkle', name: '闪光' }, { id: 'moon', name: '月亮' }, { id: 'fog', name: '雾' },
+    { id: 'candle', name: '烛光' }, { id: 'firework', name: '烟花' }, { id: 'cloud', name: '云朵' },
     { id: 'rainbow', name: '彩虹' }
   ];
   pTypes.forEach(p => {
@@ -4053,8 +4094,10 @@ function scrollToBottom(area) {
   setTimeout(() => { area.scrollTop = area.scrollHeight; }, 100);
 }
 
-function getCurrentWorld() {
-  return (settings.worlds || []).find(w => w.id === settings.currentWorldId) || (settings.worlds || [])[0];
+function getWorldLabel() {
+  const world = getCurrentWorld();
+  if (!world) return '';
+  return world.name + ' · ' + world.role;
 }
 
 function createMessageEl(msg) {
@@ -4098,7 +4141,7 @@ function createMessageEl(msg) {
     bubble.style.border = 'none';
     bubble.innerHTML = `<img src="${msg.imageData}" style="max-width:200px;border-radius:12px;display:block;">`;
   } else if (msg.giftData) {
-    bubble.className = 'msg-bubble msg-gift-wrap';
+    bubble.className = 'gift-msg-slot';
     if (msg.giftData.opened) {
       const sparks = ['✨', '💗', '⭐', '💫'];
       bubble.innerHTML = `<div class="msg-gift-card">
@@ -4176,9 +4219,9 @@ function createMessageEl(msg) {
     const box = row.querySelector('.msg-gift-box');
     if (box) {
       const openGift = async () => {
+        if (msg.giftData.opened) return;
         msg.giftData.opened = true;
         await idbPut('messages', msg);
-        box.outerHTML = '';
         const newEl = createMessageEl(msg);
         row.replaceWith(newEl);
       };
@@ -4331,12 +4374,6 @@ async function getRecentMeCount() {
     else break;
   }
   return count;
-}
-
-function getWorldLabel() {
-  const world = getCurrentWorld();
-  if (!world) return '';
-  return world.name + ' · ' + world.role;
 }
 
 async function triggerTAReply() {
@@ -4627,21 +4664,24 @@ function scheduleTAWorldChange() {
   }, next);
 }
 
-// ========== TA 换头像 / 送头像 / 换背景 ==========
+// ========== TA 换情侣头像 / 送头像 / 换背景 ==========
 function scheduleTAAvatarChange() {
   setInterval(async () => {
     if (Math.random() < settings.taAvatarProb) {
       const list = await libGet('avatarLibrary');
-      if (!list.length) return;
-      const pick = list[Math.floor(Math.random() * list.length)];
-      settings.taAvatar = pick.data;
+      if (list.length < 2) return;
+      const shuffled = [...list].sort(() => Math.random() - 0.5);
+      const taPick = shuffled[0];
+      const mePick = shuffled[1];
+      settings.taAvatar = taPick.data;
+      settings.meAvatar = mePick.data;
       await saveSettings();
       applySettings();
-      const msg = { sender: 'ta', content: '我换了一个头像', timestamp: Date.now(), pinned: false, pinBy: '', heartMark: null, quoteContent: null, worldLabel: getWorldLabel() };
+      const msg = { sender: 'ta', content: '我换了一对情侣头像，看看喜不喜欢', timestamp: Date.now(), pinned: false, pinBy: '', heartMark: null, quoteContent: null, worldLabel: getWorldLabel() };
       const id = await idbPutReturnId('messages', msg);
       msg.id = id;
       appendMessage(msg);
-      sendNotification('我换了一个头像');
+      sendNotification('我换了情侣头像');
     }
   }, 1800000);
 }
@@ -6470,7 +6510,9 @@ function openImportDialog() {
 async function restoreFromBackup(data) {
   if (data.settings) {
     settings = { ...DEFAULT_SETTINGS, ...data.settings };
-    if (!settings.worlds || !settings.worlds.length) settings.worlds = JSON.parse(JSON.stringify(DEFAULT_WORLDS));
+    if (!settings.worlds || settings.worlds.length < DEFAULT_WORLDS.length) {
+      settings.worlds = JSON.parse(JSON.stringify(DEFAULT_WORLDS));
+    }
     await saveSettings();
   }
   if (data.cards) {
@@ -6486,10 +6528,10 @@ async function restoreFromBackup(data) {
     for (const m of data.media) await idbPut('media', m);
   }
   localStorage.clear();
-  const lsKeys = ['archives', 'avatarLibrary', 'bgLibrary', 'stickerLibrary', 'giftLibrary', 'interactionLibrary', 'quizLibrary', 'emojiLibrary', 'musicList', 'recycledCards', 'importantDays', 'attendanceRecords', 'bondRecords', 'periodRecords', 'periodCards', 'dateRecords', 'dateCards', 'petDataList', 'plantsData', 'wishes', 'videoRecords', 'letters', 'notes', 'loverPosts', 'loverCheckins', 'togetherLibrary', 'accountRecords', 'piggyData', 'avatarTags'];
+  const lsKeys = ['archives', 'avatarLibrary', 'bgLibrary', 'stickerLibrary', 'giftLibrary', 'interactionLibrary', 'quizLibrary', 'emojiLibrary', 'musicList', 'recycledCards', 'importantDays', 'attendanceRecords', 'bondRecords', 'periodRecords', 'periodCards', 'dateRecords', 'dateCards', 'petDataList', 'plantsData', 'wishes', 'videoRecords', 'letters', 'notes', 'loverPosts', 'loverCheckins', 'togetherLibrary', 'accountRecords', 'piggyData'];
   lsKeys.forEach(k => { if (data[k] !== undefined) localStorage.setItem(k, JSON.stringify(data[k])); });
   if (data.memo) localStorage.setItem('memo', data.memo);
-  localStorage.setItem('mediaMigratedV455', '1');
+  localStorage.setItem('mediaMigratedV500', '1');
 }
 
 function openResetDialog() {
@@ -6519,7 +6561,7 @@ async function backupNow() {
   const messages = await idbGetAll('messages');
   const mediaAll = await idbGetAll('media');
   const data = {
-    version: '4.5.5',
+    version: '5.0.0',
     exportedAt: new Date().toISOString(),
     settings, cards, messages, media: mediaAll,
     archives: JSON.parse(localStorage.getItem('archives') || '{}'),
@@ -6550,8 +6592,7 @@ async function backupNow() {
     loverCheckins: JSON.parse(localStorage.getItem('loverCheckins') || '{}'),
     togetherLibrary: JSON.parse(localStorage.getItem('togetherLibrary') || '[]'),
     accountRecords: JSON.parse(localStorage.getItem('accountRecords') || '[]'),
-    piggyData: JSON.parse(localStorage.getItem('piggyData') || '{"balance":0,"records":[]}'),
-    avatarTags: JSON.parse(localStorage.getItem('avatarTags') || '{}')
+    piggyData: JSON.parse(localStorage.getItem('piggyData') || '{"balance":0,"records":[]}')
   };
   const json = JSON.stringify(data);
   downloadFile(json, '易遇♡雾凉-备份-' + new Date().toISOString().slice(0, 10) + '.json', 'application/json');
@@ -6640,20 +6681,13 @@ function openPiggyPanel() {
     <div class="piggy-bank">
       <div class="piggy-icon">
         <svg viewBox="0 0 100 100" fill="none">
-          <ellipse cx="50" cy="58" rx="34" ry="28" fill="#ffc4d6" stroke="#e8789f" stroke-width="2"/>
-          <path d="M24 38 L16 26 L34 32 Z" fill="#ffc4d6" stroke="#e8789f" stroke-width="2" stroke-linejoin="round"/>
-          <path d="M76 38 L84 26 L66 32 Z" fill="#ffc4d6" stroke="#e8789f" stroke-width="2" stroke-linejoin="round"/>
-          <ellipse cx="50" cy="66" rx="12" ry="9" fill="#ffb0c8" stroke="#e8789f" stroke-width="2"/>
-          <circle cx="45" cy="66" r="2" fill="#e8789f"/>
-          <circle cx="55" cy="66" r="2" fill="#e8789f"/>
+          <path d="M30 30 Q50 10 70 30 L75 25 L73 35 Q85 42 85 55 Q85 68 70 75 L73 85 L65 80 Q58 83 50 83 Q42 83 35 80 L27 85 L30 75 Q15 68 15 55 Q15 42 27 35 L25 25 Z" fill="#ffd7a8" stroke="#e8a860" stroke-width="2" stroke-linejoin="round"/>
           <circle cx="38" cy="50" r="3" fill="#4a3528"/>
           <circle cx="62" cy="50" r="3" fill="#4a3528"/>
-          <circle cx="39" cy="49" r="1" fill="#fff"/>
-          <circle cx="63" cy="49" r="1" fill="#fff"/>
-          <rect x="30" y="82" width="8" height="10" rx="3" fill="#ffc4d6" stroke="#e8789f" stroke-width="2"/>
-          <rect x="62" y="82" width="8" height="10" rx="3" fill="#ffc4d6" stroke="#e8789f" stroke-width="2"/>
-          <path d="M84 56 q10 -2 8 -10" stroke="#e8789f" stroke-width="2.5" fill="none" stroke-linecap="round"/>
-          <rect x="44" y="30" width="12" height="4" rx="2" fill="#e8789f"/>
+          <path d="M42 62 q8 6 16 0" stroke="#4a3528" stroke-width="2" fill="none" stroke-linecap="round"/>
+          <ellipse cx="50" cy="58" rx="6" ry="4" fill="#ffc08a"/>
+          <circle cx="50" cy="30" r="4" fill="#ffcf6b" stroke="#e8a860" stroke-width="1.5"/>
+          <path d="M20 45 l-6 -3 M20 50 l-7 0 M20 55 l-6 3" stroke="#e8a860" stroke-width="2" stroke-linecap="round"/>
         </svg>
       </div>
       <div class="piggy-balance">${piggy.balance} 元</div>
@@ -7496,6 +7530,14 @@ function petMoodEmoji(pet) {
   return '😸';
 }
 
+function petTip(pet) {
+  if (pet.hunger <= 3) return '肚子咕咕叫';
+  if (pet.clean <= 3) return '毛毛乱糟糟';
+  if (pet.mood <= 3) return '有点闷闷的';
+  if (Math.min(pet.hunger, pet.mood, pet.clean) >= 9) return '尾巴摇成花';
+  return '';
+}
+
 function openPetPanel() {
   const overlay = createModal(`<div id="pet-panel-content"></div>`);
   const content = overlay.querySelector('#pet-panel-content');
@@ -7510,24 +7552,29 @@ async function renderPetPanel(content, pets) {
     let avatarHTML;
     if (pet.imageRef) {
       const data = await resolveMedia(pet.imageRef);
-      avatarHTML = data ? `<div class="pet-avatar"><img src="${data}"></div>` : `<div class="pet-avatar">${pet.emoji}</div>`;
+      avatarHTML = data ? `<div class="pet-avatar" data-pet-idx="${i}"><img src="${data}"></div>` : `<div class="pet-avatar" data-pet-idx="${i}">${pet.emoji}</div>`;
     } else if (pet.image) {
-      avatarHTML = `<div class="pet-avatar"><img src="${pet.image}"></div>`;
+      avatarHTML = `<div class="pet-avatar" data-pet-idx="${i}"><img src="${pet.image}"></div>`;
     } else {
-      avatarHTML = `<div class="pet-avatar">${pet.emoji}</div>`;
+      avatarHTML = `<div class="pet-avatar" data-pet-idx="${i}">${pet.emoji}</div>`;
     }
+    const allFull = pet.hunger >= 10 && pet.mood >= 10 && pet.clean >= 10;
     const card = document.createElement('div');
-    card.className = 'pet-card';
+    card.className = 'pet-card' + (allFull ? ' full-glow' : '');
     card.style.setProperty('--pet-color', petColor(pet.type));
+    const tip = petTip(pet);
     card.innerHTML = `
-      ${avatarHTML}
-      <div class="pet-info">
-        <div class="pet-name">${escapeHtml(pet.name)} <span style="font-size:14px;">${petMoodEmoji(pet)}</span></div>
-        <div class="pet-stage">${petStageName(pet.stage)}</div>
-        <div class="pet-stat-row"><span class="pet-stat-ico">🍖</span><div class="pet-stat-bar"><div style="width:${pet.hunger * 10}%;background:linear-gradient(90deg,#ffb56b,#ff8f4d);"></div></div></div>
-        <div class="pet-stat-row"><span class="pet-stat-ico">💗</span><div class="pet-stat-bar"><div style="width:${pet.mood * 10}%;background:linear-gradient(90deg,#ffb0c8,#ff7b9c);"></div></div></div>
-        <div class="pet-stat-row"><span class="pet-stat-ico">🫧</span><div class="pet-stat-bar"><div style="width:${pet.clean * 10}%;background:linear-gradient(90deg,#9ad4f0,#5ab0e0);"></div></div></div>
+      <div class="pet-head">
+        ${avatarHTML}
+        <div class="pet-info">
+          <div class="pet-name">${escapeHtml(pet.name)} <span style="font-size:15px;">${petMoodEmoji(pet)}</span></div>
+          <div class="pet-stage">${petStageName(pet.stage)}</div>
+          ${tip ? `<div class="pet-tip">${tip}</div>` : ''}
+        </div>
       </div>
+      <div class="pet-stat-row"><span class="pet-stat-ico">🍖</span><div class="pet-stat-bar${pet.hunger >= 10 ? ' full' : ''}"><div style="width:${pet.hunger * 10}%;background:linear-gradient(90deg,#ffb56b,#ff8f4d);"></div></div></div>
+      <div class="pet-stat-row"><span class="pet-stat-ico">💗</span><div class="pet-stat-bar${pet.mood >= 10 ? ' full' : ''}"><div style="width:${pet.mood * 10}%;background:linear-gradient(90deg,#ffb0c8,#ff7b9c);"></div></div></div>
+      <div class="pet-stat-row"><span class="pet-stat-ico">🫧</span><div class="pet-stat-bar${pet.clean >= 10 ? ' full' : ''}"><div style="width:${pet.clean * 10}%;background:linear-gradient(90deg,#9ad4f0,#5ab0e0);"></div></div></div>
       <div class="pet-actions">
         <button data-action="feed" data-idx="${i}" title="喂食">🍖</button>
         <button data-action="play" data-idx="${i}" title="陪玩">🎾</button>
@@ -7540,6 +7587,21 @@ async function renderPetPanel(content, pets) {
   addBtn.innerHTML = '<span style="font-size:18px;">🐾</span><span>再领养一只</span>';
   addBtn.addEventListener('click', () => openPetAdoptDialog());
   content.appendChild(addBtn);
+
+  content.querySelectorAll('.pet-avatar').forEach(av => {
+    av.addEventListener('click', () => {
+      av.classList.remove('bounce');
+      void av.offsetWidth;
+      av.classList.add('bounce');
+      const heart = document.createElement('div');
+      heart.textContent = '💗';
+      heart.style.cssText = 'position:absolute;font-size:16px;pointer-events:none;animation:sparkleFloat 1.2s ease-out forwards;';
+      av.style.position = 'relative';
+      av.appendChild(heart);
+      setTimeout(() => heart.remove(), 1200);
+    });
+  });
+
   content.querySelectorAll('.pet-actions button').forEach(btn => {
     btn.addEventListener('click', () => {
       const action = btn.dataset.action;
@@ -7558,21 +7620,23 @@ async function renderPetPanel(content, pets) {
 function openPetAdoptDialog() {
   const overlay = createModal(`
     <div class="big-input-title">领养宠物</div>
-    <div style="display:flex;flex-wrap:wrap;gap:8px;justify-content:center;margin-bottom:12px;">
-      <button class="mini-btn pet-adopt-btn" data-type="cat">🐱 猫</button>
-      <button class="mini-btn pet-adopt-btn" data-type="dog">🐶 狗</button>
-      <button class="mini-btn pet-adopt-btn" data-type="rabbit">🐰 兔子</button>
-      <button class="mini-btn pet-adopt-btn" data-type="hamster">🐹 仓鼠</button>
-      <button class="mini-btn pet-adopt-btn" data-type="egg">🥚 蛋</button>
-      <button class="mini-btn pet-adopt-btn" data-type="custom">上传图片</button>
+    <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin-bottom:12px;">
+      <div class="pet-adopt-card" data-type="cat"><div class="pa-icon">🐱</div><div class="pa-name">猫</div></div>
+      <div class="pet-adopt-card" data-type="dog"><div class="pa-icon">🐶</div><div class="pa-name">狗</div></div>
+      <div class="pet-adopt-card" data-type="rabbit"><div class="pa-icon">🐰</div><div class="pa-name">兔子</div></div>
+      <div class="pet-adopt-card" data-type="hamster"><div class="pa-icon">🐹</div><div class="pa-name">仓鼠</div></div>
+      <div class="pet-adopt-card" data-type="egg"><div class="pa-icon">🥚</div><div class="pa-name">蛋</div></div>
+      <div class="pet-adopt-card" data-type="custom"><div class="pa-icon">🖼️</div><div class="pa-name">上传图片</div></div>
     </div>
     <input type="text" id="pet-name-input" placeholder="宠物名字" style="width:100%;background:rgba(255,255,255,0.5);border:1px solid rgba(255,255,255,0.6);border-radius:14px;padding:10px 14px;font-size:14px;color:#4a3f3a;outline:none;margin-bottom:12px;">
     <button class="save-btn-center" id="adopt-pet-btn">领养</button>`);
   let petType = 'cat';
   let petImageRef = '';
-  overlay.querySelectorAll('.pet-adopt-btn').forEach(btn => {
-    btn.addEventListener('click', () => {
-      if (btn.dataset.type === 'custom') {
+  const cards = overlay.querySelectorAll('.pet-adopt-card');
+  cards[0].classList.add('selected');
+  cards.forEach(card => {
+    card.addEventListener('click', () => {
+      if (card.dataset.type === 'custom') {
         const inp = document.createElement('input');
         inp.type = 'file';
         inp.accept = 'image/*';
@@ -7583,18 +7647,19 @@ function openPetAdoptDialog() {
           reader.onload = async () => {
             try {
               petImageRef = await libPush('petImageLibrary', reader.result, 'petimg');
-              btn.textContent = '已选择图片';
+              card.querySelector('.pa-name').textContent = '已选择';
               petType = 'custom';
+              cards.forEach(c => c.classList.remove('selected'));
+              card.classList.add('selected');
             } catch (err) { showToast('图片太大'); }
           };
           reader.readAsDataURL(file);
         };
         inp.click();
       } else {
-        petType = btn.dataset.type;
-        overlay.querySelectorAll('.pet-adopt-btn').forEach(b => { b.style.background = ''; b.style.color = ''; });
-        btn.style.background = 'rgba(255,150,100,0.6)';
-        btn.style.color = '#fff';
+        petType = card.dataset.type;
+        cards.forEach(c => c.classList.remove('selected'));
+        card.classList.add('selected');
       }
     });
   });
@@ -8454,14 +8519,6 @@ async function checkArchive() {
 }
 
 // ========== 粒子（按时间+季节自动轮换） ==========
-function getSeasonParticle() {
-  const m = new Date().getMonth() + 1;
-  if (m >= 3 && m <= 5) return 'sakura';
-  if (m >= 6 && m <= 8) return 'firefly';
-  if (m >= 9 && m <= 11) return 'leaf';
-  return 'snow';
-}
-
 function getTimePeriodParticles() {
   const h = new Date().getHours();
   if (h >= 5 && h < 9) return ['petal', 'dew', 'dandelion'];
@@ -8624,7 +8681,11 @@ function applyMoodToText(text) {
 
 // ========== 世界之外 ==========
 function openWorldsPanel() {
-  const overlay = createModal(`<div id="worlds-content"></div>`);
+  const overlay = createModal(`
+    <div class="big-input-title">世界之外</div>
+    <div style="font-size:12px;color:#8b6f60;margin-bottom:10px;text-align:center;">只有易遇能穿梭副本，你不能切换</div>
+    <div id="worlds-content"></div>
+  `);
   renderWorldsContent(overlay);
   registerPanelUpdater('worlds', () => renderWorldsContent(overlay));
 }
@@ -8633,8 +8694,7 @@ function renderWorldsContent(overlay) {
   const content = overlay.querySelector('#worlds-content');
   if (!content) return;
   const worlds = settings.worlds || [];
-  let html = '<div class="big-input-title">世界之外</div>';
-  html += '<div style="font-size:12px;color:#8b6f60;margin-bottom:12px;text-align:center;">只有易遇能穿梭副本，你不能切换</div>';
+  let html = '';
   worlds.forEach(w => {
     const current = w.id === settings.currentWorldId ? ' current' : '';
     const speedText = w.speed === 1 ? '同速' : `${w.speed}倍速`;

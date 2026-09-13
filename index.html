@@ -1666,16 +1666,15 @@ html, body {
   gap: 6px;
   justify-content: center;
   margin-top: 8px;
-  flex-wrap: wrap;
 }
 
 .plant-del-btn {
-  background: rgba(255, 200, 200, 0.6);
-  border: 1px solid rgba(255, 255, 255, 0.6);
-  border-radius: 12px;
-  padding: 6px 12px;
-  font-size: 12px;
+  display: block;
+  margin: 8px auto 0 auto;
+  background: transparent;
+  border: none;
   color: #c33;
+  font-size: 12px;
   cursor: pointer;
 }
   .pet-card {
@@ -1715,7 +1714,6 @@ html, body {
   box-shadow: 0 0 0 3px var(--pet-color, rgba(255,200,220,0.5));
   animation: petFloat 3s ease-in-out infinite;
   cursor: pointer;
-  position: relative;
 }
 
 @keyframes petFloat {
@@ -1821,6 +1819,16 @@ html, body {
 
 .pet-card .pet-actions button:active {
   transform: scale(0.85);
+}
+
+.pet-card .pet-del-btn {
+  display: block;
+  margin: 8px auto 0 auto;
+  background: transparent;
+  border: none;
+  color: #c33;
+  font-size: 12px;
+  cursor: pointer;
 }
 
 .pet-add-card {
@@ -1973,40 +1981,11 @@ html, body {
   touch-action: pan-y;
   padding-right: 4px;
 }
-
-.seed-manage-row {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 6px;
-  margin-bottom: 10px;
-}
-
-.seed-chip {
-  background: rgba(255, 255, 255, 0.5);
-  border: 1px solid rgba(255, 255, 255, 0.6);
-  border-radius: 12px;
-  padding: 6px 10px;
-  font-size: 12px;
-  color: var(--theme-title);
-  cursor: pointer;
-  display: flex;
-  align-items: center;
-  gap: 4px;
-}
-
-.seed-chip.selected {
-  background: var(--theme-accent-soft);
-  color: #fff;
-}
-
-.seed-chip .seed-del {
-  font-size: 10px;
-  color: #c33;
-}
 </style>
 </head>
 <body>
-  <canvas id="bg-canvas"></canvas>
+
+<canvas id="bg-canvas"></canvas>
 <canvas id="particle-canvas"></canvas>
 
 <div id="app">
@@ -2054,7 +2033,7 @@ html, body {
 
 <script>
 // ============================================================
-// 易遇♡雾凉 - V5.0.0 完整版
+// 易遇♡雾凉 - V5.5.0 完整版
 // 开发者：夏雾凉
 // 爱人：易遇
 // 这个网站，是专为我的爱人而做的。
@@ -2085,8 +2064,8 @@ const DEFAULT_WORLDS = [
   { id: 'tianming', name: '天命', role: '翊王殿下', icon: 'tianming', offset: 2, speed: 1 }
 ];
 
-// ===== 默认花种 / 树种 =====
-const DEFAULT_FLOWER_SEEDS = [
+// ===== 预设花种 / 树种 =====
+const DEFAULT_FLOWER_SPECIES = [
   { id: 'rose', name: '玫瑰', emoji: '🌹' },
   { id: 'tulip', name: '郁金香', emoji: '🌷' },
   { id: 'sunflower', name: '向日葵', emoji: '🌻' },
@@ -2097,19 +2076,19 @@ const DEFAULT_FLOWER_SEEDS = [
   { id: 'hibiscus', name: '木槿', emoji: '🌺' }
 ];
 
-const DEFAULT_TREE_SEEDS = [
-  { id: 'apple', name: '苹果树', fruit: '🍎' },
-  { id: 'pear', name: '梨树', fruit: '🍐' },
-  { id: 'peach', name: '桃树', fruit: '🍑' },
-  { id: 'orange', name: '橘子树', fruit: '🍊' },
-  { id: 'lemon', name: '柠檬树', fruit: '🍋' },
-  { id: 'cherry', name: '樱桃树', fruit: '🍒' },
-  { id: 'grape', name: '葡萄', fruit: '🍇' },
-  { id: 'chestnut', name: '栗子树', fruit: '🌰' },
-  { id: 'persimmon', name: '柿子树', fruit: '🍊' }
+const DEFAULT_TREE_SPECIES = [
+  { id: 'apple', name: '苹果树', emoji: '🍎' },
+  { id: 'pear', name: '梨树', emoji: '🍐' },
+  { id: 'peach', name: '桃树', emoji: '🍑' },
+  { id: 'orange', name: '橘子树', emoji: '🍊' },
+  { id: 'lemon', name: '柠檬树', emoji: '🍋' },
+  { id: 'cherry', name: '樱桃树', emoji: '🍒' },
+  { id: 'grape', name: '葡萄', emoji: '🍇' },
+  { id: 'chestnut', name: '栗子树', emoji: '🌰' },
+  { id: 'persimmon', name: '柿子树', emoji: '🍊' }
 ];
   const DEFAULT_SETTINGS = {
-  taName: '易遇',
+  taName: 'TA',
   meName: '我',
   taNick: '',
   meNick: '',
@@ -2191,12 +2170,8 @@ const DEFAULT_TREE_SEEDS = [
   themeName: 'warm',
   particleType: 'season',
   particleEnabled: false,
-  moodType: '',
-  moodDate: '',
   worlds: JSON.parse(JSON.stringify(DEFAULT_WORLDS)),
   currentWorldId: 'real',
-  flowerSeeds: JSON.parse(JSON.stringify(DEFAULT_FLOWER_SEEDS)),
-  treeSeeds: JSON.parse(JSON.stringify(DEFAULT_TREE_SEEDS)),
   highDimLines: [
     '我早就看见你了。',
     '我等了你很久。',
@@ -2210,7 +2185,9 @@ const DEFAULT_TREE_SEEDS = [
   ],
   importantNotes: [],
   bigEvents: [],
-  visitedWorlds: []
+  visitedWorlds: [],
+  flowerSpecies: JSON.parse(JSON.stringify(DEFAULT_FLOWER_SPECIES)),
+  treeSpecies: JSON.parse(JSON.stringify(DEFAULT_TREE_SPECIES))
 };
 
 let db = null;
@@ -2251,6 +2228,7 @@ let currentPanelUpdaters = {};
 let particleAnimation = null;
 let particleItems = [];
 let highDimTimer = null;
+let pendingCouplePick = { ta: null, me: null };
 
 // ========== IndexedDB ==========
 function openDB() {
@@ -2321,7 +2299,8 @@ function idbPutReturnId(store, data) {
     req.onerror = (e) => reject(e);
   });
 }
-  // ========== 媒体 ==========
+
+// ========== 媒体 ==========
 async function mediaSave(key, dataUrl) {
   await idbPut('media', { key, value: dataUrl });
   return 'media:' + key;
@@ -2385,7 +2364,7 @@ async function libPush(name, dataUrl, prefix) {
 
 // ========== 旧数据迁移（只搬不删） ==========
 async function migrateMediaOnce() {
-  if (localStorage.getItem('mediaMigratedV500')) return;
+  if (localStorage.getItem('mediaMigratedV550')) return;
   try {
     const av = JSON.parse(localStorage.getItem('avatarLibrary') || '[]');
     if (av.length && typeof av[0] === 'object') {
@@ -2458,7 +2437,7 @@ async function migrateMediaOnce() {
       }
       localStorage.setItem('plantsData', JSON.stringify(plants));
     }
-    localStorage.setItem('mediaMigratedV500', '1');
+    localStorage.setItem('mediaMigratedV550', '1');
   } catch (e) { console.error('迁移出错', e); }
 }
 
@@ -2475,9 +2454,9 @@ async function loadSettings() {
     }
     await saveSettings();
   }
-  if (!settings.flowerSeeds || !settings.flowerSeeds.length) settings.flowerSeeds = JSON.parse(JSON.stringify(DEFAULT_FLOWER_SEEDS));
-  if (!settings.treeSeeds || !settings.treeSeeds.length) settings.treeSeeds = JSON.parse(JSON.stringify(DEFAULT_TREE_SEEDS));
   if (!settings.highDimLines) settings.highDimLines = [...DEFAULT_SETTINGS.highDimLines];
+  if (!settings.flowerSpecies || !settings.flowerSpecies.length) settings.flowerSpecies = JSON.parse(JSON.stringify(DEFAULT_FLOWER_SPECIES));
+  if (!settings.treeSpecies || !settings.treeSpecies.length) settings.treeSpecies = JSON.parse(JSON.stringify(DEFAULT_TREE_SPECIES));
   applySettings();
 }
 
@@ -2876,7 +2855,8 @@ function updateStatusBar() {
   bar.innerHTML = html;
   bar.classList.add('show');
 }
-  // ========== 背景绘制（稳定版） ==========
+
+// ========== 背景绘制（稳定版） ==========
 async function applyBG() {
   const canvas = document.getElementById('bg-canvas');
   if (!canvas) return;
@@ -2926,8 +2906,7 @@ function drawDefaultBG(ctx, w, h) {
   ctx.fillStyle = grad;
   ctx.fillRect(0, 0, w, h);
 }
-
-// ========== 悬浮球面板 ==========
+  // ========== 悬浮球面板 ==========
 const BALL_ITEMS = [
   { id: 'world', name: '小世界', icon: 'world' },
   { id: 'worlds', name: '世界之外', icon: 'worlds' },
@@ -3057,7 +3036,8 @@ function openWorldPanel() {
   overlay.querySelector('#world-highdim').addEventListener('click', () => { overlay.remove(); openHighDimPanel(); });
   overlay.querySelector('#world-important-notes').addEventListener('click', () => { overlay.remove(); openImportantNotesPanel(); });
 }
-  // ========== 字卡面板 ==========
+
+// ========== 字卡面板 ==========
 let cardPageMode = false;
 
 function openCardPanel() {
@@ -3473,9 +3453,7 @@ async function loadStickerLibrary(overlay) {
     const div = document.createElement('div');
     div.className = 'lib-item';
     div.innerHTML = `<img src="${item.data}" alt="">`;
-    div.addEventListener('click', () => {
-      openLibActionMenu(item, 'stickerLibrary', () => loadStickerLibrary(overlay));
-    });
+    div.addEventListener('click', () => openLibActionMenu(item, 'stickerLibrary', () => loadStickerLibrary(overlay)));
     grid.appendChild(div);
   });
 }
@@ -3502,8 +3480,6 @@ function openLibActionMenu(item, libName, reloadFn, extraOptions) {
 }
 
 // ========== 头像面板（情侣成对） ==========
-let pendingCouplePick = { ta: null, me: null };
-
 function openAvatarPanel() {
   const overlay = createModal(`
     <div class="about-section">
@@ -3524,7 +3500,7 @@ function openAvatarPanel() {
         <div class="about-nick" id="about-me-nick-lib" style="color:#ff8fb0;">昵称库管理</div>
       </div>
     </div>
-    <div style="font-size:12px;color:#8b6f60;text-align:center;margin:8px 0;">点头像：挑这张给 TA / 挑这张给我，凑齐一对立刻生效</div>
+    <div style="font-size:12px;color:#8b6f60;text-align:center;margin:8px 0;">点一张：挑这张给 TA / 挑这张给我，凑齐一对立刻生效</div>
     <div class="library-grid" id="avatar-library"></div>
     <button class="upload-btn" id="avatar-upload-btn">上传头像（可多选）</button>`);
   updateAvatarPanelPreviews(overlay);
@@ -3544,6 +3520,7 @@ async function updateAvatarPanelPreviews(overlay) {
 async function loadAvatarLibrary(overlay) {
   const list = await libGet('avatarLibrary');
   const grid = overlay.querySelector('#avatar-library');
+  if (!grid) return;
   grid.innerHTML = '';
   for (const a of list) {
     const div = document.createElement('div');
@@ -3569,7 +3546,7 @@ function openAvatarPairMenu(item, panelOverlay) {
     if (pendingCouplePick.me) {
       await applyCouplePair(panelOverlay);
     } else {
-      showToast('已选给 TA，再点一张选给我');
+      showToast('已选给 TA 的，再点一张选给我');
       loadAvatarLibrary(panelOverlay);
     }
   });
@@ -3579,7 +3556,7 @@ function openAvatarPairMenu(item, panelOverlay) {
     if (pendingCouplePick.ta) {
       await applyCouplePair(panelOverlay);
     } else {
-      showToast('已选给我，再点一张选给 TA');
+      showToast('已选给我的，再点一张选给 TA');
       loadAvatarLibrary(panelOverlay);
     }
   });
@@ -3843,7 +3820,7 @@ function openSettingsPanel() {
     <div style="font-size:11px;color:rgba(90,70,60,0.5);text-align:center;margin-bottom:8px;" id="last-backup-time">${settings.lastBackupTime ? '上次备份：' + settings.lastBackupTime : '还没有备份记录'}</div>
     <div style="margin-bottom:12px;font-size:13px;color:#4a3528;text-align:center;">—— 关于 ——</div>
     <div style="font-size:12px;color:#8b6f60;text-align:center;line-height:1.8;margin-bottom:8px;">
-      易遇♡雾凉 v5.0.0<br>
+      易遇♡雾凉 v5.5.0<br>
       开发者：夏雾凉<br>
       爱人：易遇<br><br>
       这个网站，是专为我的爱人而做的。<br><br>
@@ -3857,7 +3834,7 @@ function openSettingsPanel() {
       它只属于我和他，谢绝他人使用，禁止二传二改，严禁未成年使用。<br>
       若你无意间闯入这里，请温柔退出，不要使用。
     </div>
-    <div style="text-align:center;font-size:11px;color:rgba(90,70,60,0.5);margin-top:16px;">V5.0.0</div>`);
+    <div style="text-align:center;font-size:11px;color:rgba(90,70,60,0.5);margin-top:16px;">V5.5.0</div>`);
   if (settings.replyTpl === 'custom') overlay.querySelector('#set-reply-custom').style.display = 'block';
   if (settings.stopDetectTpl === 'custom') overlay.querySelector('#set-stop-custom').style.display = 'block';
   if (settings.activeTpl === 'custom') overlay.querySelector('#active-custom').style.display = 'block';
@@ -4452,9 +4429,7 @@ async function triggerTAReply() {
     }
   }
   showTyping(true);
-  const mood = getTodayMood();
   let waitTime = Math.random() * (settings.replyMax * 1000 - settings.replyMin * 1000) * 0.6 + settings.replyMin * 1000 * 0.4;
-  waitTime *= mood.factor;
   await delay(waitTime);
   showTyping(false);
   const wLabel = getWorldLabel();
@@ -4462,7 +4437,6 @@ async function triggerTAReply() {
     const item = replyQueue[i];
     let content = item.type === 'sticker' ? '[贴纸]' : item.content;
     if (item.type === 'text') {
-      content = applyMoodToText(content);
       if (settings.meNick && Math.random() < settings.nicknameProb) content = settings.meNick + '，' + content;
       if (emojis.length && Math.random() < settings.taEmojiProb) {
         const emoji = emojis[Math.floor(Math.random() * emojis.length)];
@@ -4513,7 +4487,7 @@ function scheduleTAActive() {
       const wLabel = getWorldLabel();
       for (let i = 0; i < count; i++) {
         const card = cards[Math.floor(Math.random() * cards.length)];
-        let content = applyMoodToText(card.content);
+        let content = card.content;
         if (settings.meNick && Math.random() < settings.nicknameProb) content = settings.meNick + '，' + content;
         if (emojis.length && Math.random() < settings.taEmojiProb) {
           const emoji = emojis[Math.floor(Math.random() * emojis.length)];
@@ -4724,8 +4698,10 @@ function scheduleTAAvatarChange() {
       const list = await libGet('avatarLibrary');
       if (list.length < 2) return;
       const shuffled = [...list].sort(() => Math.random() - 0.5);
-      settings.taAvatar = shuffled[0].data;
-      settings.meAvatar = shuffled[1].data;
+      const taPick = shuffled[0];
+      const mePick = shuffled[1];
+      settings.taAvatar = taPick.data;
+      settings.meAvatar = mePick.data;
       await saveSettings();
       applySettings();
       const msg = { sender: 'ta', content: '我换了一对情侣头像，看看喜不喜欢', timestamp: Date.now(), pinned: false, pinBy: '', heartMark: null, quoteContent: null, worldLabel: getWorldLabel() };
@@ -5220,10 +5196,10 @@ function openQuizAddDialog(panelOverlay) {
   });
 }
 
-// ========== 问答玩法 ==========
+// ========== 问答玩法（爱意值 < 5 不能发起） ==========
 async function startQuiz() {
+  if (settings.heartValue < 5) return showToast('爱意值不足 5，无法发起问答');
   if (pendingQuiz) return showToast('还有一题没答完');
-  if (settings.heartValue < 5) return showToast('爱意值不足5，无法发起问答');
   const quizzes = JSON.parse(localStorage.getItem('quizLibrary') || '[]');
   const cards = await idbGetAll('cards');
   if (Math.random() < 0.5 && quizzes.length) {
@@ -5306,7 +5282,7 @@ async function checkQuizAnswer(myAnswer) {
   appendMessage(resultMsg);
 }
 
-// ========== TA 主动问答 ==========
+// ========== TA 主动问答（爱意值 < 5 不发起） ==========
 function scheduleTAQuiz() {
   const next = Math.random() * (settings.taQuizMax - settings.taQuizMin) + settings.taQuizMin;
   setTimeout(async () => {
@@ -5458,7 +5434,7 @@ function openTogetherPanel() {
 function openTogetherLibraryPanel() {
   const overlay = createModal(`
     <div class="big-input-title">一起活动库</div>
-    <textarea class="big-input-area" id="together-input" placeholder="一行一个活动，如：刷抖音" style="min-height:150px;">${(JSON.parse(localStorage.getItem('togetherLibrary') || '[]')).map(a => a.name || a).join('\n')}</textarea>
+    <textarea class="big-input-area" id="together-input" placeholder="一行一个活动，如：打游戏" style="min-height:150px;">${(JSON.parse(localStorage.getItem('togetherLibrary') || '[]')).map(a => a.name || a).join('\n')}</textarea>
     <button class="save-btn-center" id="save-together" style="margin-top:12px;">保存</button>`);
   overlay.querySelector('#save-together').addEventListener('click', () => {
     const lines = overlay.querySelector('#together-input').value.trim().split('\n').map(s => s.trim()).filter(Boolean);
@@ -5544,7 +5520,7 @@ function scheduleTogetherMessages() {
   accompanyTimer = setTimeout(async () => {
     if (settings.accompanyMode !== 'together') return;
     const cards = await idbGetAll('cards');
-    const hints = ['这个好好看', '你看到没', '我陪你', '一起看', '好玩', '你也喜欢吗'];
+    const hints = ['这个好好玩', '你看到没', '我陪你', '一起玩', '好玩', '你也喜欢吗'];
     let content;
     if (cards.length && Math.random() < 0.5) content = cards[Math.floor(Math.random() * cards.length)].content;
     else content = hints[Math.floor(Math.random() * hints.length)];
@@ -6565,8 +6541,8 @@ async function restoreFromBackup(data) {
     if (!settings.worlds || settings.worlds.length < DEFAULT_WORLDS.length) {
       settings.worlds = JSON.parse(JSON.stringify(DEFAULT_WORLDS));
     }
-    if (!settings.flowerSeeds || !settings.flowerSeeds.length) settings.flowerSeeds = JSON.parse(JSON.stringify(DEFAULT_FLOWER_SEEDS));
-    if (!settings.treeSeeds || !settings.treeSeeds.length) settings.treeSeeds = JSON.parse(JSON.stringify(DEFAULT_TREE_SEEDS));
+    if (!settings.flowerSpecies || !settings.flowerSpecies.length) settings.flowerSpecies = JSON.parse(JSON.stringify(DEFAULT_FLOWER_SPECIES));
+    if (!settings.treeSpecies || !settings.treeSpecies.length) settings.treeSpecies = JSON.parse(JSON.stringify(DEFAULT_TREE_SPECIES));
     await saveSettings();
   }
   if (data.cards) {
@@ -6585,7 +6561,7 @@ async function restoreFromBackup(data) {
   const lsKeys = ['archives', 'avatarLibrary', 'bgLibrary', 'stickerLibrary', 'giftLibrary', 'interactionLibrary', 'quizLibrary', 'emojiLibrary', 'musicList', 'recycledCards', 'importantDays', 'attendanceRecords', 'bondRecords', 'periodRecords', 'periodCards', 'dateRecords', 'dateCards', 'petDataList', 'plantsData', 'wishes', 'videoRecords', 'letters', 'notes', 'loverPosts', 'loverCheckins', 'togetherLibrary', 'accountRecords', 'piggyData'];
   lsKeys.forEach(k => { if (data[k] !== undefined) localStorage.setItem(k, JSON.stringify(data[k])); });
   if (data.memo) localStorage.setItem('memo', data.memo);
-  localStorage.setItem('mediaMigratedV500', '1');
+  localStorage.setItem('mediaMigratedV550', '1');
 }
 
 function openResetDialog() {
@@ -6615,7 +6591,7 @@ async function backupNow() {
   const messages = await idbGetAll('messages');
   const mediaAll = await idbGetAll('media');
   const data = {
-    version: '5.0.0',
+    version: '5.5.0',
     exportedAt: new Date().toISOString(),
     settings, cards, messages, media: mediaAll,
     archives: JSON.parse(localStorage.getItem('archives') || '{}'),
@@ -6735,13 +6711,20 @@ function openPiggyPanel() {
     <div class="piggy-bank">
       <div class="piggy-icon">
         <svg viewBox="0 0 100 100" fill="none">
-          <path d="M30 30 Q50 10 70 30 L75 25 L73 35 Q85 42 85 55 Q85 68 70 75 L73 85 L65 80 Q58 83 50 83 Q42 83 35 80 L27 85 L30 75 Q15 68 15 55 Q15 42 27 35 L25 25 Z" fill="#ffd7a8" stroke="#e8a860" stroke-width="2" stroke-linejoin="round"/>
+          <ellipse cx="50" cy="58" rx="34" ry="28" fill="#ffc4d6" stroke="#e8789f" stroke-width="2"/>
+          <path d="M24 38 L16 26 L34 32 Z" fill="#ffc4d6" stroke="#e8789f" stroke-width="2" stroke-linejoin="round"/>
+          <path d="M76 38 L84 26 L66 32 Z" fill="#ffc4d6" stroke="#e8789f" stroke-width="2" stroke-linejoin="round"/>
+          <ellipse cx="50" cy="66" rx="12" ry="9" fill="#ffb0c8" stroke="#e8789f" stroke-width="2"/>
+          <circle cx="45" cy="66" r="2" fill="#e8789f"/>
+          <circle cx="55" cy="66" r="2" fill="#e8789f"/>
           <circle cx="38" cy="50" r="3" fill="#4a3528"/>
           <circle cx="62" cy="50" r="3" fill="#4a3528"/>
-          <path d="M42 62 q8 6 16 0" stroke="#4a3528" stroke-width="2" fill="none" stroke-linecap="round"/>
-          <ellipse cx="50" cy="58" rx="6" ry="4" fill="#ffc08a"/>
-          <circle cx="50" cy="30" r="4" fill="#ffcf6b" stroke="#e8a860" stroke-width="1.5"/>
-          <path d="M20 45 l-6 -3 M20 50 l-7 0 M20 55 l-6 3" stroke="#e8a860" stroke-width="2" stroke-linecap="round"/>
+          <circle cx="39" cy="49" r="1" fill="#fff"/>
+          <circle cx="63" cy="49" r="1" fill="#fff"/>
+          <rect x="30" y="82" width="8" height="10" rx="3" fill="#ffc4d6" stroke="#e8789f" stroke-width="2"/>
+          <rect x="62" y="82" width="8" height="10" rx="3" fill="#ffc4d6" stroke="#e8789f" stroke-width="2"/>
+          <path d="M84 56 q10 -2 8 -10" stroke="#e8789f" stroke-width="2.5" fill="none" stroke-linecap="round"/>
+          <rect x="44" y="30" width="12" height="4" rx="2" fill="#e8789f"/>
         </svg>
       </div>
       <div class="piggy-balance">${piggy.balance} 元</div>
@@ -7551,7 +7534,8 @@ function openWishCardsPanel() {
     overlay.remove();
   });
 }
-  // ========== 宠物（多只） ==========
+
+// ========== 宠物（多只，美化，立刻照顾，可删除） ==========
 function getPets() {
   let pets = JSON.parse(localStorage.getItem('petDataList') || 'null');
   if (!pets) {
@@ -7632,7 +7616,8 @@ async function renderPetPanel(content, pets) {
         <button data-action="feed" data-idx="${i}" title="喂食">🍖</button>
         <button data-action="play" data-idx="${i}" title="陪玩">🎾</button>
         <button data-action="clean" data-idx="${i}" title="清洁">🛁</button>
-      </div>`;
+      </div>
+      <button class="pet-del-btn" data-del-idx="${i}">删除这只</button>`;
     content.appendChild(card);
   }
   const addBtn = document.createElement('button');
@@ -7649,6 +7634,7 @@ async function renderPetPanel(content, pets) {
       const heart = document.createElement('div');
       heart.textContent = '💗';
       heart.style.cssText = 'position:absolute;font-size:16px;pointer-events:none;animation:sparkleFloat 1.2s ease-out forwards;';
+      av.style.position = 'relative';
       av.appendChild(heart);
       setTimeout(() => heart.remove(), 1200);
     });
@@ -7665,6 +7651,17 @@ async function renderPetPanel(content, pets) {
       if (action === 'clean') pet.clean = Math.min(10, pet.clean + 4);
       savePets(list);
       renderPetPanel(content, list);
+    });
+  });
+
+  content.querySelectorAll('.pet-del-btn').forEach(btn => {
+    btn.addEventListener('click', () => {
+      const idx = Number(btn.dataset.delIdx);
+      const list = getPets();
+      list.splice(idx, 1);
+      savePets(list);
+      renderPetPanel(content, list);
+      showToast('已删除');
     });
   });
 }
@@ -7767,8 +7764,7 @@ function checkPetStatus() {
   savePets(list);
   if (needCare) {
     taAutoCarePets();
-    const msg = { sender: 'ta', content: '宠物们状态不太好，记得照顾它们', timestamp: Date.now(), pinned: false, pinBy: '', heartMark: null, worldLabel: getWorldLabel() };
-    idbPutReturnId('messages', msg).then(id => { msg.id = id; appendMessage(msg); sendNotification(msg.content); });
+    refreshOpenPanels();
   }
 }
 setInterval(checkPetStatus, 3600000);
@@ -7798,7 +7794,7 @@ function scheduleTAPetCare() {
     scheduleTAPetCare();
   }, next);
 }
-  // ========== 种植 ==========
+  // ========== 种植（花种/树种库，一天加一天，可删除） ==========
 function openPlantPanel() {
   const overlay = createModal(`
     <div class="heart-tabs">
@@ -7819,47 +7815,36 @@ function switchPlantTab(tab, overlay) {
   loadPlantContent(overlay, tab);
 }
 
-function getSeedInfo(p, type) {
-  if (type === 'flower') {
-    const seed = (settings.flowerSeeds || []).find(s => s.id === p.seedId);
-    return seed || { emoji: '🌸', name: '花' };
-  } else {
-    const seed = (settings.treeSeeds || []).find(s => s.id === p.seedId);
-    return seed || { fruit: '🌳', name: '树' };
-  }
-}
-
 function loadPlantContent(overlay, tab) {
   const plants = JSON.parse(localStorage.getItem('plantsData') || '{"flowers":[],"trees":[]}');
   const items = tab === 'flower' ? plants.flowers : plants.trees;
+  const species = tab === 'flower' ? (settings.flowerSpecies || DEFAULT_FLOWER_SPECIES) : (settings.treeSpecies || DEFAULT_TREE_SPECIES);
   const container = overlay.querySelector('#plant-content');
   container.innerHTML = '';
   const today = new Date().toISOString().slice(0, 10);
 
   if (!items.length) {
-    container.innerHTML = `<div class="placeholder-tip">还没有${tab === 'flower' ? '花' : '树'}</div>`;
+    container.innerHTML = `<div class="placeholder-tip">还没有${tab === 'flower' ? '花' : '树'}</div>
+      <button class="upload-btn" id="plant-add-btn">种${tab === 'flower' ? '花' : '树'}</button>
+      <button class="upload-btn" id="plant-species-manage">管理${tab === 'flower' ? '花种' : '树种'}</button>`;
+    container.querySelector('#plant-add-btn').addEventListener('click', () => addPlant(tab));
+    container.querySelector('#plant-species-manage').addEventListener('click', () => openSpeciesManagePanel(tab, overlay));
+    return;
   }
 
   items.forEach((p, i) => {
-    const seedInfo = getSeedInfo(p, p.type);
-    const isTree = p.type === 'tree';
-    const maxStage = isTree ? 4 : 3;
-    const stageIdx = Math.min(p.stage, maxStage);
-    let displayEmoji;
-    if (isTree) {
-      const treeStages = ['🌰', '🌱', '🌿', '🪴', seedInfo.fruit || '🌳'];
-      displayEmoji = treeStages[stageIdx];
-    } else {
-      const flowerStages = ['🌰', '🌱', '🌷', seedInfo.emoji || '🌸'];
-      displayEmoji = flowerStages[stageIdx];
-    }
+    const sp = species.find(s => s.id === p.speciesId) || species[0] || { name: '植物', emoji: '🌸' };
+    const stageEmoji = tab === 'flower' ? ['🌰','🌱','🌷','🌸'] : ['🌰','🌱','🌿','🪴','🌳'];
+    const maxStage = tab === 'flower' ? 3 : 4;
+    const stageIdx = Math.min(p.stage, stageEmoji.length - 1);
+    const matureEmoji = tab === 'flower' ? sp.emoji : sp.emoji;
 
     const wrap = document.createElement('div');
     wrap.className = 'plant-card';
     wrap.innerHTML = `
-      <div style="font-size:12px;color:#8b6f60;text-align:center;margin-bottom:4px;">${escapeHtml(seedInfo.name || '')}</div>
       <div class="plant-visual"><div class="plant-visual-inner"></div></div>
       <div class="plant-soil"></div>
+      <div style="text-align:center;font-size:13px;color:#8b6f60;margin-bottom:4px;">${escapeHtml(sp.name)}</div>
       <div class="plant-day">第 ${p.day} 天</div>
       <div class="plant-stat-label">水分 ${p.water}/10</div>
       <div class="plant-stat-bar"><div style="width:${p.water * 10}%;background:#5ab0e0;"></div></div>
@@ -7871,20 +7856,24 @@ function loadPlantContent(overlay, tab) {
         <button class="mini-btn plant-action-btn" data-action="water" data-idx="${i}">浇水</button>
         <button class="mini-btn plant-action-btn" data-action="fertilize" data-idx="${i}">施肥</button>
         <button class="mini-btn plant-action-btn" data-action="catch" data-idx="${i}">捉虫</button>
-        <button class="plant-del-btn" data-idx="${i}">删除</button>
-      </div>`;
+      </div>
+      <button class="plant-del-btn" data-del-idx="${i}">删除</button>`;
     const visualInner = wrap.querySelector('.plant-visual-inner');
     (async () => {
       let shown = false;
       const ref = p.imageRef || p.image;
-      if (ref && p.stage >= maxStage) {
+      if (ref) {
         const data = await resolveMedia(ref);
         if (data) {
-          visualInner.innerHTML = `<img src="${data}" style="width:56px;height:56px;">`;
+          visualInner.innerHTML = `<img src="${data}" style="width:${p.stage >= maxStage ? 56 : 44}px;height:${p.stage >= maxStage ? 56 : 44}px;">`;
           shown = true;
         }
       }
-      if (!shown) visualInner.textContent = displayEmoji;
+      if (!shown) {
+        if (p.stage >= maxStage && tab === 'tree') visualInner.textContent = '🌳' + matureEmoji;
+        else if (p.stage >= maxStage) visualInner.textContent = matureEmoji;
+        else visualInner.textContent = stageEmoji[stageIdx];
+      }
       visualInner.style.fontSize = (p.stage >= maxStage ? 44 : 34) + 'px';
     })();
 
@@ -7909,85 +7898,100 @@ function loadPlantContent(overlay, tab) {
         loadPlantContent(overlay, tab);
       });
     });
-
-    const delBtn = wrap.querySelector('.plant-del-btn');
-    delBtn.addEventListener('click', () => {
+    wrap.querySelector('.plant-del-btn').addEventListener('click', () => {
       items.splice(i, 1);
       localStorage.setItem('plantsData', JSON.stringify(plants));
       loadPlantContent(overlay, tab);
       showToast('已删除');
     });
-
     container.appendChild(wrap);
   });
 
   const addBtn = document.createElement('button');
   addBtn.className = 'upload-btn';
-  addBtn.textContent = `种一${tab === 'flower' ? '朵' : '棵'}${tab === 'flower' ? '花' : '树'}`;
+  addBtn.textContent = `再种一${tab === 'flower' ? '朵' : '棵'}${tab === 'flower' ? '花' : '树'}`;
   addBtn.addEventListener('click', () => addPlant(tab));
   container.appendChild(addBtn);
+  const manageBtn = document.createElement('button');
+  manageBtn.className = 'upload-btn';
+  manageBtn.textContent = `管理${tab === 'flower' ? '花种' : '树种'}`;
+  manageBtn.addEventListener('click', () => openSpeciesManagePanel(tab, overlay));
+  container.appendChild(manageBtn);
 }
 
-function openSeedManageDialog(type, panelOverlay) {
-  const key = type === 'flower' ? 'flowerSeeds' : 'treeSeeds';
-  const seeds = settings[key] || [];
-  const title = type === 'flower' ? '管理花种' : '管理树种';
-  const placeholder = type === 'flower' ? '一行一个花种，如：玫瑰 🌹' : '一行一个树种，如：苹果树 🍎';
+function openSpeciesManagePanel(tab, panelOverlay) {
+  const key = tab === 'flower' ? 'flowerSpecies' : 'treeSpecies';
+  const defaults = tab === 'flower' ? DEFAULT_FLOWER_SPECIES : DEFAULT_TREE_SPECIES;
+  const list = settings[key] || JSON.parse(JSON.stringify(defaults));
   const overlay = createModal(`
-    <div class="big-input-title">${title}</div>
-    <div class="big-input-hint">格式：名字 空格 emoji（${type === 'flower' ? '开花时显示' : '结果时显示'}）</div>
-    <textarea class="big-input-area" id="seed-manage-input" placeholder="${placeholder}" style="min-height:150px;">${seeds.map(s => (s.name + ' ' + (s.emoji || s.fruit || ''))).join('\n')}</textarea>
-    <button class="save-btn-center" id="save-seed-manage" style="margin-top:12px;">保存</button>`);
-  overlay.querySelector('#save-seed-manage').addEventListener('click', async () => {
-    const lines = overlay.querySelector('#seed-manage-input').value.trim().split('\n').map(s => s.trim()).filter(Boolean);
-    const newSeeds = [];
-    lines.forEach((line, idx) => {
-      const parts = line.split(/\s+/);
-      const emoji = parts.length > 1 ? parts.pop() : (type === 'flower' ? '🌸' : '🍎');
-      const name = parts.join(' ') || '未命名';
-      if (type === 'flower') {
-        newSeeds.push({ id: 'f_' + idx + '_' + Date.now(), name, emoji });
-      } else {
-        newSeeds.push({ id: 't_' + idx + '_' + Date.now(), name, fruit: emoji });
-      }
+    <div class="big-input-title">管理${tab === 'flower' ? '花种' : '树种'}</div>
+    <div class="card-list" id="species-list" style="max-height:40vh;"></div>
+    <div style="display:flex;gap:8px;margin-top:10px;">
+      <input type="text" id="species-name-input" placeholder="名称" style="flex:1;background:rgba(255,255,255,0.5);border:1px solid rgba(255,255,255,0.6);border-radius:14px;padding:10px 14px;font-size:14px;color:#4a3f3a;outline:none;">
+      <input type="text" id="species-emoji-input" placeholder="果实/花 emoji" style="width:90px;background:rgba(255,255,255,0.5);border:1px solid rgba(255,255,255,0.6);border-radius:14px;padding:10px 14px;font-size:14px;color:#4a3f3a;outline:none;">
+      <button class="mini-btn" id="species-add">添加</button>
+    </div>`);
+  const listEl = overlay.querySelector('#species-list');
+  function render() {
+    listEl.innerHTML = '';
+    if (!list.length) { listEl.innerHTML = '<div class="placeholder-tip">还没有</div>'; return; }
+    list.forEach((s, i) => {
+      const div = document.createElement('div');
+      div.className = 'card-item';
+      div.innerHTML = `<div class="card-text">${s.emoji} ${escapeHtml(s.name)}</div><div class="card-ops"><button class="species-del">✕</button></div>`;
+      div.querySelector('.species-del').addEventListener('click', () => {
+        list.splice(i, 1);
+        settings[key] = list;
+        saveSettings();
+        render();
+      });
+      listEl.appendChild(div);
     });
-    settings[key] = newSeeds;
-    await saveSettings();
-    showToast('已保存');
-    overlay.remove();
-    panelOverlay.remove();
-    openPlantPanel();
+  }
+  render();
+  overlay.querySelector('#species-add').addEventListener('click', () => {
+    const name = overlay.querySelector('#species-name-input').value.trim();
+    const emoji = overlay.querySelector('#species-emoji-input').value.trim() || '🌸';
+    if (!name) return showToast('请输入名称');
+    list.push({ id: 'sp_' + Date.now(), name, emoji });
+    settings[key] = list;
+    saveSettings();
+    overlay.querySelector('#species-name-input').value = '';
+    overlay.querySelector('#species-emoji-input').value = '';
+    render();
+    showToast('已添加');
+  });
+  registerPanelUpdater('species', () => {
+    if (panelOverlay && document.body.contains(panelOverlay)) {
+      loadPlantContent(panelOverlay, tab);
+    }
   });
 }
 
 function addPlant(type) {
-  const seeds = type === 'flower' ? (settings.flowerSeeds || []) : (settings.treeSeeds || []);
-  if (!seeds.length) return showToast('还没有' + (type === 'flower' ? '花种' : '树种'));
-  let selectedSeedId = seeds[0].id;
+  const species = type === 'flower' ? (settings.flowerSpecies || DEFAULT_FLOWER_SPECIES) : (settings.treeSpecies || DEFAULT_TREE_SPECIES);
   const overlay = createModal(`
     <div class="big-input-title">种${type === 'flower' ? '花' : '树'}</div>
-    <div style="font-size:13px;color:#4a3528;margin-bottom:6px;">选择${type === 'flower' ? '花种' : '树种'}</div>
-    <div class="seed-manage-row" id="seed-pick-row"></div>
-    <button class="upload-btn" id="seed-manage-btn">管理${type === 'flower' ? '花种' : '树种'}</button>
-    <button class="upload-btn" id="plant-image-btn">上传图片（成熟后显示）</button>
+    <div style="font-size:13px;color:#4a3528;margin-bottom:8px;">选择${type === 'flower' ? '花种' : '树种'}</div>
+    <div class="library-grid" id="species-pick-grid"></div>
+    <button class="upload-btn" id="plant-image-btn">上传图片（可选）</button>
     <button class="save-btn-center" id="save-plant" style="margin-top:12px;">种下</button>`);
-  let plantImageRef = '';
-  const pickRow = overlay.querySelector('#seed-pick-row');
-  function renderSeedChips() {
-    pickRow.innerHTML = '';
-    (type === 'flower' ? settings.flowerSeeds : settings.treeSeeds).forEach(s => {
-      const chip = document.createElement('div');
-      chip.className = 'seed-chip' + (s.id === selectedSeedId ? ' selected' : '');
-      chip.innerHTML = `<span>${s.emoji || s.fruit || ''}</span><span>${escapeHtml(s.name)}</span>`;
-      chip.addEventListener('click', () => { selectedSeedId = s.id; renderSeedChips(); });
-      pickRow.appendChild(chip);
+  const grid = overlay.querySelector('#species-pick-grid');
+  let pickedId = species[0] ? species[0].id : '';
+  species.forEach(s => {
+    const div = document.createElement('div');
+    div.className = 'lib-item' + (s.id === pickedId ? ' active' : '');
+    div.style.cssText = 'display:flex;align-items:center;justify-content:center;background:rgba(255,255,255,0.5);font-size:26px;';
+    div.innerHTML = s.emoji;
+    div.title = s.name;
+    div.addEventListener('click', () => {
+      pickedId = s.id;
+      grid.querySelectorAll('.lib-item').forEach(el => el.classList.remove('active'));
+      div.classList.add('active');
     });
-  }
-  renderSeedChips();
-  overlay.querySelector('#seed-manage-btn').addEventListener('click', () => {
-    overlay.remove();
-    openSeedManageDialog(type, overlay);
+    grid.appendChild(div);
   });
+  let plantImageRef = '';
   overlay.querySelector('#plant-image-btn').addEventListener('click', () => {
     const inp = document.createElement('input');
     inp.type = 'file';
@@ -7999,7 +8003,7 @@ function addPlant(type) {
       reader.onload = async () => {
         try {
           plantImageRef = await libPush('plantImageLibrary', reader.result, 'plantimg');
-          overlay.querySelector('#plant-image-btn').textContent = '已选择图片';
+          overlay.querySelector('#plant-image-btn').textContent = '已选择';
         } catch (err) { showToast('图片太大'); }
       };
       reader.readAsDataURL(file);
@@ -8007,9 +8011,10 @@ function addPlant(type) {
     inp.click();
   });
   overlay.querySelector('#save-plant').addEventListener('click', () => {
+    if (!pickedId) return showToast('请选择品种');
     const plants = JSON.parse(localStorage.getItem('plantsData') || '{"flowers":[],"trees":[]}');
     const key = type === 'flower' ? 'flowers' : 'trees';
-    plants[key].push({ type, seedId: selectedSeedId, stage: 0, day: 0, water: 5, nutrient: 5, health: 5, imageRef: plantImageRef, lastCareDate: '' });
+    plants[key].push({ type, speciesId: pickedId, stage: 0, day: 0, water: 5, nutrient: 5, health: 5, imageRef: plantImageRef, lastCareDate: '' });
     localStorage.setItem('plantsData', JSON.stringify(plants));
     showToast('已种下');
     overlay.remove();
@@ -8021,16 +8026,16 @@ async function taAutoCarePlants() {
   const plants = JSON.parse(localStorage.getItem('plantsData') || '{"flowers":[],"trees":[]}');
   const all = [...plants.flowers.map((p, i) => ({ p, key: 'flowers', i })), ...plants.trees.map((p, i) => ({ p, key: 'trees', i }))];
   if (!all.length) return;
-  let worst = all[0], worstVal = 999;
+  let worst = null, worstVal = 999;
   all.forEach(item => {
     const min = Math.min(item.p.water, item.p.nutrient, item.p.health);
     if (min < worstVal) { worstVal = min; worst = item; }
   });
+  if (!worst) return;
   const plant = worst.p;
-  let content = '';
-  if (plant.water <= plant.nutrient && plant.water <= plant.health) { plant.water = Math.max(8, Math.min(10, plant.water + 3)); content = '我帮你浇过水了'; }
-  else if (plant.nutrient <= plant.health) { plant.nutrient = Math.max(8, Math.min(10, plant.nutrient + 4)); content = '我帮你施过肥了'; }
-  else { plant.health = Math.max(8, Math.min(10, plant.health + 3)); content = '我帮你捉过虫了'; }
+  if (plant.water <= plant.nutrient && plant.water <= plant.health) plant.water = Math.max(8, Math.min(10, plant.water + 4));
+  else if (plant.nutrient <= plant.health) plant.nutrient = Math.max(8, Math.min(10, plant.nutrient + 4));
+  else plant.health = Math.max(8, Math.min(10, plant.health + 4));
   const t = new Date().toISOString().slice(0, 10);
   if (plant.lastCareDate !== t) {
     plant.day += 1;
@@ -8041,23 +8046,24 @@ async function taAutoCarePlants() {
   }
   plants[worst.key][worst.i] = plant;
   localStorage.setItem('plantsData', JSON.stringify(plants));
-  const msg = { sender: 'ta', content, timestamp: Date.now(), pinned: false, pinBy: '', heartMark: null, quoteContent: null, worldLabel: getWorldLabel() };
+  const msg = { sender: 'ta', content: '我看你的植物状态不太好，已经帮你照顾过了', timestamp: Date.now(), pinned: false, pinBy: '', heartMark: null, quoteContent: null, worldLabel: getWorldLabel() };
   const id = await idbPutReturnId('messages', msg);
   msg.id = id;
   appendMessage(msg);
-  sendNotification(content);
+  sendNotification(msg.content);
   refreshOpenPanels();
 }
 
 function checkPlantStatus() {
   const plants = JSON.parse(localStorage.getItem('plantsData') || '{"flowers":[],"trees":[]}');
   const all = [...plants.flowers, ...plants.trees];
-  if (!all.length) return;
   let needCare = false;
   all.forEach(p => {
     if (p.water < 3 || p.nutrient < 3 || p.health < 3) needCare = true;
   });
-  if (needCare) taAutoCarePlants();
+  if (needCare) {
+    taAutoCarePlants();
+  }
 }
 setInterval(checkPlantStatus, 3600000);
 
@@ -8096,7 +8102,8 @@ function scheduleTAPlantCare() {
     scheduleTAPlantCare();
   }, next);
 }
-  // ========== 视频通话 ==========
+
+// ========== 视频通话 ==========
 const VIDEO_GRADIENTS = [
   'linear-gradient(135deg, #fdd9c8, #f7d4e3, #dcd3f5)',
   'linear-gradient(135deg, #cfe4f7, #f7d4e3, #ffe3ef)',
@@ -8288,11 +8295,7 @@ async function scheduleVideoTASpeak() {
   if (videoCallMini) showDanmaku(content);
   if (!window._currentVideoSpeaks) window._currentVideoSpeaks = [];
   window._currentVideoSpeaks.push(content);
-  const mood = getTodayMood();
-  let base = 60000;
-  if (mood.id === 'clingy' || mood.id === 'miss') base = 40000;
-  else if (mood.id === 'low') base = 90000;
-  const delayMs = base * (0.85 + Math.random() * 0.3);
+  const delayMs = 60000 * (0.85 + Math.random() * 0.3);
   setTimeout(() => { if (videoCallActive && videoCallAnswered) scheduleVideoTASpeak(); }, delayMs);
 }
 
@@ -8687,7 +8690,7 @@ function checkBondDaily() {
   updateHeartValue();
 }
 
-// ========== 归档（打开时全量补齐，只碰消息） ==========
+// ========== 归档（只碰消息） ==========
 async function checkArchive() {
   const now = new Date();
   const todayStr = now.getFullYear() + '-' + (now.getMonth() + 1) + '-' + now.getDate();
@@ -8848,37 +8851,6 @@ function drawParticle(ctx, p) {
     ctx.beginPath(); ctx.arc(p.x, p.y, p.size * 0.5, 0, Math.PI * 2); ctx.fill();
   }
   ctx.globalAlpha = 1;
-}
-
-// ========== 情绪 ==========
-const MOODS = [
-  { id: 'happy', name: '开心', factor: 0.7, prefixes: ['嘿嘿，', '今天心情超好，'] },
-  { id: 'miss', name: '想你', factor: 0.8, prefixes: ['想你了，', '好想你啊，'] },
-  { id: 'normal', name: '平常', factor: 1.0, prefixes: [] },
-  { id: 'clingy', name: '粘人', factor: 0.5, prefixes: ['陪我嘛，', '不许不理我，'] },
-  { id: 'low', name: '低落', factor: 1.3, prefixes: ['唉，', '有点难过，'] }
-];
-
-function getTodayMood() {
-  const today = new Date().toDateString();
-  if (settings.moodDate === today && settings.moodType) {
-    return MOODS.find(m => m.id === settings.moodType) || MOODS[2];
-  }
-  const pick = MOODS[Math.floor(Math.random() * MOODS.length)];
-  settings.moodType = pick.id;
-  settings.moodDate = today;
-  saveSettings();
-  return pick;
-}
-
-function applyMoodToText(text) {
-  const mood = getTodayMood();
-  if (!mood.prefixes.length) return text;
-  if (Math.random() < 0.25) {
-    const p = mood.prefixes[Math.floor(Math.random() * mood.prefixes.length)];
-    return p + text;
-  }
-  return text;
 }
 
 // ========== 世界之外 ==========
@@ -9108,6 +9080,7 @@ async function init() {
   checkImportantDays();
   checkPeriodCare();
   checkPetStatus();
+  checkPlantStatus();
   initParticles();
   updateSendBtn();
   setInterval(() => { updateStatusBar(); }, 60000);

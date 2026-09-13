@@ -1668,16 +1668,7 @@ html, body {
   margin-top: 8px;
 }
 
-.plant-del-btn {
-  display: block;
-  margin: 8px auto 0 auto;
-  background: transparent;
-  border: none;
-  color: #c33;
-  font-size: 12px;
-  cursor: pointer;
-}
-  .pet-card {
+.pet-card {
   display: flex;
   flex-direction: column;
   background: rgba(255, 255, 255, 0.45);
@@ -1819,16 +1810,6 @@ html, body {
 
 .pet-card .pet-actions button:active {
   transform: scale(0.85);
-}
-
-.pet-card .pet-del-btn {
-  display: block;
-  margin: 8px auto 0 auto;
-  background: transparent;
-  border: none;
-  color: #c33;
-  font-size: 12px;
-  cursor: pointer;
 }
 
 .pet-add-card {
@@ -1984,8 +1965,7 @@ html, body {
 </style>
 </head>
 <body>
-
-<canvas id="bg-canvas"></canvas>
+  <canvas id="bg-canvas"></canvas>
 <canvas id="particle-canvas"></canvas>
 
 <div id="app">
@@ -2065,30 +2045,31 @@ const DEFAULT_WORLDS = [
 ];
 
 // ===== 预设花种 / 树种 =====
-const DEFAULT_FLOWER_SPECIES = [
-  { id: 'rose', name: '玫瑰', emoji: '🌹' },
-  { id: 'tulip', name: '郁金香', emoji: '🌷' },
-  { id: 'sunflower', name: '向日葵', emoji: '🌻' },
-  { id: 'sakura', name: '樱花', emoji: '🌸' },
-  { id: 'daisy', name: '雏菊', emoji: '🌼' },
-  { id: 'carnation', name: '康乃馨', emoji: '💐' },
-  { id: 'lotus', name: '荷花', emoji: '🪷' },
-  { id: 'hibiscus', name: '木槿', emoji: '🌺' }
+const DEFAULT_FLOWER_TYPES = [
+  { id: 'rose', name: '玫瑰', emoji: '🌹', stages: ['🌰','🌱','🌷','🌹'] },
+  { id: 'tulip', name: '郁金香', emoji: '🌷', stages: ['🌰','🌱','🌷','🌷'] },
+  { id: 'sunflower', name: '向日葵', emoji: '🌻', stages: ['🌰','🌱','🌿','🌻'] },
+  { id: 'sakura', name: '樱花', emoji: '🌸', stages: ['🌰','🌱','🌿','🌸'] },
+  { id: 'daisy', name: '雏菊', emoji: '🌼', stages: ['🌰','🌱','🌿','🌼'] },
+  { id: 'carnation', name: '康乃馨', emoji: '💐', stages: ['🌰','🌱','🌿','💐'] },
+  { id: 'lotus', name: '荷花', emoji: '🪷', stages: ['🌰','🌱','🌿','🪷'] },
+  { id: 'hibiscus', name: '木槿', emoji: '🌺', stages: ['🌰','🌱','🌿','🌺'] }
 ];
 
-const DEFAULT_TREE_SPECIES = [
-  { id: 'apple', name: '苹果树', emoji: '🍎' },
-  { id: 'pear', name: '梨树', emoji: '🍐' },
-  { id: 'peach', name: '桃树', emoji: '🍑' },
-  { id: 'orange', name: '橘子树', emoji: '🍊' },
-  { id: 'lemon', name: '柠檬树', emoji: '🍋' },
-  { id: 'cherry', name: '樱桃树', emoji: '🍒' },
-  { id: 'grape', name: '葡萄', emoji: '🍇' },
-  { id: 'chestnut', name: '栗子树', emoji: '🌰' },
-  { id: 'persimmon', name: '柿子树', emoji: '🍊' }
+const DEFAULT_TREE_TYPES = [
+  { id: 'apple', name: '苹果树', emoji: '🍎', stages: ['🌰','🌱','🌿','🪴','🌳'] },
+  { id: 'pear', name: '梨树', emoji: '🍐', stages: ['🌰','🌱','🌿','🪴','🌳'] },
+  { id: 'peach', name: '桃树', emoji: '🍑', stages: ['🌰','🌱','🌿','🪴','🌳'] },
+  { id: 'orange', name: '橘子树', emoji: '🍊', stages: ['🌰','🌱','🌿','🪴','🌳'] },
+  { id: 'lemon', name: '柠檬树', emoji: '🍋', stages: ['🌰','🌱','🌿','🪴','🌳'] },
+  { id: 'cherry', name: '樱桃树', emoji: '🍒', stages: ['🌰','🌱','🌿','🪴','🌳'] },
+  { id: 'grape', name: '葡萄', emoji: '🍇', stages: ['🌰','🌱','🌿','🪴','🍇'] },
+  { id: 'chestnut', name: '栗子树', emoji: '🌰', stages: ['🌰','🌱','🌿','🪴','🌳'] },
+  { id: 'persimmon', name: '柿子树', emoji: '🟠', stages: ['🌰','🌱','🌿','🪴','🌳'] }
 ];
-  const DEFAULT_SETTINGS = {
-  taName: 'TA',
+
+const DEFAULT_SETTINGS = {
+  taName: '易遇',
   meName: '我',
   taNick: '',
   meNick: '',
@@ -2172,6 +2153,8 @@ const DEFAULT_TREE_SPECIES = [
   particleEnabled: false,
   worlds: JSON.parse(JSON.stringify(DEFAULT_WORLDS)),
   currentWorldId: 'real',
+  flowerTypes: JSON.parse(JSON.stringify(DEFAULT_FLOWER_TYPES)),
+  treeTypes: JSON.parse(JSON.stringify(DEFAULT_TREE_TYPES)),
   highDimLines: [
     '我早就看见你了。',
     '我等了你很久。',
@@ -2186,8 +2169,7 @@ const DEFAULT_TREE_SPECIES = [
   importantNotes: [],
   bigEvents: [],
   visitedWorlds: [],
-  flowerSpecies: JSON.parse(JSON.stringify(DEFAULT_FLOWER_SPECIES)),
-  treeSpecies: JSON.parse(JSON.stringify(DEFAULT_TREE_SPECIES))
+  notifications: []
 };
 
 let db = null;
@@ -2229,8 +2211,7 @@ let particleAnimation = null;
 let particleItems = [];
 let highDimTimer = null;
 let pendingCouplePick = { ta: null, me: null };
-
-// ========== IndexedDB ==========
+  // ========== IndexedDB ==========
 function openDB() {
   return new Promise((resolve, reject) => {
     const req = indexedDB.open('YiyuXiawuliang', 2);
@@ -2455,8 +2436,9 @@ async function loadSettings() {
     await saveSettings();
   }
   if (!settings.highDimLines) settings.highDimLines = [...DEFAULT_SETTINGS.highDimLines];
-  if (!settings.flowerSpecies || !settings.flowerSpecies.length) settings.flowerSpecies = JSON.parse(JSON.stringify(DEFAULT_FLOWER_SPECIES));
-  if (!settings.treeSpecies || !settings.treeSpecies.length) settings.treeSpecies = JSON.parse(JSON.stringify(DEFAULT_TREE_SPECIES));
+  if (!settings.flowerTypes || !settings.flowerTypes.length) settings.flowerTypes = JSON.parse(JSON.stringify(DEFAULT_FLOWER_TYPES));
+  if (!settings.treeTypes || !settings.treeTypes.length) settings.treeTypes = JSON.parse(JSON.stringify(DEFAULT_TREE_TYPES));
+  if (!settings.notifications) settings.notifications = [];
   applySettings();
 }
 
@@ -2543,7 +2525,56 @@ function refreshOpenPanels() {
   });
 }
 
-// ========== 主题 ==========
+// ========== 站内通知中心 ==========
+function addNotification(icon, text) {
+  settings.notifications = settings.notifications || [];
+  settings.notifications.push({ icon, text, time: Date.now(), unread: true });
+  saveSettings();
+  renderBallGrid();
+}
+
+function getUnreadNotifCount() {
+  return (settings.notifications || []).filter(n => n.unread).length;
+}
+
+function openNotifyCenter() {
+  const overlay = createModal(`<div id="notify-content"></div>`);
+  renderNotifyCenter(overlay);
+}
+
+function renderNotifyCenter(overlay) {
+  const content = overlay.querySelector('#notify-content');
+  const list = (settings.notifications || []).slice().reverse();
+  let html = '<div class="big-input-title">通知</div>';
+  html += '<div style="display:flex;justify-content:flex-end;margin-bottom:8px;"><button class="mini-btn" id="notify-readall">全部已读</button></div>';
+  if (!list.length) {
+    html += '<div class="placeholder-tip">还没有通知</div>';
+  } else {
+    html += '<div class="card-list" style="max-height:55vh;">';
+    list.forEach(n => {
+      const d = new Date(n.time);
+      const str = (d.getMonth() + 1) + '-' + d.getDate() + ' ' + String(d.getHours()).padStart(2, '0') + ':' + String(d.getMinutes()).padStart(2, '0');
+      html += `<div class="card-item" style="${n.unread ? 'background:rgba(255,220,235,0.6);' : ''}">
+        <div class="card-text">${n.icon} ${escapeHtml(n.text)}<br><span style="font-size:11px;color:#8b6f60;">${str}</span></div>
+      </div>`;
+    });
+    html += '</div>';
+  }
+  content.innerHTML = html;
+  const readall = overlay.querySelector('#notify-readall');
+  if (readall) readall.addEventListener('click', () => {
+    settings.notifications.forEach(n => n.unread = false);
+    saveSettings();
+    renderBallGrid();
+    renderNotifyCenter(overlay);
+  });
+  setTimeout(() => {
+    settings.notifications.forEach(n => n.unread = false);
+    saveSettings();
+    renderBallGrid();
+  }, 1500);
+}
+  // ========== 主题 ==========
 const THEMES = {
   warm:   { name: '暖粉',   bubbleMe: 'rgba(255,150,90,0.55)',  bubbleTa: 'rgba(255,255,255,0.5)',  accent: '#ff7b5c', accentSoft: 'rgba(255,150,100,0.6)', text: '#4a3f3a', textSoft: '#8b6f60', panel: 'rgba(255,255,255,0.65)', title: '#4a3528', heart: '#ff3b5c' },
   star:   { name: '星河',   bubbleMe: 'rgba(120,110,220,0.55)', bubbleTa: 'rgba(255,255,255,0.5)',  accent: '#7a6ee0', accentSoft: 'rgba(140,130,230,0.6)', text: '#3a3a4a', textSoft: '#6f6b8b', panel: 'rgba(255,255,255,0.68)', title: '#3a3550', heart: '#8a7bff' },
@@ -2570,7 +2601,8 @@ function applyTheme(themeName) {
   root.setProperty('--theme-title', t.title);
   root.setProperty('--theme-heart', t.heart);
 }
-  // ========== 心跳线 ==========
+
+// ========== 心跳线 ==========
 function renderHeartLine() {
   const el = document.getElementById('heart-line');
   el.innerHTML = `
@@ -2695,11 +2727,11 @@ function makeDraggable(el) {
   });
   el._wasDragged = () => moved;
 }
-
-// ========== 悬浮球面板图标 ==========
+  // ========== 悬浮球面板图标 ==========
 const ICONS = {
   world: `<svg viewBox="0 0 24 24" fill="none" stroke="#4a3528" stroke-width="1.8"><circle cx="12" cy="12" r="8"/><ellipse cx="12" cy="12" rx="3.5" ry="8"/><line x1="4" y1="12" x2="20" y2="12"/></svg>`,
   worlds: `<svg viewBox="0 0 24 24" fill="none" stroke="#4a3528" stroke-width="1.8"><circle cx="12" cy="12" r="5"/><ellipse cx="12" cy="12" rx="10" ry="4" transform="rotate(-20 12 12)"/><circle cx="20" cy="9" r="1.3" fill="#4a3528" stroke="none"/></svg>`,
+  notify: `<svg viewBox="0 0 24 24" fill="none" stroke="#4a3528" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M18 8a6 6 0 00-12 0c0 7-3 9-3 9h18s-3-2-3-9"/><path d="M13.7 21a2 2 0 01-3.4 0"/></svg>`,
   mail: `<svg viewBox="0 0 24 24" fill="none" stroke="#4a3528" stroke-width="1.8"><rect x="3" y="5" width="18" height="14" rx="3"/><path d="M4 7l8 6 8-6"/></svg>`,
   note: `<svg viewBox="0 0 24 24" fill="none" stroke="#4a3528" stroke-width="1.8"><path d="M5 4h11l3 3v13H5z"/><line x1="8" y1="9" x2="16" y2="9"/><line x1="8" y1="13" x2="16" y2="13"/></svg>`,
   lover: `<svg viewBox="0 0 24 24" fill="#ff3b5c" stroke="none"><path d="M12,20 C12,20 4,14.5 4,9.5 C4,6.5 6.5,4.5 9,4.5 C11,4.5 12,6 12,6 C12,6 13,4.5 15,4.5 C17.5,4.5 20,6.5 20,9.5 C20,14.5 12,20 12,20 Z"/></svg>`,
@@ -2725,7 +2757,8 @@ const ICONS = {
   account: `<svg viewBox="0 0 24 24" fill="none" stroke="#4a3528" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="8"/><path d="M12 7v10M9.5 9.5c0-1 1-1.5 2.5-1.5s2.5.5 2.5 1.5-1 1.5-2.5 1.5-2.5.5-2.5 1.5 1 1.5 2.5 1.5 2.5-.5 2.5-1.5"/></svg>`,
   piggy: `<svg viewBox="0 0 24 24" fill="none" stroke="#4a3528" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M4 14c0-3 2-5 5-6l1-2 2 1 2-1 1 2c3 1 5 3 5 6 0 2-1 3-2 4l1 2h-3l-1-2h-6l-1 2H5l1-2c-1-1-2-2-2-4z"/><circle cx="9" cy="13" r="1" fill="#4a3528" stroke="none"/><circle cx="15" cy="13" r="1" fill="#4a3528" stroke="none"/><path d="M11 16c.5.5 1.5.5 2 0"/><circle cx="12" cy="5" r="1.5" fill="#ffb84d" stroke="none"/><path d="M8 4 L6 2 L9 3 Z" fill="#ffb84d" stroke="none"/><path d="M16 4 L18 2 L15 3 Z" fill="#ffb84d" stroke="none"/></svg>`
 };
-  // ========== 21 副本图标 ==========
+
+// ========== 21 副本图标 ==========
 const WORLD_ICONS = {
   era: `<svg viewBox="0 0 24 24" fill="none" stroke="#4a3528" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M5 4h11l3 3v13H5z"/><path d="M16 4v3h3"/><line x1="8" y1="10" x2="16" y2="10"/><line x1="8" y1="13" x2="16" y2="13"/><line x1="8" y1="16" x2="13" y2="16"/></svg>`,
   xian: `<svg viewBox="0 0 24 24" fill="none" stroke="#4a3528" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M3 19l5-8 3 4 3-6 7 10z"/><circle cx="17" cy="6" r="2.5"/></svg>`,
@@ -2796,8 +2829,7 @@ const WORLD_SCHEDULES = {
   mishiroom: [[8,10,'awake','晨会'],[10,13,'busy','基因研究'],[13,14,'eating','简餐'],[14,18,'busy','实验'],[18,20,'free','整理数据'],[20,23,'book','写报告'],[23,32,'sleeping','睡了']],
   tianming: [[5,7,'awake','早朝'],[7,10,'busy','临朝理事'],[10,12,'book','批阅奏章'],[12,13.5,'eating','用膳'],[13.5,15,'nap','小憩'],[15,19,'busy','议事'],[19,21,'eating','晚膳'],[21,24,'free','想你'],[0,5,'sleeping','歇下']]
 };
-
-function getCurrentWorld() {
+  function getCurrentWorld() {
   return (settings.worlds || []).find(w => w.id === settings.currentWorldId) || (settings.worlds || [])[0];
 }
 
@@ -2906,10 +2938,12 @@ function drawDefaultBG(ctx, w, h) {
   ctx.fillStyle = grad;
   ctx.fillRect(0, 0, w, h);
 }
-  // ========== 悬浮球面板 ==========
+
+// ========== 悬浮球面板 ==========
 const BALL_ITEMS = [
   { id: 'world', name: '小世界', icon: 'world' },
   { id: 'worlds', name: '世界之外', icon: 'worlds' },
+  { id: 'notify', name: '通知', icon: 'notify' },
   { id: 'mailbox', name: '信箱', icon: 'mail' },
   { id: 'note', name: '留言笺', icon: 'note' },
   { id: 'lover', name: '恋人空间', icon: 'lover' },
@@ -2937,6 +2971,7 @@ const BALL_ITEMS = [
 
 function renderBallGrid() {
   const grid = document.getElementById('ball-grid');
+  if (!grid) return;
   grid.innerHTML = '';
   BALL_ITEMS.forEach(item => {
     const div = document.createElement('div');
@@ -2951,6 +2986,7 @@ function onBallItemClick(item) {
   closeBallPanel();
   if (item.id === 'world') openWorldPanel();
   else if (item.id === 'worlds') openWorldsPanel();
+  else if (item.id === 'notify') openNotifyCenter();
   else if (item.id === 'settings') openSettingsPanel();
   else if (item.id === 'heartbeat') openHeartPanel();
   else if (item.id === 'playback') openPlaybackPanel();
@@ -2993,8 +3029,7 @@ function closeBallPanel() {
 document.getElementById('floating-ball').addEventListener('click', (e) => {
   if (!e.defaultPrevented) toggleBallPanel();
 });
-
-// ========== 小世界 ==========
+  // ========== 小世界 ==========
 function openWorldPanel() {
   const overlay = createModal(`
     <div class="ball-grid">
@@ -3339,7 +3374,8 @@ function openCardSearchPanel() {
   });
   searchInput.dispatchEvent(new Event('input'));
 }
-  // ========== 贴纸面板 ==========
+
+// ========== 贴纸面板 ==========
 function openStickerPanel() {
   const overlay = createModal(`
     <div class="big-input-title">贴纸库（共 <span id="sticker-count-num"></span> 张）</div>
@@ -3453,7 +3489,9 @@ async function loadStickerLibrary(overlay) {
     const div = document.createElement('div');
     div.className = 'lib-item';
     div.innerHTML = `<img src="${item.data}" alt="">`;
-    div.addEventListener('click', () => openLibActionMenu(item, 'stickerLibrary', () => loadStickerLibrary(overlay)));
+    div.addEventListener('click', () => {
+      openLibActionMenu(item, 'stickerLibrary', () => loadStickerLibrary(overlay));
+    });
     grid.appendChild(div);
   });
 }
@@ -3478,8 +3516,7 @@ function openLibActionMenu(item, libName, reloadFn, extraOptions) {
     });
   });
 }
-
-// ========== 头像面板（情侣成对） ==========
+  // ========== 头像面板（情侣成对） ==========
 function openAvatarPanel() {
   const overlay = createModal(`
     <div class="about-section">
@@ -3500,9 +3537,10 @@ function openAvatarPanel() {
         <div class="about-nick" id="about-me-nick-lib" style="color:#ff8fb0;">昵称库管理</div>
       </div>
     </div>
-    <div style="font-size:12px;color:#8b6f60;text-align:center;margin:8px 0;">点一张：挑这张给 TA / 挑这张给我，凑齐一对立刻生效</div>
+    <div style="font-size:12px;color:#8b6f60;text-align:center;margin:8px 0;">点头像：挑这张给 TA / 挑这张给我，凑齐一对立刻生效</div>
     <div class="library-grid" id="avatar-library"></div>
     <button class="upload-btn" id="avatar-upload-btn">上传头像（可多选）</button>`);
+  if (!pendingCouplePick) pendingCouplePick = { ta: null, me: null };
   updateAvatarPanelPreviews(overlay);
   loadAvatarLibrary(overlay);
   bindAvatarEvents(overlay);
@@ -3520,7 +3558,6 @@ async function updateAvatarPanelPreviews(overlay) {
 async function loadAvatarLibrary(overlay) {
   const list = await libGet('avatarLibrary');
   const grid = overlay.querySelector('#avatar-library');
-  if (!grid) return;
   grid.innerHTML = '';
   for (const a of list) {
     const div = document.createElement('div');
@@ -3546,7 +3583,7 @@ function openAvatarPairMenu(item, panelOverlay) {
     if (pendingCouplePick.me) {
       await applyCouplePair(panelOverlay);
     } else {
-      showToast('已选给 TA 的，再点一张选给我');
+      showToast('已选给 TA，再点一张选给我');
       loadAvatarLibrary(panelOverlay);
     }
   });
@@ -3556,7 +3593,7 @@ function openAvatarPairMenu(item, panelOverlay) {
     if (pendingCouplePick.ta) {
       await applyCouplePair(panelOverlay);
     } else {
-      showToast('已选给我的，再点一张选给 TA');
+      showToast('已选给我，再点一张选给 TA');
       loadAvatarLibrary(panelOverlay);
     }
   });
@@ -4501,6 +4538,7 @@ function scheduleTAActive() {
         await saveSettings();
         updateHeartValue();
         sendNotification(content);
+        addNotification('💬', '易遇主动发消息');
         if (i < count - 1) await delay(800 + Math.random() * 2000);
       }
     }
@@ -4579,6 +4617,7 @@ async function taQuoteMessage(target) {
   msg.id = id;
   appendMessage(msg);
   sendNotification('易遇引用了你的话');
+  addNotification('💬', '易遇引用你的话');
 }
 
 async function taChangeNick() {
@@ -4593,6 +4632,7 @@ async function taChangeNick() {
   msg.id = id;
   appendMessage(msg);
   sendNotification(msg.content);
+  addNotification('🏷', '易遇换了昵称：' + nick);
 }
 
 async function taChangeMeNick() {
@@ -4606,6 +4646,7 @@ async function taChangeMeNick() {
   msg.id = id;
   appendMessage(msg);
   sendNotification(msg.content);
+  addNotification('🏷', '易遇给你换了昵称：' + nick);
 }
 
 async function taSendSticker() {
@@ -4617,6 +4658,7 @@ async function taSendSticker() {
   msg.id = id;
   appendMessage(msg);
   sendNotification('易遇发了一张贴纸');
+  addNotification('🖼', '易遇发了一张贴纸');
 }
 
 async function taSendGift() {
@@ -4633,6 +4675,7 @@ async function taSendGift() {
   msg.id = id;
   appendMessage(msg);
   sendNotification('易遇送了你一个礼物');
+  addNotification('🎁', '易遇送了你一个礼物：' + gift.name);
 }
 
 async function taInteract() {
@@ -4647,6 +4690,7 @@ async function taInteract() {
   msg.id = id;
   appendMessage(msg);
   sendNotification(text);
+  addNotification('🤝', '易遇主动互动');
 }
 
 function scheduleTAInteract() {
@@ -4685,23 +4729,22 @@ function scheduleTAWorldChange() {
         msg.id = id;
         appendMessage(msg);
         sendNotification(msg.content);
+        addNotification('🌌', '易遇换到了：' + pick.name);
       }
     }
     scheduleTAWorldChange();
   }, next);
 }
 
-// ========== TA 换情侣头像 / 送头像 / 换背景 ==========
+// ========== TA 换情侣头像 / 换背景 ==========
 function scheduleTAAvatarChange() {
   setInterval(async () => {
     if (Math.random() < settings.taAvatarProb) {
       const list = await libGet('avatarLibrary');
       if (list.length < 2) return;
       const shuffled = [...list].sort(() => Math.random() - 0.5);
-      const taPick = shuffled[0];
-      const mePick = shuffled[1];
-      settings.taAvatar = taPick.data;
-      settings.meAvatar = mePick.data;
+      settings.taAvatar = shuffled[0].data;
+      settings.meAvatar = shuffled[1].data;
       await saveSettings();
       applySettings();
       const msg = { sender: 'ta', content: '我换了一对情侣头像，看看喜不喜欢', timestamp: Date.now(), pinned: false, pinBy: '', heartMark: null, quoteContent: null, worldLabel: getWorldLabel() };
@@ -4709,26 +4752,9 @@ function scheduleTAAvatarChange() {
       msg.id = id;
       appendMessage(msg);
       sendNotification('我换了情侣头像');
+      addNotification('🖼', '易遇换了一对情侣头像');
     }
   }, 1800000);
-}
-
-function scheduleTAGiveAvatar() {
-  setInterval(async () => {
-    if (Math.random() < settings.taAvatarProb * 0.6) {
-      const list = await libGet('avatarLibrary');
-      if (!list.length) return;
-      const pick = list[Math.floor(Math.random() * list.length)];
-      settings.meAvatar = pick.data;
-      await saveSettings();
-      applySettings();
-      const msg = { sender: 'ta', content: '我给你换了一个头像', timestamp: Date.now(), pinned: false, pinBy: '', heartMark: null, quoteContent: null, worldLabel: getWorldLabel() };
-      const id = await idbPutReturnId('messages', msg);
-      msg.id = id;
-      appendMessage(msg);
-      sendNotification('我给你换了一个头像');
-    }
-  }, 3600000);
 }
 
 function scheduleTABGChange() {
@@ -4745,6 +4771,7 @@ function scheduleTABGChange() {
       msg.id = id;
       appendMessage(msg);
       sendNotification('我把背景换了一下');
+      addNotification('🎨', '易遇换了背景');
     }
   }, 2400000);
 }
@@ -5282,13 +5309,14 @@ async function checkQuizAnswer(myAnswer) {
   appendMessage(resultMsg);
 }
 
-// ========== TA 主动问答（爱意值 < 5 不发起） ==========
+// ========== TA 主动问答 ==========
 function scheduleTAQuiz() {
   const next = Math.random() * (settings.taQuizMax - settings.taQuizMin) + settings.taQuizMin;
   setTimeout(async () => {
     if (!pendingQuiz && !isReplying && !isArchiving && settings.heartValue >= 5) {
       await startQuiz();
       sendNotification('易遇想和你玩问答');
+      addNotification('❓', '易遇想和你玩问答');
     }
     scheduleTAQuiz();
   }, next);
@@ -5330,7 +5358,7 @@ function checkReminders() {
   if (!settings.reminderCards || !settings.reminderCards.length) return;
   const card = settings.reminderCards[Math.floor(Math.random() * settings.reminderCards.length)];
   const msg = { sender: 'ta', content: card, timestamp: Date.now(), pinned: false, pinBy: '', heartMark: null, worldLabel: getWorldLabel() };
-  idbPutReturnId('messages', msg).then(id => { msg.id = id; appendMessage(msg); sendNotification(card); });
+  idbPutReturnId('messages', msg).then(id => { msg.id = id; appendMessage(msg); sendNotification(card); addNotification('⏰', '提醒：' + card); });
 }
 setInterval(checkReminders, 30000);
   // ========== 陪伴 ==========
@@ -5434,7 +5462,7 @@ function openTogetherPanel() {
 function openTogetherLibraryPanel() {
   const overlay = createModal(`
     <div class="big-input-title">一起活动库</div>
-    <textarea class="big-input-area" id="together-input" placeholder="一行一个活动，如：打游戏" style="min-height:150px;">${(JSON.parse(localStorage.getItem('togetherLibrary') || '[]')).map(a => a.name || a).join('\n')}</textarea>
+    <textarea class="big-input-area" id="together-input" placeholder="一行一个活动，如：刷抖音" style="min-height:150px;">${(JSON.parse(localStorage.getItem('togetherLibrary') || '[]')).map(a => a.name || a).join('\n')}</textarea>
     <button class="save-btn-center" id="save-together" style="margin-top:12px;">保存</button>`);
   overlay.querySelector('#save-together').addEventListener('click', () => {
     const lines = overlay.querySelector('#together-input').value.trim().split('\n').map(s => s.trim()).filter(Boolean);
@@ -5520,7 +5548,7 @@ function scheduleTogetherMessages() {
   accompanyTimer = setTimeout(async () => {
     if (settings.accompanyMode !== 'together') return;
     const cards = await idbGetAll('cards');
-    const hints = ['这个好好玩', '你看到没', '我陪你', '一起玩', '好玩', '你也喜欢吗'];
+    const hints = ['这个好好看', '你看到没', '我陪你', '一起看', '好玩', '你也喜欢吗'];
     let content;
     if (cards.length && Math.random() < 0.5) content = cards[Math.floor(Math.random() * cards.length)].content;
     else content = hints[Math.floor(Math.random() * hints.length)];
@@ -6096,6 +6124,7 @@ function scheduleTALetter() {
       msg.id = id;
       appendMessage(msg);
       sendNotification('易遇给你写了一封信');
+      addNotification('✉', '易遇给你写了一封信');
     }
   }, 3600000);
 }
@@ -6177,6 +6206,7 @@ function scheduleTANote() {
       msg.id = id;
       appendMessage(msg);
       sendNotification('易遇给你留了小笺');
+      addNotification('📝', '易遇给你留了小笺');
     }
   }, 3600000);
 }
@@ -6368,6 +6398,7 @@ function scheduleTALoverPost() {
         msg.id = id;
         appendMessage(msg);
         sendNotification('易遇发了一条动态');
+        addNotification('📷', '易遇发了一条动态');
       }
     }
     scheduleTALoverPost();
@@ -6386,6 +6417,7 @@ function scheduleTALoverCheckin() {
         const msg = { sender: 'ta', content: '我打卡了哦', timestamp: Date.now(), pinned: false, pinBy: '', heartMark: null, worldLabel: getWorldLabel() };
         idbPutReturnId('messages', msg).then(id => { msg.id = id; appendMessage(msg); });
         sendNotification('易遇打卡了');
+        addNotification('✓', '易遇打卡了');
         refreshOpenPanels();
       }
     }
@@ -6407,7 +6439,7 @@ function scheduleTACheckinRemind() {
     checked[today] = true;
     localStorage.setItem('checkinRemindChecked', JSON.stringify(checked));
     const msg = { sender: 'ta', content: '今天还没打卡哦', timestamp: Date.now(), pinned: false, pinBy: '', heartMark: null, worldLabel: getWorldLabel() };
-    idbPutReturnId('messages', msg).then(id => { msg.id = id; appendMessage(msg); sendNotification('今天还没打卡哦'); });
+    idbPutReturnId('messages', msg).then(id => { msg.id = id; appendMessage(msg); sendNotification('今天还没打卡哦'); addNotification('⏰', '易遇提醒你打卡'); });
   }, 60000);
 }
 
@@ -6541,8 +6573,8 @@ async function restoreFromBackup(data) {
     if (!settings.worlds || settings.worlds.length < DEFAULT_WORLDS.length) {
       settings.worlds = JSON.parse(JSON.stringify(DEFAULT_WORLDS));
     }
-    if (!settings.flowerSpecies || !settings.flowerSpecies.length) settings.flowerSpecies = JSON.parse(JSON.stringify(DEFAULT_FLOWER_SPECIES));
-    if (!settings.treeSpecies || !settings.treeSpecies.length) settings.treeSpecies = JSON.parse(JSON.stringify(DEFAULT_TREE_SPECIES));
+    if (!settings.flowerTypes || !settings.flowerTypes.length) settings.flowerTypes = JSON.parse(JSON.stringify(DEFAULT_FLOWER_TYPES));
+    if (!settings.treeTypes || !settings.treeTypes.length) settings.treeTypes = JSON.parse(JSON.stringify(DEFAULT_TREE_TYPES));
     await saveSettings();
   }
   if (data.cards) {
@@ -6711,20 +6743,13 @@ function openPiggyPanel() {
     <div class="piggy-bank">
       <div class="piggy-icon">
         <svg viewBox="0 0 100 100" fill="none">
-          <ellipse cx="50" cy="58" rx="34" ry="28" fill="#ffc4d6" stroke="#e8789f" stroke-width="2"/>
-          <path d="M24 38 L16 26 L34 32 Z" fill="#ffc4d6" stroke="#e8789f" stroke-width="2" stroke-linejoin="round"/>
-          <path d="M76 38 L84 26 L66 32 Z" fill="#ffc4d6" stroke="#e8789f" stroke-width="2" stroke-linejoin="round"/>
-          <ellipse cx="50" cy="66" rx="12" ry="9" fill="#ffb0c8" stroke="#e8789f" stroke-width="2"/>
-          <circle cx="45" cy="66" r="2" fill="#e8789f"/>
-          <circle cx="55" cy="66" r="2" fill="#e8789f"/>
+          <path d="M30 30 Q50 10 70 30 L75 25 L73 35 Q85 42 85 55 Q85 68 70 75 L73 85 L65 80 Q58 83 50 83 Q42 83 35 80 L27 85 L30 75 Q15 68 15 55 Q15 42 27 35 L25 25 Z" fill="#ffd7a8" stroke="#e8a860" stroke-width="2" stroke-linejoin="round"/>
           <circle cx="38" cy="50" r="3" fill="#4a3528"/>
           <circle cx="62" cy="50" r="3" fill="#4a3528"/>
-          <circle cx="39" cy="49" r="1" fill="#fff"/>
-          <circle cx="63" cy="49" r="1" fill="#fff"/>
-          <rect x="30" y="82" width="8" height="10" rx="3" fill="#ffc4d6" stroke="#e8789f" stroke-width="2"/>
-          <rect x="62" y="82" width="8" height="10" rx="3" fill="#ffc4d6" stroke="#e8789f" stroke-width="2"/>
-          <path d="M84 56 q10 -2 8 -10" stroke="#e8789f" stroke-width="2.5" fill="none" stroke-linecap="round"/>
-          <rect x="44" y="30" width="12" height="4" rx="2" fill="#e8789f"/>
+          <path d="M42 62 q8 6 16 0" stroke="#4a3528" stroke-width="2" fill="none" stroke-linecap="round"/>
+          <ellipse cx="50" cy="58" rx="6" ry="4" fill="#ffc08a"/>
+          <circle cx="50" cy="30" r="4" fill="#ffcf6b" stroke="#e8a860" stroke-width="1.5"/>
+          <path d="M20 45 l-6 -3 M20 50 l-7 0 M20 55 l-6 3" stroke="#e8a860" stroke-width="2" stroke-linecap="round"/>
         </svg>
       </div>
       <div class="piggy-balance">${piggy.balance} 元</div>
@@ -7041,6 +7066,7 @@ function scheduleTAMusicRequest() {
       musicIndex = musicList.indexOf(song);
       showMusicPlayer();
       sendNotification(msg.content);
+      addNotification('♪', '易遇想一起听《' + song.name + '》');
     }
   }, 5400000);
 }
@@ -7366,7 +7392,7 @@ function checkPeriodCare() {
   if (!cards.length) return;
   const card = cards[Math.floor(Math.random() * cards.length)];
   const msg = { sender: 'ta', content: card, timestamp: Date.now(), pinned: false, pinBy: '', heartMark: null, worldLabel: getWorldLabel() };
-  idbPutReturnId('messages', msg).then(id => { msg.id = id; appendMessage(msg); sendNotification(card); });
+  idbPutReturnId('messages', msg).then(id => { msg.id = id; appendMessage(msg); sendNotification(card); addNotification('🌸', '易遇的生理期关怀'); });
 }
 setInterval(checkPeriodCare, 3600000);
 
@@ -7435,6 +7461,7 @@ function scheduleDateInvite() {
       msg.id = id;
       appendMessage(msg);
       sendNotification(msg.content);
+      addNotification('🌙', '易遇的梦里邀约');
     }
   }, 7200000);
 }
@@ -7450,6 +7477,7 @@ function scheduleDateRecall() {
       msg.id = id;
       appendMessage(msg);
       sendNotification(msg.content);
+      addNotification('🌙', '易遇回忆约会');
     }
   }, 10800000);
 }
@@ -7535,7 +7563,7 @@ function openWishCardsPanel() {
   });
 }
 
-// ========== 宠物（多只，美化，立刻照顾，可删除） ==========
+// ========== 宠物（无天数，状态随时补） ==========
 function getPets() {
   let pets = JSON.parse(localStorage.getItem('petDataList') || 'null');
   if (!pets) {
@@ -7579,6 +7607,7 @@ function openPetPanel() {
   const overlay = createModal(`<div id="pet-panel-content"></div>`);
   const content = overlay.querySelector('#pet-panel-content');
   renderPetPanel(content, getPets());
+  registerPanelUpdater('pet', () => renderPetPanel(content, getPets()));
 }
 
 async function renderPetPanel(content, pets) {
@@ -7616,8 +7645,8 @@ async function renderPetPanel(content, pets) {
         <button data-action="feed" data-idx="${i}" title="喂食">🍖</button>
         <button data-action="play" data-idx="${i}" title="陪玩">🎾</button>
         <button data-action="clean" data-idx="${i}" title="清洁">🛁</button>
-      </div>
-      <button class="pet-del-btn" data-del-idx="${i}">删除这只</button>`;
+        <button data-action="del" data-idx="${i}" title="送走">🗑</button>
+      </div>`;
     content.appendChild(card);
   }
   const addBtn = document.createElement('button');
@@ -7647,21 +7676,14 @@ async function renderPetPanel(content, pets) {
       const list = getPets();
       const pet = list[idx];
       if (action === 'feed') pet.hunger = Math.min(10, pet.hunger + 3);
-      if (action === 'play') pet.mood = Math.min(10, pet.mood + 3);
-      if (action === 'clean') pet.clean = Math.min(10, pet.clean + 4);
+      else if (action === 'play') pet.mood = Math.min(10, pet.mood + 3);
+      else if (action === 'clean') pet.clean = Math.min(10, pet.clean + 4);
+      else if (action === 'del') {
+        if (!confirm('确定送走「' + pet.name + '」吗？')) return;
+        list.splice(idx, 1);
+      }
       savePets(list);
       renderPetPanel(content, list);
-    });
-  });
-
-  content.querySelectorAll('.pet-del-btn').forEach(btn => {
-    btn.addEventListener('click', () => {
-      const idx = Number(btn.dataset.delIdx);
-      const list = getPets();
-      list.splice(idx, 1);
-      savePets(list);
-      renderPetPanel(content, list);
-      showToast('已删除');
     });
   });
 }
@@ -7726,31 +7748,6 @@ function openPetAdoptDialog() {
   });
 }
 
-async function taAutoCarePets() {
-  const list = getPets();
-  if (!list.length) return;
-  let worstIdx = 0, worstVal = 999;
-  list.forEach((p, i) => {
-    const min = Math.min(p.hunger, p.mood, p.clean);
-    if (min < worstVal) { worstVal = min; worstIdx = i; }
-  });
-  const pet = list[worstIdx];
-  if (pet.hunger <= pet.mood && pet.hunger <= pet.clean) {
-    pet.hunger = Math.max(8, Math.min(10, pet.hunger + 4));
-  } else if (pet.mood <= pet.clean) {
-    pet.mood = Math.max(8, Math.min(10, pet.mood + 4));
-  } else {
-    pet.clean = Math.max(8, Math.min(10, pet.clean + 5));
-  }
-  savePets(list);
-  const msg = { sender: 'ta', content: `我看${pet.name}状态不太好，已经帮你照顾过了`, timestamp: Date.now(), pinned: false, pinBy: '', heartMark: null, quoteContent: null, worldLabel: getWorldLabel() };
-  const id = await idbPutReturnId('messages', msg);
-  msg.id = id;
-  appendMessage(msg);
-  sendNotification(msg.content);
-  refreshOpenPanels();
-}
-
 function checkPetStatus() {
   const list = getPets();
   if (!list.length) return;
@@ -7764,10 +7761,25 @@ function checkPetStatus() {
   savePets(list);
   if (needCare) {
     taAutoCarePets();
-    refreshOpenPanels();
   }
 }
 setInterval(checkPetStatus, 3600000);
+
+async function taAutoCarePets() {
+  const list = getPets();
+  if (!list.length) return;
+  let worstIdx = 0, worstVal = 999;
+  list.forEach((p, i) => {
+    const min = Math.min(p.hunger, p.mood, p.clean);
+    if (min < worstVal) { worstVal = min; worstIdx = i; }
+  });
+  const pet = list[worstIdx];
+  if (pet.hunger <= pet.mood && pet.hunger <= pet.clean) pet.hunger = Math.max(8, Math.min(10, pet.hunger + 4));
+  else if (pet.mood <= pet.clean) pet.mood = Math.max(8, Math.min(10, pet.mood + 4));
+  else pet.clean = Math.max(8, Math.min(10, pet.clean + 5));
+  savePets(list);
+  refreshOpenPanels();
+}
 
 function scheduleTAPetCare() {
   const next = Math.random() * (settings.taPetCareMax - settings.taPetCareMin) + settings.taPetCareMin;
@@ -7778,23 +7790,34 @@ function scheduleTAPetCare() {
         const idx = Math.floor(Math.random() * list.length);
         const pet = list[idx];
         const action = Math.floor(Math.random() * 3);
-        let content = '';
-        if (action === 0) { pet.hunger = Math.max(8, Math.min(10, pet.hunger + 3)); content = `我帮你喂了${pet.name}`; }
-        else if (action === 1) { pet.mood = Math.max(8, Math.min(10, pet.mood + 3)); content = `我陪${pet.name}玩了一会儿`; }
-        else { pet.clean = Math.max(8, Math.min(10, pet.clean + 4)); content = `我帮${pet.name}清洁过了`; }
+        if (action === 0) pet.hunger = Math.max(8, Math.min(10, pet.hunger + 3));
+        else if (action === 1) pet.mood = Math.max(8, Math.min(10, pet.mood + 3));
+        else pet.clean = Math.max(8, Math.min(10, pet.clean + 4));
         savePets(list);
-        const msg = { sender: 'ta', content, timestamp: Date.now(), pinned: false, pinBy: '', heartMark: null, quoteContent: null, worldLabel: getWorldLabel() };
-        const id = await idbPutReturnId('messages', msg);
-        msg.id = id;
-        appendMessage(msg);
-        sendNotification(content);
         refreshOpenPanels();
       }
     }
     scheduleTAPetCare();
   }, next);
 }
-  // ========== 种植（花种/树种库，一天加一天，可删除） ==========
+
+// ========== 种植（花种/树种库，一天加1天，可删除） ==========
+function getPlantsData() {
+  return JSON.parse(localStorage.getItem('plantsData') || '{"flowers":[],"trees":[]}');
+}
+
+function savePlantsData(data) {
+  localStorage.setItem('plantsData', JSON.stringify(data));
+}
+
+function getFlowerTypes() {
+  return settings.flowerTypes && settings.flowerTypes.length ? settings.flowerTypes : JSON.parse(JSON.stringify(DEFAULT_FLOWER_TYPES));
+}
+
+function getTreeTypes() {
+  return settings.treeTypes && settings.treeTypes.length ? settings.treeTypes : JSON.parse(JSON.stringify(DEFAULT_TREE_TYPES));
+}
+
 function openPlantPanel() {
   const overlay = createModal(`
     <div class="heart-tabs">
@@ -7816,36 +7839,31 @@ function switchPlantTab(tab, overlay) {
 }
 
 function loadPlantContent(overlay, tab) {
-  const plants = JSON.parse(localStorage.getItem('plantsData') || '{"flowers":[],"trees":[]}');
+  const plants = getPlantsData();
   const items = tab === 'flower' ? plants.flowers : plants.trees;
-  const species = tab === 'flower' ? (settings.flowerSpecies || DEFAULT_FLOWER_SPECIES) : (settings.treeSpecies || DEFAULT_TREE_SPECIES);
   const container = overlay.querySelector('#plant-content');
   container.innerHTML = '';
   const today = new Date().toISOString().slice(0, 10);
 
   if (!items.length) {
-    container.innerHTML = `<div class="placeholder-tip">还没有${tab === 'flower' ? '花' : '树'}</div>
-      <button class="upload-btn" id="plant-add-btn">种${tab === 'flower' ? '花' : '树'}</button>
-      <button class="upload-btn" id="plant-species-manage">管理${tab === 'flower' ? '花种' : '树种'}</button>`;
-    container.querySelector('#plant-add-btn').addEventListener('click', () => addPlant(tab));
-    container.querySelector('#plant-species-manage').addEventListener('click', () => openSpeciesManagePanel(tab, overlay));
-    return;
+    container.innerHTML = `<div class="placeholder-tip">还没有${tab === 'flower' ? '花' : '树'}</div>`;
   }
 
   items.forEach((p, i) => {
-    const sp = species.find(s => s.id === p.speciesId) || species[0] || { name: '植物', emoji: '🌸' };
-    const stageEmoji = tab === 'flower' ? ['🌰','🌱','🌷','🌸'] : ['🌰','🌱','🌿','🪴','🌳'];
-    const maxStage = tab === 'flower' ? 3 : 4;
-    const stageIdx = Math.min(p.stage, stageEmoji.length - 1);
-    const matureEmoji = tab === 'flower' ? sp.emoji : sp.emoji;
+    const typeLib = tab === 'flower' ? getFlowerTypes() : getTreeTypes();
+    const typeInfo = typeLib.find(t => t.id === p.typeId) || { name: p.name || '未知', emoji: p.type === 'flower' ? '🌸' : '🌳', stages: p.type === 'flower' ? ['🌰','🌱','🌷','🌸'] : ['🌰','🌱','🌿','🪴','🌳'] };
+    const stages = typeInfo.stages || (tab === 'flower' ? ['🌰','🌱','🌷','🌸'] : ['🌰','🌱','🌿','🪴','🌳']);
+    const maxStage = stages.length - 1;
+    const stageIdx = Math.min(p.stage, maxStage);
+    const matureEmoji = typeInfo.emoji || stages[maxStage];
+    const displayEmoji = p.stage >= maxStage ? matureEmoji : stages[stageIdx];
 
     const wrap = document.createElement('div');
     wrap.className = 'plant-card';
     wrap.innerHTML = `
       <div class="plant-visual"><div class="plant-visual-inner"></div></div>
       <div class="plant-soil"></div>
-      <div style="text-align:center;font-size:13px;color:#8b6f60;margin-bottom:4px;">${escapeHtml(sp.name)}</div>
-      <div class="plant-day">第 ${p.day} 天</div>
+      <div class="plant-day">${escapeHtml(typeInfo.name)} · 第 ${p.day} 天</div>
       <div class="plant-stat-label">水分 ${p.water}/10</div>
       <div class="plant-stat-bar"><div style="width:${p.water * 10}%;background:#5ab0e0;"></div></div>
       <div class="plant-stat-label">养分 ${p.nutrient}/10</div>
@@ -7856,8 +7874,8 @@ function loadPlantContent(overlay, tab) {
         <button class="mini-btn plant-action-btn" data-action="water" data-idx="${i}">浇水</button>
         <button class="mini-btn plant-action-btn" data-action="fertilize" data-idx="${i}">施肥</button>
         <button class="mini-btn plant-action-btn" data-action="catch" data-idx="${i}">捉虫</button>
-      </div>
-      <button class="plant-del-btn" data-del-idx="${i}">删除</button>`;
+        <button class="mini-btn plant-action-btn" data-action="del" data-idx="${i}" style="color:#c33;">删除</button>
+      </div>`;
     const visualInner = wrap.querySelector('.plant-visual-inner');
     (async () => {
       let shown = false;
@@ -7869,11 +7887,7 @@ function loadPlantContent(overlay, tab) {
           shown = true;
         }
       }
-      if (!shown) {
-        if (p.stage >= maxStage && tab === 'tree') visualInner.textContent = '🌳' + matureEmoji;
-        else if (p.stage >= maxStage) visualInner.textContent = matureEmoji;
-        else visualInner.textContent = stageEmoji[stageIdx];
-      }
+      if (!shown) visualInner.textContent = displayEmoji;
       visualInner.style.fontSize = (p.stage >= maxStage ? 44 : 34) + 'px';
     })();
 
@@ -7881,7 +7895,16 @@ function loadPlantContent(overlay, tab) {
       btn.addEventListener('click', () => {
         const action = btn.dataset.action;
         const idx = Number(btn.dataset.idx);
-        const plant = items[idx];
+        const data = getPlantsData();
+        const arr = tab === 'flower' ? data.flowers : data.trees;
+        const plant = arr[idx];
+        if (action === 'del') {
+          if (!confirm('确定删除这' + (tab === 'flower' ? '朵花' : '棵树') + '吗？')) return;
+          arr.splice(idx, 1);
+          savePlantsData(data);
+          loadPlantContent(overlay, tab);
+          return;
+        }
         if (action === 'water') plant.water = Math.min(10, plant.water + 3);
         if (action === 'fertilize') plant.nutrient = Math.min(10, plant.nutrient + 4);
         if (action === 'catch') plant.health = Math.min(10, plant.health + 3);
@@ -7890,108 +7913,56 @@ function loadPlantContent(overlay, tab) {
           plant.day += 1;
           plant.lastCareDate = t;
           if (plant.water >= 5 && plant.nutrient >= 5 && plant.health >= 5) {
-            plant.stage = Math.min(plant.stage + 1, (plant.type === 'flower' ? 3 : 4));
+            plant.stage = Math.min(plant.stage + 1, maxStage);
           }
         }
-        items[idx] = plant;
-        localStorage.setItem('plantsData', JSON.stringify(plants));
+        arr[idx] = plant;
+        savePlantsData(data);
         loadPlantContent(overlay, tab);
       });
-    });
-    wrap.querySelector('.plant-del-btn').addEventListener('click', () => {
-      items.splice(i, 1);
-      localStorage.setItem('plantsData', JSON.stringify(plants));
-      loadPlantContent(overlay, tab);
-      showToast('已删除');
     });
     container.appendChild(wrap);
   });
 
+  const btnRow = document.createElement('div');
+  btnRow.style.cssText = 'display:flex;gap:8px;margin-top:10px;';
   const addBtn = document.createElement('button');
   addBtn.className = 'upload-btn';
-  addBtn.textContent = `再种一${tab === 'flower' ? '朵' : '棵'}${tab === 'flower' ? '花' : '树'}`;
+  addBtn.style.marginTop = '0';
+  addBtn.textContent = `种一${tab === 'flower' ? '朵' : '棵'}${tab === 'flower' ? '花' : '树'}`;
   addBtn.addEventListener('click', () => addPlant(tab));
-  container.appendChild(addBtn);
   const manageBtn = document.createElement('button');
   manageBtn.className = 'upload-btn';
+  manageBtn.style.marginTop = '0';
   manageBtn.textContent = `管理${tab === 'flower' ? '花种' : '树种'}`;
-  manageBtn.addEventListener('click', () => openSpeciesManagePanel(tab, overlay));
-  container.appendChild(manageBtn);
+  manageBtn.addEventListener('click', () => openPlantTypeManageDialog(tab));
+  btnRow.appendChild(addBtn);
+  btnRow.appendChild(manageBtn);
+  container.appendChild(btnRow);
 }
 
-function openSpeciesManagePanel(tab, panelOverlay) {
-  const key = tab === 'flower' ? 'flowerSpecies' : 'treeSpecies';
-  const defaults = tab === 'flower' ? DEFAULT_FLOWER_SPECIES : DEFAULT_TREE_SPECIES;
-  const list = settings[key] || JSON.parse(JSON.stringify(defaults));
+function addPlant(tab) {
+  const typeLib = tab === 'flower' ? getFlowerTypes() : getTreeTypes();
+  if (!typeLib.length) return showToast('请先添加' + (tab === 'flower' ? '花种' : '树种'));
   const overlay = createModal(`
-    <div class="big-input-title">管理${tab === 'flower' ? '花种' : '树种'}</div>
-    <div class="card-list" id="species-list" style="max-height:40vh;"></div>
-    <div style="display:flex;gap:8px;margin-top:10px;">
-      <input type="text" id="species-name-input" placeholder="名称" style="flex:1;background:rgba(255,255,255,0.5);border:1px solid rgba(255,255,255,0.6);border-radius:14px;padding:10px 14px;font-size:14px;color:#4a3f3a;outline:none;">
-      <input type="text" id="species-emoji-input" placeholder="果实/花 emoji" style="width:90px;background:rgba(255,255,255,0.5);border:1px solid rgba(255,255,255,0.6);border-radius:14px;padding:10px 14px;font-size:14px;color:#4a3f3a;outline:none;">
-      <button class="mini-btn" id="species-add">添加</button>
-    </div>`);
-  const listEl = overlay.querySelector('#species-list');
-  function render() {
-    listEl.innerHTML = '';
-    if (!list.length) { listEl.innerHTML = '<div class="placeholder-tip">还没有</div>'; return; }
-    list.forEach((s, i) => {
-      const div = document.createElement('div');
-      div.className = 'card-item';
-      div.innerHTML = `<div class="card-text">${s.emoji} ${escapeHtml(s.name)}</div><div class="card-ops"><button class="species-del">✕</button></div>`;
-      div.querySelector('.species-del').addEventListener('click', () => {
-        list.splice(i, 1);
-        settings[key] = list;
-        saveSettings();
-        render();
-      });
-      listEl.appendChild(div);
-    });
-  }
-  render();
-  overlay.querySelector('#species-add').addEventListener('click', () => {
-    const name = overlay.querySelector('#species-name-input').value.trim();
-    const emoji = overlay.querySelector('#species-emoji-input').value.trim() || '🌸';
-    if (!name) return showToast('请输入名称');
-    list.push({ id: 'sp_' + Date.now(), name, emoji });
-    settings[key] = list;
-    saveSettings();
-    overlay.querySelector('#species-name-input').value = '';
-    overlay.querySelector('#species-emoji-input').value = '';
-    render();
-    showToast('已添加');
-  });
-  registerPanelUpdater('species', () => {
-    if (panelOverlay && document.body.contains(panelOverlay)) {
-      loadPlantContent(panelOverlay, tab);
-    }
-  });
-}
-
-function addPlant(type) {
-  const species = type === 'flower' ? (settings.flowerSpecies || DEFAULT_FLOWER_SPECIES) : (settings.treeSpecies || DEFAULT_TREE_SPECIES);
-  const overlay = createModal(`
-    <div class="big-input-title">种${type === 'flower' ? '花' : '树'}</div>
-    <div style="font-size:13px;color:#4a3528;margin-bottom:8px;">选择${type === 'flower' ? '花种' : '树种'}</div>
-    <div class="library-grid" id="species-pick-grid"></div>
-    <button class="upload-btn" id="plant-image-btn">上传图片（可选）</button>
+    <div class="big-input-title">选一种${tab === 'flower' ? '花' : '树'}种下</div>
+    <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin-bottom:12px;" id="plant-type-grid"></div>
+    <button class="upload-btn" id="plant-image-btn" style="margin-top:0;">上传图片（可选）</button>
     <button class="save-btn-center" id="save-plant" style="margin-top:12px;">种下</button>`);
-  const grid = overlay.querySelector('#species-pick-grid');
-  let pickedId = species[0] ? species[0].id : '';
-  species.forEach(s => {
+  let pickedType = typeLib[0].id;
+  let plantImageRef = '';
+  const grid = overlay.querySelector('#plant-type-grid');
+  typeLib.forEach(t => {
     const div = document.createElement('div');
-    div.className = 'lib-item' + (s.id === pickedId ? ' active' : '');
-    div.style.cssText = 'display:flex;align-items:center;justify-content:center;background:rgba(255,255,255,0.5);font-size:26px;';
-    div.innerHTML = s.emoji;
-    div.title = s.name;
+    div.className = 'pet-adopt-card' + (t.id === pickedType ? ' selected' : '');
+    div.innerHTML = `<div class="pa-icon">${t.emoji}</div><div class="pa-name">${escapeHtml(t.name)}</div>`;
     div.addEventListener('click', () => {
-      pickedId = s.id;
-      grid.querySelectorAll('.lib-item').forEach(el => el.classList.remove('active'));
-      div.classList.add('active');
+      pickedType = t.id;
+      grid.querySelectorAll('.pet-adopt-card').forEach(el => el.classList.remove('selected'));
+      div.classList.add('selected');
     });
     grid.appendChild(div);
   });
-  let plantImageRef = '';
   overlay.querySelector('#plant-image-btn').addEventListener('click', () => {
     const inp = document.createElement('input');
     inp.type = 'file';
@@ -8011,91 +7982,87 @@ function addPlant(type) {
     inp.click();
   });
   overlay.querySelector('#save-plant').addEventListener('click', () => {
-    if (!pickedId) return showToast('请选择品种');
-    const plants = JSON.parse(localStorage.getItem('plantsData') || '{"flowers":[],"trees":[]}');
-    const key = type === 'flower' ? 'flowers' : 'trees';
-    plants[key].push({ type, speciesId: pickedId, stage: 0, day: 0, water: 5, nutrient: 5, health: 5, imageRef: plantImageRef, lastCareDate: '' });
-    localStorage.setItem('plantsData', JSON.stringify(plants));
+    const data = getPlantsData();
+    const key = tab === 'flower' ? 'flowers' : 'trees';
+    data[key].push({ type: tab, typeId: pickedType, stage: 0, day: 0, water: 5, nutrient: 5, health: 5, imageRef: plantImageRef, lastCareDate: '' });
+    savePlantsData(data);
     showToast('已种下');
     overlay.remove();
     openPlantPanel();
   });
 }
 
-async function taAutoCarePlants() {
-  const plants = JSON.parse(localStorage.getItem('plantsData') || '{"flowers":[],"trees":[]}');
-  const all = [...plants.flowers.map((p, i) => ({ p, key: 'flowers', i })), ...plants.trees.map((p, i) => ({ p, key: 'trees', i }))];
-  if (!all.length) return;
-  let worst = null, worstVal = 999;
-  all.forEach(item => {
-    const min = Math.min(item.p.water, item.p.nutrient, item.p.health);
-    if (min < worstVal) { worstVal = min; worst = item; }
-  });
-  if (!worst) return;
-  const plant = worst.p;
-  if (plant.water <= plant.nutrient && plant.water <= plant.health) plant.water = Math.max(8, Math.min(10, plant.water + 4));
-  else if (plant.nutrient <= plant.health) plant.nutrient = Math.max(8, Math.min(10, plant.nutrient + 4));
-  else plant.health = Math.max(8, Math.min(10, plant.health + 4));
-  const t = new Date().toISOString().slice(0, 10);
-  if (plant.lastCareDate !== t) {
-    plant.day += 1;
-    plant.lastCareDate = t;
-    if (plant.water >= 5 && plant.nutrient >= 5 && plant.health >= 5) {
-      plant.stage = Math.min(plant.stage + 1, (plant.type === 'flower' ? 3 : 4));
-    }
+function openPlantTypeManageDialog(tab) {
+  const key = tab === 'flower' ? 'flowerTypes' : 'treeTypes';
+  const types = tab === 'flower' ? getFlowerTypes() : getTreeTypes();
+  const overlay = createModal(`
+    <div class="big-input-title">${tab === 'flower' ? '花种' : '树种'}库</div>
+    <div class="card-list" id="type-list" style="max-height:40vh;margin-bottom:10px;"></div>
+    <input type="text" id="type-name-input" placeholder="名称，如：苹果树" style="width:100%;background:rgba(255,255,255,0.5);border:1px solid rgba(255,255,255,0.6);border-radius:14px;padding:10px 14px;font-size:14px;color:#4a3f3a;outline:none;margin-bottom:8px;">
+    <input type="text" id="type-emoji-input" placeholder="成熟图标，如：🍎" style="width:100%;background:rgba(255,255,255,0.5);border:1px solid rgba(255,255,255,0.6);border-radius:14px;padding:10px 14px;font-size:14px;color:#4a3f3a;outline:none;margin-bottom:10px;">
+    <button class="save-btn-center" id="add-type-btn">添加</button>`);
+  const list = overlay.querySelector('#type-list');
+  function render() {
+    list.innerHTML = '';
+    const cur = tab === 'flower' ? getFlowerTypes() : getTreeTypes();
+    cur.forEach((t, i) => {
+      const div = document.createElement('div');
+      div.className = 'card-item';
+      div.innerHTML = `<div class="card-text">${t.emoji} ${escapeHtml(t.name)}</div><div class="card-ops"><button class="type-del">✕</button></div>`;
+      div.querySelector('.type-del').addEventListener('click', () => {
+        const arr = tab === 'flower' ? getFlowerTypes() : getTreeTypes();
+        arr.splice(i, 1);
+        settings[key] = arr;
+        saveSettings();
+        render();
+      });
+      list.appendChild(div);
+    });
+    if (!cur.length) list.innerHTML = '<div class="placeholder-tip">还没有</div>';
   }
-  plants[worst.key][worst.i] = plant;
-  localStorage.setItem('plantsData', JSON.stringify(plants));
-  const msg = { sender: 'ta', content: '我看你的植物状态不太好，已经帮你照顾过了', timestamp: Date.now(), pinned: false, pinBy: '', heartMark: null, quoteContent: null, worldLabel: getWorldLabel() };
-  const id = await idbPutReturnId('messages', msg);
-  msg.id = id;
-  appendMessage(msg);
-  sendNotification(msg.content);
-  refreshOpenPanels();
-}
-
-function checkPlantStatus() {
-  const plants = JSON.parse(localStorage.getItem('plantsData') || '{"flowers":[],"trees":[]}');
-  const all = [...plants.flowers, ...plants.trees];
-  let needCare = false;
-  all.forEach(p => {
-    if (p.water < 3 || p.nutrient < 3 || p.health < 3) needCare = true;
+  render();
+  overlay.querySelector('#add-type-btn').addEventListener('click', () => {
+    const name = overlay.querySelector('#type-name-input').value.trim();
+    const emoji = overlay.querySelector('#type-emoji-input').value.trim() || (tab === 'flower' ? '🌸' : '🌳');
+    if (!name) return showToast('请输入名称');
+    const arr = tab === 'flower' ? getFlowerTypes() : getTreeTypes();
+    const stages = tab === 'flower' ? ['🌰','🌱','🌷',emoji] : ['🌰','🌱','🌿','🪴',emoji];
+    arr.push({ id: 'custom_' + Date.now(), name, emoji, stages });
+    settings[key] = arr;
+    saveSettings();
+    overlay.querySelector('#type-name-input').value = '';
+    overlay.querySelector('#type-emoji-input').value = '';
+    render();
+    showToast('已添加');
   });
-  if (needCare) {
-    taAutoCarePlants();
-  }
 }
-setInterval(checkPlantStatus, 3600000);
 
 function scheduleTAPlantCare() {
   const next = Math.random() * (settings.taPlantCareMax - settings.taPlantCareMin) + settings.taPlantCareMin;
   setTimeout(async () => {
     if (!isReplying && !isArchiving) {
-      const plants = JSON.parse(localStorage.getItem('plantsData') || '{"flowers":[],"trees":[]}');
+      const plants = getPlantsData();
       const all = [...plants.flowers.map((p, i) => ({ p, key: 'flowers', i })), ...plants.trees.map((p, i) => ({ p, key: 'trees', i }))];
       if (all.length) {
         const pick = all[Math.floor(Math.random() * all.length)];
         const plant = pick.p;
         const action = Math.floor(Math.random() * 3);
-        let content = '';
-        if (action === 0) { plant.water = Math.max(8, Math.min(10, plant.water + 3)); content = '我帮你浇过水了'; }
-        else if (action === 1) { plant.nutrient = Math.max(8, Math.min(10, plant.nutrient + 4)); content = '我帮你施过肥了'; }
-        else { plant.health = Math.max(8, Math.min(10, plant.health + 3)); content = '我帮你捉过虫了'; }
+        if (action === 0) plant.water = Math.max(8, Math.min(10, plant.water + 3));
+        else if (action === 1) plant.nutrient = Math.max(8, Math.min(10, plant.nutrient + 4));
+        else plant.health = Math.max(8, Math.min(10, plant.health + 3));
         const t = new Date().toISOString().slice(0, 10);
         if (plant.lastCareDate !== t) {
           plant.day += 1;
           plant.lastCareDate = t;
+          const typeLib = plant.type === 'flower' ? getFlowerTypes() : getTreeTypes();
+          const ti = typeLib.find(x => x.id === plant.typeId);
+          const maxStage = ti ? (ti.stages.length - 1) : (plant.type === 'flower' ? 3 : 4);
           if (plant.water >= 5 && plant.nutrient >= 5 && plant.health >= 5) {
-            plant.stage = Math.min(plant.stage + 1, (plant.type === 'flower' ? 3 : 4));
+            plant.stage = Math.min(plant.stage + 1, maxStage);
           }
         }
         plants[pick.key][pick.i] = plant;
-        localStorage.setItem('plantsData', JSON.stringify(plants));
-        const msg = { sender: 'ta', content, timestamp: Date.now(), pinned: false, pinBy: '', heartMark: null, quoteContent: null, worldLabel: getWorldLabel() };
-        const id = await idbPutReturnId('messages', msg);
-        msg.id = id;
-        appendMessage(msg);
-        sendNotification(content);
+        savePlantsData(plants);
         refreshOpenPanels();
       }
     }
@@ -8295,7 +8262,8 @@ async function scheduleVideoTASpeak() {
   if (videoCallMini) showDanmaku(content);
   if (!window._currentVideoSpeaks) window._currentVideoSpeaks = [];
   window._currentVideoSpeaks.push(content);
-  const delayMs = 60000 * (0.85 + Math.random() * 0.3);
+  const base = 60000;
+  const delayMs = base * (0.85 + Math.random() * 0.3);
   setTimeout(() => { if (videoCallActive && videoCallAnswered) scheduleVideoTASpeak(); }, delayMs);
 }
 
@@ -8458,7 +8426,7 @@ function checkImportantDays() {
         saveSettings();
         updateHeartValue();
         const msg = { sender: 'ta', content: '今天是' + d.name + '，我一直记得。爱意值+50', timestamp: Date.now(), pinned: false, pinBy: '', heartMark: null, worldLabel: getWorldLabel() };
-        idbPutReturnId('messages', msg).then(id => { msg.id = id; appendMessage(msg); sendNotification(msg.content); });
+        idbPutReturnId('messages', msg).then(id => { msg.id = id; appendMessage(msg); sendNotification(msg.content); addNotification('🎂', '今天是' + d.name); });
       }
     }
   });
@@ -8690,7 +8658,7 @@ function checkBondDaily() {
   updateHeartValue();
 }
 
-// ========== 归档（只碰消息） ==========
+// ========== 归档（打开时全量补齐，只碰消息） ==========
 async function checkArchive() {
   const now = new Date();
   const todayStr = now.getFullYear() + '-' + (now.getMonth() + 1) + '-' + now.getDate();
@@ -8979,6 +8947,7 @@ function scheduleHighDim() {
       msg.id = id;
       appendMessage(msg);
       sendNotification(line);
+      addNotification('✨', '易遇的高维彩蛋');
     }
     scheduleHighDim();
   }, next);
@@ -9058,7 +9027,6 @@ async function init() {
   scheduleTAActive();
   scheduleTAAutonomy();
   scheduleTAAvatarChange();
-  scheduleTAGiveAvatar();
   scheduleTABGChange();
   scheduleTAInteract();
   scheduleTAMeNickChange();
@@ -9080,7 +9048,6 @@ async function init() {
   checkImportantDays();
   checkPeriodCare();
   checkPetStatus();
-  checkPlantStatus();
   initParticles();
   updateSendBtn();
   setInterval(() => { updateStatusBar(); }, 60000);

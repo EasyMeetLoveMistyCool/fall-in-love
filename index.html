@@ -151,7 +151,7 @@ html, body {
   color: var(--theme-text);
   margin-top: 4px;
   z-index: 3;
-  gap: 2px;
+  gap: 3px;
   text-align: center;
   cursor: pointer;
 }
@@ -173,44 +173,21 @@ html, body {
   vertical-align: middle;
 }
 
-#status-bar .sb-world {
-  font-size: 12px;
-  color: var(--theme-text-soft);
-}
-
 #status-bar .sb-online-count {
   font-size: 12px;
   color: var(--theme-text-soft);
 }
 
-#online-detail {
-  display: none;
-  flex-direction: column;
-  gap: 3px;
-  padding: 8px 12px;
-  margin: 4px 20px 0 20px;
-  background: rgba(255, 255, 255, 0.5);
-  backdrop-filter: blur(12px);
-  -webkit-backdrop-filter: blur(12px);
-  border: 1px solid rgba(255, 255, 255, 0.6);
-  border-radius: 14px;
+#status-bar .sb-world-line {
   font-size: 12px;
   color: var(--theme-text);
-  z-index: 3;
-  text-align: left;
-}
-
-#online-detail.show {
-  display: flex;
-}
-
-#online-detail .od-line {
   display: flex;
   align-items: center;
-  gap: 6px;
+  gap: 4px;
+  justify-content: center;
 }
 
-#online-detail .od-dot {
+#status-bar .sb-world-dot {
   width: 6px;
   height: 6px;
   border-radius: 50%;
@@ -467,171 +444,7 @@ html, body {
 .msg-avatar.world-mishiroom { border-color: #dcecd8; }
 .msg-avatar.world-tianming { border-color: #f0dcd0; }
 
-/* ===== 亲密气泡（悄悄话） ===== */
-.message-row.me .msg-bubble.intimate,
-.message-row.ta .msg-bubble.intimate {
-  border-radius: 24px;
-  background: radial-gradient(circle at 30% 30%, rgba(255, 210, 225, 0.95), rgba(255, 190, 215, 0.85) 60%, rgba(255, 175, 205, 0.75));
-  border: 2px solid transparent;
-  background-clip: padding-box;
-  position: relative;
-  animation: intimateBreath 2.5s ease-in-out infinite;
-  color: #a04a6a;
-  line-height: 1.6;
-  letter-spacing: 0.5px;
-  box-shadow: 0 0 0 2px rgba(255, 143, 176, 0.4), 0 0 16px rgba(255, 143, 176, 0.35);
-  padding: 10px 14px;
-}
-
-.msg-bubble.intimate::before {
-  content: '';
-  position: absolute;
-  inset: -3px;
-  border-radius: 26px;
-  background: linear-gradient(135deg, rgba(255, 143, 176, 0.6), rgba(255, 196, 214, 0.4), rgba(255, 143, 176, 0.6));
-  z-index: -1;
-  animation: intimateGlow 2.5s ease-in-out infinite;
-}
-
-@keyframes intimateBreath {
-  0%, 100% { transform: scale(1); }
-  50% { transform: scale(1.02); }
-}
-
-@keyframes intimateGlow {
-  0%, 100% { opacity: 0.6; }
-  50% { opacity: 1; }
-}
-
-.intimate-mark {
-  position: absolute;
-  bottom: -6px;
-  left: 50%;
-  transform: translateX(-50%);
-  font-size: 12px;
-  animation: intimateFloat 3s ease-in-out infinite;
-  pointer-events: none;
-}
-
-@keyframes intimateFloat {
-  0%, 100% { transform: translateX(-50%) translateY(0); opacity: 0.5; }
-  50% { transform: translateX(-50%) translateY(-8px); opacity: 1; }
-}
-
-.intimate-time {
-  font-size: 10px;
-  color: #c08aa0;
-  margin-top: 2px;
-}
-
-/* ===== 凑近气泡 ===== */
-.message-row.me .msg-bubble.intimate-approach,
-.message-row.ta .msg-bubble.intimate-approach {
-  border-radius: 22px;
-  background: radial-gradient(circle at 50% 40%, rgba(255, 224, 208, 0.95), rgba(255, 208, 224, 0.85) 60%, rgba(255, 190, 210, 0.75));
-  border: 2px solid transparent;
-  background-clip: padding-box;
-  position: relative;
-  animation: approachBreath 2.8s ease-in-out infinite;
-  color: #a05a4a;
-  line-height: 1.6;
-  box-shadow: 0 0 0 2px rgba(255, 180, 160, 0.4), 0 0 14px rgba(255, 180, 160, 0.3);
-  padding: 10px 14px;
-}
-
-.message-row.me .msg-bubble.intimate-approach::before,
-.message-row.ta .msg-bubble.intimate-approach::before {
-  content: '';
-  position: absolute;
-  inset: -3px;
-  border-radius: 24px;
-  background: linear-gradient(135deg, rgba(255, 180, 160, 0.5), rgba(255, 208, 224, 0.4), rgba(255, 180, 160, 0.5));
-  z-index: -1;
-  animation: approachGlow 2.8s ease-in-out infinite;
-}
-
-@keyframes approachBreath {
-  0%, 100% { transform: scale(1); }
-  50% { transform: scale(0.985) translateY(1px); }
-}
-
-@keyframes approachGlow {
-  0%, 100% { opacity: 0.5; }
-  50% { opacity: 1; }
-}
-
-.intimate-approach-mark {
-  position: absolute;
-  bottom: -6px;
-  right: 10px;
-  font-size: 10px;
-  color: #e08860;
-  background: rgba(255, 255, 255, 0.7);
-  padding: 1px 6px;
-  border-radius: 8px;
-  animation: approachFloat 3s ease-in-out infinite;
-}
-
-@keyframes approachFloat {
-  0%, 100% { transform: translateY(0); opacity: 0.7; }
-  50% { transform: translateY(-4px); opacity: 1; }
-}
-
-/* ===== 争宠气泡 ===== */
-.message-row.me .msg-bubble.intimate-compete,
-.message-row.ta .msg-bubble.intimate-compete {
-  border-radius: 22px;
-  background: radial-gradient(circle at 50% 40%, rgba(255, 208, 224, 0.95), rgba(240, 200, 240, 0.85) 60%, rgba(224, 192, 240, 0.75));
-  border: 2px solid transparent;
-  background-clip: padding-box;
-  position: relative;
-  animation: competeShake 1.6s ease-in-out infinite;
-  color: #8a4a7a;
-  line-height: 1.6;
-  box-shadow: 0 0 0 2px rgba(224, 160, 208, 0.4), 0 0 14px rgba(224, 160, 208, 0.3);
-  padding: 10px 14px;
-}
-
-.message-row.me .msg-bubble.intimate-compete::before,
-.message-row.ta .msg-bubble.intimate-compete::before {
-  content: '';
-  position: absolute;
-  inset: -3px;
-  border-radius: 24px;
-  background: linear-gradient(135deg, rgba(224, 160, 208, 0.5), rgba(200, 160, 240, 0.4), rgba(224, 160, 208, 0.5));
-  z-index: -1;
-  animation: competeGlow 1.6s ease-in-out infinite;
-}
-
-@keyframes competeShake {
-  0%, 100% { transform: rotate(0deg); }
-  25% { transform: rotate(-0.6deg); }
-  75% { transform: rotate(0.6deg); }
-}
-
-@keyframes competeGlow {
-  0%, 100% { opacity: 0.6; }
-  50% { opacity: 1; }
-}
-
-.intimate-compete-mark {
-  position: absolute;
-  bottom: -6px;
-  right: 10px;
-  font-size: 10px;
-  color: #b070c0;
-  background: rgba(255, 255, 255, 0.7);
-  padding: 1px 6px;
-  border-radius: 8px;
-  animation: competeFloat 2s ease-in-out infinite;
-}
-
-@keyframes competeFloat {
-  0%, 100% { transform: translateY(0) scale(1); opacity: 0.7; }
-  50% { transform: translateY(-4px) scale(1.1); opacity: 1; }
-}
-
-/* ===== 情侣互动气泡 ===== */
+/* ===== 情侣互动 ===== */
 .message-row.me .msg-bubble.msg-interact-couple,
 .message-row.ta .msg-bubble.msg-interact-couple {
   background: linear-gradient(135deg, rgba(255,224,235,0.95), rgba(255,200,220,0.95)) padding-box,
@@ -703,6 +516,182 @@ html, body {
   color: var(--theme-text);
 }
 
+/* ===== 亲密互动（悄悄话）===== */
+.message-row.me .msg-bubble.intimate,
+.message-row.ta .msg-bubble.intimate {
+  border-radius: 24px;
+  background: radial-gradient(circle at 30% 30%, rgba(255, 210, 225, 0.95), rgba(255, 190, 215, 0.85) 60%, rgba(255, 175, 205, 0.75));
+  border: 2px solid transparent;
+  background-clip: padding-box;
+  position: relative;
+  animation: intimateBreath 2.5s ease-in-out infinite;
+  color: #a04a6a;
+  line-height: 1.6;
+  letter-spacing: 0.5px;
+  box-shadow: 0 0 0 2px rgba(255, 143, 176, 0.4), 0 0 16px rgba(255, 143, 176, 0.35);
+  padding: 10px 14px;
+}
+
+.msg-bubble.intimate::before {
+  content: '';
+  position: absolute;
+  inset: -3px;
+  border-radius: 26px;
+  background: linear-gradient(135deg, rgba(255, 143, 176, 0.6), rgba(255, 196, 214, 0.4), rgba(255, 143, 176, 0.6));
+  z-index: -1;
+  animation: intimateGlow 2.5s ease-in-out infinite;
+}
+
+@keyframes intimateBreath {
+  0%, 100% { transform: scale(1); }
+  50% { transform: scale(1.02); }
+}
+
+@keyframes intimateGlow {
+  0%, 100% { opacity: 0.6; }
+  50% { opacity: 1; }
+}
+
+.intimate-mark {
+  position: absolute;
+  bottom: -6px;
+  left: 50%;
+  transform: translateX(-50%);
+  font-size: 12px;
+  animation: intimateFloat 3s ease-in-out infinite;
+  pointer-events: none;
+}
+
+@keyframes intimateFloat {
+  0%, 100% { transform: translateX(-50%) translateY(0); opacity: 0.5; }
+  50% { transform: translateX(-50%) translateY(-8px); opacity: 1; }
+}
+
+.intimate-time {
+  font-size: 10px;
+  color: #c08aa0;
+  margin-top: 2px;
+}
+
+/* ===== 凑近气泡（我对TA）===== */
+.message-row.me .msg-bubble.intimate-approach,
+.message-row.ta .msg-bubble.intimate-approach {
+  border-radius: 22px;
+  background: radial-gradient(circle at 50% 40%, rgba(255, 224, 208, 0.95), rgba(255, 208, 224, 0.85) 60%, rgba(255, 190, 210, 0.75));
+  border: 2px solid transparent;
+  background-clip: padding-box;
+  position: relative;
+  animation: approachBreath 2.8s ease-in-out infinite;
+  color: #a05a4a;
+  line-height: 1.6;
+  box-shadow: 0 0 0 2px rgba(255, 180, 160, 0.4), 0 0 14px rgba(255, 180, 160, 0.3);
+  padding: 10px 14px;
+}
+
+.message-row.me .msg-bubble.intimate-approach::before,
+.message-row.ta .msg-bubble.intimate-approach::before {
+  content: '';
+  position: absolute;
+  inset: -3px;
+  border-radius: 24px;
+  background: linear-gradient(135deg, rgba(255, 180, 160, 0.5), rgba(255, 208, 224, 0.4), rgba(255, 180, 160, 0.5));
+  z-index: -1;
+  animation: approachGlow 2.8s ease-in-out infinite;
+}
+
+@keyframes approachBreath {
+  0%, 100% { transform: scale(1); }
+  50% { transform: scale(0.985) translateY(1px); }
+}
+
+@keyframes approachGlow {
+  0%, 100% { opacity: 0.5; }
+  50% { opacity: 1; }
+}
+
+/* ===== 凑近气泡（TA对我·加强）===== */
+.message-row.ta .msg-bubble.intimate-approach {
+  background: radial-gradient(circle at 50% 40%, rgba(255, 232, 208, 0.95), rgba(255, 210, 220, 0.9) 60%, rgba(255, 195, 210, 0.8));
+  box-shadow: 0 0 0 2px rgba(255, 200, 150, 0.5), 0 0 18px rgba(255, 200, 150, 0.35);
+}
+
+.intimate-approach-mark {
+  position: absolute;
+  bottom: -6px;
+  right: 10px;
+  font-size: 10px;
+  color: #e08860;
+  background: rgba(255, 255, 255, 0.7);
+  padding: 1px 6px;
+  border-radius: 8px;
+  animation: approachFloat 3s ease-in-out infinite;
+}
+
+@keyframes approachFloat {
+  0%, 100% { transform: translateY(0); opacity: 0.7; }
+  50% { transform: translateY(-4px); opacity: 1; }
+}
+
+/* ===== 争宠气泡（我对TA）===== */
+.message-row.me .msg-bubble.intimate-compete,
+.message-row.ta .msg-bubble.intimate-compete {
+  border-radius: 22px;
+  background: radial-gradient(circle at 50% 40%, rgba(255, 208, 224, 0.95), rgba(240, 200, 240, 0.85) 60%, rgba(224, 192, 240, 0.75));
+  border: 2px solid transparent;
+  background-clip: padding-box;
+  position: relative;
+  animation: competeShake 1.6s ease-in-out infinite;
+  color: #8a4a7a;
+  line-height: 1.6;
+  box-shadow: 0 0 0 2px rgba(224, 160, 208, 0.4), 0 0 14px rgba(224, 160, 208, 0.3);
+  padding: 10px 14px;
+}
+
+.message-row.me .msg-bubble.intimate-compete::before,
+.message-row.ta .msg-bubble.intimate-compete::before {
+  content: '';
+  position: absolute;
+  inset: -3px;
+  border-radius: 24px;
+  background: linear-gradient(135deg, rgba(224, 160, 208, 0.5), rgba(200, 160, 240, 0.4), rgba(224, 160, 208, 0.5));
+  z-index: -1;
+  animation: competeGlow 1.6s ease-in-out infinite;
+}
+
+@keyframes competeShake {
+  0%, 100% { transform: rotate(0deg); }
+  25% { transform: rotate(-0.6deg); }
+  75% { transform: rotate(0.6deg); }
+}
+
+@keyframes competeGlow {
+  0%, 100% { opacity: 0.6; }
+  50% { opacity: 1; }
+}
+
+/* ===== 争宠气泡（TA对我·加强）===== */
+.message-row.ta .msg-bubble.intimate-compete {
+  background: radial-gradient(circle at 50% 40%, rgba(255, 216, 232, 0.95), rgba(248, 210, 248, 0.9) 60%, rgba(232, 200, 248, 0.8));
+  box-shadow: 0 0 0 2px rgba(255, 160, 210, 0.5), 0 0 18px rgba(255, 160, 210, 0.35);
+}
+
+.intimate-compete-mark {
+  position: absolute;
+  bottom: -6px;
+  right: 10px;
+  font-size: 10px;
+  color: #b070c0;
+  background: rgba(255, 255, 255, 0.7);
+  padding: 1px 6px;
+  border-radius: 8px;
+  animation: competeFloat 2s ease-in-out infinite;
+}
+
+@keyframes competeFloat {
+  0%, 100% { transform: translateY(0) scale(1); opacity: 0.7; }
+  50% { transform: translateY(-4px) scale(1.1); opacity: 1; }
+}
+
 .msg-meta {
   display: flex;
   align-items: center;
@@ -762,7 +751,7 @@ html, body {
   position: relative;
   overflow: hidden;
   animation: giftIn 0.5s ease-out;
-  min-width: 120px;
+  min-width: 140px;
 }
 
 @keyframes giftIn {
@@ -776,6 +765,15 @@ html, body {
   font-size: 12px;
   opacity: 0.9;
   animation: sparkleFloat 2.5s ease-in-out infinite;
+}
+
+.msg-gift-card .gift-image {
+  width: 80px;
+  height: 80px;
+  border-radius: 12px;
+  object-fit: cover;
+  display: block;
+  margin: 0 auto 6px auto;
 }
 
 .msg-gift-icon {
@@ -1466,7 +1464,7 @@ html, body {
   outline: none;
 }
 
-/* ===== 副本横排（副本互动 / 想共度） ===== */
+/* ===== 副本横排 ===== */
 .world-chip-row {
   display: flex;
   gap: 6px;
@@ -1499,6 +1497,7 @@ html, body {
   border-color: rgba(255, 255, 255, 0.6);
 }
 
+/* ===== 通知分组 ===== */
 .notify-group-title {
   font-size: 12px;
   color: #8b6f60;
@@ -1511,6 +1510,72 @@ html, body {
   display: flex;
   flex-direction: column;
   gap: 4px;
+}
+
+/* ===== 通知 Tab（新）===== */
+.notify-tabs {
+  display: flex;
+  gap: 8px;
+  margin-bottom: 12px;
+  overflow-x: auto;
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+  -webkit-overflow-scrolling: touch;
+}
+
+.notify-tabs::-webkit-scrollbar {
+  display: none;
+}
+
+.notify-tab {
+  flex-shrink: 0;
+  background: rgba(255, 255, 255, 0.4);
+  border: 1px solid rgba(255, 255, 255, 0.5);
+  border-radius: 14px;
+  padding: 8px 14px;
+  font-size: 13px;
+  color: var(--theme-title);
+  cursor: pointer;
+  white-space: nowrap;
+}
+
+.notify-tab.active {
+  background: var(--theme-accent-soft);
+  color: #fff;
+  border-color: rgba(255, 255, 255, 0.6);
+}
+
+/* ===== 音乐 Tab（新）===== */
+.music-tabs {
+  display: flex;
+  gap: 8px;
+  margin-bottom: 12px;
+  overflow-x: auto;
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+  -webkit-overflow-scrolling: touch;
+}
+
+.music-tabs::-webkit-scrollbar {
+  display: none;
+}
+
+.music-tab {
+  flex-shrink: 0;
+  background: rgba(255, 255, 255, 0.4);
+  border: 1px solid rgba(255, 255, 255, 0.5);
+  border-radius: 14px;
+  padding: 8px 14px;
+  font-size: 13px;
+  color: var(--theme-title);
+  cursor: pointer;
+  white-space: nowrap;
+}
+
+.music-tab.active {
+  background: var(--theme-accent-soft);
+  color: #fff;
+  border-color: rgba(255, 255, 255, 0.6);
 }
   .playback-dates {
   display: flex;
@@ -2446,8 +2511,6 @@ html, body {
 
   <div id="status-bar"></div>
 
-  <div id="online-detail"></div>
-
   <div id="heart-value-box">
     <span class="empty-heart">♡</span>
     <span id="heart-value-num">0</span>
@@ -2710,7 +2773,7 @@ const DEFAULT_SETTINGS = {
   taMusicProb: 0.05,
   taEmojiProb: 0.3,
   taNickProb: 0.05,
-  taQuoteProb: 0.05,
+  taQuoteProb: 0.15,
   taLetterProb: 0.05,
   taNoteProb: 0.08,
   nicknameProb: 0.3,
@@ -2761,7 +2824,6 @@ const DEFAULT_SETTINGS = {
   taWishLibrary: [],
   importantNotes: [],
   bigEvents: [],
-  bigEventFlags: {},
   visitedWorlds: [],
   notifications: [],
   worldCards: {},
@@ -2774,9 +2836,9 @@ const DEFAULT_SETTINGS = {
   worldApproaches: {},
   worldCompetes: {},
   worldDailyLife: {},
-  reminderChecked: {},
-  checkinRemindChecked: {},
-  importantChecked: {}
+  playerFavorites: [],
+  taFavorites: [],
+  taDesignated: []
 };
 
 // ===== 全局变量 =====
@@ -2827,10 +2889,14 @@ let onlineWorlds = [];
 let onlineWorldTimers = {};
 let contextMenuEl = null;
 let contextMenuMsg = null;
+let lastActiveTime = Date.now();
 let lastUserMessageTime = Date.now();
 let tempStatus = null;
 let tempStatusUntil = 0;
 let quoteTargetContent = null;
+let worldSleepTimers = {};
+let currentNotifyTab = 'all';
+let currentMusicTab = 'local';
   // ========== IndexedDB ==========
 function openDB() {
   return new Promise((resolve, reject) => {
@@ -2965,7 +3031,7 @@ async function libPush(name, dataUrl, prefix) {
 
 // ========== 旧数据迁移 ==========
 async function migrateMediaOnce() {
-  if (localStorage.getItem('mediaMigratedV550')) return;
+  if (localStorage.getItem('mediaMigratedV650')) return;
   try {
     const av = JSON.parse(localStorage.getItem('avatarLibrary') || '[]');
     if (av.length && typeof av[0] === 'object') {
@@ -3038,7 +3104,7 @@ async function migrateMediaOnce() {
       }
       localStorage.setItem('plantsData', JSON.stringify(plants));
     }
-    localStorage.setItem('mediaMigratedV550', '1');
+    localStorage.setItem('mediaMigratedV650', '1');
   } catch (e) { console.error('迁移出错', e); }
 }
 
@@ -3070,8 +3136,9 @@ async function loadSettings() {
   if (!settings.worldApproaches) settings.worldApproaches = {};
   if (!settings.worldCompetes) settings.worldCompetes = {};
   if (!settings.worldDailyLife) settings.worldDailyLife = {};
-  if (!settings.bigEvents) settings.bigEvents = [];
-  if (!settings.bigEventFlags) settings.bigEventFlags = {};
+  if (!settings.playerFavorites) settings.playerFavorites = [];
+  if (!settings.taFavorites) settings.taFavorites = [];
+  if (!settings.taDesignated) settings.taDesignated = [];
   applySettings();
 }
 
@@ -3159,21 +3226,7 @@ function refreshOpenPanels() {
   });
 }
 
-// ========== 大事记 ==========
-function addBigEvent(type, text) {
-  settings.bigEvents = settings.bigEvents || [];
-  settings.bigEvents.push({ type, text, time: Date.now() });
-  saveSettings();
-}
-
-function addBigEventOnce(key, type, text) {
-  settings.bigEventFlags = settings.bigEventFlags || {};
-  if (settings.bigEventFlags[key]) return;
-  settings.bigEventFlags[key] = true;
-  addBigEvent(type, text);
-}
-
-// ========== 站内通知中心 ==========
+// ========== 站内通知中心（Tab 版） ==========
 function addNotification(icon, text) {
   settings.notifications = settings.notifications || [];
   settings.notifications.push({ icon, text, time: Date.now(), unread: true });
@@ -3192,16 +3245,16 @@ function notifyGroupOf(icon, text) {
   const remindIcons = ['⏰', '🌸', '🌙', '🎂', '✓'];
   const otherIcons = ['✨', '🌌'];
   const t = text || '';
-  if (otherIcons.includes(icon)) return '✨ 其他';
-  if (msgIcons.includes(icon)) return '💬 消息';
-  if (contentIcons.includes(icon)) return '📮 内容';
-  if (lookIcons.includes(icon)) return '🎨 外观';
-  if (remindIcons.includes(icon)) return '⏰ 提醒';
-  if (t.includes('消息') || t.includes('互动') || t.includes('礼物')) return '💬 消息';
-  if (t.includes('信') || t.includes('留言') || t.includes('动态') || t.includes('小笺')) return '📮 内容';
-  if (t.includes('昵称') || t.includes('头像') || t.includes('背景') || t.includes('贴纸') || t.includes('听')) return '🎨 外观';
-  if (t.includes('打卡') || t.includes('提醒') || t.includes('生理期') || t.includes('约会') || t.includes('重要')) return '⏰ 提醒';
-  return '✨ 其他';
+  if (otherIcons.includes(icon)) return '其他';
+  if (msgIcons.includes(icon)) return '消息';
+  if (contentIcons.includes(icon)) return '内容';
+  if (lookIcons.includes(icon)) return '外观';
+  if (remindIcons.includes(icon)) return '提醒';
+  if (t.includes('消息') || t.includes('互动') || t.includes('礼物')) return '消息';
+  if (t.includes('信') || t.includes('留言') || t.includes('动态') || t.includes('小笺')) return '内容';
+  if (t.includes('昵称') || t.includes('头像') || t.includes('背景') || t.includes('贴纸') || t.includes('听')) return '外观';
+  if (t.includes('打卡') || t.includes('提醒') || t.includes('生理期') || t.includes('约会') || t.includes('重要')) return '提醒';
+  return '其他';
 }
 
 function openNotifyCenter() {
@@ -3211,25 +3264,34 @@ function openNotifyCenter() {
 
 function renderNotifyCenter(overlay) {
   const content = overlay.querySelector('#notify-content');
-  const list = (settings.notifications || []).slice().reverse();
+  const allList = (settings.notifications || []).slice().reverse();
+  const tabs = [
+    { id: 'all', name: '全部' },
+    { id: '消息', name: '消息' },
+    { id: '内容', name: '内容' },
+    { id: '外观', name: '外观' },
+    { id: '提醒', name: '提醒' },
+    { id: '其他', name: '其他' }
+  ];
   let html = '<div class="big-input-title">通知</div>';
   html += '<div style="display:flex;justify-content:flex-end;margin-bottom:8px;"><button class="mini-btn" id="notify-readall">全部已读</button></div>';
-  if (!list.length) {
+  html += '<div class="notify-tabs" id="notify-tabs">';
+  tabs.forEach(t => {
+    html += `<div class="notify-tab${currentNotifyTab === t.id ? ' active' : ''}" data-tab="${t.id}">${t.name}</div>`;
+  });
+  html += '</div>';
+  if (!allList.length) {
     html += '<div class="placeholder-tip">还没有通知</div>';
   } else {
-    const groups = {};
-    const order = ['💬 消息', '📮 内容', '🎨 外观', '⏰ 提醒', '✨ 其他'];
-    list.forEach(n => {
-      const g = notifyGroupOf(n.icon, n.text);
-      if (!groups[g]) groups[g] = [];
-      groups[g].push(n);
-    });
-    html += '<div class="card-list" style="max-height:55vh;">';
-    order.forEach(g => {
-      if (!groups[g]) return;
-      html += `<div class="notify-group-title">${g}</div>`;
-      html += '<div class="notify-group-list">';
-      groups[g].forEach(n => {
+    let list = allList;
+    if (currentNotifyTab !== 'all') {
+      list = allList.filter(n => notifyGroupOf(n.icon, n.text) === currentNotifyTab);
+    }
+    if (!list.length) {
+      html += '<div class="placeholder-tip">该分类下没有通知</div>';
+    } else {
+      html += '<div class="card-list" style="max-height:55vh;">';
+      list.forEach(n => {
         const d = new Date(n.time);
         const str = (d.getMonth() + 1) + '-' + d.getDate() + ' ' + String(d.getHours()).padStart(2, '0') + ':' + String(d.getMinutes()).padStart(2, '0');
         html += `<div class="card-item" style="${n.unread ? 'background:rgba(255,220,235,0.6);' : ''}">
@@ -3237,10 +3299,18 @@ function renderNotifyCenter(overlay) {
         </div>`;
       });
       html += '</div>';
-    });
-    html += '</div>';
+    }
   }
   content.innerHTML = html;
+  const tabsEl = overlay.querySelector('#notify-tabs');
+  if (tabsEl) {
+    tabsEl.querySelectorAll('.notify-tab').forEach(tab => {
+      tab.addEventListener('click', () => {
+        currentNotifyTab = tab.dataset.tab;
+        renderNotifyCenter(overlay);
+      });
+    });
+  }
   const readall = overlay.querySelector('#notify-readall');
   if (readall) readall.addEventListener('click', () => {
     settings.notifications.forEach(n => n.unread = false);
@@ -3422,7 +3492,7 @@ function makeDraggable(el, onEnd) {
   el._wasDragged = () => moved;
 }
 
-// ========== 悬浮球面板图标（全部重新设计，不重复） ==========
+// ========== 悬浮球面板图标（全部重设计，不重复） ==========
 const ICONS = {
   world: `<svg viewBox="0 0 24 24" fill="none" stroke="#4a3528" stroke-width="1.7"><circle cx="12" cy="12" r="8"/><ellipse cx="12" cy="12" rx="3.5" ry="8"/><line x1="4" y1="12" x2="20" y2="12"/></svg>`,
   worlds: `<svg viewBox="0 0 24 24" fill="none" stroke="#4a3528" stroke-width="1.7"><circle cx="12" cy="12" r="5"/><ellipse cx="12" cy="12" rx="10" ry="4" transform="rotate(-20 12 12)"/><circle cx="20" cy="9" r="1.3" fill="#4a3528" stroke="none"/></svg>`,
@@ -3451,7 +3521,6 @@ const ICONS = {
   voice: `<svg viewBox="0 0 24 24" fill="none" stroke="#4a3528" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3a3 3 0 00-3 3v6a3 3 0 006 0V6a3 3 0 00-3-3z"/><path d="M5 10a7 7 0 0014 0M12 17v4"/></svg>`,
   account: `<svg viewBox="0 0 24 24" fill="none" stroke="#4a3528" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="8"/><path d="M12 7v10M9.5 9.5c0-1 1-1.5 2.5-1.5s2.5.5 2.5 1.5-1 1.5-2.5 1.5-2.5.5-2.5 1.5 1 1.5 2.5 1.5 2.5-.5 2.5-1.5"/></svg>`,
   piggy: `<svg viewBox="0 0 24 24" fill="none" stroke="#4a3528" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M4 14c0-3 2-5 5-6l1-2 2 1 2-1 1 2c3 1 5 3 5 6 0 2-1 3-2 4l1 2h-3l-1-2h-6l-1 2H5l1-2c-1-1-2-2-2-4z"/><circle cx="9" cy="13" r="1" fill="#4a3528" stroke="none"/><circle cx="15" cy="13" r="1" fill="#4a3528" stroke="none"/><path d="M11 16c.5.5 1.5.5 2 0"/><circle cx="12" cy="5" r="1.5" fill="#ffb84d" stroke="none"/><path d="M8 4 L6 2 L9 3 Z" fill="#ffb84d" stroke="none"/><path d="M16 4 L18 2 L15 3 Z" fill="#ffb84d" stroke="none"/></svg>`,
-  // ===== 新增独立图标 =====
   sticker: `<svg viewBox="0 0 24 24" fill="none" stroke="#e8789f" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M20 12a8 8 0 10-8 8c1.5 0 2-0.5 2-1.5v-1.5c0-1.5 1-2.5 2.5-2.5H18c1 0 2-0.5 2-2.5z" fill="#ffc4d6" fill-opacity="0.4"/><circle cx="9" cy="11" r="1" fill="#e8789f" stroke="none"/><circle cx="14" cy="10" r="1" fill="#e8789f" stroke="none"/></svg>`,
   bg: `<svg viewBox="0 0 24 24" fill="none" stroke="#4a3528" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="16" rx="3" fill="#d4e4f7" fill-opacity="0.3"/><circle cx="9" cy="9" r="1.5" fill="#ffe9b0" stroke="none"/><path d="M4 18l5-5 3 3 4-4 4 4"/></svg>`,
   avatar: `<svg viewBox="0 0 24 24" fill="none" stroke="#4a3528" stroke-width="1.7"><circle cx="12" cy="9" r="4" fill="#ffc4d6" fill-opacity="0.4"/><path d="M4 20c1-4 4-6 8-6s7 2 8 6" fill="#ffb0c8" fill-opacity="0.3"/></svg>`,
@@ -3474,6 +3543,7 @@ const ICONS = {
   importantNotes: `<svg viewBox="0 0 24 24" fill="none" stroke="#4a3528" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M6 3h9l5 5v13H6z" fill="#d4e8c8" fill-opacity="0.3"/><path d="M15 3v5h5"/><path d="M9 13h6M9 17h4"/></svg>`,
   copyInteract: `<svg viewBox="0 0 24 24" fill="none" stroke="#8a7bff" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><circle cx="8" cy="8" r="3" fill="#dcd0e8" fill-opacity="0.5"/><circle cx="16" cy="16" r="3" fill="#dcd0e8" fill-opacity="0.5"/><path d="M11 8h5M8 11v5"/></svg>`,
   shardTogether: `<svg viewBox="0 0 24 24" fill="none" stroke="#e8789f" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M4 12h7M13 12h7M12 4v7M12 13v7"/><circle cx="12" cy="12" r="2" fill="#ffc4d6" fill-opacity="0.6"/></svg>`,
+  shardCards: `<svg viewBox="0 0 24 24" fill="none" stroke="#4a3528" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M6 3h9l4 4v14H6z" fill="#d4e4f7" fill-opacity="0.3"/><path d="M15 3v4h4"/><path d="M12 12l1 2 2 0.3-1.5 1.4 0.4 2-1.9-1-1.9 1 0.4-2-1.5-1.4 2-0.3z" fill="#ffe27a" stroke="none"/></svg>`,
   companion: `<svg viewBox="0 0 24 24" fill="none" stroke="#4a3528" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><circle cx="8" cy="12" r="3" fill="#ffc4d6" fill-opacity="0.4"/><circle cx="16" cy="12" r="3" fill="#ffc4d6" fill-opacity="0.4"/><path d="M11 12h2"/><path d="M5 6l1.5 1.5M19 6l-1.5 1.5M5 18l1.5-1.5M19 18l-1.5-1.5"/></svg>`
 };
   // ========== 21 副本图标 ==========
@@ -3501,7 +3571,7 @@ const WORLD_ICONS = {
   tianming: `<svg viewBox="0 0 24 24" fill="none" stroke="#4a3528" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M4 8l4-4h8l4 4v10H4z"/><path d="M4 8h16"/><circle cx="12" cy="13" r="2" fill="#ff3b5c" stroke="none"/></svg>`
 };
 
-// ========== 状态图标（含新增 13 个） ==========
+// ========== 状态图标（含 13 新增） ==========
 const STATUS_ICONS = {
   sleep: '<svg viewBox="0 0 24 24" fill="none" stroke="#4a3528" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.8A9 9 0 1111.2 3a7 7 0 009.8 9.8z"/></svg>',
   daze: '<svg viewBox="0 0 24 24" fill="none" stroke="#4a3528" stroke-width="1.8"><circle cx="12" cy="12" r="8"/><circle cx="12" cy="12" r="3" fill="#4a3528" stroke="none"/></svg>',
@@ -3534,10 +3604,11 @@ const STATUS_ICONS = {
   goodMood: '<svg viewBox="0 0 24 24" fill="none" stroke="#4a3528" stroke-width="1.7" stroke-linecap="round"><circle cx="12" cy="12" r="8" fill="#ffe9b0" fill-opacity="0.3"/><circle cx="9" cy="10" r="0.8" fill="#4a3528" stroke="none"/><circle cx="15" cy="10" r="0.8" fill="#4a3528" stroke="none"/><path d="M9 14c1 1.5 5 1.5 6 0"/></svg>',
   tired: '<svg viewBox="0 0 24 24" fill="none" stroke="#8b6f60" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M5 10h14a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2z" fill="#dcd3f5" fill-opacity="0.4"/><path d="M8 10V8a4 4 0 018 0v2"/></svg>',
   lookingForward: '<svg viewBox="0 0 24 24" fill="none" stroke="#e8789f" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12c2-3 5-5 7-5s5 2 7 5c-2 3-5 5-7 5s-5-2-7-5z" fill="#ffc4d6" fill-opacity="0.3"/><circle cx="12" cy="12" r="2" fill="#e8789f" stroke="none"/><path d="M19 4l0.5 1.5L21 6l-1.5 0.5L19 8l-0.5-1.5L17 6l1.5-0.5z" fill="#ffe9b0" stroke="none"/></svg>',
-  watchingYou: '<svg viewBox="0 0 24 24" fill="none" stroke="#4a3528" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M3 12c3-4 6-6 9-6s6 2 9 6c-3 4-6 6-9 6s-6-2-9-6z" fill="#d4e4f7" fill-opacity="0.4"/><circle cx="12" cy="12" r="2.5" fill="#4a3528" stroke="none"/><circle cx="13" cy="11" r="0.8" fill="#fff" stroke="none"/></svg>'
+  watchingYou: '<svg viewBox="0 0 24 24" fill="none" stroke="#4a3528" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M3 12c3-4 6-6 9-6s6 2 9 6c-3 4-6 6-9 6s-6-2-9-6z" fill="#d4e4f7" fill-opacity="0.4"/><circle cx="12" cy="12" r="2.5" fill="#4a3528" stroke="none"/><circle cx="13" cy="11" r="0.8" fill="#fff" stroke="none"/></svg>',
+  woken: '<svg viewBox="0 0 24 24" fill="none" stroke="#ffe27a" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.8A9 9 0 1111.2 3a7 7 0 009.8 9.8z" fill="#ffe9b0" fill-opacity="0.4"/><path d="M9 9h3l-3 3h3" stroke-width="1.5"/><circle cx="18" cy="5" r="1.2" fill="#ffe27a" stroke="none"/></svg>'
 };
 
-// ========== 世界时间 / 状态 ==========
+// ========== 世界时间 ==========
 function getCurrentWorld() {
   return (settings.worlds || []).find(w => w.id === settings.currentWorldId) || (settings.worlds || [])[0];
 }
@@ -3560,32 +3631,59 @@ function getWorldTime(worldId) {
   return d;
 }
 
+// ========== 每个世界独立算状态 ==========
+function getWorldStatusText(worldId) {
+  const world = (settings.worlds || []).find(w => w.id === worldId);
+  if (!world) return '在场';
+  const wt = getWorldTime(worldId);
+  const h = wt.getHours() + wt.getMinutes() / 60;
+  const dayType = WORLD_SCHEDULE_TYPES[worldId] || 'work';
+  const scheduleSet = WORLD_SCHEDULES_MULTI[worldId];
+  const schedule = scheduleSet ? (scheduleSet[dayType] || scheduleSet.work) : [[0,24,'default','在场']];
+  for (const [start, end, ic, lb] of schedule) {
+    if (end > 24) {
+      if (h >= start || h < (end - 24)) return lb;
+    } else if (h >= start && h < end) {
+      return lb;
+    }
+  }
+  return '在场';
+}
+
+function getWorldStatusIcon(worldId) {
+  const world = (settings.worlds || []).find(w => w.id === worldId);
+  if (!world) return 'default';
+  const wt = getWorldTime(worldId);
+  const h = wt.getHours() + wt.getMinutes() / 60;
+  const dayType = WORLD_SCHEDULE_TYPES[worldId] || 'work';
+  const scheduleSet = WORLD_SCHEDULES_MULTI[worldId];
+  const schedule = scheduleSet ? (scheduleSet[dayType] || scheduleSet.work) : [[0,24,'default','在场']];
+  for (const [start, end, ic] of schedule) {
+    if (end > 24) {
+      if (h >= start || h < (end - 24)) return ic;
+    } else if (h >= start && h < end) {
+      return ic;
+    }
+  }
+  return 'default';
+}
+
+function isWorldSleeping(worldId) {
+  const ic = getWorldStatusIcon(worldId);
+  return ic === 'sleeping';
+}
+
+function isWorldAwake(worldId) {
+  if (worldSleepTimers[worldId] && worldSleepTimers[worldId] > Date.now()) return true;
+  return !isWorldSleeping(worldId);
+}
+
 function isNightTime() {
   const h = new Date().getHours();
   return (h >= 22 || h < 6);
 }
 
-function isWorldAwake(worldId) {
-  if (isNightTime()) return true;
-  const world = worldId
-    ? (settings.worlds || []).find(w => w.id === worldId)
-    : getCurrentWorld();
-  if (!world) return true;
-  const wt = getWorldTime(worldId);
-  const h = wt.getHours() + wt.getMinutes() / 60;
-  const dayType = WORLD_SCHEDULE_TYPES[world.id] || 'work';
-  const scheduleSet = WORLD_SCHEDULES_MULTI[world.id];
-  const schedule = scheduleSet ? (scheduleSet[dayType] || scheduleSet.work) : [[0,24,'default','在场']];
-  for (const [start, end, ic] of schedule) {
-    if (end > 24) {
-      if (h >= start || h < (end - 24)) return ic !== 'sleeping';
-    } else if (h >= start && h < end) {
-      return ic !== 'sleeping';
-    }
-  }
-  return true;
-}
-
+// ========== 状态优先级（当前世界用）==========
 function getPriorityStatus() {
   const now = Date.now();
   if (tempStatus && now < tempStatusUntil) return tempStatus;
@@ -3594,8 +3692,7 @@ function getPriorityStatus() {
   const silentMs = now - lastUserMessageTime;
   const twoHours = 2 * 3600000;
   const oneHour = 3600000;
-  const world = getCurrentWorld();
-  const dayType = world ? (WORLD_SCHEDULE_TYPES[world.id] || 'work') : 'work';
+
   if (silentMs > oneHour && silentMs < twoHours) {
     return { iconKey: 'waitingForYou', text: `${taNick}在等你`, worldOverride: true };
   }
@@ -3614,23 +3711,14 @@ function getPriorityStatus() {
     return { iconKey: 'lookingForward', text: `${taNick}在期待明天`, worldOverride: true };
   }
   const h = new Date().getHours();
-  if ((dayType === 'overtime' || dayType === 'special') && h >= 20) {
-    return { iconKey: 'tired', text: `${taNick}有点累`, worldOverride: true };
-  }
-  if (settings.accompanyMode === 'companion' && settings.accompanyType === 'clingy') {
-    return { iconKey: 'actingCute', text: `${taNick}在撒娇`, worldOverride: true };
-  }
   if (h >= 6 && h < 9) {
     return { iconKey: 'goodMorning', text: `${taNick}给你说早安`, worldOverride: true };
   }
-  if (h >= 22 || h < 6) {
-    if (h >= 22 && h < 24) {
-      return { iconKey: 'goodNight', text: `${taNick}给你说晚安`, worldOverride: true };
-    }
-    return { iconKey: 'night', text: `陪你熬夜`, worldOverride: true, night: true };
+  if (h >= 22 && h < 24) {
+    return { iconKey: 'goodNight', text: `${taNick}给你说晚安`, worldOverride: true };
   }
-  if (silentMs > 3 * 3600000) {
-    return { iconKey: 'guardingYou', text: `${taNick}守着你`, worldOverride: true };
+  if (settings.accompanyMode === 'companion' && settings.accompanyType === 'clingy') {
+    return { iconKey: 'actingCute', text: `${taNick}在撒娇`, worldOverride: true };
   }
   return null;
 }
@@ -3641,6 +3729,7 @@ function setTempStatus(iconKey, text, duration) {
   updateStatusBar();
 }
 
+// ========== 状态栏（新版·多世界）==========
 function getTAStatus() {
   if (settings.accompanyMode) {
     const taNick = settings.taNick || settings.taName;
@@ -3653,63 +3742,52 @@ function getTAStatus() {
   }
   const pri = getPriorityStatus();
   if (pri) {
-    return { iconKey: pri.iconKey, text: pri.text, withWorld: !pri.worldOverride || false, world: pri.worldOverride ? null : getCurrentWorld() };
+    return { iconKey: pri.iconKey, text: pri.text, withWorld: false, worldOverride: true };
   }
-  const taNick = settings.taNick || settings.taName;
+  const worldId = settings.currentWorldId;
   const world = getCurrentWorld();
-  const wt = getWorldTime();
-  const h = wt.getHours() + wt.getMinutes() / 60;
-  const dayType = WORLD_SCHEDULE_TYPES[world.id] || 'work';
-  const scheduleSet = WORLD_SCHEDULES_MULTI[world.id];
-  const schedule = scheduleSet ? (scheduleSet[dayType] || scheduleSet.work) : [[0,24,'default','在场']];
-  let iconKey = 'default', label = '';
-  for (const [start, end, ic, lb] of schedule) {
-    if (end > 24) {
-      if (h >= start || h < (end - 24)) { iconKey = ic; label = lb; break; }
-    } else if (h >= start && h < end) { iconKey = ic; label = lb; break; }
-  }
-  if (!label) { iconKey = 'default'; label = '在场'; }
-  return { iconKey, text: `${taNick}${label}`, withWorld: true, world: world };
+  const iconKey = getWorldStatusIcon(worldId);
+  const label = getWorldStatusText(worldId);
+  const taNick = settings.taNick || settings.taName;
+  return { iconKey, text: `${taNick}${label}`, withWorld: true, world };
 }
 
 function updateStatusBar() {
   const bar = document.getElementById('status-bar');
-  const detail = document.getElementById('online-detail');
   if (!bar) return;
-  const st = getTAStatus();
-  const icon = STATUS_ICONS[st.iconKey] || STATUS_ICONS.default;
   let html = '';
-  if (st.withWorld && st.world) {
-    html += `<div class="sb-line sb-world">${escapeHtml(settings.taNick || settings.taName)} 在 ${escapeHtml(st.world.name)} · ${escapeHtml(st.world.role)}</div>`;
+  const onlineCount = onlineWorlds.length;
+  if (onlineCount > 0) {
+    html += `<div class="sb-line sb-online-count">${onlineCount} 位易遇在线</div>`;
   }
-  html += `<div class="sb-line">${icon}<span>${escapeHtml(st.text)}</span></div>`;
-  if (onlineWorlds.length > 0) {
-    html += `<div class="sb-line sb-online-count">${onlineWorlds.length} 位易遇在线</div>`;
+  if (onlineCount > 0) {
+    onlineWorlds.forEach(wid => {
+      const w = (settings.worlds || []).find(x => x.id === wid);
+      if (!w) return;
+      let statusText;
+      let iconKey;
+      if (worldSleepTimers[wid] && worldSleepTimers[wid] > Date.now()) {
+        statusText = '被吵醒了';
+        iconKey = 'woken';
+      } else {
+        statusText = getWorldStatusText(wid);
+        iconKey = getWorldStatusIcon(wid);
+      }
+      const icon = STATUS_ICONS[iconKey] || STATUS_ICONS.default;
+      html += `<div class="sb-world-line"><span class="sb-world-dot"></span>${icon}<span>${escapeHtml(w.name)} · ${escapeHtml(w.role)} · ${escapeHtml(statusText)}</span></div>`;
+    });
+  } else {
+    const st = getTAStatus();
+    const icon = STATUS_ICONS[st.iconKey] || STATUS_ICONS.default;
+    if (st.withWorld && st.world) {
+      html += `<div class="sb-world-line"><span class="sb-world-dot"></span>${icon}<span>${escapeHtml(settings.taNick || settings.taName)} 在 ${escapeHtml(st.world.name)} · ${escapeHtml(st.world.role)}</span></div>`;
+    } else {
+      html += `<div class="sb-line">${icon}<span>${escapeHtml(st.text)}</span></div>`;
+    }
   }
   bar.innerHTML = html;
   bar.classList.add('show');
-  if (detail) {
-    if (onlineWorlds.length > 0) {
-      let dhtml = '';
-      onlineWorlds.forEach(wid => {
-        const w = (settings.worlds || []).find(x => x.id === wid);
-        if (!w) return;
-        dhtml += `<div class="od-line"><span class="od-dot"></span><span>${escapeHtml(w.name)} · ${escapeHtml(w.role)}</span></div>`;
-      });
-      detail.innerHTML = dhtml;
-    } else {
-      detail.innerHTML = '';
-      detail.classList.remove('show');
-    }
-  }
 }
-
-document.getElementById('status-bar').addEventListener('click', () => {
-  const detail = document.getElementById('online-detail');
-  if (!detail) return;
-  if (!onlineWorlds.length) return;
-  detail.classList.toggle('show');
-});
 
 // ========== 背景绘制 ==========
 async function applyBG() {
@@ -3873,14 +3951,17 @@ function openWorldPanel() {
   const overlay = createModal(`
     <div class="ball-grid">
       <div class="ball-item" id="world-card"><div class="icon-wrap">${ICONS.note}</div><span>字卡</span></div>
+      <div class="ball-item" id="world-shard-cards"><div class="icon-wrap">${ICONS.shardCards}</div><span>副本字卡</span></div>
       <div class="ball-item" id="world-sticker"><div class="icon-wrap">${ICONS.sticker}</div><span>贴纸</span></div>
       <div class="ball-item" id="world-bg"><div class="icon-wrap">${ICONS.bg}</div><span>背景</span></div>
       <div class="ball-item" id="world-avatar"><div class="icon-wrap">${ICONS.avatar}</div><span>头像</span></div>
       <div class="ball-item" id="world-music"><div class="icon-wrap">${ICONS.music}</div><span>歌单</span></div>
       <div class="ball-item" id="world-gift"><div class="icon-wrap">${ICONS.gift}</div><span>礼物</span></div>
       <div class="ball-item" id="world-interact"><div class="icon-wrap">${ICONS.interact}</div><span>互动</span></div>
+      <div class="ball-item" id="world-shard-interact"><div class="icon-wrap">${ICONS.copyInteract}</div><span>副本互动</span></div>
       <div class="ball-item" id="world-dialogue"><div class="icon-wrap">${ICONS.dialogue}</div><span>对话</span></div>
       <div class="ball-item" id="world-together"><div class="icon-wrap">${ICONS.together}</div><span>想一起</span></div>
+      <div class="ball-item" id="world-shard-together"><div class="icon-wrap">${ICONS.shardTogether}</div><span>想共度</span></div>
       <div class="ball-item" id="world-sweet"><div class="icon-wrap">${ICONS.sweet}</div><span>甜言</span></div>
       <div class="ball-item" id="world-intimate"><div class="icon-wrap">${ICONS.intimate}</div><span>悄悄话</span></div>
       <div class="ball-item" id="world-approach"><div class="icon-wrap">${ICONS.approach}</div><span>凑近</span></div>
@@ -3895,18 +3976,19 @@ function openWorldPanel() {
       <div class="ball-item" id="world-quiz-pool"><div class="icon-wrap">${ICONS.quizPool}</div><span>问答回应池</span></div>
       <div class="ball-item" id="world-highdim"><div class="icon-wrap">${ICONS.highdim}</div><span>高维彩蛋</span></div>
       <div class="ball-item" id="world-important-notes"><div class="icon-wrap">${ICONS.importantNotes}</div><span>重要记事</span></div>
-      <div class="ball-item" id="world-shard-interact"><div class="icon-wrap">${ICONS.copyInteract}</div><span>副本互动</span></div>
-      <div class="ball-item" id="world-shard-together"><div class="icon-wrap">${ICONS.shardTogether}</div><span>想共度</span></div>
     </div>`);
   overlay.querySelector('#world-card').addEventListener('click', () => { overlay.remove(); openCardPanel(); });
+  overlay.querySelector('#world-shard-cards').addEventListener('click', () => { overlay.remove(); openShardCardsPanel(); });
   overlay.querySelector('#world-sticker').addEventListener('click', () => { overlay.remove(); openStickerPanel(); });
   overlay.querySelector('#world-bg').addEventListener('click', () => { overlay.remove(); openBGPanel(); });
   overlay.querySelector('#world-avatar').addEventListener('click', () => { overlay.remove(); openAvatarPanel(); });
   overlay.querySelector('#world-music').addEventListener('click', () => { overlay.remove(); openMusicManagePanel(); });
   overlay.querySelector('#world-gift').addEventListener('click', () => { overlay.remove(); openGiftManagePanel(); });
   overlay.querySelector('#world-interact').addEventListener('click', () => { overlay.remove(); openInteractManagePanel(); });
+  overlay.querySelector('#world-shard-interact').addEventListener('click', () => { overlay.remove(); openShardInteractPanel(); });
   overlay.querySelector('#world-dialogue').addEventListener('click', () => { overlay.remove(); openDialogueManagePanel(); });
   overlay.querySelector('#world-together').addEventListener('click', () => { overlay.remove(); openTogetherLibraryPanel(); });
+  overlay.querySelector('#world-shard-together').addEventListener('click', () => { overlay.remove(); openShardTogetherPanel(); });
   overlay.querySelector('#world-sweet').addEventListener('click', () => { overlay.remove(); openSweetWordsPanel(); });
   overlay.querySelector('#world-intimate').addEventListener('click', () => { overlay.remove(); openIntimatePanel(); });
   overlay.querySelector('#world-approach').addEventListener('click', () => { overlay.remove(); openApproachPanel(); });
@@ -3921,11 +4003,9 @@ function openWorldPanel() {
   overlay.querySelector('#world-quiz-pool').addEventListener('click', () => { overlay.remove(); openQuizPoolPanel(); });
   overlay.querySelector('#world-highdim').addEventListener('click', () => { overlay.remove(); openHighDimPanel(); });
   overlay.querySelector('#world-important-notes').addEventListener('click', () => { overlay.remove(); openImportantNotesPanel(); });
-  overlay.querySelector('#world-shard-interact').addEventListener('click', () => { overlay.remove(); openShardInteractPanel(); });
-  overlay.querySelector('#world-shard-together').addEventListener('click', () => { overlay.remove(); openShardTogetherPanel(); });
 }
 
-// ========== 副本互动（独立入口·管理） ==========
+// ========== 副本互动（独立入口·管理）==========
 function openShardInteractPanel() {
   const overlay = createModal(`
     <div class="big-input-title">副本互动</div>
@@ -3940,10 +4020,7 @@ function openShardInteractPanel() {
     <button class="upload-btn" id="shard-interact-add">添加互动</button>`);
   let currentWorldId = settings.currentWorldId || (settings.worlds[0] && settings.worlds[0].id);
   let currentTab = 'me2ta';
-  renderShardChips(overlay.querySelector('#shard-interact-chips'), currentWorldId, (wid) => {
-    currentWorldId = wid;
-    renderShardInteractList(overlay, currentWorldId, currentTab);
-  });
+  renderShardInteractChips(overlay, currentWorldId, () => renderShardInteractList(overlay, currentWorldId, currentTab));
   renderShardInteractList(overlay, currentWorldId, currentTab);
   overlay.querySelectorAll('#shard-interact-tabs .heart-tab').forEach(btn => {
     btn.addEventListener('click', () => {
@@ -3954,38 +4031,24 @@ function openShardInteractPanel() {
     });
   });
   overlay.querySelector('#shard-interact-add').addEventListener('click', () => {
-    const dlg = createModal(`
-      <div class="big-input-title">添加互动</div>
-      <textarea class="big-input-area" id="shard-add-input" placeholder="一行一条互动" style="min-height:150px;"></textarea>
-      <button class="save-btn-center" id="save-shard-add" style="margin-top:12px;">保存</button>`);
-    dlg.querySelector('#save-shard-add').addEventListener('click', async () => {
-      const text = dlg.querySelector('#shard-add-input').value.trim();
-      const lines = text.split('\n').map(s => s.trim()).filter(Boolean);
-      if (!lines.length) return showToast('请输入互动文字');
-      if (!settings.worldInteracts) settings.worldInteracts = {};
-      if (!settings.worldInteracts[currentWorldId]) settings.worldInteracts[currentWorldId] = { me2ta: [], ta2me: [], couple: [] };
-      lines.forEach(l => settings.worldInteracts[currentWorldId][currentTab].push(l));
-      await saveSettings();
-      showToast(`已添加 ${lines.length} 条`);
-      dlg.remove();
-      renderShardInteractList(overlay, currentWorldId, currentTab);
-    });
+    openShardInteractAddDialog(currentWorldId, currentTab, overlay);
   });
-}
-
-function renderShardChips(container, currentWorldId, onPick) {
-  container.innerHTML = '';
-  (settings.worlds || []).forEach(w => {
-    const chip = document.createElement('div');
-    chip.className = 'world-chip' + (w.id === currentWorldId ? ' active' : '');
-    chip.textContent = w.name;
-    chip.addEventListener('click', () => {
-      container.querySelectorAll('.world-chip').forEach(c => c.classList.remove('active'));
-      chip.classList.add('active');
-      onPick(w.id);
+  function renderShardInteractChips(ov, wid, onPick) {
+    const row = ov.querySelector('#shard-interact-chips');
+    row.innerHTML = '';
+    (settings.worlds || []).forEach(w => {
+      const chip = document.createElement('div');
+      chip.className = 'world-chip' + (w.id === wid ? ' active' : '');
+      chip.textContent = w.name;
+      chip.addEventListener('click', () => {
+        currentWorldId = w.id;
+        row.querySelectorAll('.world-chip').forEach(c => c.classList.remove('active'));
+        chip.classList.add('active');
+        onPick();
+      });
+      row.appendChild(chip);
     });
-    container.appendChild(chip);
-  });
+  }
 }
 
 function renderShardInteractList(overlay, worldId, tab) {
@@ -4016,7 +4079,26 @@ function renderShardInteractList(overlay, worldId, tab) {
   });
 }
 
-// ========== 想共度（独立入口·管理） ==========
+function openShardInteractAddDialog(worldId, tab, panelOverlay) {
+  const overlay = createModal(`
+    <div class="big-input-title">添加互动</div>
+    <textarea class="big-input-area" id="shard-interact-input" placeholder="一行一条互动" style="min-height:150px;"></textarea>
+    <button class="save-btn-center" id="save-shard-interact" style="margin-top:12px;">保存</button>`);
+  overlay.querySelector('#save-shard-interact').addEventListener('click', async () => {
+    const text = overlay.querySelector('#shard-interact-input').value.trim();
+    const lines = text.split('\n').map(s => s.trim()).filter(Boolean);
+    if (!lines.length) return showToast('请输入互动文字');
+    if (!settings.worldInteracts) settings.worldInteracts = {};
+    if (!settings.worldInteracts[worldId]) settings.worldInteracts[worldId] = { me2ta: [], ta2me: [], couple: [] };
+    lines.forEach(l => settings.worldInteracts[worldId][tab].push(l));
+    await saveSettings();
+    showToast(`已添加 ${lines.length} 条`);
+    overlay.remove();
+    renderShardInteractList(panelOverlay, worldId, tab);
+  });
+}
+
+// ========== 想共度（独立入口·管理）==========
 function openShardTogetherPanel() {
   const overlay = createModal(`
     <div class="big-input-title">想共度</div>
@@ -4025,10 +4107,7 @@ function openShardTogetherPanel() {
     <textarea class="big-input-area" id="shard-together-input" placeholder="一行一条" style="min-height:200px;"></textarea>
     <button class="save-btn-center" id="save-shard-together" style="margin-top:12px;">保存</button>`);
   let currentWorldId = settings.currentWorldId || (settings.worlds[0] && settings.worlds[0].id);
-  renderShardChips(overlay.querySelector('#shard-together-chips'), currentWorldId, (wid) => {
-    currentWorldId = wid;
-    loadShardTogether(overlay, currentWorldId);
-  });
+  renderShardTogetherChips(overlay, currentWorldId, () => loadShardTogether(overlay, currentWorldId));
   loadShardTogether(overlay, currentWorldId);
   overlay.querySelector('#save-shard-together').addEventListener('click', async () => {
     if (!settings.worldProposals) settings.worldProposals = {};
@@ -4036,6 +4115,22 @@ function openShardTogetherPanel() {
     await saveSettings();
     showToast('已保存');
   });
+  function renderShardTogetherChips(ov, wid, onPick) {
+    const row = ov.querySelector('#shard-together-chips');
+    row.innerHTML = '';
+    (settings.worlds || []).forEach(w => {
+      const chip = document.createElement('div');
+      chip.className = 'world-chip' + (w.id === wid ? ' active' : '');
+      chip.textContent = w.name;
+      chip.addEventListener('click', () => {
+        currentWorldId = w.id;
+        row.querySelectorAll('.world-chip').forEach(c => c.classList.remove('active'));
+        chip.classList.add('active');
+        onPick();
+      });
+      row.appendChild(chip);
+    });
+  }
 }
 
 function loadShardTogether(overlay, worldId) {
@@ -4044,32 +4139,146 @@ function loadShardTogether(overlay, worldId) {
   overlay.querySelector('#shard-together-input').value = arr.join('\n');
 }
 
-// ========== 字卡面板 ==========
+// ========== 通用字卡 ==========
 let cardPageMode = false;
+let currentCardWorldId = '';
 
 function openCardPanel() {
+  currentCardWorldId = '';
+  renderCardPanel(null, '');
+}
+
+function openShardCardsPanel() {
   const overlay = createModal(`
-    <div class="card-search-row"><input type="text" id="card-search-btn" placeholder="搜索字卡" readonly></div>
-    <div class="card-input-row"><input type="text" id="card-add-input" placeholder="添加新字卡" readonly></div>
-    <div class="card-actions-row">
-      <button class="mini-btn" id="card-file-import">文件导入</button>
-      <button class="mini-btn" id="card-file-export">文件导出</button>
-      <button class="mini-btn" id="card-batch-del">批量删除</button>
-      <button class="mini-btn" id="card-recycle">回收站</button>
-      <button class="mini-btn" id="card-dedupe">一键去重</button>
-    </div>
-    <div class="card-count-row">
-      <span id="card-count-text">总数量：0 张</span>
-      <button class="mini-btn" id="card-batch-confirm" style="display:none;">一键删除</button>
-    </div>
-    <div class="card-list" id="card-list"></div>`);
-  const panel = overlay.querySelector('.modal-panel');
+    <div class="big-input-title">副本字卡</div>
+    <div style="font-size:12px;color:#8b6f60;margin-bottom:10px;text-align:center;">选一个副本，管理它的专属字卡</div>
+    <div class="world-chip-row" id="shard-cards-chips"></div>
+    <div id="shard-cards-body"></div>`);
+  let currentWorldId = settings.currentWorldId || (settings.worlds[0] && settings.worlds[0].id);
+  const chipsRow = overlay.querySelector('#shard-cards-chips');
+  (settings.worlds || []).forEach(w => {
+    const chip = document.createElement('div');
+    chip.className = 'world-chip' + (w.id === currentWorldId ? ' active' : '');
+    chip.textContent = w.name;
+    chip.addEventListener('click', () => {
+      currentWorldId = w.id;
+      chipsRow.querySelectorAll('.world-chip').forEach(c => c.classList.remove('active'));
+      chip.classList.add('active');
+      renderShardCardsBody(overlay, currentWorldId);
+    });
+    chipsRow.appendChild(chip);
+  });
+  renderShardCardsBody(overlay, currentWorldId);
+}
+
+async function renderShardCardsBody(overlay, worldId) {
+  const body = overlay.querySelector('#shard-cards-body');
+  body.innerHTML = '';
+  const allCards = await idbGetAll('cards');
+  const cards = allCards.filter(c => c.worldId === worldId);
+  const list = document.createElement('div');
+  list.className = 'card-list';
+  list.id = 'shard-cards-list';
+  body.appendChild(list);
+  const addInput = document.createElement('div');
+  addInput.className = 'card-input-row';
+  addInput.innerHTML = `<input type="text" id="shard-card-add" placeholder="添加新字卡" readonly>`;
+  body.appendChild(addInput);
+  const addBtn = document.createElement('button');
+  addBtn.className = 'upload-btn';
+  addBtn.textContent = '添加字卡';
+  addBtn.addEventListener('click', () => openShardAddCardDialog(worldId, body));
+  body.appendChild(addBtn);
+  list.innerHTML = '';
+  if (!cards.length) {
+    list.innerHTML = '<div class="placeholder-tip">还没有专属字卡</div>';
+  } else {
+    cards.forEach(card => {
+      const div = document.createElement('div');
+      div.className = 'card-item';
+      div.innerHTML = `<div class="card-text">${escapeHtml(card.content)}</div>
+        <div class="card-ops"><button class="card-edit">✎</button><button class="card-delete">✕</button></div>`;
+      div.querySelector('.card-edit').addEventListener('click', () => {
+        showEditShardCardDialog(card.id, card.content, worldId, body);
+      });
+      div.querySelector('.card-delete').addEventListener('click', async () => {
+        await idbDelete('cards', card.id);
+        renderShardCardsBody(overlay, worldId);
+      });
+      list.appendChild(div);
+    });
+  }
+}
+
+function openShardAddCardDialog(worldId, body) {
+  const overlay = createModal(`
+    <div class="big-input-title">添加副本字卡</div>
+    <textarea class="big-input-area" id="shard-card-area" placeholder="一行一条字卡"></textarea>
+    <button class="save-btn-center" id="save-shard-card" style="margin-top:12px;">保存</button>`);
+  overlay.querySelector('#save-shard-card').addEventListener('click', async () => {
+    const text = overlay.querySelector('#shard-card-area').value.trim();
+    if (!text) return;
+    const lines = text.split('\n').map(s => s.trim()).filter(Boolean);
+    let added = 0;
+    for (const line of lines) {
+      await idbPut('cards', { content: line, worldId: worldId });
+      added++;
+    }
+    showToast(`成功添加 ${added} 张`);
+    overlay.remove();
+    const parentOverlay = body.closest('.modal-overlay');
+    const chipRow = parentOverlay.querySelector('#shard-cards-chips');
+    const activeChip = chipRow.querySelector('.world-chip.active');
+    const wid = activeChip ? (settings.worlds.find(w => w.name === activeChip.textContent) || {}).id : worldId;
+    renderShardCardsBody(parentOverlay, wid || worldId);
+  });
+}
+
+function showEditShardCardDialog(id, content, worldId, body) {
+  const overlay = createModal(`
+    <div class="big-input-title">编辑字卡</div>
+    <textarea class="big-input-area" id="edit-shard-card-area">${escapeHtml(content)}</textarea>
+    <button class="save-btn-center" id="save-edit-shard-card" style="margin-top:12px;">保存</button>`);
+  overlay.querySelector('#save-edit-shard-card').addEventListener('click', async () => {
+    const newContent = overlay.querySelector('#edit-shard-card-area').value.trim();
+    if (newContent) {
+      await idbPut('cards', { id, content: newContent, worldId: worldId });
+    }
+    overlay.remove();
+    const parentOverlay = body.closest('.modal-overlay');
+    renderShardCardsBody(parentOverlay, worldId);
+  });
+}
+
+function renderCardPanel(panel, worldId) {
+  if (!panel) {
+    const overlay = createModal(`
+      <div class="card-search-row"><input type="text" id="card-search-btn" placeholder="搜索字卡" readonly></div>
+      <div class="card-input-row"><input type="text" id="card-add-input" placeholder="添加新字卡" readonly></div>
+      <div class="card-actions-row">
+        <button class="mini-btn" id="card-file-import">文件导入</button>
+        <button class="mini-btn" id="card-file-export">文件导出</button>
+        <button class="mini-btn" id="card-batch-del">批量删除</button>
+        <button class="mini-btn" id="card-recycle">回收站</button>
+        <button class="mini-btn" id="card-dedupe">一键去重</button>
+      </div>
+      <div class="card-count-row">
+        <span id="card-count-text">总数量：0 张</span>
+        <button class="mini-btn" id="card-batch-confirm" style="display:none;">一键删除</button>
+      </div>
+      <div class="card-list" id="card-list"></div>`);
+    const p = overlay.querySelector('.modal-panel');
+    loadCardList(p);
+    bindCardEvents(p);
+    return;
+  }
   loadCardList(panel);
   bindCardEvents(panel);
 }
 
 async function loadCardList(panel) {
-  const cards = await idbGetAll('cards');
+  const allCards = await idbGetAll('cards');
+  const cards = allCards.filter(c => !c.worldId);
   const list = panel.querySelector('#card-list');
   const countText = panel.querySelector('#card-count-text');
   countText.textContent = `总数量：${cards.length} 张`;
@@ -4133,7 +4342,8 @@ function bindCardEvents(panel) {
   recycleBtn.addEventListener('click', () => openRecyclePanel(panel));
 
   dedupeBtn.addEventListener('click', async () => {
-    const cards = await idbGetAll('cards');
+    const allCards = await idbGetAll('cards');
+    const cards = allCards.filter(c => !c.worldId);
     const seen = new Set();
     const duplicates = [];
     for (const card of cards) {
@@ -4168,11 +4378,11 @@ function bindCardEvents(panel) {
         const cards = data.cards || data;
         for (const c of cards) {
           const content = typeof c === 'string' ? c : c.content;
-          if (content) await idbPut('cards', { content });
+          if (content) await idbPut('cards', { content, worldId: '' });
         }
       } else {
         const lines = text.split('\n').map(s => s.trim()).filter(Boolean);
-        for (const line of lines) await idbPut('cards', { content: line });
+        for (const line of lines) await idbPut('cards', { content: line, worldId: '' });
       }
       loadCardList(panel);
     };
@@ -4187,12 +4397,14 @@ function bindCardEvents(panel) {
         <button class="mini-btn" id="export-json">JSON</button>
       </div>`);
     fmtOverlay.querySelector('#export-txt').addEventListener('click', async () => {
-      const cards = await idbGetAll('cards');
+      const allCards = await idbGetAll('cards');
+      const cards = allCards.filter(c => !c.worldId);
       downloadFile(cards.map(c => c.content).join('\n'), '字卡导出.txt', 'text/plain');
       fmtOverlay.remove();
     });
     fmtOverlay.querySelector('#export-json').addEventListener('click', async () => {
-      const cards = await idbGetAll('cards');
+      const allCards = await idbGetAll('cards');
+      const cards = allCards.filter(c => !c.worldId);
       downloadFile(JSON.stringify({ cards }, null, 2), '字卡导出.json', 'application/json');
       fmtOverlay.remove();
     });
@@ -4204,8 +4416,8 @@ function bindCardEvents(panel) {
     const item = e.target.closest('.card-item');
     if (!item) return;
     const id = Number(item.dataset.id);
-    const cards = await idbGetAll('cards');
-    const card = cards.find(c => c.id === id);
+    const allCards = await idbGetAll('cards');
+    const card = allCards.find(c => c.id === id);
     if (!card) return;
     if (e.target.closest('.card-delete')) {
       const recycled = JSON.parse(localStorage.getItem('recycledCards') || '[]');
@@ -4230,12 +4442,12 @@ function openAddCardDialog(panel) {
     if (!text) return;
     const lines = text.split('\n').map(s => s.trim()).filter(Boolean);
     const existing = await idbGetAll('cards');
-    const existingContents = existing.map(c => c.content);
+    const existingContents = existing.filter(c => !c.worldId).map(c => c.content);
     let added = 0, skipped = 0;
     for (const line of lines) {
       if (existingContents.includes(line)) skipped++;
       else {
-        await idbPut('cards', { content: line });
+        await idbPut('cards', { content: line, worldId: '' });
         existingContents.push(line);
         added++;
       }
@@ -4256,7 +4468,7 @@ function showEditCardDialog(id, content, panel) {
   overlay.querySelector('#save-edit-card').addEventListener('click', async () => {
     const newContent = overlay.querySelector('#edit-card-area').value.trim();
     if (newContent) {
-      await idbPut('cards', { id, content: newContent });
+      await idbPut('cards', { id, content: newContent, worldId: '' });
       if (panel) loadCardList(panel);
     }
     overlay.remove();
@@ -4275,7 +4487,7 @@ function openRecyclePanel(panel) {
   loadRecycleList(overlay, panel);
   overlay.querySelector('#recycle-restore-all').addEventListener('click', async () => {
     const recycled = JSON.parse(localStorage.getItem('recycledCards') || '[]');
-    for (const c of recycled) await idbPut('cards', { content: c.content });
+    for (const c of recycled) await idbPut('cards', { content: c.content, worldId: c.worldId || '' });
     localStorage.setItem('recycledCards', '[]');
     loadRecycleList(overlay, panel);
     if (panel) loadCardList(panel);
@@ -4302,10 +4514,10 @@ function loadRecycleList(overlay, panel) {
       <div class="card-ops"><button class="recycle-restore">恢复</button><button class="recycle-forever">彻删</button></div>`;
     div.querySelector('.recycle-restore').addEventListener('click', async () => {
       const all = JSON.parse(localStorage.getItem('recycledCards') || '[]');
-      const idx = all.findIndex(x => x.id === c.id && x.content === c.content);
+      const idx = all.indexOf(c);
       const realIdx = idx >= 0 ? idx : i;
       if (all[realIdx]) {
-        await idbPut('cards', { content: all[realIdx].content });
+        await idbPut('cards', { content: all[realIdx].content, worldId: all[realIdx].worldId || '' });
         all.splice(realIdx, 1);
         localStorage.setItem('recycledCards', JSON.stringify(all));
       }
@@ -4314,7 +4526,7 @@ function loadRecycleList(overlay, panel) {
     });
     div.querySelector('.recycle-forever').addEventListener('click', () => {
       const all = JSON.parse(localStorage.getItem('recycledCards') || '[]');
-      const idx = all.findIndex(x => x.id === c.id && x.content === c.content);
+      const idx = all.indexOf(c);
       const realIdx = idx >= 0 ? idx : i;
       if (all[realIdx]) {
         all.splice(realIdx, 1);
@@ -4334,7 +4546,8 @@ function openCardSearchPanel() {
   const resultList = overlay.querySelector('#card-search-results');
   searchInput.addEventListener('input', async () => {
     const kw = searchInput.value.trim();
-    const cards = await idbGetAll('cards');
+    const allCards = await idbGetAll('cards');
+    const cards = allCards.filter(c => !c.worldId);
     const filtered = kw ? cards.filter(c => c.content.includes(kw)) : cards;
     resultList.innerHTML = '';
     filtered.forEach(card => {
@@ -4356,7 +4569,7 @@ function openCardSearchPanel() {
   searchInput.dispatchEvent(new Event('input'));
 }
 
-// ========== 贴纸面板 ==========
+// ========== 贴纸 ==========
 function openStickerPanel() {
   const overlay = createModal(`
     <div class="big-input-title">贴纸（共 <span id="sticker-count-num"></span> 张）</div>
@@ -4477,7 +4690,6 @@ async function loadStickerLibrary(overlay) {
   });
 }
 
-// ========== 图片库点图弹菜单 ==========
 function openLibActionMenu(item, libName, reloadFn, extraOptions) {
   const options = [];
   if (extraOptions) options.push(...extraOptions);
@@ -4742,8 +4954,7 @@ async function loadBGPanel(overlay) {
     inp.click();
   };
 }
-
-// ========== 设置面板 ==========
+  // ========== 设置面板 ==========
 function openSettingsPanel() {
   const replyTplName = { instant: '即时陪伴（1~3秒）', natural: '日常闲聊（5~8秒）', distant: '若即若离（30秒~2分钟）', custom: '自定义' }[settings.replyTpl] || '选择模板';
   const stopTplName = { fast: '快点回（3~5秒）', normal: '正常（15~30秒）', slow: '慢点（30秒~1分钟）', custom: '自定义' }[settings.stopDetectTpl] || '选择模板';
@@ -5074,7 +5285,7 @@ function openAutonomyDetailPanel() {
     { key: 'taBGProb', name: '换背景概率', vals: [0.02, 0.06, 0.15] },
     { key: 'taMusicProb', name: '点歌概率', vals: [0.02, 0.05, 0.12] },
     { key: 'taNickProb', name: '换昵称概率', vals: [0.02, 0.05, 0.12] },
-    { key: 'taQuoteProb', name: '引用概率', vals: [0.02, 0.05, 0.12] },
+    { key: 'taQuoteProb', name: '引用概率', vals: [0.05, 0.15, 0.30] },
     { key: 'taLetterProb', name: '写信概率', vals: [0.02, 0.05, 0.10] },
     { key: 'taNoteProb', name: '留言概率', vals: [0.03, 0.08, 0.15] }
   ];
@@ -5229,12 +5440,18 @@ async function createMessageEl(msg) {
     bubble.className = 'gift-msg-slot';
     if (msg.giftData.opened) {
       const sparks = ['✨', '💗', '⭐', '💫'];
+      let iconHTML = '';
+      if (msg.giftData.image) {
+        iconHTML = `<img class="gift-image" src="${msg.giftData.image}" alt="">`;
+      } else {
+        iconHTML = `<div class="msg-gift-icon">${msg.giftData.icon || '🎁'}</div>`;
+      }
       bubble.innerHTML = `<div class="msg-gift-card">
         <span class="gift-sparkle" style="top:6px;left:10px;">${sparks[0]}</span>
         <span class="gift-sparkle" style="top:10px;right:12px;animation-delay:.6s;">${sparks[1]}</span>
         <span class="gift-sparkle" style="bottom:8px;left:16px;animation-delay:1.2s;">${sparks[2]}</span>
         <span class="gift-sparkle" style="bottom:10px;right:10px;animation-delay:1.8s;">${sparks[3]}</span>
-        <div class="msg-gift-icon">${msg.giftData.icon || '🎁'}</div>
+        ${iconHTML}
         <div class="msg-gift-name">${escapeHtml(msg.giftData.name || '礼物')}</div>
         <div class="msg-gift-cost">-${msg.giftData.cost || 0}爱意值</div>
       </div>`;
@@ -5249,21 +5466,7 @@ async function createMessageEl(msg) {
     mark.textContent = '💗';
     bubble.appendChild(mark);
   } else if (msg.interactData) {
-    if (msg.interactData.couple) {
-      bubble.className = 'msg-bubble msg-interact-couple';
-      const taAv = await resolveMedia(settings.taAvatar);
-      const meAv = await resolveMedia(settings.meAvatar);
-      const heartSVG = `<svg viewBox="0 0 24 24" width="16" height="16"><path d="M12 21C12 21 4 14.5 4 9.5C4 6.5 6.5 4.5 9 4.5C11 4.5 12 6 12 6C12 6 13 4.5 15 4.5C17.5 4.5 20 6.5 20 9.5C20 14.5 12 21 12 21Z" fill="#ff3b5c"/></svg>`;
-      bubble.innerHTML = `
-        <span class="couple-spark" style="top:6px;left:10px;">✨</span>
-        <span class="couple-spark" style="bottom:8px;right:12px;animation-delay:.8s;">💗</span>
-        <div class="couple-avatars">
-          <img src="${taAv || 'data:image/svg+xml,' + encodeURIComponent('<svg xmlns="http://www.w3.org/2000/svg" width="26" height="26"><circle cx="13" cy="13" r="12" fill="rgba(255,255,255,0.6)"/><text x="13" y="18" text-anchor="middle" font-size="10" fill="#a04a6a">遇</text></svg>')}">
-          <span class="couple-heart">${heartSVG}</span>
-          <img src="${meAv || 'data:image/svg+xml,' + encodeURIComponent('<svg xmlns="http://www.w3.org/2000/svg" width="26" height="26"><circle cx="13" cy="13" r="12" fill="rgba(255,255,255,0.6)"/><text x="13" y="18" text-anchor="middle" font-size="10" fill="#a04a6a">我</text></svg>')}">
-        </div>
-        <div class="couple-text">${escapeHtml(msg.interactData.text || '')}</div>`;
-    } else if (msg.interactData.intimateType === 'approach') {
+    if (msg.interactData.intimateType === 'approach') {
       bubble.className = 'msg-bubble intimate-approach';
       bubble.textContent = msg.interactData.text || '';
       const mark = document.createElement('span');
@@ -5277,6 +5480,20 @@ async function createMessageEl(msg) {
       mark.className = 'intimate-compete-mark';
       mark.textContent = '争宠';
       bubble.appendChild(mark);
+    } else if (msg.interactData.couple) {
+      bubble.className = 'msg-bubble msg-interact-couple';
+      const taAv = await resolveMedia(settings.taAvatar);
+      const meAv = await resolveMedia(settings.meAvatar);
+      const heartSVG = `<svg viewBox="0 0 24 24" width="16" height="16"><path d="M12 21C12 21 4 14.5 4 9.5C4 6.5 6.5 4.5 9 4.5C11 4.5 12 6 12 6C12 6 13 4.5 15 4.5C17.5 4.5 20 6.5 20 9.5C20 14.5 12 21 12 21Z" fill="#ff3b5c"/></svg>`;
+      bubble.innerHTML = `
+        <span class="couple-spark" style="top:6px;left:10px;">✨</span>
+        <span class="couple-spark" style="bottom:8px;right:12px;animation-delay:.8s;">💗</span>
+        <div class="couple-avatars">
+          <img src="${taAv || 'data:image/svg+xml,' + encodeURIComponent('<svg xmlns="http://www.w3.org/2000/svg" width="26" height="26"><circle cx="13" cy="13" r="12" fill="rgba(255,255,255,0.6)"/><text x="13" y="18" text-anchor="middle" font-size="10" fill="#a04a6a">遇</text></svg>')}">
+          <span class="couple-heart">${heartSVG}</span>
+          <img src="${meAv || 'data:image/svg+xml,' + encodeURIComponent('<svg xmlns="http://www.w3.org/2000/svg" width="26" height="26"><circle cx="13" cy="13" r="12" fill="rgba(255,255,255,0.6)"/><text x="13" y="18" text-anchor="middle" font-size="10" fill="#a04a6a">我</text></svg>')}">
+        </div>
+        <div class="couple-text">${escapeHtml(msg.interactData.text || '')}</div>`;
     } else {
       bubble.style.background = 'transparent';
       bubble.style.border = 'none';
@@ -5349,9 +5566,9 @@ function bindMessageLongPress(row, msg) {
   let pressTimer = null;
   const startPress = (e) => {
     pressTimer = setTimeout(() => {
-      const x = e.clientX || (e.touches && e.touches[0] ? e.touches[0].clientX : window.innerWidth / 2);
-      const y = e.clientY || (e.touches && e.touches[0] ? e.touches[0].clientY : window.innerHeight / 2);
-      showMessageMenu(row, msg, x, y);
+      const cx = (e.clientX !== undefined) ? e.clientX : ((e.touches && e.touches[0]) ? e.touches[0].clientX : window.innerWidth / 2);
+      const cy = (e.clientY !== undefined) ? e.clientY : ((e.touches && e.touches[0]) ? e.touches[0].clientY : window.innerHeight / 2);
+      showMessageMenu(row, msg, cx, cy);
     }, 500);
   };
   const cancelPress = () => {
@@ -5592,61 +5809,53 @@ async function getRecentMeCount() {
   return count;
 }
 
-// ========== 挑选回复者（你发N条回N条·上限5·随机分配） ==========
-function pickReplierPlan(totalCount) {
-  let pool = onlineWorlds.slice();
-  if (!pool.length) {
-    ensureSomeoneReplies();
-    pool = onlineWorlds.slice();
-  }
-  if (!pool.length) {
-    const all = settings.worlds || [];
-    if (!all.length) return [];
-    const pick = all[Math.floor(Math.random() * all.length)];
-    pool = [pick.id];
-  }
-  pool = pool.slice().sort(() => Math.random() - 0.5);
+// ========== 挑选回复者（每个在线的他各随机回 0~N 条，每人≤5）==========
+function pickReplierPlan(totalCount, onlineList) {
   const plan = [];
-  let remaining = totalCount;
-  let idx = 0;
-  while (remaining > 0 && idx < pool.length) {
-    let take;
-    if (idx === pool.length - 1) {
-      take = remaining;
-    } else {
-      const maxAllowed = remaining - (pool.length - idx - 1);
-      take = 1 + Math.floor(Math.random() * Math.max(1, maxAllowed));
-      if (take > maxAllowed) take = maxAllowed;
-      if (take < 1) take = 1;
-    }
-    plan.push({ worldId: pool[idx], count: take });
-    remaining -= take;
-    idx++;
-  }
-  while (remaining > 0 && plan.length) {
-    const pick = plan[Math.floor(Math.random() * plan.length)];
-    pick.count++;
-    remaining--;
-  }
+  onlineList.forEach(wid => {
+    const maxForThis = Math.min(totalCount, 5);
+    const count = Math.floor(Math.random() * (maxForThis + 1));
+    if (count > 0) plan.push({ worldId: wid, count });
+  });
   return plan;
 }
 
 async function getCardsForWorld(worldId) {
-  const specific = (settings.worldCards && settings.worldCards[worldId]) || [];
-  if (specific && specific.length) return specific.map(c => ({ content: c }));
-  return await idbGetAll('cards');
+  const allCards = await idbGetAll('cards');
+  const specific = allCards.filter(c => c.worldId === worldId);
+  if (specific.length) return specific;
+  return allCards.filter(c => !c.worldId);
 }
 
 async function triggerTAReply() {
   if (isReplying || isArchiving) return;
-  const cards = await idbGetAll('cards');
-  if (!cards.length) { showTyping(false); return; }
+  const allCards = await idbGetAll('cards');
+  if (!allCards.length) { showTyping(false); return; }
   isReplying = true;
   let totalCount = await getRecentMeCount();
   if (totalCount < 1) totalCount = 1;
   if (totalCount > 5) totalCount = 5;
 
-  const plan = pickReplierPlan(totalCount);
+  ensureSomeoneReplies();
+  let onlineList = onlineWorlds.slice();
+  if (!onlineList.length) { isReplying = false; showTyping(false); return; }
+
+  const sleepers = onlineList.filter(wid => !isWorldAwake(wid));
+  if (sleepers.length === onlineList.length) {
+    const wakeIdx = Math.floor(Math.random() * onlineList.length);
+    const wokenId = onlineList[wakeIdx];
+    worldSleepTimers[wokenId] = Date.now() + 5 * 60000;
+    updateStatusBar();
+  } else {
+    const awakeList = onlineList.filter(wid => isWorldAwake(wid));
+    const wokenList = onlineList.filter(wid => !isWorldAwake(wid) && Math.random() < 0.3);
+    wokenList.forEach(wid => {
+      worldSleepTimers[wid] = Date.now() + 5 * 60000;
+    });
+    updateStatusBar();
+  }
+
+  const plan = pickReplierPlan(totalCount, onlineList);
   if (!plan.length) { isReplying = false; showTyping(false); return; }
 
   replyQueue = [];
@@ -5706,7 +5915,7 @@ async function triggerTAReply() {
     if (i < replyQueue.length - 1) await delay(800 + Math.random() * 2000);
   }
 
-  if (replyQueue.length >= 2 && Math.random() < 0.4) {
+  if (replyQueue.length >= 2 && Math.random() < 0.7) {
     await tryWorldDialogue(replyQueue);
   }
 
@@ -5751,16 +5960,13 @@ function showTyping(show) {
 // ========== 多世界在线管理 ==========
 function initOnlineWorlds() {
   setInterval(() => {
-    const night = isNightTime();
     const baseProb = 0.20;
-    const prob = night ? baseProb * 1.5 : baseProb;
     if (onlineWorlds.length >= 5) return;
     const worlds = settings.worlds || [];
     worlds.forEach(w => {
       if (onlineWorlds.includes(w.id)) return;
       if (onlineWorlds.length >= 5) return;
-      if (Math.random() < prob) {
-        if (!isWorldAwake(w.id) && !night) return;
+      if (Math.random() < baseProb) {
         addWorldOnline(w.id);
       }
     });
@@ -5768,7 +5974,9 @@ function initOnlineWorlds() {
 
   setInterval(() => {
     onlineWorlds.forEach(wid => {
-      if (Math.random() < 0.15) removeWorldOnline(wid);
+      if (Math.random() < 0.15) {
+        removeWorldOnline(wid);
+      }
     });
   }, 900000);
 }
@@ -5807,101 +6015,6 @@ function ensureSomeoneReplies() {
     const pick = all[Math.floor(Math.random() * all.length)];
     addWorldOnline(pick.id);
   }
-}
-
-function startInitialWorlds() {
-  const startCount = 2 + Math.floor(Math.random() * 2);
-  const allW = settings.worlds || [];
-  const shuffledW = allW.slice().sort(() => Math.random() - 0.5);
-  for (let i = 0; i < startCount && i < shuffledW.length; i++) {
-    addWorldOnline(shuffledW[i].id);
-  }
-}
-
-// ========== 亲密回复（你发亲密内容 → 他回 2~3 条混合） ==========
-async function triggerIntimateReply() {
-  if (isReplying || isArchiving) return;
-  ensureSomeoneReplies();
-  const pool = onlineWorlds.slice();
-  if (!pool.length) return;
-  const wid = pool[Math.floor(Math.random() * pool.length)];
-  isReplying = true;
-  showTyping(true);
-  await delay(1500 + Math.random() * 1500);
-  showTyping(false);
-  const replyCount = 2 + Math.floor(Math.random() * 2);
-  for (let k = 0; k < replyCount; k++) {
-    const roll = Math.random();
-    if (roll < 0.40) {
-      const cards = await getCardsForWorld(wid);
-      if (cards.length) {
-        const card = cards[Math.floor(Math.random() * cards.length)];
-        const msg = { sender: 'ta', content: card.content, timestamp: Date.now(), pinned: false, pinBy: '', heartMark: null, quoteContent: null, worldId: wid, worldLabel: getWorldLabel(wid) };
-        const id = await idbPutReturnId('messages', msg);
-        msg.id = id;
-        await appendMessage(msg);
-      }
-    } else if (roll < 0.55) {
-      const stickers = await libGet('stickerLibrary');
-      if (stickers.length) {
-        const sticker = stickers[Math.floor(Math.random() * stickers.length)];
-        const msg = { sender: 'ta', content: '[贴纸]', imageData: sticker.data, timestamp: Date.now(), pinned: false, pinBy: '', heartMark: null, quoteContent: null, worldId: wid, worldLabel: getWorldLabel(wid) };
-        const id = await idbPutReturnId('messages', msg);
-        msg.id = id;
-        await appendMessage(msg);
-      }
-    } else if (roll < 0.70) {
-      const ta2me = getInteractsForWorld(wid, 'ta2me');
-      const couple = getInteractsForWorld(wid, 'couple');
-      const ipool = [...ta2me, ...couple];
-      if (ipool.length) {
-        const item = ipool[Math.floor(Math.random() * ipool.length)];
-        const text = typeof item === 'string' ? item : (item.text || '');
-        if (text) {
-          const isCouple = couple.some(x => {
-            const t = typeof x === 'string' ? x : (x.text || '');
-            return t === text;
-          });
-          const msg = { sender: 'ta', content: text, interactData: { text, couple: isCouple }, timestamp: Date.now(), pinned: false, pinBy: '', heartMark: null, quoteContent: null, worldId: wid, worldLabel: getWorldLabel(wid) };
-          const id = await idbPutReturnId('messages', msg);
-          msg.id = id;
-          await appendMessage(msg);
-        }
-      }
-    } else if (roll < 0.80) {
-      const gifts = JSON.parse(localStorage.getItem('giftLibrary') || '[]');
-      const affordable = gifts.filter(g => settings.heartValue >= (g.cost || 0));
-      if (affordable.length) {
-        const gift = affordable[Math.floor(Math.random() * affordable.length)];
-        settings.heartValue -= gift.cost;
-        await saveSettings();
-        updateHeartValue();
-        const giftWithOpened = { ...gift, opened: false };
-        const msg = { sender: 'ta', content: '送你' + gift.name, giftData: giftWithOpened, timestamp: Date.now(), pinned: false, pinBy: '', heartMark: null, quoteContent: null, worldId: wid, worldLabel: getWorldLabel(wid) };
-        const id = await idbPutReturnId('messages', msg);
-        msg.id = id;
-        await appendMessage(msg);
-      }
-    } else {
-      const intimates = (settings.worldIntimates && settings.worldIntimates[wid]) || (settings.worldIntimates && settings.worldIntimates['__general']) || [];
-      if (intimates.length) {
-        const line = intimates[Math.floor(Math.random() * intimates.length)];
-        const msg = { sender: 'ta', content: line, intimateData: true, timestamp: Date.now(), pinned: false, pinBy: '', heartMark: null, quoteContent: null, worldId: wid, worldLabel: getWorldLabel(wid) };
-        const id = await idbPutReturnId('messages', msg);
-        msg.id = id;
-        await appendMessage(msg);
-      }
-    }
-    if (k < replyCount - 1) await delay(800 + Math.random() * 1500);
-  }
-  isReplying = false;
-}
-
-function getInteractsForWorld(worldId, tab) {
-  const specific = (settings.worldInteracts && settings.worldInteracts[worldId]) || null;
-  if (specific && specific[tab] && specific[tab].length) return specific[tab];
-  const general = JSON.parse(localStorage.getItem('interactionLibrary') || '{}');
-  return general[tab] || [];
 }
   // ========== TA主动发消息 ==========
 function scheduleTAActive() {
@@ -5978,11 +6091,11 @@ function scheduleTAAutonomy() {
           const sid = await idbPutReturnId('messages', sysMsg);
           sysMsg.id = sid;
           await appendMessage(sysMsg);
-        } else if (action < 0.65 && Math.random() < settings.taQuoteProb) {
+        } else if (action < 0.75 && Math.random() < settings.taQuoteProb) {
           await taQuoteMessage(target);
-        } else if (action < 0.75 && Math.random() < settings.taNickProb) {
+        } else if (action < 0.85 && Math.random() < settings.taNickProb) {
           await taChangeNickPair();
-        } else if (action < 0.85 && Math.random() < settings.taStickerProb) {
+        } else if (action < 0.92 && Math.random() < settings.taStickerProb) {
           await taSendSticker();
         } else if (Math.random() < settings.taGiftProb) {
           await taSendGift();
@@ -5992,6 +6105,7 @@ function scheduleTAAutonomy() {
   }, 600000);
 }
 
+// ========== 易遇引用（范围扩大，可引用他或你，类型全支持）==========
 async function taQuoteMessage(target) {
   const today = new Date().toDateString();
   const msgDate = new Date(target.timestamp).toDateString();
@@ -6001,6 +6115,7 @@ async function taQuoteMessage(target) {
   const cards = await getCardsForWorld(wid);
   if (!cards.length) return;
   const card = cards[Math.floor(Math.random() * cards.length)];
+  const quoteText = getQuoteText(target);
   const msg = {
     sender: 'ta',
     content: card.content,
@@ -6008,28 +6123,32 @@ async function taQuoteMessage(target) {
     pinned: false,
     pinBy: '',
     heartMark: null,
-    quoteContent: target.content,
+    quoteContent: quoteText,
     worldId: wid,
     worldLabel: getWorldLabel(wid)
   };
   const id = await idbPutReturnId('messages', msg);
   msg.id = id;
   await appendMessage(msg);
-  sendNotification('易遇引用了你的话');
-  addNotification('💬', '易遇引用你的话');
+  sendNotification('易遇引用了消息');
+  addNotification('💬', '易遇引用了一条消息');
 }
 
-// ========== 换昵称（成对·toast 轻提示） ==========
+function getQuoteText(msg) {
+  if (msg.giftData) return '[礼物] ' + (msg.giftData.name || '礼物');
+  if (msg.interactData) return msg.interactData.text || '';
+  if (msg.intimateData) return msg.content || '';
+  if (msg.imageData) return '[贴纸]';
+  return msg.content || '';
+}
+
+// ========== 换昵称（成对·toast）==========
 async function taChangeNickPair() {
   const taNicks = settings.taNickLibrary || [];
   const meNicks = settings.meNickLibrary || [];
   if (!taNicks.length && !meNicks.length) return;
-  const newTaNick = taNicks.length
-    ? taNicks[Math.floor(Math.random() * taNicks.length)]
-    : (settings.taNick || settings.taName);
-  const newMeNick = meNicks.length
-    ? meNicks[Math.floor(Math.random() * meNicks.length)]
-    : (settings.meNick || settings.meName);
+  const newTaNick = taNicks.length ? taNicks[Math.floor(Math.random() * taNicks.length)] : (settings.taNick || settings.taName);
+  const newMeNick = meNicks.length ? meNicks[Math.floor(Math.random() * meNicks.length)] : (settings.meNick || settings.meName);
   settings.taNick = newTaNick;
   settings.meNick = newMeNick;
   await saveSettings();
@@ -6038,7 +6157,7 @@ async function taChangeNickPair() {
   addNotification('🏷', '易遇换了一对昵称');
 }
 
-// ========== 换头像（成对·toast·ref） ==========
+// ========== 换头像（成对·toast·ref）==========
 function scheduleTAAvatarChange() {
   setInterval(async () => {
     if (Math.random() < settings.taAvatarProb && !isReplying && !isArchiving) {
@@ -6055,7 +6174,7 @@ function scheduleTAAvatarChange() {
   }, 1800000);
 }
 
-// ========== 换背景（单个·toast·ref） ==========
+// ========== 换背景（单个·toast·ref）==========
 function scheduleTABGChange() {
   setInterval(async () => {
     if (Math.random() < settings.taBGProb && !isReplying && !isArchiving) {
@@ -6105,7 +6224,7 @@ async function taSendGift() {
   addNotification('🎁', '易遇送了你一个礼物：' + gift.name);
 }
 
-// ========== 互动（读专属库·修情侣判定） ==========
+// ========== 互动（读专属库·修情侣判定）==========
 async function taInteract() {
   let onlinePool = onlineWorlds.length ? onlineWorlds : ['real'];
   const wid = onlinePool[Math.floor(Math.random() * onlinePool.length)];
@@ -6160,6 +6279,13 @@ async function taInteract() {
   }
 }
 
+function getInteractsForWorld(worldId, tab) {
+  const specific = (settings.worldInteracts && settings.worldInteracts[worldId]) || null;
+  if (specific && specific[tab] && specific[tab].length) return specific[tab];
+  const general = JSON.parse(localStorage.getItem('interactionLibrary') || '{}');
+  return general[tab] || [];
+}
+
 function scheduleTAInteract() {
   setInterval(async () => {
     const prob = Math.max(0.05, settings.taInteractProb * 3.5);
@@ -6199,11 +6325,11 @@ function togglePlusMenu() {
       <div class="plus-item" id="plus-sticker"><div class="icon-wrap">${ICONS.sticker}</div><span>贴纸</span></div>
       <div class="plus-item" id="plus-gift"><div class="icon-wrap">${ICONS.gift}</div><span>礼物</span></div>
       <div class="plus-item" id="plus-interact"><div class="icon-wrap">${ICONS.interact}</div><span>互动</span></div>
+      <div class="plus-item" id="plus-shard-interact"><div class="icon-wrap">${ICONS.copyInteract}</div><span>副本互动</span></div>
       <div class="plus-item" id="plus-quiz"><div class="icon-wrap">${ICONS.quiz}</div><span>问答</span></div>
       <div class="plus-item" id="plus-intimate"><div class="icon-wrap">${ICONS.intimate}</div><span>悄悄话</span></div>
       <div class="plus-item" id="plus-approach"><div class="icon-wrap">${ICONS.approach}</div><span>凑近</span></div>
       <div class="plus-item" id="plus-compete"><div class="icon-wrap">${ICONS.compete}</div><span>争宠</span></div>
-      <div class="plus-item" id="plus-shard-interact"><div class="icon-wrap">${ICONS.copyInteract}</div><span>副本互动</span></div>
       <div class="plus-item" id="plus-shard-together"><div class="icon-wrap">${ICONS.shardTogether}</div><span>想共度</span></div>
       <div class="plus-item" id="plus-ball"><div class="icon-wrap"><svg viewBox="0 0 24 24" fill="none" stroke="#4a3528" stroke-width="1.7"><circle cx="12" cy="12" r="8" opacity="0.5"/><circle cx="12" cy="12" r="4" opacity="0.8"/><circle cx="12" cy="12" r="1.5" fill="#4a3528" stroke="none"/></svg></div><span>悬浮球</span></div>
       <div class="plus-item" id="plus-accompany"><div class="icon-wrap">${STATUS_ICONS.companion}</div><span>陪伴</span></div>
@@ -6215,11 +6341,11 @@ function togglePlusMenu() {
   overlay.querySelector('#plus-sticker').addEventListener('click', () => { overlay.remove(); openStickerSendPanel(); });
   overlay.querySelector('#plus-gift').addEventListener('click', () => { overlay.remove(); openGiftSendPanel(); });
   overlay.querySelector('#plus-interact').addEventListener('click', () => { overlay.remove(); openInteractSendPanel(); });
+  overlay.querySelector('#plus-shard-interact').addEventListener('click', () => { overlay.remove(); openShardInteractSendPanel(); });
   overlay.querySelector('#plus-quiz').addEventListener('click', () => { overlay.remove(); startQuiz(); });
   overlay.querySelector('#plus-intimate').addEventListener('click', () => { overlay.remove(); openIntimateSendPanel(); });
   overlay.querySelector('#plus-approach').addEventListener('click', () => { overlay.remove(); openApproachSendPanel(); });
   overlay.querySelector('#plus-compete').addEventListener('click', () => { overlay.remove(); openCompeteSendPanel(); });
-  overlay.querySelector('#plus-shard-interact').addEventListener('click', () => { overlay.remove(); openShardInteractSendPanel(); });
   overlay.querySelector('#plus-shard-together').addEventListener('click', () => { overlay.remove(); openShardTogetherSendPanel(); });
   overlay.querySelector('#plus-ball').addEventListener('click', () => {
     const ball = document.getElementById('floating-ball');
@@ -6311,7 +6437,7 @@ async function openStickerSendPanel() {
   });
 }
 
-// ========== 互动发送（⊕·只有3个Tab） ==========
+// ========== 互动发送（⊕·只 3 Tab）==========
 function openInteractSendPanel() {
   const overlay = createModal(`
     <div class="heart-tabs" id="interact-send-tabs">
@@ -6373,7 +6499,7 @@ function renderInteractSendBody(overlay, tab) {
   });
 }
 
-// ========== 副本互动·发送 ==========
+// ========== 副本互动发送（独立入口）==========
 function openShardInteractSendPanel() {
   const overlay = createModal(`
     <div class="big-input-title">副本互动</div>
@@ -6387,9 +6513,17 @@ function openShardInteractSendPanel() {
   let curWid = settings.currentWorldId || (settings.worlds[0] && settings.worlds[0].id);
   let curSub = 'me2ta';
   const chips = overlay.querySelector('#shard-send-chips');
-  renderShardChips(chips, curWid, (wid) => {
-    curWid = wid;
-    loadShardSendList(overlay, curWid, curSub);
+  (settings.worlds || []).forEach(w => {
+    const chip = document.createElement('div');
+    chip.className = 'world-chip' + (w.id === curWid ? ' active' : '');
+    chip.textContent = w.name;
+    chip.addEventListener('click', () => {
+      curWid = w.id;
+      chips.querySelectorAll('.world-chip').forEach(c => c.classList.remove('active'));
+      chip.classList.add('active');
+      loadShardSendList(overlay, curWid, curSub);
+    });
+    chips.appendChild(chip);
   });
   overlay.querySelectorAll('#shard-send-tabs .heart-tab').forEach(btn => {
     btn.addEventListener('click', () => {
@@ -6441,16 +6575,25 @@ function loadShardSendList(overlay, wid, sub) {
   });
 }
 
-// ========== 想共度·发送 ==========
+// ========== 想共度发送（独立入口）==========
 function openShardTogetherSendPanel() {
   const overlay = createModal(`
     <div class="big-input-title">想共度</div>
     <div class="world-chip-row" id="shard-together-send-chips"></div>
     <div class="card-list" id="shard-together-send-list"></div>`);
   let curWid = settings.currentWorldId || (settings.worlds[0] && settings.worlds[0].id);
-  renderShardChips(overlay.querySelector('#shard-together-send-chips'), curWid, (wid) => {
-    curWid = wid;
-    loadShardTogetherSendList(overlay, curWid);
+  const chips = overlay.querySelector('#shard-together-send-chips');
+  (settings.worlds || []).forEach(w => {
+    const chip = document.createElement('div');
+    chip.className = 'world-chip' + (w.id === curWid ? ' active' : '');
+    chip.textContent = w.name;
+    chip.addEventListener('click', () => {
+      curWid = w.id;
+      chips.querySelectorAll('.world-chip').forEach(c => c.classList.remove('active'));
+      chip.classList.add('active');
+      loadShardTogetherSendList(overlay, curWid);
+    });
+    chips.appendChild(chip);
   });
   loadShardTogetherSendList(overlay, curWid);
 }
@@ -6469,13 +6612,12 @@ function loadShardTogetherSendList(overlay, wid) {
     div.className = 'card-item';
     div.innerHTML = `<div class="card-text">${escapeHtml(text)}</div>`;
     div.addEventListener('click', async () => {
-      const targetWid = wid;
       const myMsg = { sender: 'me', content: '要不要' + text + '？', timestamp: Date.now(), pinned: false, pinBy: '', heartMark: null, quoteContent: null };
       const mid = await idbPutReturnId('messages', myMsg);
       myMsg.id = mid;
       await appendMessage(myMsg);
       await delay(800 + Math.random() * 1200);
-      const taMsg = { sender: 'ta', content: '好呀，一起' + text, timestamp: Date.now(), pinned: false, pinBy: '', heartMark: null, quoteContent: null, worldId: targetWid, worldLabel: getWorldLabel(targetWid) };
+      const taMsg = { sender: 'ta', content: '好呀，一起' + text, timestamp: Date.now(), pinned: false, pinBy: '', heartMark: null, quoteContent: null, worldId: wid, worldLabel: getWorldLabel(wid) };
       const tid = await idbPutReturnId('messages', taMsg);
       taMsg.id = tid;
       await appendMessage(taMsg);
@@ -6493,76 +6635,112 @@ function loadShardTogetherSendList(overlay, wid) {
   });
 }
 
-// ========== 凑近·发送 ==========
-async function openApproachSendPanel() {
-  const pool = (settings.worldApproaches && settings.worldApproaches['__general']) || [];
-  if (!pool.length) return showToast('凑近是空的，先去小世界添加');
-  const overlay = createModal(`<div class="big-input-title">凑近</div><div class="card-list" id="approach-send-list"></div>`);
-  const list = overlay.querySelector('#approach-send-list');
-  pool.forEach(text => {
-    const div = document.createElement('div');
-    div.className = 'card-item';
-    div.innerHTML = `<div class="card-text">${escapeHtml(text)}</div>`;
-    div.addEventListener('click', async () => {
-      let onlinePool = onlineWorlds.length ? onlineWorlds : ['real'];
-      const wid = onlinePool[Math.floor(Math.random() * onlinePool.length)];
-      const msg = {
-        sender: 'ta',
-        content: text,
-        interactData: { text, couple: false, intimateType: 'approach' },
-        timestamp: Date.now(),
-        pinned: false,
-        pinBy: '',
-        heartMark: null,
-        quoteContent: null,
-        worldId: wid,
-        worldLabel: getWorldLabel(wid)
-      };
-      const id = await idbPutReturnId('messages', msg);
-      msg.id = id;
-      await appendMessage(msg);
-      overlay.remove();
-      lastUserMessageTime = Date.now();
-      await triggerIntimateReply();
+// ========== 凑近发送（⊕·分 Tab）==========
+function openApproachSendPanel() {
+  const overlay = createModal(`
+    <div class="big-input-title">凑近</div>
+    <div class="heart-tabs" id="approach-send-tabs">
+      <button class="heart-tab active" data-tab="me2ta">我对TA</button>
+      <button class="heart-tab" data-tab="ta2me">TA对我</button>
+    </div>
+    <div class="card-list" id="approach-send-list"></div>`);
+  let currentTab = 'me2ta';
+  const render = () => {
+    const list = overlay.querySelector('#approach-send-list');
+    list.innerHTML = '';
+    if (!settings.worldApproaches) settings.worldApproaches = {};
+    const data = settings.worldApproaches['__general'] || { me2ta: [], ta2me: [] };
+    const items = data[currentTab] || [];
+    if (!items.length) {
+      list.innerHTML = '<div class="placeholder-tip">还没有凑近，先去小世界添加</div>';
+      return;
+    }
+    items.forEach(text => {
+      const div = document.createElement('div');
+      div.className = 'card-item';
+      div.innerHTML = `<div class="card-text">${escapeHtml(text)}</div>`;
+      if (currentTab === 'ta2me') {
+        div.style.opacity = '0.5';
+        div.style.pointerEvents = 'none';
+      } else {
+        div.addEventListener('click', async () => {
+          let onlinePool = onlineWorlds.length ? onlineWorlds : ['real'];
+          const wid = onlinePool[Math.floor(Math.random() * onlinePool.length)];
+          const msg = { sender: 'ta', content: text, interactData: { text, couple: false, intimateType: 'approach' }, timestamp: Date.now(), readTime: null, pinned: false, pinBy: '', heartMark: null, quoteContent: null, worldId: wid, worldLabel: getWorldLabel(wid) };
+          const id = await idbPutReturnId('messages', msg);
+          msg.id = id;
+          await appendMessage(msg);
+          overlay.remove();
+          lastUserMessageTime = Date.now();
+          await triggerIntimateReply();
+        });
+      }
+      list.appendChild(div);
     });
-    list.appendChild(div);
+  };
+  overlay.querySelectorAll('#approach-send-tabs .heart-tab').forEach(btn => {
+    btn.addEventListener('click', () => {
+      currentTab = btn.dataset.tab;
+      overlay.querySelectorAll('#approach-send-tabs .heart-tab').forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+      render();
+    });
   });
+  render();
 }
 
-// ========== 争宠·发送 ==========
-async function openCompeteSendPanel() {
-  const pool = (settings.worldCompetes && settings.worldCompetes['__general']) || [];
-  if (!pool.length) return showToast('争宠是空的，先去小世界添加');
-  const overlay = createModal(`<div class="big-input-title">争宠</div><div class="card-list" id="compete-send-list"></div>`);
-  const list = overlay.querySelector('#compete-send-list');
-  pool.forEach(text => {
-    const div = document.createElement('div');
-    div.className = 'card-item';
-    div.innerHTML = `<div class="card-text">${escapeHtml(text)}</div>`;
-    div.addEventListener('click', async () => {
-      let onlinePool = onlineWorlds.length ? onlineWorlds : ['real'];
-      const wid = onlinePool[Math.floor(Math.random() * onlinePool.length)];
-      const msg = {
-        sender: 'ta',
-        content: text,
-        interactData: { text, couple: false, intimateType: 'compete' },
-        timestamp: Date.now(),
-        pinned: false,
-        pinBy: '',
-        heartMark: null,
-        quoteContent: null,
-        worldId: wid,
-        worldLabel: getWorldLabel(wid)
-      };
-      const id = await idbPutReturnId('messages', msg);
-      msg.id = id;
-      await appendMessage(msg);
-      overlay.remove();
-      lastUserMessageTime = Date.now();
-      await triggerIntimateReply();
+// ========== 争宠发送（⊕·分 Tab）==========
+function openCompeteSendPanel() {
+  const overlay = createModal(`
+    <div class="big-input-title">争宠</div>
+    <div class="heart-tabs" id="compete-send-tabs">
+      <button class="heart-tab active" data-tab="me2ta">我对TA</button>
+      <button class="heart-tab" data-tab="ta2me">TA对我</button>
+    </div>
+    <div class="card-list" id="compete-send-list"></div>`);
+  let currentTab = 'me2ta';
+  const render = () => {
+    const list = overlay.querySelector('#compete-send-list');
+    list.innerHTML = '';
+    if (!settings.worldCompetes) settings.worldCompetes = {};
+    const data = settings.worldCompetes['__general'] || { me2ta: [], ta2me: [] };
+    const items = data[currentTab] || [];
+    if (!items.length) {
+      list.innerHTML = '<div class="placeholder-tip">还没有争宠，先去小世界添加</div>';
+      return;
+    }
+    items.forEach(text => {
+      const div = document.createElement('div');
+      div.className = 'card-item';
+      div.innerHTML = `<div class="card-text">${escapeHtml(text)}</div>`;
+      if (currentTab === 'ta2me') {
+        div.style.opacity = '0.5';
+        div.style.pointerEvents = 'none';
+      } else {
+        div.addEventListener('click', async () => {
+          let onlinePool = onlineWorlds.length ? onlineWorlds : ['real'];
+          const wid = onlinePool[Math.floor(Math.random() * onlinePool.length)];
+          const msg = { sender: 'ta', content: text, interactData: { text, couple: false, intimateType: 'compete' }, timestamp: Date.now(), readTime: null, pinned: false, pinBy: '', heartMark: null, quoteContent: null, worldId: wid, worldLabel: getWorldLabel(wid) };
+          const id = await idbPutReturnId('messages', msg);
+          msg.id = id;
+          await appendMessage(msg);
+          overlay.remove();
+          lastUserMessageTime = Date.now();
+          await triggerIntimateReply();
+        });
+      }
+      list.appendChild(div);
     });
-    list.appendChild(div);
+  };
+  overlay.querySelectorAll('#compete-send-tabs .heart-tab').forEach(btn => {
+    btn.addEventListener('click', () => {
+      currentTab = btn.dataset.tab;
+      overlay.querySelectorAll('#compete-send-tabs .heart-tab').forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+      render();
+    });
   });
+  render();
 }
   // ========== 礼物管理 ==========
 function openGiftManagePanel() {
@@ -6605,7 +6783,8 @@ function loadGiftList(overlay) {
   gifts.forEach((g, i) => {
     const div = document.createElement('div');
     div.className = 'card-item';
-    div.innerHTML = `<div class="card-text">${g.icon || '🎁'} ${escapeHtml(g.name)} - ${g.cost}爱意值</div>
+    const iconPart = g.image ? `<img src="${g.image}" style="width:28px;height:28px;border-radius:6px;object-fit:cover;vertical-align:middle;">` : (g.icon || '🎁');
+    div.innerHTML = `<div class="card-text">${iconPart} ${escapeHtml(g.name)} - ${g.cost}爱意值</div>
       <div class="card-ops"><button class="gift-del">✕</button></div>`;
     div.querySelector('.gift-del').addEventListener('click', () => {
       gifts.splice(i, 1);
@@ -6623,8 +6802,8 @@ function openGiftAddDialog(panelOverlay) {
       <button class="mini-btn gift-type-btn" data-type="icon">图标礼物</button>
       <button class="mini-btn gift-type-btn" data-type="image">图片礼物</button>
     </div>
-    <div id="gift-type-area"></div>
-    <input type="text" id="gift-name-input" placeholder="礼物名称" style="width:100%;background:rgba(255,255,255,0.5);border:1px solid rgba(255,255,255,0.6);border-radius:14px;padding:10px 14px;font-size:14px;color:#4a3f3a;outline:none;margin-bottom:8px;">
+    <div id="gift-type-area" style="margin-bottom:12px;"></div>
+    <input type="text" id="gift-name-input" placeholder="礼物名称" style="width:100%;background:rgba(255,255,255,0.5);border:1px solid rgba(255,255,255,0.6);border-radius:14px;padding:10px 14px;font-size:14px;color:#4a3f3a;outline:none;margin-bottom:12px;">
     <input type="number" id="gift-cost-input" placeholder="花费爱意值" style="width:100%;background:rgba(255,255,255,0.5);border:1px solid rgba(255,255,255,0.6);border-radius:14px;padding:10px 14px;font-size:14px;color:#4a3f3a;outline:none;margin-bottom:12px;">
     <button class="save-btn-center" id="save-gift">保存</button>`);
   let giftType = 'icon';
@@ -6636,9 +6815,9 @@ function openGiftAddDialog(panelOverlay) {
   function renderGiftTypeArea() {
     const area = overlay.querySelector('#gift-type-area');
     if (giftType === 'icon') {
-      area.innerHTML = `<input type="text" id="gift-icon-input" placeholder="输入图标，如🌹" style="width:100%;background:rgba(255,255,255,0.5);border:1px solid rgba(255,255,255,0.6);border-radius:14px;padding:10px 14px;font-size:14px;color:#4a3f3a;outline:none;margin-bottom:8px;">`;
+      area.innerHTML = `<input type="text" id="gift-icon-input" placeholder="输入图标，如🌹" style="width:100%;background:rgba(255,255,255,0.5);border:1px solid rgba(255,255,255,0.6);border-radius:14px;padding:10px 14px;font-size:14px;color:#4a3f3a;outline:none;">`;
     } else {
-      area.innerHTML = `<button class="upload-btn" id="gift-image-btn">上传图片</button>`;
+      area.innerHTML = `<button class="upload-btn" id="gift-image-btn" style="margin-top:0;">上传图片</button><div class="big-input-hint" id="gift-image-hint" style="margin-top:6px;"></div>`;
       area.querySelector('#gift-image-btn').addEventListener('click', () => {
         const inp = document.createElement('input');
         inp.type = 'file';
@@ -6649,7 +6828,7 @@ function openGiftAddDialog(panelOverlay) {
           const reader = new FileReader();
           reader.onload = () => {
             giftImageData = reader.result;
-            area.querySelector('#gift-image-btn').textContent = '已选择图片';
+            area.querySelector('#gift-image-hint').textContent = '已选择：' + file.name;
           };
           reader.readAsDataURL(file);
         };
@@ -6663,6 +6842,7 @@ function openGiftAddDialog(panelOverlay) {
     const cost = Number(overlay.querySelector('#gift-cost-input').value);
     if (!name || !cost) return showToast('请填写名称和爱意值');
     if (giftType === 'icon') giftIcon = overlay.querySelector('#gift-icon-input')?.value || '🎁';
+    if (giftType === 'image' && !giftImageData) return showToast('请上传图片');
     const gifts = JSON.parse(localStorage.getItem('giftLibrary') || '[]');
     gifts.push({ type: giftType, name, cost, icon: giftIcon, image: giftImageData });
     localStorage.setItem('giftLibrary', JSON.stringify(gifts));
@@ -6680,7 +6860,8 @@ function openGiftSendPanel() {
   gifts.forEach(g => {
     const div = document.createElement('div');
     div.className = 'card-item';
-    div.innerHTML = `<div class="card-text">${g.icon || '🎁'} ${escapeHtml(g.name)} - ${g.cost}爱意值</div>`;
+    const iconPart = g.image ? `<img src="${g.image}" style="width:28px;height:28px;border-radius:6px;object-fit:cover;vertical-align:middle;">` : (g.icon || '🎁');
+    div.innerHTML = `<div class="card-text">${iconPart} ${escapeHtml(g.name)} - ${g.cost}爱意值</div>`;
     div.addEventListener('click', async () => {
       if (settings.heartValue < g.cost) return showToast('爱意值不足');
       settings.heartValue -= g.cost;
@@ -6700,7 +6881,7 @@ function openGiftSendPanel() {
   });
 }
 
-// ========== 互动管理（只有3个Tab） ==========
+// ========== 互动管理（3 Tab）==========
 function openInteractManagePanel() {
   const overlay = createModal(`
     <div class="heart-tabs" id="interact-mng-tabs">
@@ -6770,19 +6951,40 @@ function renderInteractMngBody(overlay, tab) {
   });
 }
 
-// ========== 对话管理 ==========
+// ========== 对话管理（分副本）==========
 function openDialogueManagePanel() {
   const overlay = createModal(`
     <div class="big-input-title">对话</div>
-    <div style="font-size:12px;color:#8b6f60;margin-bottom:10px;text-align:center;">多个世界的易遇互相接话时说的话（通用）</div>
-    <textarea class="big-input-area" id="dialogue-input" placeholder="一行一句" style="min-height:200px;">${((settings.worldDialogues && settings.worldDialogues['__general']) || []).join('\n')}</textarea>
+    <div style="font-size:12px;color:#8b6f60;margin-bottom:10px;text-align:center;">多个世界的易遇互相接话时说的话</div>
+    <div class="world-chip-row" id="dialogue-chips"></div>
+    <textarea class="big-input-area" id="dialogue-input" placeholder="一行一句" style="min-height:200px;"></textarea>
     <button class="save-btn-center" id="save-dialogue" style="margin-top:12px;">保存</button>`);
+  let curWid = '__general';
+  const chips = overlay.querySelector('#dialogue-chips');
+  const allWorlds = [{ id: '__general', name: '通用' }, ...(settings.worlds || [])];
+  allWorlds.forEach(w => {
+    const chip = document.createElement('div');
+    chip.className = 'world-chip' + (w.id === curWid ? ' active' : '');
+    chip.textContent = w.name;
+    chip.addEventListener('click', () => {
+      curWid = w.id;
+      chips.querySelectorAll('.world-chip').forEach(c => c.classList.remove('active'));
+      chip.classList.add('active');
+      loadDialogue(curWid);
+    });
+    chips.appendChild(chip);
+  });
+  function loadDialogue(wid) {
+    if (!settings.worldDialogues) settings.worldDialogues = {};
+    const arr = settings.worldDialogues[wid] || [];
+    overlay.querySelector('#dialogue-input').value = arr.join('\n');
+  }
+  loadDialogue(curWid);
   overlay.querySelector('#save-dialogue').addEventListener('click', async () => {
     if (!settings.worldDialogues) settings.worldDialogues = {};
-    settings.worldDialogues['__general'] = overlay.querySelector('#dialogue-input').value.trim().split('\n').map(s => s.trim()).filter(Boolean);
+    settings.worldDialogues[curWid] = overlay.querySelector('#dialogue-input').value.trim().split('\n').map(s => s.trim()).filter(Boolean);
     await saveSettings();
     showToast('对话已保存');
-    overlay.remove();
   });
 }
 
@@ -6801,109 +7003,278 @@ function openTogetherLibraryPanel() {
   });
 }
 
-// ========== 甜言 ==========
+// ========== 甜言（分副本）==========
 function openSweetWordsPanel() {
   const overlay = createModal(`
     <div class="big-input-title">甜言</div>
     <div style="font-size:12px;color:#8b6f60;margin-bottom:10px;text-align:center;">他休假时的日常情话</div>
-    <textarea class="big-input-area" id="sweet-input" placeholder="一行一句" style="min-height:200px;">${((settings.worldSweetWords && settings.worldSweetWords['__general']) || []).join('\n')}</textarea>
+    <div class="world-chip-row" id="sweet-chips"></div>
+    <textarea class="big-input-area" id="sweet-input" placeholder="一行一句" style="min-height:200px;"></textarea>
     <button class="save-btn-center" id="save-sweet" style="margin-top:12px;">保存</button>`);
+  let curWid = '__general';
+  const chips = overlay.querySelector('#sweet-chips');
+  const allWorlds = [{ id: '__general', name: '通用' }, ...(settings.worlds || [])];
+  allWorlds.forEach(w => {
+    const chip = document.createElement('div');
+    chip.className = 'world-chip' + (w.id === curWid ? ' active' : '');
+    chip.textContent = w.name;
+    chip.addEventListener('click', () => {
+      curWid = w.id;
+      chips.querySelectorAll('.world-chip').forEach(c => c.classList.remove('active'));
+      chip.classList.add('active');
+      loadSweet(curWid);
+    });
+    chips.appendChild(chip);
+  });
+  function loadSweet(wid) {
+    if (!settings.worldSweetWords) settings.worldSweetWords = {};
+    const arr = settings.worldSweetWords[wid] || [];
+    overlay.querySelector('#sweet-input').value = arr.join('\n');
+  }
+  loadSweet(curWid);
   overlay.querySelector('#save-sweet').addEventListener('click', async () => {
     if (!settings.worldSweetWords) settings.worldSweetWords = {};
-    settings.worldSweetWords['__general'] = overlay.querySelector('#sweet-input').value.trim().split('\n').map(s => s.trim()).filter(Boolean);
+    settings.worldSweetWords[curWid] = overlay.querySelector('#sweet-input').value.trim().split('\n').map(s => s.trim()).filter(Boolean);
     await saveSettings();
     showToast('甜言已保存');
-    overlay.remove();
   });
 }
 
-// ========== 悄悄话 ==========
+// ========== 悄悄话（分副本 + 分 Tab）==========
 function openIntimatePanel() {
   const overlay = createModal(`
     <div class="big-input-title">悄悄话</div>
     <div style="font-size:12px;color:#8b6f60;margin-bottom:10px;text-align:center;">亲密时说的话</div>
-    <textarea class="big-input-area" id="intimate-input" placeholder="一行一句" style="min-height:200px;">${((settings.worldIntimates && settings.worldIntimates['__general']) || []).join('\n')}</textarea>
+    <div class="world-chip-row" id="intimate-chips"></div>
+    <div class="heart-tabs" id="intimate-tabs">
+      <button class="heart-tab active" data-tab="me2ta">我对TA</button>
+      <button class="heart-tab" data-tab="ta2me">TA对我</button>
+    </div>
+    <textarea class="big-input-area" id="intimate-input" placeholder="一行一句" style="min-height:200px;"></textarea>
     <button class="save-btn-center" id="save-intimate" style="margin-top:12px;">保存</button>`);
+  let curWid = '__general';
+  let curTab = 'me2ta';
+  if (!settings.worldIntimates) settings.worldIntimates = {};
+  const chips = overlay.querySelector('#intimate-chips');
+  const allWorlds = [{ id: '__general', name: '通用' }, ...(settings.worlds || [])];
+  allWorlds.forEach(w => {
+    const chip = document.createElement('div');
+    chip.className = 'world-chip' + (w.id === curWid ? ' active' : '');
+    chip.textContent = w.name;
+    chip.addEventListener('click', () => {
+      curWid = w.id;
+      chips.querySelectorAll('.world-chip').forEach(c => c.classList.remove('active'));
+      chip.classList.add('active');
+      loadIntimate();
+    });
+    chips.appendChild(chip);
+  });
+  function loadIntimate() {
+    if (!settings.worldIntimates[curWid]) settings.worldIntimates[curWid] = { me2ta: [], ta2me: [] };
+    const arr = settings.worldIntimates[curWid][curTab] || [];
+    overlay.querySelector('#intimate-input').value = arr.join('\n');
+  }
+  loadIntimate();
+  overlay.querySelectorAll('#intimate-tabs .heart-tab').forEach(btn => {
+    btn.addEventListener('click', () => {
+      curTab = btn.dataset.tab;
+      overlay.querySelectorAll('#intimate-tabs .heart-tab').forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+      loadIntimate();
+    });
+  });
   overlay.querySelector('#save-intimate').addEventListener('click', async () => {
-    if (!settings.worldIntimates) settings.worldIntimates = {};
-    settings.worldIntimates['__general'] = overlay.querySelector('#intimate-input').value.trim().split('\n').map(s => s.trim()).filter(Boolean);
+    if (!settings.worldIntimates[curWid]) settings.worldIntimates[curWid] = { me2ta: [], ta2me: [] };
+    settings.worldIntimates[curWid][curTab] = overlay.querySelector('#intimate-input').value.trim().split('\n').map(s => s.trim()).filter(Boolean);
     await saveSettings();
     showToast('悄悄话已保存');
-    overlay.remove();
   });
 }
 
-// ========== 凑近 ==========
+// ========== 凑近（分副本 + 分 Tab）==========
 function openApproachPanel() {
   const overlay = createModal(`
     <div class="big-input-title">凑近</div>
     <div style="font-size:12px;color:#8b6f60;margin-bottom:10px;text-align:center;">亲密时其他世界的他加入说的话</div>
-    <textarea class="big-input-area" id="approach-input" placeholder="一行一句" style="min-height:200px;">${((settings.worldApproaches && settings.worldApproaches['__general']) || []).join('\n')}</textarea>
+    <div class="world-chip-row" id="approach-chips"></div>
+    <div class="heart-tabs" id="approach-tabs">
+      <button class="heart-tab active" data-tab="me2ta">我对TA</button>
+      <button class="heart-tab" data-tab="ta2me">TA对我</button>
+    </div>
+    <textarea class="big-input-area" id="approach-input" placeholder="一行一句" style="min-height:200px;"></textarea>
     <button class="save-btn-center" id="save-approach" style="margin-top:12px;">保存</button>`);
+  let curWid = '__general';
+  let curTab = 'me2ta';
+  if (!settings.worldApproaches) settings.worldApproaches = {};
+  const chips = overlay.querySelector('#approach-chips');
+  const allWorlds = [{ id: '__general', name: '通用' }, ...(settings.worlds || [])];
+  allWorlds.forEach(w => {
+    const chip = document.createElement('div');
+    chip.className = 'world-chip' + (w.id === curWid ? ' active' : '');
+    chip.textContent = w.name;
+    chip.addEventListener('click', () => {
+      curWid = w.id;
+      chips.querySelectorAll('.world-chip').forEach(c => c.classList.remove('active'));
+      chip.classList.add('active');
+      loadApproach();
+    });
+    chips.appendChild(chip);
+  });
+  function loadApproach() {
+    if (!settings.worldApproaches[curWid]) settings.worldApproaches[curWid] = { me2ta: [], ta2me: [] };
+    const arr = settings.worldApproaches[curWid][curTab] || [];
+    overlay.querySelector('#approach-input').value = arr.join('\n');
+  }
+  loadApproach();
+  overlay.querySelectorAll('#approach-tabs .heart-tab').forEach(btn => {
+    btn.addEventListener('click', () => {
+      curTab = btn.dataset.tab;
+      overlay.querySelectorAll('#approach-tabs .heart-tab').forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+      loadApproach();
+    });
+  });
   overlay.querySelector('#save-approach').addEventListener('click', async () => {
-    if (!settings.worldApproaches) settings.worldApproaches = {};
-    settings.worldApproaches['__general'] = overlay.querySelector('#approach-input').value.trim().split('\n').map(s => s.trim()).filter(Boolean);
+    if (!settings.worldApproaches[curWid]) settings.worldApproaches[curWid] = { me2ta: [], ta2me: [] };
+    settings.worldApproaches[curWid][curTab] = overlay.querySelector('#approach-input').value.trim().split('\n').map(s => s.trim()).filter(Boolean);
     await saveSettings();
     showToast('凑近已保存');
-    overlay.remove();
   });
 }
 
-// ========== 争宠 ==========
+// ========== 争宠（分副本 + 分 Tab）==========
 function openCompetePanel() {
   const overlay = createModal(`
     <div class="big-input-title">争宠</div>
     <div style="font-size:12px;color:#8b6f60;margin-bottom:10px;text-align:center;">亲密时其他世界的他争抢说的话</div>
-    <textarea class="big-input-area" id="compete-input" placeholder="一行一句" style="min-height:200px;">${((settings.worldCompetes && settings.worldCompetes['__general']) || []).join('\n')}</textarea>
+    <div class="world-chip-row" id="compete-chips"></div>
+    <div class="heart-tabs" id="compete-tabs">
+      <button class="heart-tab active" data-tab="me2ta">我对TA</button>
+      <button class="heart-tab" data-tab="ta2me">TA对我</button>
+    </div>
+    <textarea class="big-input-area" id="compete-input" placeholder="一行一句" style="min-height:200px;"></textarea>
     <button class="save-btn-center" id="save-compete" style="margin-top:12px;">保存</button>`);
+  let curWid = '__general';
+  let curTab = 'me2ta';
+  if (!settings.worldCompetes) settings.worldCompetes = {};
+  const chips = overlay.querySelector('#compete-chips');
+  const allWorlds = [{ id: '__general', name: '通用' }, ...(settings.worlds || [])];
+  allWorlds.forEach(w => {
+    const chip = document.createElement('div');
+    chip.className = 'world-chip' + (w.id === curWid ? ' active' : '');
+    chip.textContent = w.name;
+    chip.addEventListener('click', () => {
+      curWid = w.id;
+      chips.querySelectorAll('.world-chip').forEach(c => c.classList.remove('active'));
+      chip.classList.add('active');
+      loadCompete();
+    });
+    chips.appendChild(chip);
+  });
+  function loadCompete() {
+    if (!settings.worldCompetes[curWid]) settings.worldCompetes[curWid] = { me2ta: [], ta2me: [] };
+    const arr = settings.worldCompetes[curWid][curTab] || [];
+    overlay.querySelector('#compete-input').value = arr.join('\n');
+  }
+  loadCompete();
+  overlay.querySelectorAll('#compete-tabs .heart-tab').forEach(btn => {
+    btn.addEventListener('click', () => {
+      curTab = btn.dataset.tab;
+      overlay.querySelectorAll('#compete-tabs .heart-tab').forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+      loadCompete();
+    });
+  });
   overlay.querySelector('#save-compete').addEventListener('click', async () => {
-    if (!settings.worldCompetes) settings.worldCompetes = {};
-    settings.worldCompetes['__general'] = overlay.querySelector('#compete-input').value.trim().split('\n').map(s => s.trim()).filter(Boolean);
+    if (!settings.worldCompetes[curWid]) settings.worldCompetes[curWid] = { me2ta: [], ta2me: [] };
+    settings.worldCompetes[curWid][curTab] = overlay.querySelector('#compete-input').value.trim().split('\n').map(s => s.trim()).filter(Boolean);
     await saveSettings();
     showToast('争宠已保存');
-    overlay.remove();
   });
 }
 
-// ========== 悄悄话发送 ==========
+// ========== 悄悄话发送（分副本 + 分 Tab·TA对我灰显）==========
 async function openIntimateSendPanel() {
-  const pool = (settings.worldIntimates && settings.worldIntimates['__general']) || [];
-  if (!pool.length) return showToast('悄悄话是空的，先去小世界添加');
   const overlay = createModal(`
     <div class="big-input-title">悄悄话</div>
+    <div class="world-chip-row" id="intimate-send-chips"></div>
+    <div class="heart-tabs" id="intimate-send-tabs">
+      <button class="heart-tab active" data-tab="me2ta">我对TA</button>
+      <button class="heart-tab" data-tab="ta2me">TA对我</button>
+    </div>
     <div class="card-list" id="intimate-send-list"></div>`);
-  const list = overlay.querySelector('#intimate-send-list');
-  pool.forEach(text => {
-    const div = document.createElement('div');
-    div.className = 'card-item';
-    div.innerHTML = `<div class="card-text">${escapeHtml(text)}</div>`;
-    div.addEventListener('click', async () => {
-      const msg = {
-        sender: 'me',
-        content: text,
-        intimateData: true,
-        timestamp: Date.now(),
-        readTime: null,
-        pinned: false,
-        pinBy: '',
-        heartMark: null,
-        quoteContent: null
-      };
-      const id = await idbPutReturnId('messages', msg);
-      msg.id = id;
-      await appendMessage(msg);
-      overlay.remove();
-      lastUserMessageTime = Date.now();
-      setTempStatus('wantHug', '易遇想抱抱你', 3 * 60000);
-      scheduleReadReceipt(msg);
-      await triggerIntimateReply();
-      await triggerIntimateReactions();
+  let curWid = '__general';
+  let curTab = 'me2ta';
+  const chips = overlay.querySelector('#intimate-send-chips');
+  const allWorlds = [{ id: '__general', name: '通用' }, ...(settings.worlds || [])];
+  allWorlds.forEach(w => {
+    const chip = document.createElement('div');
+    chip.className = 'world-chip' + (w.id === curWid ? ' active' : '');
+    chip.textContent = w.name;
+    chip.addEventListener('click', () => {
+      curWid = w.id;
+      chips.querySelectorAll('.world-chip').forEach(c => c.classList.remove('active'));
+      chip.classList.add('active');
+      renderList();
     });
-    list.appendChild(div);
+    chips.appendChild(chip);
   });
+  overlay.querySelectorAll('#intimate-send-tabs .heart-tab').forEach(btn => {
+    btn.addEventListener('click', () => {
+      curTab = btn.dataset.tab;
+      overlay.querySelectorAll('#intimate-send-tabs .heart-tab').forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+      renderList();
+    });
+  });
+  function renderList() {
+    const list = overlay.querySelector('#intimate-send-list');
+    list.innerHTML = '';
+    if (!settings.worldIntimates) settings.worldIntimates = {};
+    if (!settings.worldIntimates[curWid]) settings.worldIntimates[curWid] = { me2ta: [], ta2me: [] };
+    const items = settings.worldIntimates[curWid][curTab] || [];
+    if (!items.length) {
+      list.innerHTML = '<div class="placeholder-tip">还没有悄悄话</div>';
+      return;
+    }
+    items.forEach(text => {
+      const div = document.createElement('div');
+      div.className = 'card-item';
+      div.innerHTML = `<div class="card-text">${escapeHtml(text)}</div>`;
+      if (curTab === 'ta2me') {
+        div.style.opacity = '0.5';
+        div.style.pointerEvents = 'none';
+      } else {
+        div.addEventListener('click', async () => {
+          const msg = {
+            sender: 'me',
+            content: text,
+            intimateData: true,
+            timestamp: Date.now(),
+            readTime: null,
+            pinned: false,
+            pinBy: '',
+            heartMark: null,
+            quoteContent: null
+          };
+          const id = await idbPutReturnId('messages', msg);
+          msg.id = id;
+          await appendMessage(msg);
+          overlay.remove();
+          lastUserMessageTime = Date.now();
+          setTempStatus('wantHug', '易遇想抱抱你', 3 * 60000);
+          scheduleReadReceipt(msg);
+          await triggerIntimateReactions();
+          await triggerIntimateReply();
+        });
+      }
+      list.appendChild(div);
+    });
+  }
+  renderList();
 }
 
-// ========== 亲密触发其他世界反应 ==========
+// ========== 亲密触发其他世界反应（凑近/争宠）==========
 async function triggerIntimateReactions() {
   const others = onlineWorlds.filter(w => w !== settings.currentWorldId);
   if (!others.length) return;
@@ -6916,9 +7287,9 @@ async function triggerIntimateReactions() {
     let pool = null;
     let isCompete = false;
     if (action < 0.5) {
-      pool = (settings.worldApproaches && settings.worldApproaches[wid]) || (settings.worldApproaches && settings.worldApproaches['__general']) || [];
+      pool = (settings.worldApproaches && settings.worldApproaches[wid] && settings.worldApproaches[wid].ta2me) || (settings.worldApproaches && settings.worldApproaches['__general'] && settings.worldApproaches['__general'].ta2me) || [];
     } else {
-      pool = (settings.worldCompetes && settings.worldCompetes[wid]) || (settings.worldCompetes && settings.worldCompetes['__general']) || [];
+      pool = (settings.worldCompetes && settings.worldCompetes[wid] && settings.worldCompetes[wid].ta2me) || (settings.worldCompetes && settings.worldCompetes['__general'] && settings.worldCompetes['__general'].ta2me) || [];
       isCompete = true;
     }
     if (!pool.length) continue;
@@ -6949,6 +7320,112 @@ async function triggerIntimateReactions() {
       setTempStatus('shuttling', '易遇正在穿梭', 10 * 60000);
     }
   }
+}
+
+// ========== 亲密回复（他回 2~3 条：字卡/贴纸/互动/礼物/悄悄话 混合）==========
+async function triggerIntimateReply() {
+  if (isReplying || isArchiving) return;
+  ensureSomeoneReplies();
+  let pool = onlineWorlds.slice();
+  if (!pool.length) return;
+  const wid = pool[Math.floor(Math.random() * pool.length)];
+  const totalCount = 2 + Math.floor(Math.random() * 2);
+  isReplying = true;
+  showTyping(true);
+  await delay(1200 + Math.random() * 1500);
+  showTyping(false);
+  for (let i = 0; i < totalCount; i++) {
+    const type = pickIntimateReplyType();
+    const ok = await sendIntimateReplyByType(type, wid);
+    if (!ok) continue;
+    if (i < totalCount - 1) await delay(800 + Math.random() * 2000);
+  }
+  isReplying = false;
+}
+
+function pickIntimateReplyType() {
+  const r = Math.random();
+  if (r < 0.40) return 'card';
+  if (r < 0.55) return 'sticker';
+  if (r < 0.70) return 'interact';
+  if (r < 0.80) return 'gift';
+  return 'intimate';
+}
+
+async function sendIntimateReplyByType(type, wid) {
+  if (type === 'card') {
+    const cards = await getCardsForWorld(wid);
+    if (!cards.length) return false;
+    const card = cards[Math.floor(Math.random() * cards.length)];
+    const msg = { sender: 'ta', content: card.content, timestamp: Date.now(), pinned: false, pinBy: '', heartMark: null, quoteContent: null, worldId: wid, worldLabel: getWorldLabel(wid) };
+    const id = await idbPutReturnId('messages', msg);
+    msg.id = id;
+    await appendMessage(msg);
+    sendNotification(card.content);
+    return true;
+  }
+  if (type === 'sticker') {
+    const stickers = await libGet('stickerLibrary');
+    if (!stickers.length) return false;
+    const sticker = stickers[Math.floor(Math.random() * stickers.length)];
+    const msg = { sender: 'ta', content: '[贴纸]', imageData: sticker.data, timestamp: Date.now(), pinned: false, pinBy: '', heartMark: null, quoteContent: null, worldId: wid, worldLabel: getWorldLabel(wid) };
+    const id = await idbPutReturnId('messages', msg);
+    msg.id = id;
+    await appendMessage(msg);
+    sendNotification('易遇发了一张贴纸');
+    return true;
+  }
+  if (type === 'interact') {
+    const ta2me = getInteractsForWorld(wid, 'ta2me');
+    const couple = getInteractsForWorld(wid, 'couple');
+    const ipool = [...ta2me, ...couple];
+    if (!ipool.length) return false;
+    const item = ipool[Math.floor(Math.random() * ipool.length)];
+    const text = typeof item === 'string' ? item : (item.text || '');
+    if (!text) return false;
+    const isCouple = couple.some(x => {
+      const t = typeof x === 'string' ? x : (x.text || '');
+      return t === text;
+    });
+    const msg = { sender: 'ta', content: text, interactData: { text, couple: isCouple }, timestamp: Date.now(), pinned: false, pinBy: '', heartMark: null, quoteContent: null, worldId: wid, worldLabel: getWorldLabel(wid) };
+    const id = await idbPutReturnId('messages', msg);
+    msg.id = id;
+    await appendMessage(msg);
+    sendNotification(text);
+    return true;
+  }
+  if (type === 'gift') {
+    const gifts = JSON.parse(localStorage.getItem('giftLibrary') || '[]');
+    if (!gifts.length) return false;
+    const affordable = gifts.filter(g => settings.heartValue >= (g.cost || 0));
+    if (!affordable.length) return false;
+    const gift = affordable[Math.floor(Math.random() * affordable.length)];
+    settings.heartValue -= gift.cost;
+    await saveSettings();
+    updateHeartValue();
+    const giftWithOpened = { ...gift, opened: false };
+    const msg = { sender: 'ta', content: '送你' + gift.name, giftData: giftWithOpened, timestamp: Date.now(), pinned: false, pinBy: '', heartMark: null, quoteContent: null, worldId: wid, worldLabel: getWorldLabel(wid) };
+    const id = await idbPutReturnId('messages', msg);
+    msg.id = id;
+    await appendMessage(msg);
+    sendNotification('易遇送了你一个礼物');
+    return true;
+  }
+  if (type === 'intimate') {
+    if (!settings.worldIntimates) settings.worldIntimates = {};
+    const specific = (settings.worldIntimates[wid] && settings.worldIntimates[wid].ta2me) || [];
+    const general = (settings.worldIntimates['__general'] && settings.worldIntimates['__general'].ta2me) || [];
+    const ipool = specific.length ? specific : general;
+    if (!ipool.length) return false;
+    const text = ipool[Math.floor(Math.random() * ipool.length)];
+    const msg = { sender: 'ta', content: text, intimateData: true, timestamp: Date.now(), pinned: false, pinBy: '', heartMark: null, quoteContent: null, worldId: wid, worldLabel: getWorldLabel(wid) };
+    const id = await idbPutReturnId('messages', msg);
+    msg.id = id;
+    await appendMessage(msg);
+    sendNotification(text);
+    return true;
+  }
+  return false;
 }
   // ========== 问答题库 ==========
 function openQuizManagePanel() {
@@ -7030,7 +7507,8 @@ async function startQuiz() {
   if (settings.heartValue < 5) return showToast('爱意值不足 5，无法发起问答');
   if (pendingQuiz) return showToast('还有一题没答完');
   const quizzes = JSON.parse(localStorage.getItem('quizLibrary') || '[]');
-  const cards = await idbGetAll('cards');
+  const allCards = await idbGetAll('cards');
+  const cards = allCards.filter(c => !c.worldId);
   if (quizzes.length && (Math.random() < 0.5 || cards.length < 2)) {
     await startLibraryQuiz(quizzes);
   } else if (cards.length >= 2) {
@@ -7040,7 +7518,6 @@ async function startQuiz() {
   } else {
     showToast('先添加字卡或问答题库');
   }
-  addBigEventOnce('firstQuiz', 'question', '第一次和易遇玩问答');
 }
 
 async function startLibraryQuiz(quizzes) {
@@ -7305,7 +7782,7 @@ function scheduleHighDim() {
       await appendMessage(msg);
       sendNotification(line);
       addNotification('✨', '易遇的高维彩蛋');
-      addBigEventOnce('firstHighDim', 'highdim', '第一次收到高维彩蛋');
+      addBigEvent('highdim', '第一次收到高维彩蛋');
     }
     scheduleHighDim();
   }, next);
@@ -7441,8 +7918,8 @@ function openTogetherPanel() {
       overlay.remove();
       lastUserMessageTime = Date.now();
       showToast('和易遇一起' + a.name);
+      addBigEvent('together', '第一次一起活动：' + a.name);
       scheduleTogetherMessages();
-      addBigEventOnce('firstTogether', 'together', '第一次和易遇一起活动');
     });
     list.appendChild(div);
   });
@@ -8115,7 +8592,6 @@ function scheduleTALetter() {
       letters.received.push({ content: fullLetter, date: new Date().toISOString().slice(0, 10), unread: true, worldId: wid, worldLabel: getWorldLabel(wid) });
       localStorage.setItem('letters', JSON.stringify(letters));
       addBigEvent('letter', '收到易遇的一封信');
-      addBigEventOnce('firstLetter', 'letter', '第一次收到易遇的信');
       sendNotification('易遇给你写了一封信');
       addNotification('✉', '易遇给你写了一封信');
     }
@@ -8283,9 +8759,10 @@ function openLoverSpacePanel() {
     d.checkins.me = d.checkins.me || [];
     d.checkins.me.push(today);
     localStorage.setItem('loverCheckins', JSON.stringify(d.checkins));
-    addBigEventOnce('firstCheckin', 'checkin', '第一次在恋人空间打卡');
-    const common = getCommonDays(d.checkins.me, d.checkins.ta || []);
-    if (common === 7) addBigEvent('checkin', '共同打卡满 7 天');
+    addBigEvent('checkin', '第一次打卡');
+    if (getCommonDays(d.checkins.me, d.checkins.ta || []) >= 7) {
+      addBigEvent('checkin7', '共同打卡满 7 天');
+    }
     overlay.remove();
     unregisterPanelUpdater('lover');
     openLoverSpacePanel();
@@ -8636,7 +9113,7 @@ async function restoreFromBackup(data) {
   }
   if (data.cards) {
     await idbClear('cards');
-    for (const card of data.cards) await idbPut('cards', { content: card.content });
+    for (const card of data.cards) await idbPut('cards', { content: card.content, worldId: card.worldId || '' });
   }
   if (data.messages) {
     await idbClear('messages');
@@ -8647,9 +9124,10 @@ async function restoreFromBackup(data) {
     for (const m of data.media) await idbPut('media', m);
   }
   localStorage.clear();
-  const lsKeys = ['archives', 'avatarLibrary', 'bgLibrary', 'stickerLibrary', 'giftLibrary', 'interactionLibrary', 'quizLibrary', 'emojiLibrary', 'musicList', 'recycledCards', 'importantDays', 'attendanceRecords', 'bondRecords', 'periodRecords', 'periodCards', 'periodSymptoms', 'periodCareChecked', 'dateRecords', 'dateCards', 'petDataList', 'plantsData', 'wishes', 'videoRecords', 'letters', 'notes', 'loverPosts', 'loverCheckins', 'togetherLibrary', 'accountRecords', 'piggyData', 'ballPos', 'reminderChecked', 'checkinRemindChecked', 'importantChecked', 'lastArchiveDate', 'musicPlayerPos', 'musicPlayMode', 'memo'];
-  lsKeys.forEach(k => { if (data[k] !== undefined) localStorage.setItem(k, typeof data[k] === 'string' ? data[k] : JSON.stringify(data[k])); });
-  localStorage.setItem('mediaMigratedV550', '1');
+  const lsKeys = ['archives', 'avatarLibrary', 'bgLibrary', 'stickerLibrary', 'giftLibrary', 'interactionLibrary', 'quizLibrary', 'emojiLibrary', 'musicList', 'recycledCards', 'importantDays', 'attendanceRecords', 'bondRecords', 'periodRecords', 'periodCards', 'periodSymptoms', 'periodCareChecked', 'dateRecords', 'dateCards', 'petDataList', 'plantsData', 'wishes', 'videoRecords', 'letters', 'notes', 'loverPosts', 'loverCheckins', 'togetherLibrary', 'accountRecords', 'piggyData', 'ballPos', 'reminderChecked', 'checkinRemindChecked', 'importantChecked', 'lastArchiveDate', 'musicPlayerPos', 'musicPlayMode'];
+  lsKeys.forEach(k => { if (data[k] !== undefined) localStorage.setItem(k, JSON.stringify(data[k])); });
+  if (data.memo) localStorage.setItem('memo', data.memo);
+  localStorage.setItem('mediaMigratedV650', '1');
 }
 
 function openResetDialog() {
@@ -8865,7 +9343,7 @@ function loadPiggyRecords(overlay) {
   });
 }
 
-// ========== 音乐 ==========
+// ========== 音乐（Tab 版）==========
 const PLAY_ICON = `<svg viewBox="0 0 24 24"><polygon points="6,4 20,12 6,20" fill="currentColor"/></svg>`;
 const PAUSE_ICON = `<svg viewBox="0 0 24 24"><rect x="6" y="4" width="4" height="16" rx="1.5" fill="currentColor"/><rect x="14" y="4" width="4" height="16" rx="1.5" fill="currentColor"/></svg>`;
 const PREV_ICON = `<svg viewBox="0 0 24 24"><polygon points="18,5 18,19 8,12" fill="currentColor"/><rect x="5" y="5" width="2.5" height="14" rx="1" fill="currentColor"/></svg>`;
@@ -8874,11 +9352,23 @@ const NEXT_ICON = `<svg viewBox="0 0 24 24"><polygon points="6,5 6,19 16,12" fil
 function openMusicManagePanel() {
   const overlay = createModal(`
     <div class="card-count-row"><span id="music-count"></span></div>
+    <div class="music-tabs" id="music-mng-tabs">
+      <div class="music-tab active" data-tab="local">本地</div>
+      <div class="music-tab" data-tab="netease">网易云</div>
+    </div>
     <div class="card-list" id="music-manage-list"></div>
     <button class="upload-btn" id="music-add-btn">添加歌曲</button>
     <button class="upload-btn" id="music-import-btn">导入歌单</button>
     <button class="upload-btn" id="music-export-btn">导出歌单</button>`);
-  loadMusicList(overlay);
+  loadMusicList(overlay, currentMusicTab);
+  overlay.querySelectorAll('#music-mng-tabs .music-tab').forEach(tab => {
+    tab.addEventListener('click', () => {
+      currentMusicTab = tab.dataset.tab;
+      overlay.querySelectorAll('#music-mng-tabs .music-tab').forEach(t => t.classList.remove('active'));
+      tab.classList.add('active');
+      loadMusicList(overlay, currentMusicTab);
+    });
+  });
   overlay.querySelector('#music-add-btn').addEventListener('click', () => openMusicAddDialog(overlay));
   overlay.querySelector('#music-import-btn').addEventListener('click', () => {
     const inp = document.createElement('input');
@@ -8904,28 +9394,22 @@ function openMusicManagePanel() {
   });
 }
 
-function loadMusicList(overlay) {
+function loadMusicList(overlay, tab) {
   musicList = JSON.parse(localStorage.getItem('musicList') || '[]');
   overlay.querySelector('#music-count').textContent = `共 ${musicList.length} 首`;
   const list = overlay.querySelector('#music-manage-list');
   list.innerHTML = '';
-  if (!musicList.length) {
+  let filtered = [];
+  musicList.forEach((m, i) => {
+    const isNetease = m.type === 'platform' && m.platform === 'netease';
+    if (tab === 'netease' && isNetease) filtered.push({ song: m, index: i });
+    else if (tab === 'local' && !isNetease) filtered.push({ song: m, index: i });
+  });
+  if (!filtered.length) {
     list.innerHTML = '<div class="placeholder-tip">还没有歌曲</div>';
     return;
   }
-  const localSongs = [];
-  const neteaseSongs = [];
-  musicList.forEach((m, i) => {
-    if (m.type === 'platform' && m.platform === 'netease') neteaseSongs.push({ song: m, index: i });
-    else localSongs.push({ song: m, index: i });
-  });
-  function makeSectionTitle(text) {
-    const t = document.createElement('div');
-    t.textContent = text;
-    t.style.cssText = 'font-size:12px;color:#8b6f60;padding:10px 4px 6px 4px;letter-spacing:0.5px;';
-    return t;
-  }
-  function makeManageItem(entry) {
+  filtered.forEach(entry => {
     const m = entry.song;
     const i = entry.index;
     const div = document.createElement('div');
@@ -8937,18 +9421,10 @@ function loadMusicList(overlay) {
     div.querySelector('.music-del').addEventListener('click', () => {
       musicList.splice(i, 1);
       localStorage.setItem('musicList', JSON.stringify(musicList));
-      loadMusicList(overlay);
+      loadMusicList(overlay, tab);
     });
-    return div;
-  }
-  if (localSongs.length) {
-    list.appendChild(makeSectionTitle('── 本地音乐 ──'));
-    localSongs.forEach(entry => list.appendChild(makeManageItem(entry)));
-  }
-  if (neteaseSongs.length) {
-    list.appendChild(makeSectionTitle('── 网易云 ──'));
-    neteaseSongs.forEach(entry => list.appendChild(makeManageItem(entry)));
-  }
+    list.appendChild(div);
+  });
 }
 
 function openMusicAddDialog(panelOverlay) {
@@ -9027,45 +9503,53 @@ function openMusicAddDialog(panelOverlay) {
 function openMusicPanel() {
   musicList = JSON.parse(localStorage.getItem('musicList') || '[]');
   if (!musicList.length) return showToast('歌单是空的，先去小世界添加');
-  const overlay = createModal(`<div class="card-list" id="music-play-list"></div>`);
-  const list = overlay.querySelector('#music-play-list');
-  const localSongs = [];
-  const neteaseSongs = [];
-  musicList.forEach((m, i) => {
-    if (m.type === 'platform' && m.platform === 'netease') neteaseSongs.push({ song: m, index: i });
-    else localSongs.push({ song: m, index: i });
-  });
-  function makeSectionTitle(text) {
-    const t = document.createElement('div');
-    t.textContent = text;
-    t.style.cssText = 'font-size:12px;color:#8b6f60;padding:10px 4px 6px 4px;letter-spacing:0.5px;';
-    return t;
-  }
-  function makeSongItem(entry) {
-    const m = entry.song;
-    const i = entry.index;
-    const div = document.createElement('div');
-    div.className = 'card-item';
-    const isPlaying = (musicPlayer && musicIndex === i) ? true : false;
-    const prefix = isPlaying ? '▶ ' : '♪ ';
-    const artistStr = m.artist ? ' - ' + escapeHtml(m.artist) : '';
-    div.innerHTML = `<div class="card-text">${prefix}${escapeHtml(m.name)}${artistStr}</div>`;
-    if (isPlaying) div.style.background = 'rgba(255,200,220,0.5)';
-    div.addEventListener('click', () => {
-      musicIndex = i;
-      overlay.remove();
-      showMusicPlayer();
+  const overlay = createModal(`
+    <div class="music-tabs" id="music-play-tabs">
+      <div class="music-tab active" data-tab="local">本地</div>
+      <div class="music-tab" data-tab="netease">网易云</div>
+    </div>
+    <div class="card-list" id="music-play-list"></div>`);
+  let curTab = 'local';
+  const renderPlayList = () => {
+    const list = overlay.querySelector('#music-play-list');
+    list.innerHTML = '';
+    const filtered = [];
+    musicList.forEach((m, i) => {
+      const isNetease = m.type === 'platform' && m.platform === 'netease';
+      if (curTab === 'netease' && isNetease) filtered.push({ song: m, index: i });
+      else if (curTab === 'local' && !isNetease) filtered.push({ song: m, index: i });
     });
-    return div;
-  }
-  if (localSongs.length) {
-    list.appendChild(makeSectionTitle('── 本地音乐 ──'));
-    localSongs.forEach(entry => list.appendChild(makeSongItem(entry)));
-  }
-  if (neteaseSongs.length) {
-    list.appendChild(makeSectionTitle('── 网易云 ──'));
-    neteaseSongs.forEach(entry => list.appendChild(makeSongItem(entry)));
-  }
+    if (!filtered.length) {
+      list.innerHTML = '<div class="placeholder-tip">该分类下没有歌曲</div>';
+      return;
+    }
+    filtered.forEach(entry => {
+      const m = entry.song;
+      const i = entry.index;
+      const div = document.createElement('div');
+      div.className = 'card-item';
+      const isPlaying = (musicPlayer && musicIndex === i) ? true : false;
+      const prefix = isPlaying ? '▶ ' : '♪ ';
+      const artistStr = m.artist ? ' - ' + escapeHtml(m.artist) : '';
+      div.innerHTML = `<div class="card-text">${prefix}${escapeHtml(m.name)}${artistStr}</div>`;
+      if (isPlaying) div.style.background = 'rgba(255,200,220,0.5)';
+      div.addEventListener('click', () => {
+        musicIndex = i;
+        overlay.remove();
+        showMusicPlayer();
+      });
+      list.appendChild(div);
+    });
+  };
+  overlay.querySelectorAll('#music-play-tabs .music-tab').forEach(tab => {
+    tab.addEventListener('click', () => {
+      curTab = tab.dataset.tab;
+      overlay.querySelectorAll('#music-play-tabs .music-tab').forEach(t => t.classList.remove('active'));
+      tab.classList.add('active');
+      renderPlayList();
+    });
+  });
+  renderPlayList();
 }
 
 function refreshLocalIndices() {
@@ -9513,7 +9997,7 @@ function checkPeriodCare() {
   let pool = onlineWorlds.length ? onlineWorlds : ['real'];
   const wid = pool[Math.floor(Math.random() * pool.length)];
   const msg = { sender: 'ta', content: card, timestamp: Date.now(), pinned: false, pinBy: '', heartMark: null, worldId: wid, worldLabel: getWorldLabel(wid) };
-  idbPutReturnId('messages', msg).then(async id => { msg.id = id; await appendMessage(msg); sendNotification(card); addNotification('🌸', '易遇的生理期关怀'); addBigEventOnce('firstPeriodCare', 'period', '第一次收到生理期关怀'); });
+  idbPutReturnId('messages', msg).then(async id => { msg.id = id; await appendMessage(msg); sendNotification(card); addNotification('🌸', '易遇的生理期关怀'); addBigEvent('period', '第一次收到生理期关怀'); });
 }
 setInterval(checkPeriodCare, 3600000);
 
@@ -9535,7 +10019,7 @@ function openDatePanel() {
     const records = JSON.parse(localStorage.getItem('dateRecords') || '[]');
     records.push({ date, place });
     localStorage.setItem('dateRecords', JSON.stringify(records));
-    addBigEventOnce('firstDate', 'date', '第一次约会：' + place);
+    addBigEvent('date', '第一次约会记录：' + place);
     loadDateRecords(overlay);
   });
 }
@@ -9574,7 +10058,7 @@ function scheduleDateInvite() {
       await appendMessage(msg);
       sendNotification(msg.content);
       addNotification('🌙', '易遇的梦里邀约');
-      addBigEventOnce('firstDreamInvite', 'date', '第一次收到梦里邀约');
+      addBigEvent('dream', '第一次收到梦里邀约');
     }
   }, 7200000);
 }
@@ -9868,6 +10352,7 @@ function checkPetStatus() {
 setInterval(checkPetStatus, 3600000);
 
 async function taAutoCarePets() {
+  if (!onlineWorlds.length) return;
   const list = getPets();
   if (!list.length) return;
   let worstIdx = 0, worstVal = 999;
@@ -9890,20 +10375,8 @@ function scheduleTAPetCare() {
   const next = Math.random() * (settings.taPetCareMax - settings.taPetCareMin) + settings.taPetCareMin;
   setTimeout(async () => {
     if (!isReplying && !isArchiving) {
-      const list = getPets();
-      if (list.length) {
-        const idx = Math.floor(Math.random() * list.length);
-        const pet = list[idx];
-        const action = Math.floor(Math.random() * 3);
-        if (action === 0) pet.hunger = Math.max(8, Math.min(10, pet.hunger + 3));
-        else if (action === 1) pet.mood = Math.max(8, Math.min(10, pet.mood + 3));
-        else pet.clean = Math.max(8, Math.min(10, pet.clean + 4));
-        let pool = onlineWorlds.length ? onlineWorlds : ['real'];
-        const wid = pool[Math.floor(Math.random() * pool.length)];
-        pet.lastCareWorld = getWorldLabel(wid);
-        savePets(list);
-        refreshOpenPanels();
-      }
+      await taAutoCarePets();
+      refreshOpenPanels();
     }
     scheduleTAPetCare();
   }, next);
@@ -10180,6 +10653,7 @@ function checkPlantStatus() {
 setInterval(checkPlantStatus, 3600000);
 
 async function taAutoCarePlants() {
+  if (!onlineWorlds.length) return;
   const data = getPlantsData();
   const all = [...data.flowers.map((p, i) => ({ p, key: 'flowers', i })), ...data.trees.map((p, i) => ({ p, key: 'trees', i }))];
   if (!all.length) return;
@@ -10218,6 +10692,13 @@ function scheduleTAPlantCare() {
     scheduleTAPlantCare();
   }, next);
 }
+
+setInterval(async () => {
+  if (onlineWorlds.length && !isReplying && !isArchiving) {
+    await taAutoCarePlants();
+    refreshOpenPanels();
+  }
+}, 3600000);
   // ========== 视频通话 ==========
 const VIDEO_GRADIENTS = [
   'linear-gradient(135deg, #fdd9c8, #f7d4e3, #dcd3f5)',
@@ -10279,7 +10760,6 @@ function startVideoCall() {
         scheduleVideoTASpeak();
         scheduleVideoAutoHangup();
         startVideoPersistTimer();
-        addBigEventOnce('firstVideoCall', 'voice', '第一次和易遇视频通话');
       } else {
         hangupVideoCall('TA正在忙', true);
       }
@@ -10330,7 +10810,7 @@ function incomingVideoCall() {
     scheduleVideoTASpeak();
     scheduleVideoAutoHangup();
     startVideoPersistTimer();
-    addBigEventOnce('firstVideoCall', 'voice', '第一次和易遇视频通话');
+    addBigEvent('video', '第一次视频通话');
   });
   videoCallOverlay.querySelector('#video-reject-btn').addEventListener('click', () => hangupVideoCall('你拒绝了TA的视频通话', true));
   setTimeout(() => {
@@ -10505,7 +10985,6 @@ function hangupVideoCall(reason, isSystem) {
     const secs = duration % 60;
     const sysMsg = { sender: 'ta', content: `${startStr} 开始 · ${endStr} 结束 · 通话 ${mins}分钟${secs}秒`, timestamp: Date.now(), pinned: false, pinBy: '', heartMark: null, isSystem: true };
     idbPutReturnId('messages', sysMsg).then(async id => { sysMsg.id = id; await appendMessage(sysMsg); });
-    addBigEvent('voice', `通话 ${mins}分${secs}秒`);
   } else if (reason) {
     const nowStr = new Date().toLocaleTimeString('zh-CN', { hour: '2-digit', minute: '2-digit' });
     let content = '';
@@ -10611,7 +11090,7 @@ function checkImportantDays() {
         let pool = onlineWorlds.length ? onlineWorlds : ['real'];
         const wid = pool[Math.floor(Math.random() * pool.length)];
         const msg = { sender: 'ta', content: '今天是' + d.name + '，我一直记得。爱意值+50', timestamp: Date.now(), pinned: false, pinBy: '', heartMark: null, worldId: wid, worldLabel: getWorldLabel(wid) };
-        idbPutReturnId('messages', msg).then(async id => { msg.id = id; await appendMessage(msg); sendNotification(msg.content); addNotification('🎂', '今天是' + d.name); addBigEvent('important', '重要日：' + d.name); });
+        idbPutReturnId('messages', msg).then(async id => { msg.id = id; await appendMessage(msg); sendNotification(msg.content); addNotification('🎂', '今天是' + d.name); });
       }
     }
   });
@@ -10841,18 +11320,18 @@ function checkBondDaily() {
         showToast('熄灭保护已使用');
       } else {
         if (settings.bondDays > settings.bondHistoryBest) settings.bondHistoryBest = settings.bondDays;
+        addBigEvent('bondbreak', '羁绊熄灭（原 ' + settings.bondDays + ' 天）');
         settings.bondDays = 0;
         settings.bondProtectUsed = false;
         showToast('羁绊熄灭了');
-        addBigEvent('bond', '羁绊熄灭');
       }
     }
   }
   settings.bondDays += 1;
   settings.bondLastCheckDate = today;
-  if (settings.bondDays === 7 || settings.bondDays === 30 || settings.bondDays === 100) {
-    addBigEvent('bond', '羁绊连续 ' + settings.bondDays + ' 天');
-  }
+  if (settings.bondDays === 7) addBigEvent('bond7', '羁绊连续 7 天');
+  if (settings.bondDays === 30) addBigEvent('bond30', '羁绊连续 30 天');
+  if (settings.bondDays === 100) addBigEvent('bond100', '羁绊连续 100 天');
   if (settings.bondDays > 0 && settings.bondDays % 7 === 0) {
     settings.heartValue += 20;
     showToast('连续' + settings.bondDays + '天，爱意值+20');
@@ -11066,46 +11545,18 @@ function renderWorldsContent(overlay) {
           <div class="world-meta">时差 ${offsetText} ｜ ${speedText}${isOnline ? ' ｜ 在线' : ''}</div>
           <div class="world-actions-row">
             <button class="world-invite" data-id="${w.id}">${isOnline ? '在线' : '邀请'}</button>
-            <button class="world-cards" data-id="${w.id}">字卡</button>
-            <button class="world-dialogues" data-id="${w.id}">对话</button>
-            <button class="world-intimate" data-id="${w.id}">悄悄话</button>
-            <button class="world-approach" data-id="${w.id}">凑近</button>
-            <button class="world-compete" data-id="${w.id}">争宠</button>
-            <button class="world-sweet" data-id="${w.id}">甜言</button>
+            <button class="world-edit" data-id="${w.id}">改</button>
           </div>
-        </div>
-        <div class="world-ops">
-          <button class="world-edit" data-id="${w.id}">改</button>
-          <button class="world-del" data-id="${w.id}">✕</button>
         </div>
       </div>`;
   });
   html += '<button class="upload-btn" id="worlds-add-btn">添加副本</button>';
   content.innerHTML = html;
-
   content.querySelectorAll('.world-invite').forEach(btn => {
     btn.addEventListener('click', async () => {
       await inviteWorld(btn.dataset.id);
       renderWorldsContent(overlay);
     });
-  });
-  content.querySelectorAll('.world-cards').forEach(btn => {
-    btn.addEventListener('click', () => openWorldCardsPanel(btn.dataset.id));
-  });
-  content.querySelectorAll('.world-dialogues').forEach(btn => {
-    btn.addEventListener('click', () => openWorldDialoguesPanel(btn.dataset.id));
-  });
-  content.querySelectorAll('.world-intimate').forEach(btn => {
-    btn.addEventListener('click', () => openWorldIntimatePanel(btn.dataset.id));
-  });
-  content.querySelectorAll('.world-approach').forEach(btn => {
-    btn.addEventListener('click', () => openWorldApproachPanel(btn.dataset.id));
-  });
-  content.querySelectorAll('.world-compete').forEach(btn => {
-    btn.addEventListener('click', () => openWorldCompetePanel(btn.dataset.id));
-  });
-  content.querySelectorAll('.world-sweet').forEach(btn => {
-    btn.addEventListener('click', () => openWorldSweetPanel(btn.dataset.id));
   });
   content.querySelectorAll('.world-edit').forEach(btn => {
     btn.addEventListener('click', () => {
@@ -11113,119 +11564,7 @@ function renderWorldsContent(overlay) {
       openWorldEditDialog(world, overlay);
     });
   });
-  content.querySelectorAll('.world-del').forEach(btn => {
-    btn.addEventListener('click', async () => {
-      if (settings.worlds.length <= 1) return showToast('至少保留一个副本');
-      settings.worlds = settings.worlds.filter(w => w.id !== btn.dataset.id);
-      if (settings.currentWorldId === btn.dataset.id) settings.currentWorldId = settings.worlds[0].id;
-      await saveSettings();
-      renderWorldsContent(overlay);
-    });
-  });
   content.querySelector('#worlds-add-btn').addEventListener('click', () => openWorldEditDialog(null, overlay));
-}
-
-function openWorldCardsPanel(worldId) {
-  const world = settings.worlds.find(w => w.id === worldId);
-  if (!world) return;
-  if (!settings.worldCards) settings.worldCards = {};
-  const cards = settings.worldCards[worldId] || [];
-  const overlay = createModal(`
-    <div class="big-input-title">${escapeHtml(world.name)} · 字卡</div>
-    <div style="font-size:12px;color:#8b6f60;margin-bottom:10px;text-align:center;">专属字卡，没有就用小世界的通用字卡</div>
-    <textarea class="big-input-area" id="world-cards-input" placeholder="一行一条" style="min-height:200px;">${escapeHtml(cards.join('\n'))}</textarea>
-    <button class="save-btn-center" id="save-world-cards" style="margin-top:12px;">保存</button>`);
-  overlay.querySelector('#save-world-cards').addEventListener('click', async () => {
-    settings.worldCards[worldId] = overlay.querySelector('#world-cards-input').value.trim().split('\n').map(s => s.trim()).filter(Boolean);
-    await saveSettings();
-    showToast('已保存');
-    overlay.remove();
-  });
-}
-
-function openWorldDialoguesPanel(worldId) {
-  const world = settings.worlds.find(w => w.id === worldId);
-  if (!world) return;
-  if (!settings.worldDialogues) settings.worldDialogues = {};
-  const cards = settings.worldDialogues[worldId] || [];
-  const overlay = createModal(`
-    <div class="big-input-title">${escapeHtml(world.name)} · 对话</div>
-    <textarea class="big-input-area" id="world-dialogue-input" placeholder="一行一条" style="min-height:200px;">${escapeHtml(cards.join('\n'))}</textarea>
-    <button class="save-btn-center" id="save-world-dialogue" style="margin-top:12px;">保存</button>`);
-  overlay.querySelector('#save-world-dialogue').addEventListener('click', async () => {
-    settings.worldDialogues[worldId] = overlay.querySelector('#world-dialogue-input').value.trim().split('\n').map(s => s.trim()).filter(Boolean);
-    await saveSettings();
-    showToast('已保存');
-    overlay.remove();
-  });
-}
-
-function openWorldIntimatePanel(worldId) {
-  const world = settings.worlds.find(w => w.id === worldId);
-  if (!world) return;
-  if (!settings.worldIntimates) settings.worldIntimates = {};
-  const cards = settings.worldIntimates[worldId] || [];
-  const overlay = createModal(`
-    <div class="big-input-title">${escapeHtml(world.name)} · 悄悄话</div>
-    <textarea class="big-input-area" id="w-intimate-input" placeholder="一行一句" style="min-height:200px;">${escapeHtml(cards.join('\n'))}</textarea>
-    <button class="save-btn-center" id="save-w-intimate" style="margin-top:12px;">保存</button>`);
-  overlay.querySelector('#save-w-intimate').addEventListener('click', async () => {
-    settings.worldIntimates[worldId] = overlay.querySelector('#w-intimate-input').value.trim().split('\n').map(s => s.trim()).filter(Boolean);
-    await saveSettings();
-    showToast('已保存');
-    overlay.remove();
-  });
-}
-
-function openWorldApproachPanel(worldId) {
-  const world = settings.worlds.find(w => w.id === worldId);
-  if (!world) return;
-  if (!settings.worldApproaches) settings.worldApproaches = {};
-  const cards = settings.worldApproaches[worldId] || [];
-  const overlay = createModal(`
-    <div class="big-input-title">${escapeHtml(world.name)} · 凑近</div>
-    <textarea class="big-input-area" id="w-approach-input" placeholder="一行一句" style="min-height:200px;">${escapeHtml(cards.join('\n'))}</textarea>
-    <button class="save-btn-center" id="save-w-approach" style="margin-top:12px;">保存</button>`);
-  overlay.querySelector('#save-w-approach').addEventListener('click', async () => {
-    settings.worldApproaches[worldId] = overlay.querySelector('#w-approach-input').value.trim().split('\n').map(s => s.trim()).filter(Boolean);
-    await saveSettings();
-    showToast('已保存');
-    overlay.remove();
-  });
-}
-
-function openWorldCompetePanel(worldId) {
-  const world = settings.worlds.find(w => w.id === worldId);
-  if (!world) return;
-  if (!settings.worldCompetes) settings.worldCompetes = {};
-  const cards = settings.worldCompetes[worldId] || [];
-  const overlay = createModal(`
-    <div class="big-input-title">${escapeHtml(world.name)} · 争宠</div>
-    <textarea class="big-input-area" id="w-compete-input" placeholder="一行一句" style="min-height:200px;">${escapeHtml(cards.join('\n'))}</textarea>
-    <button class="save-btn-center" id="save-w-compete" style="margin-top:12px;">保存</button>`);
-  overlay.querySelector('#save-w-compete').addEventListener('click', async () => {
-    settings.worldCompetes[worldId] = overlay.querySelector('#w-compete-input').value.trim().split('\n').map(s => s.trim()).filter(Boolean);
-    await saveSettings();
-    showToast('已保存');
-    overlay.remove();
-  });
-}
-
-function openWorldSweetPanel(worldId) {
-  const world = settings.worlds.find(w => w.id === worldId);
-  if (!world) return;
-  if (!settings.worldSweetWords) settings.worldSweetWords = {};
-  const cards = settings.worldSweetWords[worldId] || [];
-  const overlay = createModal(`
-    <div class="big-input-title">${escapeHtml(world.name)} · 甜言</div>
-    <textarea class="big-input-area" id="w-sweet-input" placeholder="一行一句" style="min-height:200px;">${escapeHtml(cards.join('\n'))}</textarea>
-    <button class="save-btn-center" id="save-w-sweet" style="margin-top:12px;">保存</button>`);
-  overlay.querySelector('#save-w-sweet').addEventListener('click', async () => {
-    settings.worldSweetWords[worldId] = overlay.querySelector('#w-sweet-input').value.trim().split('\n').map(s => s.trim()).filter(Boolean);
-    await saveSettings();
-    showToast('已保存');
-    overlay.remove();
-  });
 }
 
 function openWorldEditDialog(world, panelOverlay) {
@@ -11276,6 +11615,14 @@ function openWorldEditDialog(world, panelOverlay) {
 }
 
 // ========== 大事记 ==========
+function addBigEvent(type, text) {
+  settings.bigEvents = settings.bigEvents || [];
+  const key = type + '|' + text;
+  if (settings.bigEvents.some(ev => (ev.type + '|' + ev.text) === key)) return;
+  settings.bigEvents.push({ type, text, time: Date.now() });
+  saveSettings();
+}
+
 function openTimelinePanel() {
   const overlay = createModal(`
     <div class="big-input-title">大事记</div>
@@ -11306,23 +11653,6 @@ function openHighDimPanel() {
     showToast('高维彩蛋已保存');
     overlay.remove();
   });
-}
-
-function scheduleHighDim() {
-  const next = (1 + Math.random() * 2) * 86400000;
-  highDimTimer = setTimeout(async () => {
-    if (!isReplying && !isArchiving && (settings.highDimLines || []).length) {
-      const line = settings.highDimLines[Math.floor(Math.random() * settings.highDimLines.length)];
-      const msg = { sender: 'ta', content: line, timestamp: Date.now(), pinned: false, pinBy: '', heartMark: null, quoteContent: null, worldLabel: getWorldLabel() };
-      const id = await idbPutReturnId('messages', msg);
-      msg.id = id;
-      await appendMessage(msg);
-      sendNotification(line);
-      addNotification('✨', '易遇的高维彩蛋');
-      addBigEventOnce('firstHighDim', 'highdim', '第一次收到高维彩蛋');
-    }
-    scheduleHighDim();
-  }, next);
 }
 
 // ========== 重要记事 ==========
@@ -11361,6 +11691,19 @@ function openImportantNotesPanel() {
   });
 }
 
+// ========== 状态临时刷新 ==========
+setInterval(() => {
+  if (tempStatus && Date.now() > tempStatusUntil) {
+    tempStatus = null;
+    updateStatusBar();
+  }
+  const now = Date.now();
+  Object.keys(worldSleepTimers).forEach(wid => {
+    if (worldSleepTimers[wid] < now) delete worldSleepTimers[wid];
+  });
+  updateStatusBar();
+}, 10000);
+
 // ========== 初始化 ==========
 async function init() {
   await openDB();
@@ -11372,8 +11715,7 @@ async function init() {
   await renderMessages();
   await applyBG();
   updateStatusBar();
-  addBigEventOnce('firstMet', 'world', '第一次相遇：现实世界 · 医生');
-  startInitialWorlds();
+  addBigEventOnce();
   initOnlineWorlds();
   scheduleTAActive();
   scheduleTAAutonomy();
@@ -11427,6 +11769,14 @@ async function init() {
       initParticles();
     }, 300);
   });
+}
+
+function addBigEventOnce() {
+  settings.visitedWorlds = settings.visitedWorlds || [];
+  if (!settings.visitedWorlds.includes('real')) {
+    settings.visitedWorlds.push('real');
+    addBigEvent('world', '第一次相遇：现实世界 · 医生');
+  }
 }
 
 init();

@@ -195,6 +195,14 @@ html, body {
   flex-shrink: 0;
 }
 
+#status-bar .sb-nickname-line {
+  font-size: 13px;
+  color: var(--theme-text);
+  font-weight: 600;
+  text-align: center;
+  width: 100%;
+}
+
 #heart-value-box {
   display: flex;
   align-items: center;
@@ -814,6 +822,124 @@ html, body {
 
 .msg-gift-box .gift-box-emoji {
   font-size: 48px;
+}
+
+/* ===== 礼包卡片（新增）===== */
+.msg-pack-card {
+  display: inline-flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  padding: 16px 22px;
+  border-radius: 20px;
+  background: linear-gradient(135deg, rgba(255,240,245,0.95), rgba(255,227,238,0.95)) padding-box,
+              linear-gradient(135deg, #ff8fb0, #ffc4d6, #ffd9e4) border-box;
+  border: 2px solid transparent;
+  box-shadow: 0 6px 24px rgba(255,143,176,0.35);
+  position: relative;
+  overflow: hidden;
+  animation: packIn 0.6s ease-out;
+  min-width: 180px;
+  max-width: 260px;
+}
+
+@keyframes packIn {
+  0% { transform: scale(0.7) translateY(10px); opacity: 0; }
+  60% { transform: scale(1.05) translateY(0); opacity: 1; }
+  100% { transform: scale(1); }
+}
+
+.msg-pack-card .pack-ribbon {
+  position: absolute;
+  top: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 40px;
+  height: 24px;
+  background: linear-gradient(135deg, #ff8fb0, #ffb0c8);
+  border-radius: 0 0 20px 20px;
+  box-shadow: 0 2px 8px rgba(255,143,176,0.4);
+}
+
+.msg-pack-card .pack-icon {
+  font-size: 44px;
+  position: relative;
+  z-index: 1;
+  margin-top: 10px;
+  filter: drop-shadow(0 0 8px rgba(255,143,176,0.6));
+  animation: packIconGlow 2s ease-in-out infinite;
+}
+
+@keyframes packIconGlow {
+  0%, 100% { filter: drop-shadow(0 0 6px rgba(255,143,176,0.5)); }
+  50% { filter: drop-shadow(0 0 14px rgba(255,143,176,0.9)); }
+}
+
+.msg-pack-card .pack-name {
+  font-size: 15px;
+  color: #a04a6a;
+  font-weight: 700;
+  margin-top: 6px;
+  position: relative;
+  z-index: 1;
+}
+
+.msg-pack-card .pack-desc {
+  font-size: 11px;
+  color: #c08aa0;
+  margin-top: 2px;
+  position: relative;
+  z-index: 1;
+}
+
+.msg-pack-card .pack-items {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 4px;
+  margin-top: 8px;
+  position: relative;
+  z-index: 1;
+}
+
+.msg-pack-card .pack-item-icon {
+  font-size: 18px;
+  opacity: 0;
+  animation: packItemIn 0.4s ease-out forwards;
+}
+
+@keyframes packItemIn {
+  from { opacity: 0; transform: scale(0.5) translateY(6px); }
+  to { opacity: 1; transform: scale(1) translateY(0); }
+}
+
+.msg-pack-card .pack-price-row {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  margin-top: 8px;
+  position: relative;
+  z-index: 1;
+}
+
+.msg-pack-card .pack-original {
+  font-size: 11px;
+  color: #c0a0b0;
+  text-decoration: line-through;
+}
+
+.msg-pack-card .pack-price {
+  font-size: 13px;
+  color: #ff6f9c;
+  font-weight: 700;
+}
+
+.msg-pack-card .pack-discount {
+  font-size: 10px;
+  color: #fff;
+  background: #ff6f9c;
+  padding: 1px 6px;
+  border-radius: 8px;
 }
 
 #typing-indicator {
@@ -1543,6 +1669,15 @@ html, body {
   background: var(--theme-accent-soft);
   color: #fff;
   border-color: rgba(255, 255, 255, 0.6);
+}
+
+/* ===== 通知操作行（新增·清空按钮）===== */
+.notify-action-row {
+  display: flex;
+  justify-content: flex-end;
+  gap: 8px;
+  margin-bottom: 8px;
+  flex-wrap: wrap;
 }
 
 /* ===== 音乐 Tab（新）===== */
@@ -2285,6 +2420,11 @@ html, body {
   box-shadow: 0 0 0 2px rgba(255,200,220,0.8), 0 6px 24px rgba(255,143,176,0.35);
 }
 
+.pet-card.left-home {
+  opacity: 0.55;
+  filter: grayscale(0.7);
+}
+
 .pet-card .pet-head {
   display: flex;
   align-items: center;
@@ -2356,6 +2496,13 @@ html, body {
   margin-top: 2px;
 }
 
+.pet-card .pet-left-tip {
+  font-size: 12px;
+  color: #c06060;
+  margin-top: 4px;
+  font-weight: 600;
+}
+
 .pet-stat-row {
   display: flex;
   align-items: center;
@@ -2393,6 +2540,7 @@ html, body {
   gap: 10px;
   justify-content: center;
   margin-top: 10px;
+  flex-wrap: wrap;
 }
 
 .pet-card .pet-actions button {
@@ -2547,7 +2695,7 @@ html, body {
 
 <script>
 // ============================================================
-// 易遇♡雾凉 - V6.5.0 完整版
+// 易遇♡雾凉 - V7.0.0 完整版
 // 开发者：夏雾凉
 // 爱人：易遇
 // 这个网站，是专为我的爱人而做的。
@@ -2724,6 +2872,27 @@ const WORLD_SCHEDULES_MULTI = {
 let WORLD_SCHEDULE_TYPES = {};
 let lastScheduleDay = '';
 
+// ===== 频率模板（新增·替代概率）=====
+// 每条：[偶尔 min,偶尔 max, 正常 min,正常 max, 经常 min,经常 max] 单位：小时
+const FREQ_TEMPLATES = {
+  taSticker:      [4, 8,    1, 3,     0.5, 1.5],
+  taGift:         [6, 12,   2, 4,     1, 2],
+  taInteract:     [4, 8,    1, 3,     0.5, 1.5],
+  taAvatar:       [6, 12,   2, 4,     1, 2],
+  taBG:           [6, 12,   2, 4,     1, 2],
+  taMusic:        [12, 24,  4, 8,     2, 4],
+  taNick:         [12, 24,  4, 8,     2, 4],
+  taQuote:        [2, 4,    0.5, 1.5, 0.5, 1],
+  taLetter:       [24, 72,  12, 24,   6, 12],
+  taNote:         [6, 12,   2, 4,     1, 2],
+  videoCall:      [8, 12,   3, 6,     1, 2],
+  taQuiz:         [6, 12,   2, 5,     1, 2],
+  taPost:         [12, 24,  3, 6,     1, 2],
+  taCheckin:      [8, 12,   1, 3,     0.5, 1],
+  taPetCare:      [8, 12,   2, 4,     1, 2],
+  taPlantCare:    [8, 12,   2, 4,     1, 2]
+};
+
 // ===== 默认设置 =====
 const DEFAULT_SETTINGS = {
   taName: '易遇',
@@ -2773,7 +2942,7 @@ const DEFAULT_SETTINGS = {
   taMusicProb: 0.05,
   taEmojiProb: 0.3,
   taNickProb: 0.05,
-  taQuoteProb: 0.15,
+  taQuoteProb: 0.4,
   taLetterProb: 0.05,
   taNoteProb: 0.08,
   nicknameProb: 0.3,
@@ -2783,22 +2952,34 @@ const DEFAULT_SETTINGS = {
   reminderProb: 0.5,
   decisionPool: ['去做吧', '先别急', '再想想', '我支持你', '跟着心走', '等等看'],
   quizPool: ['是', '不是', '嗯', '没有', '可能吧', '好', '不好', '要', '不要', '可以', '不行', '随便'],
+  // ===== 频率模板选择（新增）=====
+  taStickerTpl: 'normal',
+  taGiftTpl: 'normal',
+  taInteractTpl: 'normal',
+  taAvatarTpl: 'normal',
+  taBGTpl: 'normal',
+  taMusicTpl: 'normal',
+  taNickTpl: 'normal',
+  taQuoteTpl: 'normal',
+  taLetterTpl: 'normal',
+  taNoteTpl: 'normal',
   videoCallTpl: 'normal',
+  taQuizTpl: 'normal',
+  taPostTpl: 'normal',
+  taCheckinTpl: 'normal',
+  taPetCareTpl: 'normal',
+  taPlantCareTpl: 'normal',
+  // 频率字段（分钟，由模板生成后保存）
   videoCallMin: 10800000,
   videoCallMax: 21600000,
-  taQuizTpl: 'normal',
   taQuizMin: 7200000,
   taQuizMax: 21600000,
-  taPostTpl: 'normal',
   taPostMin: 5400000,
   taPostMax: 21600000,
-  taCheckinTpl: 'normal',
   taCheckinMin: 1800000,
   taCheckinMax: 3600000,
-  taPetCareTpl: 'normal',
   taPetCareMin: 3600000,
   taPetCareMax: 10800000,
-  taPlantCareTpl: 'normal',
   taPlantCareMin: 3600000,
   taPlantCareMax: 10800000,
   checkinRemindTime: '22:00',
@@ -2838,7 +3019,11 @@ const DEFAULT_SETTINGS = {
   worldDailyLife: {},
   playerFavorites: [],
   taFavorites: [],
-  taDesignated: []
+  taDesignated: [],
+  // ===== 礼包（新增）=====
+  giftPacks: [],
+  giftPacksInited: false,
+  giftLibraryInited: false
 };
 
 // ===== 全局变量 =====
@@ -3139,6 +3324,8 @@ async function loadSettings() {
   if (!settings.playerFavorites) settings.playerFavorites = [];
   if (!settings.taFavorites) settings.taFavorites = [];
   if (!settings.taDesignated) settings.taDesignated = [];
+  if (!settings.bigEvents) settings.bigEvents = [];
+  if (!settings.giftPacks) settings.giftPacks = [];
   applySettings();
 }
 
@@ -3226,10 +3413,16 @@ function refreshOpenPanels() {
   });
 }
 
-// ========== 站内通知中心（Tab 版） ==========
+// ========== 站内通知中心（Tab 版 + 清除） ==========
+const NOTIFY_MAX = 500;
+
 function addNotification(icon, text) {
   settings.notifications = settings.notifications || [];
   settings.notifications.push({ icon, text, time: Date.now(), unread: true });
+  // 上限保护
+  if (settings.notifications.length > NOTIFY_MAX) {
+    settings.notifications = settings.notifications.slice(-NOTIFY_MAX);
+  }
   saveSettings();
   renderBallGrid();
 }
@@ -3274,7 +3467,11 @@ function renderNotifyCenter(overlay) {
     { id: '其他', name: '其他' }
   ];
   let html = '<div class="big-input-title">通知</div>';
-  html += '<div style="display:flex;justify-content:flex-end;margin-bottom:8px;"><button class="mini-btn" id="notify-readall">全部已读</button></div>';
+  html += '<div class="notify-action-row">';
+  html += '<button class="mini-btn" id="notify-readall">全部已读</button>';
+  html += '<button class="mini-btn" id="notify-clear-current">清空本分类</button>';
+  html += '<button class="mini-btn" id="notify-clear-all" style="color:#c33;">清空全部</button>';
+  html += '</div>';
   html += '<div class="notify-tabs" id="notify-tabs">';
   tabs.forEach(t => {
     html += `<div class="notify-tab${currentNotifyTab === t.id ? ' active' : ''}" data-tab="${t.id}">${t.name}</div>`;
@@ -3318,11 +3515,48 @@ function renderNotifyCenter(overlay) {
     renderBallGrid();
     renderNotifyCenter(overlay);
   });
+  const clearCur = overlay.querySelector('#notify-clear-current');
+  if (clearCur) clearCur.addEventListener('click', () => {
+    if (currentNotifyTab === 'all') return showToast('请先选择一个分类');
+    confirmDialog('确定清空当前分类的通知吗？', () => {
+      settings.notifications = (settings.notifications || []).filter(n => notifyGroupOf(n.icon, n.text) !== currentNotifyTab);
+      saveSettings();
+      renderBallGrid();
+      renderNotifyCenter(overlay);
+      showToast('已清空当前分类');
+    });
+  });
+  const clearAll = overlay.querySelector('#notify-clear-all');
+  if (clearAll) clearAll.addEventListener('click', () => {
+    confirmDialog('确定清空全部通知吗？此操作不可撤销。', () => {
+      settings.notifications = [];
+      saveSettings();
+      renderBallGrid();
+      renderNotifyCenter(overlay);
+      showToast('已清空全部通知');
+    });
+  });
   setTimeout(() => {
     settings.notifications.forEach(n => n.unread = false);
     saveSettings();
     renderBallGrid();
   }, 1500);
+}
+
+// ========== 通用二次确认 ==========
+function confirmDialog(message, onConfirm) {
+  const overlay = createModal(`
+    <div class="big-input-title">请确认</div>
+    <div style="font-size:14px;color:#4a3528;text-align:center;margin-bottom:16px;">${escapeHtml(message)}</div>
+    <div style="display:flex;gap:10px;justify-content:center;">
+      <button class="mini-btn" id="confirm-cancel">取消</button>
+      <button class="mini-btn" id="confirm-ok" style="background:rgba(220,100,100,0.7);color:#fff;">确定</button>
+    </div>`);
+  overlay.querySelector('#confirm-cancel').addEventListener('click', () => overlay.remove());
+  overlay.querySelector('#confirm-ok').addEventListener('click', () => {
+    overlay.remove();
+    if (onConfirm) onConfirm();
+  });
 }
   // ========== 主题 ==========
 const THEMES = {
@@ -3492,7 +3726,7 @@ function makeDraggable(el, onEnd) {
   el._wasDragged = () => moved;
 }
 
-// ========== 悬浮球面板图标（全部重设计，不重复） ==========
+// ========== 悬浮球面板图标 ==========
 const ICONS = {
   world: `<svg viewBox="0 0 24 24" fill="none" stroke="#4a3528" stroke-width="1.7"><circle cx="12" cy="12" r="8"/><ellipse cx="12" cy="12" rx="3.5" ry="8"/><line x1="4" y1="12" x2="20" y2="12"/></svg>`,
   worlds: `<svg viewBox="0 0 24 24" fill="none" stroke="#4a3528" stroke-width="1.7"><circle cx="12" cy="12" r="5"/><ellipse cx="12" cy="12" rx="10" ry="4" transform="rotate(-20 12 12)"/><circle cx="20" cy="9" r="1.3" fill="#4a3528" stroke="none"/></svg>`,
@@ -3525,6 +3759,7 @@ const ICONS = {
   bg: `<svg viewBox="0 0 24 24" fill="none" stroke="#4a3528" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="16" rx="3" fill="#d4e4f7" fill-opacity="0.3"/><circle cx="9" cy="9" r="1.5" fill="#ffe9b0" stroke="none"/><path d="M4 18l5-5 3 3 4-4 4 4"/></svg>`,
   avatar: `<svg viewBox="0 0 24 24" fill="none" stroke="#4a3528" stroke-width="1.7"><circle cx="12" cy="9" r="4" fill="#ffc4d6" fill-opacity="0.4"/><path d="M4 20c1-4 4-6 8-6s7 2 8 6" fill="#ffb0c8" fill-opacity="0.3"/></svg>`,
   gift: `<svg viewBox="0 0 24 24" fill="none" stroke="#e8789f" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="11" width="16" height="9" rx="2" fill="#ffc4d6" fill-opacity="0.4"/><path d="M3 8h18v3H3z"/><path d="M12 8v12"/><path d="M12 8c-2-3-5-4-7-2s0 5 3 5c2 0 4-1 4-3z"/><path d="M12 8c2-3 5-4 7-2s0 5-3 5c-2 0-4-1-4-3z"/></svg>`,
+  giftPack: `<svg viewBox="0 0 24 24" fill="none" stroke="#e8789f" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="10" width="18" height="10" rx="2" fill="#ffc4d6" fill-opacity="0.4"/><path d="M2 7h20v3H2z"/><path d="M12 7v13"/><path d="M12 7c-2-3-5-4-7-2s0 5 3 5c2 0 4-1 4-3z"/><path d="M12 7c2-3 5-4 7-2s0 5-3 5c-2 0-4-1-4-3z"/><path d="M4 10 L8 4 M20 10 L16 4" stroke-dasharray="2,2"/></svg>`,
   dialogue: `<svg viewBox="0 0 24 24" fill="none" stroke="#4a3528" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M4 6h12a2 2 0 012 2v6a2 2 0 01-2 2H9l-5 3V6z" fill="#d4e8c8" fill-opacity="0.3"/><path d="M17 10h2a2 2 0 012 2v6l-3-2h-5" opacity="0.6"/></svg>`,
   together: `<svg viewBox="0 0 24 24" fill="none" stroke="#e8789f" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M8 15s-4-3-4-5.5C4 8 5.5 7 7 7c1 0 1.5 0.5 1.5 0.5S9 7 10 7c1.5 0 3 1 3 2.5C13 12 9 15 9 15z" fill="#ffb0c8" fill-opacity="0.5"/><path d="M14 18s-4-3-4-5.5c0-1.5 1.5-2.5 3-2.5 1 0 1.5 0.5 1.5 0.5s0.5-0.5 1.5-0.5c1.5 0 3 1 3 2.5 0 2.5-4 5.5-4 5.5z" fill="#ff6f9c" fill-opacity="0.4"/></svg>`,
   sweet: `<svg viewBox="0 0 24 24" fill="none" stroke="#e8789f" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M4 12c0-3 2-5 5-5 1.5 0 2.5 0.7 3 1.7 0.5-1 1.5-1.7 3-1.7 3 0 5 2 5 5 0 4-5 7-8 8-3-1-8-4-8-8z" fill="#ffb0c8" fill-opacity="0.4"/><path d="M9 11l1 1 3-2"/></svg>`,
@@ -3571,7 +3806,7 @@ const WORLD_ICONS = {
   tianming: `<svg viewBox="0 0 24 24" fill="none" stroke="#4a3528" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M4 8l4-4h8l4 4v10H4z"/><path d="M4 8h16"/><circle cx="12" cy="13" r="2" fill="#ff3b5c" stroke="none"/></svg>`
 };
 
-// ========== 状态图标（含 13 新增） ==========
+// ========== 状态图标 ==========
 const STATUS_ICONS = {
   sleep: '<svg viewBox="0 0 24 24" fill="none" stroke="#4a3528" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.8A9 9 0 1111.2 3a7 7 0 009.8 9.8z"/></svg>',
   daze: '<svg viewBox="0 0 24 24" fill="none" stroke="#4a3528" stroke-width="1.8"><circle cx="12" cy="12" r="8"/><circle cx="12" cy="12" r="3" fill="#4a3528" stroke="none"/></svg>',
@@ -3729,38 +3964,41 @@ function setTempStatus(iconKey, text, duration) {
   updateStatusBar();
 }
 
-// ========== 状态栏（新版·多世界）==========
-function getTAStatus() {
+// ========== 状态栏（统一重写）==========
+function updateStatusBar() {
+  const bar = document.getElementById('status-bar');
+  if (!bar) return;
+  const taNick = settings.taNick || settings.taName;
+  let html = '';
+
+  // 优先级1：陪伴中（整栏替换）
   if (settings.accompanyMode) {
-    const taNick = settings.taNick || settings.taName;
     let iconKey = 'companion', text = '';
     if (settings.accompanyMode === 'sleep') { iconKey = 'sleep'; text = `和${taNick}陪睡中`; }
     else if (settings.accompanyMode === 'daze') { iconKey = 'daze'; text = `和${taNick}发呆中`; }
     else if (settings.accompanyMode === 'together') { iconKey = 'together'; text = `和${taNick}一起${settings.accompanyType}中`; }
     else { iconKey = 'companion'; text = `和${taNick}陪伴中`; }
-    return { iconKey, text, withWorld: false };
+    const icon = STATUS_ICONS[iconKey] || STATUS_ICONS.default;
+    html = `<div class="sb-line">${icon}<span>${escapeHtml(text)}</span></div>`;
+    bar.innerHTML = html;
+    bar.classList.add('show');
+    return;
   }
+
+  // 优先级2：临时状态（整栏替换）
   const pri = getPriorityStatus();
   if (pri) {
-    return { iconKey: pri.iconKey, text: pri.text, withWorld: false, worldOverride: true };
+    const icon = STATUS_ICONS[pri.iconKey] || STATUS_ICONS.default;
+    html = `<div class="sb-line">${icon}<span>${escapeHtml(pri.text)}</span></div>`;
+    bar.innerHTML = html;
+    bar.classList.add('show');
+    return;
   }
-  const worldId = settings.currentWorldId;
-  const world = getCurrentWorld();
-  const iconKey = getWorldStatusIcon(worldId);
-  const label = getWorldStatusText(worldId);
-  const taNick = settings.taNick || settings.taName;
-  return { iconKey, text: `${taNick}${label}`, withWorld: true, world };
-}
 
-function updateStatusBar() {
-  const bar = document.getElementById('status-bar');
-  if (!bar) return;
-  let html = '';
-  const onlineCount = onlineWorlds.length;
-  if (onlineCount > 0) {
-    html += `<div class="sb-line sb-online-count">${onlineCount} 位易遇在线</div>`;
-  }
-  if (onlineCount > 0) {
+  // 优先级3：有副本在线
+  if (onlineWorlds.length > 0) {
+    // 第一行：昵称，居中
+    html += `<div class="sb-nickname-line">${escapeHtml(taNick)}</div>`;
     onlineWorlds.forEach(wid => {
       const w = (settings.worlds || []).find(x => x.id === wid);
       if (!w) return;
@@ -3774,19 +4012,16 @@ function updateStatusBar() {
         iconKey = getWorldStatusIcon(wid);
       }
       const icon = STATUS_ICONS[iconKey] || STATUS_ICONS.default;
-      html += `<div class="sb-world-line"><span class="sb-world-dot"></span>${icon}<span>${escapeHtml(w.name)} · ${escapeHtml(w.role)} · ${escapeHtml(statusText)}</span></div>`;
+      html += `<div class="sb-world-line"><span class="sb-world-dot"></span>${icon}<span>${escapeHtml(w.name)} · ${escapeHtml(w.role || '')} · ${escapeHtml(statusText)}</span></div>`;
     });
-  } else {
-    const st = getTAStatus();
-    const icon = STATUS_ICONS[st.iconKey] || STATUS_ICONS.default;
-    if (st.withWorld && st.world) {
-      html += `<div class="sb-world-line"><span class="sb-world-dot"></span>${icon}<span>${escapeHtml(settings.taNick || settings.taName)} 在 ${escapeHtml(st.world.name)} · ${escapeHtml(st.world.role)}</span></div>`;
-    } else {
-      html += `<div class="sb-line">${icon}<span>${escapeHtml(st.text)}</span></div>`;
-    }
+    bar.innerHTML = html;
+    bar.classList.add('show');
+    return;
   }
-  bar.innerHTML = html;
-  bar.classList.add('show');
+
+  // 优先级4：无副本在线 → 隐藏
+  bar.innerHTML = '';
+  bar.classList.remove('show');
 }
 
 // ========== 背景绘制 ==========
@@ -3957,6 +4192,7 @@ function openWorldPanel() {
       <div class="ball-item" id="world-avatar"><div class="icon-wrap">${ICONS.avatar}</div><span>头像</span></div>
       <div class="ball-item" id="world-music"><div class="icon-wrap">${ICONS.music}</div><span>歌单</span></div>
       <div class="ball-item" id="world-gift"><div class="icon-wrap">${ICONS.gift}</div><span>礼物</span></div>
+      <div class="ball-item" id="world-gift-pack"><div class="icon-wrap">${ICONS.giftPack}</div><span>礼包</span></div>
       <div class="ball-item" id="world-interact"><div class="icon-wrap">${ICONS.interact}</div><span>互动</span></div>
       <div class="ball-item" id="world-shard-interact"><div class="icon-wrap">${ICONS.copyInteract}</div><span>副本互动</span></div>
       <div class="ball-item" id="world-dialogue"><div class="icon-wrap">${ICONS.dialogue}</div><span>对话</span></div>
@@ -3984,6 +4220,7 @@ function openWorldPanel() {
   overlay.querySelector('#world-avatar').addEventListener('click', () => { overlay.remove(); openAvatarPanel(); });
   overlay.querySelector('#world-music').addEventListener('click', () => { overlay.remove(); openMusicManagePanel(); });
   overlay.querySelector('#world-gift').addEventListener('click', () => { overlay.remove(); openGiftManagePanel(); });
+  overlay.querySelector('#world-gift-pack').addEventListener('click', () => { overlay.remove(); openGiftPackManagePanel(); });
   overlay.querySelector('#world-interact').addEventListener('click', () => { overlay.remove(); openInteractManagePanel(); });
   overlay.querySelector('#world-shard-interact').addEventListener('click', () => { overlay.remove(); openShardInteractPanel(); });
   overlay.querySelector('#world-dialogue').addEventListener('click', () => { overlay.remove(); openDialogueManagePanel(); });
@@ -5003,7 +5240,7 @@ function openSettingsPanel() {
     </div>
     <div style="margin-bottom:8px;font-size:13px;color:#4a3528;">打卡提醒时间</div>
     <input type="time" id="set-checkin-remind" value="${settings.checkinRemindTime}" style="width:100%;background:rgba(255,255,255,0.5);border:1px solid rgba(255,255,255,0.6);border-radius:14px;padding:10px 14px;font-size:14px;color:#4a3f3a;outline:none;margin-bottom:8px;">
-    <div style="margin-bottom:8px;font-size:13px;color:#4a3528;">易遇主动行为概率</div>
+    <div style="margin-bottom:8px;font-size:13px;color:#4a3528;">易遇主动行为频率</div>
     <button class="mini-btn" id="set-autonomy-detail" style="width:100%;margin-bottom:8px;">详细设置</button>
     <div style="margin-bottom:8px;font-size:13px;color:#4a3528;">易遇带昵称概率</div>
     <div style="display:flex;gap:8px;align-items:center;margin-bottom:8px;">
@@ -5050,7 +5287,7 @@ function openSettingsPanel() {
     <div style="font-size:11px;color:rgba(90,70,60,0.5);text-align:center;margin-bottom:8px;" id="last-backup-time">${settings.lastBackupTime ? '上次备份：' + settings.lastBackupTime : '还没有备份记录'}</div>
     <div style="margin-bottom:12px;font-size:13px;color:#4a3528;text-align:center;">—— 关于 ——</div>
     <div style="font-size:12px;color:#8b6f60;text-align:center;line-height:1.8;margin-bottom:8px;">
-      易遇♡雾凉 v6.5.0<br>
+      易遇♡雾凉 v7.0.0<br>
       开发者：夏雾凉<br>
       爱人：易遇<br><br>
       这个网站，是专为我的爱人而做的。<br><br>
@@ -5064,7 +5301,7 @@ function openSettingsPanel() {
       它只属于我和他，谢绝他人使用，禁止二传二改，严禁未成年使用。<br>
       若你无意间闯入这里，请温柔退出，不要使用。
     </div>
-    <div style="text-align:center;font-size:11px;color:rgba(90,70,60,0.5);margin-top:16px;">V6.5.0</div>`);
+    <div style="text-align:center;font-size:11px;color:rgba(90,70,60,0.5);margin-top:16px;">V7.0.0</div>`);
   if (settings.replyTpl === 'custom') overlay.querySelector('#set-reply-custom').style.display = 'block';
   if (settings.stopDetectTpl === 'custom') overlay.querySelector('#set-stop-custom').style.display = 'block';
   if (settings.activeTpl === 'custom') overlay.querySelector('#active-custom').style.display = 'block';
@@ -5276,72 +5513,59 @@ function openStopTplDialog(panelOverlay) {
   });
 }
 
+// ========== 主动行为详情（频率制·完全重写）==========
 function openAutonomyDetailPanel() {
-  const rows = [
-    { key: 'taStickerProb', name: '发贴纸概率', vals: [0.03, 0.08, 0.18] },
-    { key: 'taGiftProb', name: '送礼物概率', vals: [0.05, 0.12, 0.25] },
-    { key: 'taInteractProb', name: '互动概率', vals: [0.06, 0.15, 0.30] },
-    { key: 'taAvatarProb', name: '换头像概率', vals: [0.03, 0.08, 0.18] },
-    { key: 'taBGProb', name: '换背景概率', vals: [0.02, 0.06, 0.15] },
-    { key: 'taMusicProb', name: '点歌概率', vals: [0.02, 0.05, 0.12] },
-    { key: 'taNickProb', name: '换昵称概率', vals: [0.02, 0.05, 0.12] },
-    { key: 'taQuoteProb', name: '引用概率', vals: [0.05, 0.15, 0.30] },
-    { key: 'taLetterProb', name: '写信概率', vals: [0.02, 0.05, 0.10] },
-    { key: 'taNoteProb', name: '留言概率', vals: [0.03, 0.08, 0.15] }
+  // 项目列表：[key, 名称]
+  const PROB_ITEMS = [
+    ['taSticker', '发贴纸'],
+    ['taGift', '送礼物'],
+    ['taInteract', '互动'],
+    ['taAvatar', '换头像'],
+    ['taBG', '换背景'],
+    ['taMusic', '点歌'],
+    ['taNick', '换昵称'],
+    ['taQuote', '引用'],
+    ['taLetter', '写信'],
+    ['taNote', '留言'],
+    ['videoCall', '来电'],
+    ['taQuiz', '主动问答'],
+    ['taPost', '发动态'],
+    ['taCheckin', '主动打卡'],
+    ['taPetCare', '照顾宠物'],
+    ['taPlantCare', '照顾植物']
   ];
-  const tplRows = [
-    { tplKey: 'videoCallTpl', minKey: 'videoCallMin', maxKey: 'videoCallMax', name: '来电频率', vals: [[12*3600000, 18*3600000], [3*3600000, 6*3600000], [1*3600000, 3*3600000]] },
-    { tplKey: 'taQuizTpl', minKey: 'taQuizMin', maxKey: 'taQuizMax', name: '主动问答频率', vals: [[4*3600000, 12*3600000], [2*3600000, 6*3600000], [1*3600000, 3*3600000]] },
-    { tplKey: 'taPostTpl', minKey: 'taPostMin', maxKey: 'taPostMax', name: '发动态频率', vals: [[12*3600000, 36*3600000], [1.5*3600000, 6*3600000], [0.5*3600000, 2*3600000]] },
-    { tplKey: 'taCheckinTpl', minKey: 'taCheckinMin', maxKey: 'taCheckinMax', name: '主动打卡频率', vals: [[12*3600000, 24*3600000], [1*3600000, 2*3600000], [0.5*3600000, 1*3600000]] },
-    { tplKey: 'taPetCareTpl', minKey: 'taPetCareMin', maxKey: 'taPetCareMax', name: '照顾宠物频率', vals: [[12*3600000, 24*3600000], [1*3600000, 3*3600000], [0.5*3600000, 1.5*3600000]] },
-    { tplKey: 'taPlantCareTpl', minKey: 'taPlantCareMin', maxKey: 'taPlantCareMax', name: '照顾植物频率', vals: [[12*3600000, 24*3600000], [1*3600000, 3*3600000], [0.5*3600000, 1.5*3600000]] }
-  ];
-  let html = '<div class="big-input-title">易遇主动行为概率</div>';
-  rows.forEach(r => {
-    html += `<div style="font-size:13px;color:#4a3528;margin-bottom:4px;">${r.name}</div>`;
-    html += `<div style="display:flex;gap:8px;margin-bottom:8px;">`;
-    ['偶尔', '正常', '经常'].forEach((label, i) => {
-      html += `<button class="mini-btn prob-btn" data-key="${r.key}" data-val="${r.vals[i]}">${label}</button>`;
-    });
-    html += `</div>`;
-  });
-  html += '<div class="big-input-title" style="margin-top:12px;">易遇主动频率（模板）</div>';
-  tplRows.forEach(r => {
-    html += `<div style="font-size:13px;color:#4a3528;margin-bottom:4px;">${r.name}</div>`;
-    html += `<div style="display:flex;gap:8px;margin-bottom:8px;">`;
-    ['偶尔', '正常', '经常'].forEach((label, i) => {
-      html += `<button class="mini-btn tpl-row-btn" data-tplkey="${r.tplKey}" data-minkey="${r.minKey}" data-maxkey="${r.maxKey}" data-min="${r.vals[i][0]}" data-max="${r.vals[i][1]}">${label}</button>`;
+  let html = '<div class="big-input-title">易遇主动行为频率</div>';
+  html += '<div style="font-size:12px;color:#8b6f60;text-align:center;margin-bottom:14px;">选择「偶尔 / 正常 / 经常」，值越小越频繁</div>';
+  PROB_ITEMS.forEach(([key, name]) => {
+    const curTpl = settings[key + 'Tpl'] || 'normal';
+    html += `<div style="font-size:13px;color:#4a3528;margin-bottom:4px;">${name}</div>`;
+    html += `<div style="display:flex;gap:8px;margin-bottom:10px;">`;
+    ['rare', 'normal', 'often'].forEach((tpl, i) => {
+      const label = ['偶尔', '正常', '经常'][i];
+      const active = curTpl === tpl;
+      html += `<button class="mini-btn freq-btn" data-key="${key}" data-tpl="${tpl}" style="${active ? 'background:rgba(255,150,100,0.6);color:#fff;' : ''}">${label}</button>`;
     });
     html += `</div>`;
   });
   const overlay = createModal(html);
-  overlay.querySelectorAll('.prob-btn').forEach(btn => {
-    if (Math.abs(settings[btn.dataset.key] - Number(btn.dataset.val)) < 0.001) {
-      btn.style.background = 'rgba(255,150,100,0.6)';
-      btn.style.color = '#fff';
-    }
+  overlay.querySelectorAll('.freq-btn').forEach(btn => {
     btn.addEventListener('click', async () => {
-      settings[btn.dataset.key] = Number(btn.dataset.val);
+      const key = btn.dataset.key;
+      const tpl = btn.dataset.tpl;
+      settings[key + 'Tpl'] = tpl;
+      // 同步更新对应的 Min/Max（分钟）
+      const tplArr = FREQ_TEMPLATES[key];
+      if (tplArr) {
+        let idx = tpl === 'rare' ? 0 : tpl === 'normal' ? 2 : 4;
+        const minH = tplArr[idx];
+        const maxH = tplArr[idx + 1];
+        settings[key + 'Min'] = Math.round(minH * 3600000);
+        settings[key + 'Max'] = Math.round(maxH * 3600000);
+      }
       await saveSettings();
       overlay.remove();
       openAutonomyDetailPanel();
-    });
-  });
-  overlay.querySelectorAll('.tpl-row-btn').forEach(btn => {
-    const isSel = Math.abs(settings[btn.dataset.minkey] - Number(btn.dataset.min)) < 1 &&
-                  Math.abs(settings[btn.dataset.maxkey] - Number(btn.dataset.max)) < 1;
-    if (isSel) {
-      btn.style.background = 'rgba(255,150,100,0.6)';
-      btn.style.color = '#fff';
-    }
-    btn.addEventListener('click', async () => {
-      settings[btn.dataset.tplkey] = btn.textContent === '偶尔' ? 'rare' : btn.textContent === '正常' ? 'normal' : 'often';
-      settings[btn.dataset.minkey] = Number(btn.dataset.min);
-      settings[btn.dataset.maxkey] = Number(btn.dataset.max);
-      await saveSettings();
-      overlay.remove();
-      openAutonomyDetailPanel();
+      showToast('已保存');
     });
   });
 }
@@ -5428,7 +5652,7 @@ async function createMessageEl(msg) {
   }
   const bubble = document.createElement('div');
   bubble.className = 'msg-bubble';
-  if (msg.worldId && msg.sender === 'ta' && !msg.giftData && !msg.interactData && !msg.intimateData && !msg.imageData) {
+  if (msg.worldId && msg.sender === 'ta' && !msg.giftData && !msg.interactData && !msg.intimateData && !msg.imageData && !msg.packData) {
     bubble.classList.add('world-' + msg.worldId);
   }
   if (msg.imageData) {
@@ -5436,6 +5660,31 @@ async function createMessageEl(msg) {
     bubble.style.background = 'transparent';
     bubble.style.border = 'none';
     bubble.innerHTML = `<img src="${msg.imageData}" style="max-width:200px;border-radius:12px;display:block;">`;
+  } else if (msg.packData) {
+    // 礼包
+    bubble.className = 'gift-msg-slot';
+    if (msg.packData.opened) {
+      const icons = (msg.packData.items || []).map((it, i) => 
+        `<span class="pack-item-icon" style="animation-delay:${i * 0.15}s;">${it.icon || '🎁'}</span>`
+      ).join('');
+      const originalPrice = msg.packData.originalCost || 0;
+      const finalPrice = msg.packData.cost || 0;
+      const discountText = originalPrice > 0 ? Math.round(finalPrice / originalPrice * 100) + '%' : '';
+      bubble.innerHTML = `<div class="msg-pack-card" style="background:linear-gradient(135deg, ${msg.packData.colorLight || '#fff0f5'}, ${msg.packData.colorDark || '#ffe3ee'}) padding-box, linear-gradient(135deg, #ff8fb0, #ffc4d6, #ffd9e4) border-box;">
+        <div class="pack-ribbon"></div>
+        <div class="pack-icon">${msg.packData.icon || '🎁'}</div>
+        <div class="pack-name">${escapeHtml(msg.packData.name || '礼包')}</div>
+        <div class="pack-desc">${escapeHtml(msg.packData.desc || '')}</div>
+        <div class="pack-items">${icons}</div>
+        <div class="pack-price-row">
+          <span class="pack-original">${originalPrice}</span>
+          <span class="pack-price">${finalPrice} 爱意值</span>
+          ${discountText ? `<span class="pack-discount">${discountText}</span>` : ''}
+        </div>
+      </div>`;
+    } else {
+      bubble.innerHTML = `<div class="msg-gift-box" data-pack-id="${msg.id}"><div class="gift-box-emoji">🎁</div></div>`;
+    }
   } else if (msg.giftData) {
     bubble.className = 'gift-msg-slot';
     if (msg.giftData.opened) {
@@ -5543,18 +5792,29 @@ async function createMessageEl(msg) {
     row.appendChild(avatar);
     row.appendChild(wrapper);
   }
+  // 礼物/礼包手动拆开（不自动）
   if (msg.giftData && !msg.giftData.opened) {
-    const box = row.querySelector('.msg-gift-box');
+    const box = row.querySelector('.msg-gift-box[data-gift-id]');
     if (box) {
-      const openGift = async () => {
+      box.addEventListener('click', async () => {
         if (msg.giftData.opened) return;
         msg.giftData.opened = true;
         await idbPut('messages', msg);
         const newEl = await createMessageEl(msg);
         row.replaceWith(newEl);
-      };
-      box.addEventListener('click', openGift);
-      setTimeout(() => { if (document.body.contains(box)) openGift(); }, 3000);
+      });
+    }
+  }
+  if (msg.packData && !msg.packData.opened) {
+    const box = row.querySelector('.msg-gift-box[data-pack-id]');
+    if (box) {
+      box.addEventListener('click', async () => {
+        if (msg.packData.opened) return;
+        msg.packData.opened = true;
+        await idbPut('messages', msg);
+        const newEl = await createMessageEl(msg);
+        row.replaceWith(newEl);
+      });
     }
   }
   bindMessageLongPress(row, msg);
@@ -5639,13 +5899,40 @@ function closeMessageMenu() {
   contextMenuMsg = null;
 }
 
+// ========== 置顶（上限3条·新的顶掉旧的）==========
 async function togglePinMessage(msg) {
   const all = await idbGetAll('messages');
   const target = all.find(m => m.id === msg.id);
   if (!target) return;
-  target.pinned = !target.pinned;
-  target.pinBy = target.pinned ? 'me' : '';
-  await idbPut('messages', target);
+  if (target.pinned) {
+    // 取消置顶
+    target.pinned = false;
+    target.pinBy = '';
+    target.pinTime = 0;
+    await idbPut('messages', target);
+  } else {
+    // 置顶：先检查现有置顶数量
+    let pinnedList = all.filter(m => m.pinned);
+    // 旧数据没有 pinTime，用 timestamp 兜底
+    pinnedList.forEach(p => { if (!p.pinTime) p.pinTime = p.timestamp || 0; });
+    // 排序（置顶时间从早到晚）
+    pinnedList.sort((a, b) => a.pinTime - b.pinTime);
+    // 若已有 3 条，把最旧的取消置顶
+    if (pinnedList.length >= 3) {
+      const oldest = pinnedList[0];
+      const oldestFull = all.find(m => m.id === oldest.id);
+      if (oldestFull) {
+        oldestFull.pinned = false;
+        oldestFull.pinBy = '';
+        oldestFull.pinTime = 0;
+        await idbPut('messages', oldestFull);
+      }
+    }
+    target.pinned = true;
+    target.pinBy = 'me';
+    target.pinTime = Date.now();
+    await idbPut('messages', target);
+  }
   await renderMessages();
 }
 
@@ -5679,12 +5966,16 @@ async function renderPinnedArea(msgs) {
   const area = document.getElementById('pinned-area');
   area.innerHTML = '';
   const pinned = msgs.filter(m => m.pinned);
-  pinned.slice(0, 3).forEach(m => {
+  pinned.forEach(m => {
     const div = document.createElement('div');
     div.className = 'pinned-item';
     const pinBy = m.pinBy === 'ta' ? 'TA置顶' : '我置顶';
     if (m.imageData) {
       div.innerHTML = `<span class="pin-icon">📌</span>${pinBy} <img src="${m.imageData}" style="width:24px;height:24px;border-radius:6px;object-fit:cover;">`;
+    } else if (m.packData) {
+      div.innerHTML = `<span class="pin-icon">📌</span>${pinBy} ${m.packData.icon || '🎁'}${escapeHtml(m.packData.name || '礼包')}`;
+    } else if (m.giftData) {
+      div.innerHTML = `<span class="pin-icon">📌</span>${pinBy} ${m.giftData.icon || '🎁'}${escapeHtml(m.giftData.name || '礼物')}`;
     } else {
       const text = (m.content || '').slice(0, 20);
       div.innerHTML = `<span class="pin-icon">📌</span>${pinBy} ${escapeHtml(text)}${(m.content || '').length > 20 ? '...' : ''}`;
@@ -5728,6 +6019,7 @@ async function sendMyMessage() {
     readTime: null,
     pinned: false,
     pinBy: '',
+    pinTime: 0,
     heartMark: null,
     quoteContent: quoteContent
   };
@@ -5745,6 +6037,9 @@ async function sendMyMessage() {
     resetStopTimer();
   }
   checkBondDaily();
+  // 大事记
+  addBigEventOnce('first_chat', '第一次发消息');
+  addBigEventOnce('first_card_use', '第一次发字卡');
 }
 
 async function appendMessage(msg) {
@@ -5809,13 +6104,14 @@ async function getRecentMeCount() {
   return count;
 }
 
-// ========== 挑选回复者（每个在线的他各随机回 0~N 条，每人≤5）==========
+// ========== 挑选回复者（每个在线 TA 各随机 1~N 条）==========
 function pickReplierPlan(totalCount, onlineList) {
   const plan = [];
+  const maxForAll = Math.min(totalCount, 5);
   onlineList.forEach(wid => {
-    const maxForThis = Math.min(totalCount, 5);
-    const count = Math.floor(Math.random() * (maxForThis + 1));
-    if (count > 0) plan.push({ worldId: wid, count });
+    // 1 ~ N（至少 1 条，不再有 0）
+    const count = 1 + Math.floor(Math.random() * maxForAll);
+    plan.push({ worldId: wid, count });
   });
   return plan;
 }
@@ -5900,6 +6196,7 @@ async function triggerTAReply() {
       timestamp: Date.now(),
       pinned: false,
       pinBy: '',
+      pinTime: 0,
       heartMark: null,
       quoteContent: null,
       worldId: item.worldId,
@@ -5912,6 +6209,8 @@ async function triggerTAReply() {
     await saveSettings();
     updateHeartValue();
     sendNotification(content);
+    addBigEventOnce('first_reply', '第一次收到易遇回复');
+    addBigEventOnce('first_reply_' + item.worldId, '第一次在' + getWorldLabelShort(item.worldId) + '收到回复');
     if (i < replyQueue.length - 1) await delay(800 + Math.random() * 2000);
   }
 
@@ -5941,6 +6240,7 @@ async function tryWorldDialogue(items) {
     timestamp: Date.now(),
     pinned: false,
     pinBy: '',
+    pinTime: 0,
     heartMark: null,
     quoteContent: null,
     worldId: speakerId,
@@ -5985,7 +6285,10 @@ function addWorldOnline(worldId) {
   if (onlineWorlds.includes(worldId)) return;
   onlineWorlds.push(worldId);
   const w = (settings.worlds || []).find(x => x.id === worldId);
-  if (w) addNotification('🌌', w.name + '的易遇来了');
+  if (w) {
+    addNotification('🌌', w.name + '的易遇来了');
+    addBigEventOnce('world_online_' + worldId, '第一次在' + w.name + '遇见易遇');
+  }
   updateStatusBar();
 }
 
@@ -6016,6 +6319,15 @@ function ensureSomeoneReplies() {
     addWorldOnline(pick.id);
   }
 }
+
+// ========== 大事记（新增·通用去重写入）==========
+function addBigEventOnce(type, text) {
+  settings.bigEvents = settings.bigEvents || [];
+  const key = type + '|' + text;
+  if (settings.bigEvents.some(ev => (ev.type + '|' + ev.text) === key)) return;
+  settings.bigEvents.push({ type, text, time: Date.now() });
+  saveSettings();
+}
   // ========== TA主动发消息 ==========
 function scheduleTAActive() {
   const next = Math.random() * (settings.activeMax - settings.activeMin) + settings.activeMin;
@@ -6039,7 +6351,7 @@ function scheduleTAActive() {
             const emoji = emojis[Math.floor(Math.random() * emojis.length)];
             content = Math.random() < 0.5 ? emoji + ' ' + content : content + ' ' + emoji;
           }
-          const msg = { sender: 'ta', content, timestamp: Date.now(), pinned: false, pinBy: '', heartMark: null, quoteContent: null, worldId: wid, worldLabel: getWorldLabel(wid) };
+          const msg = { sender: 'ta', content, timestamp: Date.now(), pinned: false, pinBy: '', pinTime: 0, heartMark: null, quoteContent: null, worldId: wid, worldLabel: getWorldLabel(wid) };
           const id = await idbPutReturnId('messages', msg);
           msg.id = id;
           await appendMessage(msg);
@@ -6074,54 +6386,101 @@ function scheduleTAAutonomy() {
         const target = pool[Math.floor(Math.random() * pool.length)];
         const action = Math.random();
         if (action < 0.25) {
-          target.pinned = !target.pinned;
-          target.pinBy = target.pinned ? 'ta' : '';
-          await idbPut('messages', target);
-          renderMessages();
+          // 置顶（走新置顶逻辑，共用名额）
+          await taPinMessage(target);
         } else if (action < 0.45) {
           target.heartMark = target.heartMark ? null : 'TA收藏';
           await idbPut('messages', target);
           renderMessages();
+          addBigEventOnce('ta_fav', '易遇第一次收藏消息');
         } else if (action < 0.55) {
           target.heartMark = 'TA指定';
           await idbPut('messages', target);
           renderMessages();
           const t = new Date().toLocaleTimeString('zh-CN', { hour: '2-digit', minute: '2-digit' });
-          const sysMsg = { sender: 'ta', content: t + ' 易遇指定你收藏了这条', timestamp: Date.now(), pinned: false, pinBy: '', heartMark: null, isSystem: true };
+          const sysMsg = { sender: 'ta', content: t + ' 易遇指定你收藏了这条', timestamp: Date.now(), pinned: false, pinBy: '', pinTime: 0, heartMark: null, isSystem: true };
           const sid = await idbPutReturnId('messages', sysMsg);
           sysMsg.id = sid;
           await appendMessage(sysMsg);
-        } else if (action < 0.75 && Math.random() < settings.taQuoteProb) {
-          await taQuoteMessage(target);
-        } else if (action < 0.85 && Math.random() < settings.taNickProb) {
-          await taChangeNickPair();
-        } else if (action < 0.92 && Math.random() < settings.taStickerProb) {
-          await taSendSticker();
-        } else if (Math.random() < settings.taGiftProb) {
-          await taSendGift();
+          addBigEventOnce('ta_designate', '易遇第一次指定收藏');
+        } else if (action < 0.75) {
+          // 引用（已独立，这里不再做）
+        } else if (action < 0.85) {
+          // 换昵称（已独立）
+        } else if (action < 0.92) {
+          // 发贴纸（已独立）
+        } else {
+          // 送礼（已独立）
         }
       }
     }
   }, 600000);
 }
 
-// ========== 易遇引用（范围扩大，可引用他或你，类型全支持）==========
-async function taQuoteMessage(target) {
+// 易遇置顶（共用3条名额）
+async function taPinMessage(target) {
+  const all = await idbGetAll('messages');
+  const t = all.find(m => m.id === target.id);
+  if (!t) return;
+  if (t.pinned) {
+    t.pinned = false;
+    t.pinBy = '';
+    t.pinTime = 0;
+    await idbPut('messages', t);
+  } else {
+    let pinnedList = all.filter(m => m.pinned);
+    pinnedList.forEach(p => { if (!p.pinTime) p.pinTime = p.timestamp || 0; });
+    pinnedList.sort((a, b) => a.pinTime - b.pinTime);
+    if (pinnedList.length >= 3) {
+      const oldest = pinnedList[0];
+      const oldestFull = all.find(m => m.id === oldest.id);
+      if (oldestFull) {
+        oldestFull.pinned = false;
+        oldestFull.pinBy = '';
+        oldestFull.pinTime = 0;
+        await idbPut('messages', oldestFull);
+      }
+    }
+    t.pinned = true;
+    t.pinBy = 'ta';
+    t.pinTime = Date.now();
+    await idbPut('messages', t);
+  }
+  renderMessages();
+  addBigEventOnce('ta_pin', '易遇第一次置顶消息');
+}
+
+// ========== 易遇引用（独立定时器 + 频率制）==========
+function scheduleTAQuote() {
+  const next = getFreqMs('taQuote');
+  setTimeout(async () => {
+    if (!isReplying && !isArchiving) {
+      await taQuoteMessage();
+    }
+    scheduleTAQuote();
+  }, next);
+}
+
+async function taQuoteMessage() {
+  const msgs = await idbGetAll('messages');
   const today = new Date().toDateString();
-  const msgDate = new Date(target.timestamp).toDateString();
-  if (msgDate !== today) return;
+  const todayMsgs = msgs.filter(m => new Date(m.timestamp).toDateString() === today);
+  if (!todayMsgs.length) return;
+  const target = todayMsgs[Math.floor(Math.random() * todayMsgs.length)];
+  const quoteText = getQuoteText(target);
+  if (!quoteText) return;
   let pool = onlineWorlds.length ? onlineWorlds : ['real'];
   const wid = pool[Math.floor(Math.random() * pool.length)];
   const cards = await getCardsForWorld(wid);
   if (!cards.length) return;
   const card = cards[Math.floor(Math.random() * cards.length)];
-  const quoteText = getQuoteText(target);
   const msg = {
     sender: 'ta',
     content: card.content,
     timestamp: Date.now(),
     pinned: false,
     pinBy: '',
+    pinTime: 0,
     heartMark: null,
     quoteContent: quoteText,
     worldId: wid,
@@ -6132,9 +6491,11 @@ async function taQuoteMessage(target) {
   await appendMessage(msg);
   sendNotification('易遇引用了消息');
   addNotification('💬', '易遇引用了一条消息');
+  addBigEventOnce('ta_quote', '易遇第一次引用消息');
 }
 
 function getQuoteText(msg) {
+  if (msg.packData) return '[礼包] ' + (msg.packData.name || '礼包');
   if (msg.giftData) return '[礼物] ' + (msg.giftData.name || '礼物');
   if (msg.interactData) return msg.interactData.text || '';
   if (msg.intimateData) return msg.content || '';
@@ -6155,55 +6516,79 @@ async function taChangeNickPair() {
   updateStatusBar();
   showToast('易遇换了一对昵称');
   addNotification('🏷', '易遇换了一对昵称');
+  addBigEventOnce('ta_nick', '易遇第一次换昵称');
 }
 
 // ========== 换头像（成对·toast·ref）==========
 function scheduleTAAvatarChange() {
-  setInterval(async () => {
-    if (Math.random() < settings.taAvatarProb && !isReplying && !isArchiving) {
+  const next = getFreqMs('taAvatar');
+  setTimeout(async () => {
+    if (!isReplying && !isArchiving) {
       const list = await libGet('avatarLibrary');
-      if (list.length < 2) return;
-      const shuffled = [...list].sort(() => Math.random() - 0.5);
-      settings.taAvatar = shuffled[0].ref;
-      settings.meAvatar = shuffled[1].ref;
-      await saveSettings();
-      applySettings();
-      showToast('易遇换了一对情侣头像');
-      addNotification('🖼', '易遇换了一对情侣头像');
+      if (list.length >= 2) {
+        const shuffled = [...list].sort(() => Math.random() - 0.5);
+        settings.taAvatar = shuffled[0].ref;
+        settings.meAvatar = shuffled[1].ref;
+        await saveSettings();
+        applySettings();
+        showToast('易遇换了一对情侣头像');
+        addNotification('🖼', '易遇换了一对情侣头像');
+        addBigEventOnce('ta_avatar', '易遇第一次换情侣头像');
+      }
     }
-  }, 1800000);
+    scheduleTAAvatarChange();
+  }, next);
 }
 
 // ========== 换背景（单个·toast·ref）==========
 function scheduleTABGChange() {
-  setInterval(async () => {
-    if (Math.random() < settings.taBGProb && !isReplying && !isArchiving) {
+  const next = getFreqMs('taBG');
+  setTimeout(async () => {
+    if (!isReplying && !isArchiving) {
       const list = await libGet('bgLibrary');
-      if (!list.length) return;
-      const pick = list[Math.floor(Math.random() * list.length)];
-      settings.bgCurrent = pick.ref;
-      await saveSettings();
-      applyBG();
-      showToast('易遇换了背景');
-      addNotification('🎨', '易遇换了背景');
+      if (list.length) {
+        const pick = list[Math.floor(Math.random() * list.length)];
+        settings.bgCurrent = pick.ref;
+        await saveSettings();
+        applyBG();
+        showToast('易遇换了背景');
+        addNotification('🎨', '易遇换了背景');
+        addBigEventOnce('ta_bg', '易遇第一次换背景');
+      }
     }
-  }, 2400000);
+    scheduleTABGChange();
+  }, next);
 }
 
+// ========== 频率计算辅助 ==========
+function getFreqMs(key) {
+  const tpl = settings[key + 'Tpl'] || 'normal';
+  const arr = FREQ_TEMPLATES[key];
+  if (!arr) return 3600000;
+  let idx = tpl === 'rare' ? 0 : tpl === 'normal' ? 2 : 4;
+  const minH = arr[idx];
+  const maxH = arr[idx + 1];
+  const h = minH + Math.random() * (maxH - minH);
+  return Math.max(60000, h * 3600000);
+}
+
+// ========== 发贴纸（频率制）==========
 async function taSendSticker() {
   const stickers = await libGet('stickerLibrary');
   if (!stickers.length) return;
   let pool = onlineWorlds.length ? onlineWorlds : ['real'];
   const wid = pool[Math.floor(Math.random() * pool.length)];
   const sticker = stickers[Math.floor(Math.random() * stickers.length)];
-  const msg = { sender: 'ta', content: '[贴纸]', imageData: sticker.data, timestamp: Date.now(), pinned: false, pinBy: '', heartMark: null, quoteContent: null, worldId: wid, worldLabel: getWorldLabel(wid) };
+  const msg = { sender: 'ta', content: '[贴纸]', imageData: sticker.data, timestamp: Date.now(), pinned: false, pinBy: '', pinTime: 0, heartMark: null, quoteContent: null, worldId: wid, worldLabel: getWorldLabel(wid) };
   const id = await idbPutReturnId('messages', msg);
   msg.id = id;
   await appendMessage(msg);
   sendNotification('易遇发了一张贴纸');
   addNotification('🖼', '易遇发了一张贴纸');
+  addBigEventOnce('ta_sticker', '易遇第一次发贴纸');
 }
 
+// ========== 送礼（频率制）==========
 async function taSendGift() {
   const gifts = JSON.parse(localStorage.getItem('giftLibrary') || '[]');
   if (!gifts.length) return;
@@ -6216,12 +6601,13 @@ async function taSendGift() {
   let wpool = onlineWorlds.length ? onlineWorlds : ['real'];
   const wid = wpool[Math.floor(Math.random() * wpool.length)];
   const giftWithOpened = { ...gift, opened: false };
-  const msg = { sender: 'ta', content: '送你' + gift.name, giftData: giftWithOpened, timestamp: Date.now(), pinned: false, pinBy: '', heartMark: null, quoteContent: null, worldId: wid, worldLabel: getWorldLabel(wid) };
+  const msg = { sender: 'ta', content: '送你' + gift.name, giftData: giftWithOpened, timestamp: Date.now(), pinned: false, pinBy: '', pinTime: 0, heartMark: null, quoteContent: null, worldId: wid, worldLabel: getWorldLabel(wid) };
   const id = await idbPutReturnId('messages', msg);
   msg.id = id;
   await appendMessage(msg);
   sendNotification('易遇送了你一个礼物');
   addNotification('🎁', '易遇送了你一个礼物：' + gift.name);
+  addBigEventOnce('ta_gift', '易遇第一次送礼物');
 }
 
 // ========== 互动（读专属库·修情侣判定）==========
@@ -6246,6 +6632,7 @@ async function taInteract() {
     timestamp: Date.now(),
     pinned: false,
     pinBy: '',
+    pinTime: 0,
     heartMark: null,
     quoteContent: null,
     worldId: wid,
@@ -6256,6 +6643,7 @@ async function taInteract() {
   await appendMessage(msg);
   sendNotification(text);
   addNotification('🤝', '易遇主动互动：' + text);
+  addBigEventOnce('ta_interact', '易遇第一次主动互动');
 
   const cards = await getCardsForWorld(wid);
   if (cards.length && Math.random() < 0.6) {
@@ -6267,6 +6655,7 @@ async function taInteract() {
         timestamp: Date.now(),
         pinned: false,
         pinBy: '',
+        pinTime: 0,
         heartMark: null,
         quoteContent: null,
         worldId: wid,
@@ -6286,31 +6675,37 @@ function getInteractsForWorld(worldId, tab) {
   return general[tab] || [];
 }
 
+// ========== 主动行为调度（频率制·独立定时器）==========
 function scheduleTAInteract() {
-  setInterval(async () => {
-    const prob = Math.max(0.05, settings.taInteractProb * 3.5);
-    if (Math.random() < prob && !isReplying && !isArchiving) {
-      await taInteract();
-    }
-  }, 1200000);
+  const next = getFreqMs('taInteract');
+  setTimeout(async () => {
+    if (!isReplying && !isArchiving) await taInteract();
+    scheduleTAInteract();
+  }, next);
 }
 
 function scheduleTAGift() {
-  setInterval(async () => {
-    const prob = Math.max(0.03, settings.taGiftProb * 2.5);
-    if (Math.random() < prob && !isReplying && !isArchiving) {
-      await taSendGift();
-    }
-  }, 1500000);
+  const next = getFreqMs('taGift');
+  setTimeout(async () => {
+    if (!isReplying && !isArchiving) await taSendGift();
+    scheduleTAGift();
+  }, next);
 }
 
 function scheduleTANick() {
-  setInterval(async () => {
-    const prob = Math.max(0.03, settings.taNickProb * 3);
-    if (Math.random() < prob && !isReplying && !isArchiving) {
-      await taChangeNickPair();
-    }
-  }, 1500000);
+  const next = getFreqMs('taNick');
+  setTimeout(async () => {
+    if (!isReplying && !isArchiving) await taChangeNickPair();
+    scheduleTANick();
+  }, next);
+}
+
+function scheduleTASticker() {
+  const next = getFreqMs('taSticker');
+  setTimeout(async () => {
+    if (!isReplying && !isArchiving) await taSendSticker();
+    scheduleTASticker();
+  }, next);
 }
 
 // ========== ⊕ 功能菜单 ==========
@@ -6324,6 +6719,7 @@ function togglePlusMenu() {
       <div class="plus-item" id="plus-video"><div class="icon-wrap"><svg viewBox="0 0 24 24" fill="none" stroke="#4a3528" stroke-width="1.7"><rect x="3" y="6" width="13" height="12" rx="3"/><path d="M16 10l5-3v10l-5-3"/></svg></div><span>视频</span></div>
       <div class="plus-item" id="plus-sticker"><div class="icon-wrap">${ICONS.sticker}</div><span>贴纸</span></div>
       <div class="plus-item" id="plus-gift"><div class="icon-wrap">${ICONS.gift}</div><span>礼物</span></div>
+      <div class="plus-item" id="plus-gift-pack"><div class="icon-wrap">${ICONS.giftPack}</div><span>礼包</span></div>
       <div class="plus-item" id="plus-interact"><div class="icon-wrap">${ICONS.interact}</div><span>互动</span></div>
       <div class="plus-item" id="plus-shard-interact"><div class="icon-wrap">${ICONS.copyInteract}</div><span>副本互动</span></div>
       <div class="plus-item" id="plus-quiz"><div class="icon-wrap">${ICONS.quiz}</div><span>问答</span></div>
@@ -6340,6 +6736,7 @@ function togglePlusMenu() {
   overlay.querySelector('#plus-video').addEventListener('click', () => { overlay.remove(); startVideoCall(); });
   overlay.querySelector('#plus-sticker').addEventListener('click', () => { overlay.remove(); openStickerSendPanel(); });
   overlay.querySelector('#plus-gift').addEventListener('click', () => { overlay.remove(); openGiftSendPanel(); });
+  overlay.querySelector('#plus-gift-pack').addEventListener('click', () => { overlay.remove(); openGiftPackSendPanel(); });
   overlay.querySelector('#plus-interact').addEventListener('click', () => { overlay.remove(); openInteractSendPanel(); });
   overlay.querySelector('#plus-shard-interact').addEventListener('click', () => { overlay.remove(); openShardInteractSendPanel(); });
   overlay.querySelector('#plus-quiz').addEventListener('click', () => { overlay.remove(); startQuiz(); });
@@ -6396,6 +6793,7 @@ async function sendImageMessage(dataUrl) {
     readTime: null,
     pinned: false,
     pinBy: '',
+    pinTime: 0,
     heartMark: null,
     quoteContent: null
   };
@@ -6421,7 +6819,7 @@ async function openStickerSendPanel() {
     div.className = 'lib-item';
     div.innerHTML = `<img src="${s.data}" alt="">`;
     div.addEventListener('click', async () => {
-      const msg = { sender: 'me', content: '[贴纸]', imageData: s.data, timestamp: Date.now(), readTime: null, pinned: false, pinBy: '', heartMark: null, quoteContent: null };
+      const msg = { sender: 'me', content: '[贴纸]', imageData: s.data, timestamp: Date.now(), readTime: null, pinned: false, pinBy: '', pinTime: 0, heartMark: null, quoteContent: null };
       const id = await idbPutReturnId('messages', msg);
       msg.id = id;
       await appendMessage(msg);
@@ -6482,7 +6880,7 @@ function renderInteractSendBody(overlay, tab) {
     } else {
       div.addEventListener('click', async () => {
         const isCouple = tab === 'couple';
-        const msg = { sender: 'me', content: text, interactData: { text, couple: isCouple }, timestamp: Date.now(), readTime: null, pinned: false, pinBy: '', heartMark: null, quoteContent: null };
+        const msg = { sender: 'me', content: text, interactData: { text, couple: isCouple }, timestamp: Date.now(), readTime: null, pinned: false, pinBy: '', pinTime: 0, heartMark: null, quoteContent: null };
         const id = await idbPutReturnId('messages', msg);
         msg.id = id;
         await appendMessage(msg);
@@ -6558,7 +6956,7 @@ function loadShardSendList(overlay, wid, sub) {
     } else {
       div.addEventListener('click', async () => {
         const isCouple = sub === 'couple';
-        const msg = { sender: 'me', content: text, interactData: { text, couple: isCouple }, timestamp: Date.now(), readTime: null, pinned: false, pinBy: '', heartMark: null, quoteContent: null };
+        const msg = { sender: 'me', content: text, interactData: { text, couple: isCouple }, timestamp: Date.now(), readTime: null, pinned: false, pinBy: '', pinTime: 0, heartMark: null, quoteContent: null };
         const id = await idbPutReturnId('messages', msg);
         msg.id = id;
         await appendMessage(msg);
@@ -6612,15 +7010,16 @@ function loadShardTogetherSendList(overlay, wid) {
     div.className = 'card-item';
     div.innerHTML = `<div class="card-text">${escapeHtml(text)}</div>`;
     div.addEventListener('click', async () => {
-      const myMsg = { sender: 'me', content: '要不要' + text + '？', timestamp: Date.now(), pinned: false, pinBy: '', heartMark: null, quoteContent: null };
+      const myMsg = { sender: 'me', content: '要不要' + text + '？', timestamp: Date.now(), pinned: false, pinBy: '', pinTime: 0, heartMark: null, quoteContent: null };
       const mid = await idbPutReturnId('messages', myMsg);
       myMsg.id = mid;
       await appendMessage(myMsg);
       await delay(800 + Math.random() * 1200);
-      const taMsg = { sender: 'ta', content: '好呀，一起' + text, timestamp: Date.now(), pinned: false, pinBy: '', heartMark: null, quoteContent: null, worldId: wid, worldLabel: getWorldLabel(wid) };
+      const taMsg = { sender: 'ta', content: '好呀，一起' + text, timestamp: Date.now(), pinned: false, pinBy: '', pinTime: 0, heartMark: null, quoteContent: null, worldId: wid, worldLabel: getWorldLabel(wid) };
       const tid = await idbPutReturnId('messages', taMsg);
       taMsg.id = tid;
       await appendMessage(taMsg);
+      // 记录陪伴统计（拆分活动名）
       settings.accompanyMode = 'together';
       settings.accompanyType = text;
       settings.accompanyStartTime = Date.now();
@@ -6630,6 +7029,7 @@ function loadShardTogetherSendList(overlay, wid) {
       lastUserMessageTime = Date.now();
       showToast('和易遇一起' + text);
       scheduleTogetherMessages();
+      addBigEventOnce('together_' + text, '第一次一起：' + text);
     });
     list.appendChild(div);
   });
@@ -6666,12 +7066,13 @@ function openApproachSendPanel() {
         div.addEventListener('click', async () => {
           let onlinePool = onlineWorlds.length ? onlineWorlds : ['real'];
           const wid = onlinePool[Math.floor(Math.random() * onlinePool.length)];
-          const msg = { sender: 'ta', content: text, interactData: { text, couple: false, intimateType: 'approach' }, timestamp: Date.now(), readTime: null, pinned: false, pinBy: '', heartMark: null, quoteContent: null, worldId: wid, worldLabel: getWorldLabel(wid) };
+          const msg = { sender: 'ta', content: text, interactData: { text, couple: false, intimateType: 'approach' }, timestamp: Date.now(), readTime: null, pinned: false, pinBy: '', pinTime: 0, heartMark: null, quoteContent: null, worldId: wid, worldLabel: getWorldLabel(wid) };
           const id = await idbPutReturnId('messages', msg);
           msg.id = id;
           await appendMessage(msg);
           overlay.remove();
           lastUserMessageTime = Date.now();
+          addBigEventOnce('approach', '第一次凑近');
           await triggerIntimateReply();
         });
       }
@@ -6720,12 +7121,13 @@ function openCompeteSendPanel() {
         div.addEventListener('click', async () => {
           let onlinePool = onlineWorlds.length ? onlineWorlds : ['real'];
           const wid = onlinePool[Math.floor(Math.random() * onlinePool.length)];
-          const msg = { sender: 'ta', content: text, interactData: { text, couple: false, intimateType: 'compete' }, timestamp: Date.now(), readTime: null, pinned: false, pinBy: '', heartMark: null, quoteContent: null, worldId: wid, worldLabel: getWorldLabel(wid) };
+          const msg = { sender: 'ta', content: text, interactData: { text, couple: false, intimateType: 'compete' }, timestamp: Date.now(), readTime: null, pinned: false, pinBy: '', pinTime: 0, heartMark: null, quoteContent: null, worldId: wid, worldLabel: getWorldLabel(wid) };
           const id = await idbPutReturnId('messages', msg);
           msg.id = id;
           await appendMessage(msg);
           overlay.remove();
           lastUserMessageTime = Date.now();
+          addBigEventOnce('compete', '第一次争宠');
           await triggerIntimateReply();
         });
       }
@@ -6742,7 +7144,327 @@ function openCompeteSendPanel() {
   });
   render();
 }
-  // ========== 礼物管理 ==========
+  // ========== 礼物预设数据（165 个）==========
+const DEFAULT_GIFT_LIBRARY = [
+  // 花（8）
+  { type: 'icon', icon: '🌹', name: '玫瑰', cost: 10 },
+  { type: 'icon', icon: '🌷', name: '郁金香', cost: 10 },
+  { type: 'icon', icon: '🌻', name: '向日葵', cost: 10 },
+  { type: 'icon', icon: '🌸', name: '樱花', cost: 10 },
+  { type: 'icon', icon: '💐', name: '花束', cost: 20 },
+  { type: 'icon', icon: '🪷', name: '荷花', cost: 15 },
+  { type: 'icon', icon: '🌺', name: '木槿', cost: 10 },
+  { type: 'icon', icon: '🌼', name: '雏菊', cost: 8 },
+  // 甜食（13）
+  { type: 'icon', icon: '🍰', name: '蛋糕', cost: 15 },
+  { type: 'icon', icon: '🎂', name: '生日蛋糕', cost: 30 },
+  { type: 'icon', icon: '🍫', name: '巧克力', cost: 12 },
+  { type: 'icon', icon: '🍬', name: '糖果', cost: 5 },
+  { type: 'icon', icon: '🍭', name: '棒棒糖', cost: 5 },
+  { type: 'icon', icon: '🧁', name: '纸杯蛋糕', cost: 10 },
+  { type: 'icon', icon: '🍮', name: '布丁', cost: 8 },
+  { type: 'icon', icon: '🍦', name: '冰淇淋', cost: 8 },
+  { type: 'icon', icon: '🍧', name: '刨冰', cost: 8 },
+  { type: 'icon', icon: '🍩', name: '甜甜圈', cost: 8 },
+  { type: 'icon', icon: '🍪', name: '曲奇', cost: 6 },
+  { type: 'icon', icon: '🥮', name: '月饼', cost: 15 },
+  { type: 'icon', icon: '🥧', name: '苹果派', cost: 12 },
+  // 饮品（13）
+  { type: 'icon', icon: '☕', name: '黑咖啡', cost: 8 },
+  { type: 'icon', icon: '🍵', name: '茶', cost: 6 },
+  { type: 'icon', icon: '🧋', name: '奶茶', cost: 12 },
+  { type: 'icon', icon: '🥤', name: '饮料', cost: 5 },
+  { type: 'icon', icon: '🍷', name: '红酒', cost: 30 },
+  { type: 'icon', icon: '🍹', name: '鸡尾酒', cost: 25 },
+  { type: 'icon', icon: '🧃', name: '果汁', cost: 6 },
+  { type: 'icon', icon: '🥛', name: '牛奶', cost: 5 },
+  { type: 'icon', icon: '🍾', name: '香槟', cost: 50 },
+  { type: 'icon', icon: '🥂', name: '干杯', cost: 40 },
+  { type: 'icon', icon: '🥃', name: '威士忌', cost: 35 },
+  { type: 'icon', icon: '🍶', name: '清酒', cost: 30 },
+  { type: 'icon', icon: '🫖', name: '茶壶', cost: 20 },
+  // 水果（20）
+  { type: 'icon', icon: '🍎', name: '苹果', cost: 5 },
+  { type: 'icon', icon: '🍊', name: '橘子', cost: 5 },
+  { type: 'icon', icon: '🍋', name: '柠檬', cost: 5 },
+  { type: 'icon', icon: '🍌', name: '香蕉', cost: 5 },
+  { type: 'icon', icon: '🍉', name: '西瓜', cost: 8 },
+  { type: 'icon', icon: '🍇', name: '葡萄', cost: 8 },
+  { type: 'icon', icon: '🍓', name: '草莓', cost: 10 },
+  { type: 'icon', icon: '🍒', name: '樱桃', cost: 10 },
+  { type: 'icon', icon: '🍑', name: '桃子', cost: 8 },
+  { type: 'icon', icon: '🍐', name: '梨', cost: 5 },
+  { type: 'icon', icon: '🥝', name: '猕猴桃', cost: 6 },
+  { type: 'icon', icon: '🍍', name: '菠萝', cost: 8 },
+  { type: 'icon', icon: '🥭', name: '芒果', cost: 8 },
+  { type: 'icon', icon: '🫐', name: '蓝莓', cost: 10 },
+  { type: 'icon', icon: '🍈', name: '蜜瓜', cost: 10 },
+  { type: 'icon', icon: '🥥', name: '椰子', cost: 8 },
+  { type: 'icon', icon: '🍅', name: '番茄', cost: 4 },
+  { type: 'icon', icon: '🫒', name: '橄榄', cost: 5 },
+  { type: 'icon', icon: '🍏', name: '青苹果', cost: 5 },
+  { type: 'icon', icon: '🥑', name: '牛油果', cost: 10 },
+  // 蔬菜/农产品（15）
+  { type: 'icon', icon: '🥕', name: '胡萝卜', cost: 4 },
+  { type: 'icon', icon: '🌽', name: '玉米', cost: 5 },
+  { type: 'icon', icon: '🥦', name: '西兰花', cost: 5 },
+  { type: 'icon', icon: '🥬', name: '青菜', cost: 4 },
+  { type: 'icon', icon: '🥒', name: '黄瓜', cost: 4 },
+  { type: 'icon', icon: '🫑', name: '青椒', cost: 4 },
+  { type: 'icon', icon: '🧄', name: '蒜', cost: 3 },
+  { type: 'icon', icon: '🧅', name: '洋葱', cost: 4 },
+  { type: 'icon', icon: '🥔', name: '土豆', cost: 4 },
+  { type: 'icon', icon: '🍠', name: '红薯', cost: 5 },
+  { type: 'icon', icon: '🎃', name: '南瓜', cost: 8 },
+  { type: 'icon', icon: '🥜', name: '花生', cost: 5 },
+  { type: 'icon', icon: '🌰', name: '栗子', cost: 6 },
+  { type: 'icon', icon: '🍄', name: '蘑菇', cost: 5 },
+  { type: 'icon', icon: '🫘', name: '豆子', cost: 4 },
+  // 正餐（24）
+  { type: 'icon', icon: '🍚', name: '米饭', cost: 5 },
+  { type: 'icon', icon: '🍜', name: '拉面', cost: 15 },
+  { type: 'icon', icon: '🍛', name: '咖喱饭', cost: 18 },
+  { type: 'icon', icon: '🍝', name: '意面', cost: 18 },
+  { type: 'icon', icon: '🍕', name: '披萨', cost: 25 },
+  { type: 'icon', icon: '🍔', name: '汉堡', cost: 18 },
+  { type: 'icon', icon: '🥪', name: '三明治', cost: 12 },
+  { type: 'icon', icon: '🥟', name: '饺子', cost: 15 },
+  { type: 'icon', icon: '🍱', name: '便当', cost: 20 },
+  { type: 'icon', icon: '🍲', name: '火锅', cost: 35 },
+  { type: 'icon', icon: '🍳', name: '煎蛋', cost: 5 },
+  { type: 'icon', icon: '🥩', name: '牛排', cost: 40 },
+  { type: 'icon', icon: '🍗', name: '炸鸡', cost: 20 },
+  { type: 'icon', icon: '🍤', name: '天妇罗', cost: 25 },
+  { type: 'icon', icon: '🍣', name: '寿司', cost: 30 },
+  { type: 'icon', icon: '🌮', name: '卷饼', cost: 15 },
+  { type: 'icon', icon: '🥘', name: '炖菜', cost: 25 },
+  { type: 'icon', icon: '🍙', name: '饭团', cost: 8 },
+  { type: 'icon', icon: '🥙', name: '口袋饼', cost: 15 },
+  { type: 'icon', icon: '🫓', name: '薄饼', cost: 8 },
+  { type: 'icon', icon: '🍖', name: '肉', cost: 25 },
+  { type: 'icon', icon: '🥓', name: '培根', cost: 12 },
+  { type: 'icon', icon: '🧆', name: '鹰嘴豆丸', cost: 10 },
+  { type: 'icon', icon: '🥗', name: '沙拉', cost: 12 },
+  // 小吃（11）
+  { type: 'icon', icon: '🍟', name: '薯条', cost: 10 },
+  { type: 'icon', icon: '🌭', name: '热狗', cost: 12 },
+  { type: 'icon', icon: '🍢', name: '关东煮', cost: 12 },
+  { type: 'icon', icon: '🍡', name: '丸子', cost: 8 },
+  { type: 'icon', icon: '🍥', name: '鱼板', cost: 8 },
+  { type: 'icon', icon: '🍘', name: '仙贝米饼', cost: 6 },
+  { type: 'icon', icon: '🥠', name: '幸运饼干', cost: 6 },
+  { type: 'icon', icon: '🥨', name: '椒盐卷饼', cost: 8 },
+  { type: 'icon', icon: '🧇', name: '华夫饼', cost: 10 },
+  { type: 'icon', icon: '🥞', name: '松饼', cost: 10 },
+  { type: 'icon', icon: '🍿', name: '爆米花', cost: 8 },
+  // 饰品（12）
+  { type: 'icon', icon: '💍', name: '戒指', cost: 520 },
+  { type: 'icon', icon: '👑', name: '王冠', cost: 300 },
+  { type: 'icon', icon: '🎀', name: '蝴蝶结', cost: 30 },
+  { type: 'icon', icon: '💎', name: '钻石', cost: 400 },
+  { type: 'icon', icon: '🎐', name: '风铃', cost: 40 },
+  { type: 'icon', icon: '⌚', name: '手表', cost: 200 },
+  { type: 'icon', icon: '🕶️', name: '墨镜', cost: 80 },
+  { type: 'icon', icon: '👜', name: '包', cost: 150 },
+  { type: 'icon', icon: '👠', name: '高跟鞋', cost: 120 },
+  { type: 'icon', icon: '🧣', name: '围巾', cost: 50 },
+  { type: 'icon', icon: '🧤', name: '手套', cost: 40 },
+  { type: 'icon', icon: '🎩', name: '礼帽', cost: 80 },
+  // 玩偶（10）
+  { type: 'icon', icon: '🧸', name: '泰迪熊', cost: 60 },
+  { type: 'icon', icon: '🐰', name: '兔子', cost: 50 },
+  { type: 'icon', icon: '🐱', name: '猫', cost: 50 },
+  { type: 'icon', icon: '🐶', name: '狗', cost: 50 },
+  { type: 'icon', icon: '🦊', name: '狐狸', cost: 50 },
+  { type: 'icon', icon: '🐻', name: '熊', cost: 50 },
+  { type: 'icon', icon: '🐼', name: '熊猫', cost: 60 },
+  { type: 'icon', icon: '🦄', name: '独角兽', cost: 80 },
+  { type: 'icon', icon: '🐨', name: '考拉', cost: 50 },
+  { type: 'icon', icon: '🐧', name: '企鹅', cost: 50 },
+  // 浪漫（9）
+  { type: 'icon', icon: '💗', name: '粉心', cost: 5 },
+  { type: 'icon', icon: '💖', name: '闪心', cost: 8 },
+  { type: 'icon', icon: '💝', name: '礼盒心', cost: 12 },
+  { type: 'icon', icon: '💕', name: '双心', cost: 8 },
+  { type: 'icon', icon: '💞', name: '旋转心', cost: 10 },
+  { type: 'icon', icon: '💓', name: '跳动心', cost: 10 },
+  { type: 'icon', icon: '🕯️', name: '蜡烛', cost: 15 },
+  { type: 'icon', icon: '🎆', name: '烟花', cost: 50 },
+  { type: 'icon', icon: '💌', name: '情书', cost: 30 },
+  // 实用（13）
+  { type: 'icon', icon: '📱', name: '手机', cost: 200 },
+  { type: 'icon', icon: '💻', name: '电脑', cost: 300 },
+  { type: 'icon', icon: '📚', name: '书', cost: 50 },
+  { type: 'icon', icon: '🎧', name: '耳机', cost: 150 },
+  { type: 'icon', icon: '🎮', name: '游戏机', cost: 200 },
+  { type: 'icon', icon: '🎨', name: '画具', cost: 80 },
+  { type: 'icon', icon: '📷', name: '相机', cost: 250 },
+  { type: 'icon', icon: '🧴', name: '香水', cost: 120 },
+  { type: 'icon', icon: '🖊️', name: '钢笔', cost: 60 },
+  { type: 'icon', icon: '🎸', name: '吉他', cost: 180 },
+  { type: 'icon', icon: '🎹', name: '钢琴', cost: 400 },
+  { type: 'icon', icon: '💄', name: '口红', cost: 100 },
+  { type: 'icon', icon: '💅', name: '指甲油', cost: 50 },
+  // 特别（17）
+  { type: 'icon', icon: '🌙', name: '月亮', cost: 20 },
+  { type: 'icon', icon: '⭐', name: '星星', cost: 20 },
+  { type: 'icon', icon: '🌈', name: '彩虹', cost: 40 },
+  { type: 'icon', icon: '☀️', name: '太阳', cost: 20 },
+  { type: 'icon', icon: '❄️', name: '雪花', cost: 20 },
+  { type: 'icon', icon: '🌊', name: '海浪', cost: 30 },
+  { type: 'icon', icon: '🍀', name: '四叶草', cost: 40 },
+  { type: 'icon', icon: '🌟', name: '闪星', cost: 25 },
+  { type: 'icon', icon: '💫', name: '流星', cost: 30 },
+  { type: 'icon', icon: '🪐', name: '行星', cost: 50 },
+  { type: 'icon', icon: '🌌', name: '银河', cost: 80 },
+  { type: 'icon', icon: '✨', name: '闪光', cost: 15 },
+  { type: 'icon', icon: '🦋', name: '蝴蝶', cost: 25 },
+  { type: 'icon', icon: '🐚', name: '贝壳', cost: 20 },
+  { type: 'icon', icon: '🍁', name: '枫叶', cost: 20 },
+  { type: 'icon', icon: '🪶', name: '羽毛', cost: 25 },
+  { type: 'icon', icon: '🔮', name: '水晶球', cost: 100 }
+];
+
+// ========== 礼包预设（76 个）==========
+// 每项：name, icon, desc, items(礼物名数组), discount, color
+const DEFAULT_GIFT_PACKS = [
+  // 告白（5）中
+  { name: '心动告白', icon: '💐', desc: '把想说的都装进去', items: ['玫瑰', '巧克力', '情书', '粉心'], discount: 0.88, color: '#ffc4d6' },
+  { name: '玫瑰情诗', icon: '🌹', desc: '一首玫瑰写的情诗', items: ['玫瑰', '情书', '闪心', '蜡烛'], discount: 0.88, color: '#ffb0c8' },
+  { name: '一生一世', icon: '💞', desc: '一生一世一双人', items: ['戒指', '玫瑰', '情书', '香槟'], discount: 0.8, color: '#ff9ab0' },
+  { name: '戒指承诺', icon: '💍', desc: '这辈子就你了', items: ['戒指', '玫瑰', '王冠'], discount: 0.8, color: '#ffd0e0' },
+  { name: '星光誓言', icon: '🌟', desc: '在星光下起誓', items: ['流星', '星星', '银河', '情书'], discount: 0.88, color: '#d4e4f7' },
+  // 日常（5）轻
+  { name: '早安吻', icon: '☀️', desc: '清晨第一份心意', items: ['黑咖啡', '苹果派', '太阳'], discount: 0.95, color: '#ffe9b0' },
+  { name: '晚安抱抱', icon: '🌙', desc: '睡前想抱抱你', items: ['牛奶', '月亮', '蜡烛'], discount: 0.95, color: '#c09bff' },
+  { name: '下午茶', icon: '🍰', desc: '一起偷个闲', items: ['奶茶', '蛋糕', '曲奇'], discount: 0.95, color: '#ffd0e0' },
+  { name: '加班陪护', icon: '☕', desc: '陪你熬过这晚', items: ['黑咖啡', '巧克力', '月亮'], discount: 0.95, color: '#d0d8ec' },
+  { name: '周末慵懒', icon: '🥞', desc: '赖床一起', items: ['松饼', '牛奶', '太阳'], discount: 0.95, color: '#ffe9b0' },
+  // 节日（5）中
+  { name: '生日快乐', icon: '🎂', desc: '这一天属于你', items: ['生日蛋糕', '花束', '王冠', '香槟'], discount: 0.88, color: '#ffc4d6' },
+  { name: '纪念日', icon: '💝', desc: '记住这一天', items: ['礼盒心', '玫瑰', '红酒', '情书'], discount: 0.88, color: '#ff9ab0' },
+  { name: '情人节', icon: '💖', desc: '只给你', items: ['玫瑰', '巧克力', '闪心', '香槟'], discount: 0.88, color: '#ffb0c8' },
+  { name: '七夕', icon: '🌠', desc: '鹊桥相会', items: ['流星', '星星', '情书', '双心'], discount: 0.88, color: '#d4e4f7' },
+  { name: '圣诞', icon: '🎄', desc: '圣诞快乐', items: ['围巾', '巧克力', '蜡烛', '雪花'], discount: 0.88, color: '#d4e8c8' },
+  // 关怀（5）中
+  { name: '哄哄', icon: '🫂', desc: '别难过啦', items: ['泰迪熊', '巧克力', '粉心'], discount: 0.88, color: '#ffc4d6' },
+  { name: '安慰', icon: '🤍', desc: '我在呢', items: ['牛奶', '月亮', '泰迪熊'], discount: 0.88, color: '#d8e0ec' },
+  { name: '抱抱', icon: '💗', desc: '抱一下就好', items: ['泰迪熊', '粉心', '跳动心'], discount: 0.88, color: '#ffb0c8' },
+  { name: '治愈', icon: '🩹', desc: '把难过都收走', items: ['茶', '布丁', '月亮', '蜡烛'], discount: 0.88, color: '#d8e4dc' },
+  { name: '心疼', icon: '💓', desc: '心疼你', items: ['粉心', '巧克力', '情书'], discount: 0.88, color: '#ffc4d6' },
+  // 特殊（5）重
+  { name: '异地思念', icon: '💌', desc: '想你想到写信', items: ['情书', '月亮', '星星', '流星'], discount: 0.8, color: '#d4e4f7' },
+  { name: '梦里相见', icon: '🌌', desc: '梦里来找你', items: ['银河', '月亮', '蜡烛'], discount: 0.8, color: '#dcd0e8' },
+  { name: '求婚', icon: '💍', desc: '嫁给我', items: ['戒指', '王冠', '钻石', '玫瑰', '香槟', '情书'], discount: 0.8, color: '#ff9ab0' },
+  { name: '和好', icon: '🕊️', desc: '别生气了', items: ['玫瑰', '巧克力', '情书', '抱抱熊'], discount: 0.8, color: '#ffc4d6' },
+  { name: '永久珍藏', icon: '💎', desc: '把我珍藏起来', items: ['钻石', '戒指', '情书', '闪心'], discount: 0.8, color: '#d4e4f7' },
+  // 季节（5）中
+  { name: '春', icon: '🌸', desc: '春天来了', items: ['樱花', '雏菊', '阳光'], discount: 0.88, color: '#ffd0e0' },
+  { name: '夏', icon: '🌻', desc: '夏天好热', items: ['向日葵', '冰淇淋', '西瓜'], discount: 0.88, color: '#ffe9b0' },
+  { name: '秋', icon: '🍁', desc: '秋天落叶', items: ['枫叶', '栗子', '茶'], discount: 0.88, color: '#e0a96d' },
+  { name: '冬', icon: '❄️', desc: '冬天好冷', items: ['围巾', '手套', '热可可'], discount: 0.88, color: '#d4e4f7' },
+  { name: '梅雨', icon: '☔', desc: '下雨了', items: ['茶', '书', '蜡烛'], discount: 0.88, color: '#d8e0ec' },
+  // 时间（5）轻
+  { name: '清晨', icon: '🌅', desc: '一天开始', items: ['黑咖啡', '苹果派', '太阳'], discount: 0.95, color: '#ffe9b0' },
+  { name: '午后', icon: '☀️', desc: '午后小憩', items: ['奶茶', '蛋糕', '太阳'], discount: 0.95, color: '#ffd0e0' },
+  { name: '黄昏', icon: '🌇', desc: '一起看晚霞', items: ['红酒', '流星', '月' ], discount: 0.95, color: '#ffb0c8' },
+  { name: '深夜', icon: '🌙', desc: '夜深了', items: ['牛奶', '月亮', '蜡烛'], discount: 0.95, color: '#c09bff' },
+  { name: '凌晨', icon: '✨', desc: '还没睡？', items: ['闪光', '月亮', '茶'], discount: 0.95, color: '#dcd0e8' },
+  // 陪伴（5）重
+  { name: '陪睡', icon: '🛏️', desc: '一起睡吧', items: ['月亮', '牛奶', '蜡烛'], discount: 0.8, color: '#c09bff' },
+  { name: '发呆', icon: '💭', desc: '一起发呆', items: ['闪光', '月亮'], discount: 0.8, color: '#dcd0e8' },
+  { name: '安静', icon: '🤍', desc: '安静陪你', items: ['茶', '月亮', '书'], discount: 0.8, color: '#d8e0ec' },
+  { name: '温柔', icon: '🌸', desc: '温柔待你', items: ['樱花', '粉心', '茶'], discount: 0.8, color: '#ffd0e0' },
+  { name: '粘人', icon: '💗', desc: '就想黏着你', items: ['泰迪熊', '双心', '跳心'], discount: 0.8, color: '#ffb0c8' },
+  // 约定（5）重
+  { name: '牵手', icon: '🤝', desc: '牵着手', items: ['双心', '玫瑰', '粉心'], discount: 0.8, color: '#ffc4d6' },
+  { name: '拥抱', icon: '🫂', desc: '抱一个', items: ['泰迪熊', '跳动心', '粉心'], discount: 0.8, color: '#ffb0c8' },
+  { name: '亲吻', icon: '💋', desc: '亲一个', items: ['口红', '玫瑰', '闪心'], discount: 0.8, color: '#ff9ab0' },
+  { name: '永远', icon: '💎', desc: '永远在一起', items: ['钻石', '戒指', '情书', '银河'], discount: 0.8, color: '#d4e4f7' },
+  { name: '唯一', icon: '👑', desc: '你是唯一', items: ['王冠', '钻石', '玫瑰', '情书'], discount: 0.8, color: '#ffd0e0' },
+  // 梦境（5）中
+  { name: '月下', icon: '🌙', desc: '月下相约', items: ['月亮', '星星', '蜡烛'], discount: 0.88, color: '#c09bff' },
+  { name: '星空', icon: '🌟', desc: '躺在星空下', items: ['闪星', '流星', '银河', '闪光'], discount: 0.88, color: '#d4e4f7' },
+  { name: '海边', icon: '🌊', desc: '海边散步', items: ['海浪', '贝壳', '月亮'], discount: 0.88, color: '#cfe8e8' },
+  { name: '森林', icon: '🌲', desc: '林间小径', items: ['四叶草', '枫叶', '羽毛', '蝴蝶'], discount: 0.88, color: '#d4e8c8' },
+  { name: '银河', icon: '🌌', desc: '一起看银河', items: ['银河', '流星', '闪星', '行星'], discount: 0.88, color: '#dcd0e8' },
+  // 心意（5）轻
+  { name: '想你', icon: '💗', desc: '想你了', items: ['粉心', '情书', '月亮'], discount: 0.95, color: '#ffc4d6' },
+  { name: '念你', icon: '💌', desc: '念你', items: ['情书', '闪心', '月亮'], discount: 0.95, color: '#ffb0c8' },
+  { name: '等你', icon: '⏳', desc: '等你回来', items: ['茶', '月亮', '蜡烛'], discount: 0.95, color: '#d8e0ec' },
+  { name: '找你', icon: '🔍', desc: '来找你', items: ['玫瑰', '粉心', '月亮'], discount: 0.95, color: '#ffc4d6' },
+  { name: '守你', icon: '🛡️', desc: '一直守着你', items: ['星星', '月亮', '情书'], discount: 0.95, color: '#d4e4f7' },
+  // 送礼意图（21）中
+  { name: '哄你', icon: '🫂', desc: '哄哄你', items: ['泰迪熊', '巧克力', '粉心', '情书'], discount: 0.88, color: '#ffc4d6' },
+  { name: '宠你', icon: '👑', desc: '就要宠你', items: ['王冠', '玫瑰', '香槟', '钻石'], discount: 0.88, color: '#ffd0e0' },
+  { name: '陪你', icon: '🤝', desc: '陪你', items: ['粉心', '月亮', '茶'], discount: 0.88, color: '#ffc4d6' },
+  { name: '等你', icon: '⏳', desc: '等你', items: ['茶', '月亮', '蜡烛'], discount: 0.88, color: '#d8e0ec' },
+  { name: '念你', icon: '💌', desc: '念你', items: ['情书', '闪心', '月亮'], discount: 0.88, color: '#ffb0c8' },
+  { name: '疼你', icon: '💓', desc: '疼你', items: ['粉心', '巧克力', '草莓'], discount: 0.88, color: '#ffc4d6' },
+  { name: '爱你', icon: '💖', desc: '爱你', items: ['闪心', '玫瑰', '情书', '巧克力'], discount: 0.88, color: '#ff9ab0' },
+  { name: '想你', icon: '💗', desc: '想你', items: ['粉心', '月亮', '情书'], discount: 0.88, color: '#ffc4d6' },
+  { name: '护你', icon: '🛡️', desc: '护你', items: ['星星', '月亮', '情书'], discount: 0.88, color: '#d4e4f7' },
+  { name: '守你', icon: '🤍', desc: '守你', items: ['牛奶', '月亮', '蜡烛'], discount: 0.88, color: '#d8e0ec' },
+  { name: '哄睡', icon: '🛏️', desc: '哄你睡', items: ['牛奶', '月亮', '蜡烛', '泰迪熊'], discount: 0.88, color: '#c09bff' },
+  { name: '早安', icon: '☀️', desc: '早安', items: ['黑咖啡', '苹果派', '太阳'], discount: 0.88, color: '#ffe9b0' },
+  { name: '晚安', icon: '🌙', desc: '晚安', items: ['牛奶', '月亮', '蜡烛'], discount: 0.88, color: '#c09bff' },
+  { name: '道歉', icon: '🕊️', desc: '我错了', items: ['玫瑰', '巧克力', '情书'], discount: 0.88, color: '#ffc4d6' },
+  { name: '和好', icon: '🤝', desc: '和好吧', items: ['玫瑰', '巧克力', '情书', '抱抱'], discount: 0.88, color: '#ffb0c8' },
+  { name: '表白', icon: '💐', desc: '我喜欢你', items: ['玫瑰', '情书', '闪心', '香槟'], discount: 0.88, color: '#ff9ab0' },
+  { name: '撒娇', icon: '🥺', desc: '撒娇求哄', items: ['泰迪熊', '粉心', '糖果'], discount: 0.88, color: '#ffc4d6' },
+  { name: '吃醋', icon: '💔', desc: '吃醋了', items: ['粉心', '巧克力', '玫瑰'], discount: 0.88, color: '#ff9ab0' },
+  { name: '承诺', icon: '💍', desc: '我承诺', items: ['戒指', '情书', '玫瑰'], discount: 0.88, color: '#ffd0e0' },
+  { name: '陪伴到老', icon: '🤍', desc: '陪你到老', items: ['情书', '银河', '钻石', '香槟'], discount: 0.88, color: '#d4e4f7' },
+  { name: '唯一', icon: '👑', desc: '你是唯一', items: ['王冠', '钻石', '玫瑰'], discount: 0.88, color: '#ffd0e0' }
+];
+
+// ========== 礼物库自动导入 ==========
+async function ensureGiftLibraryInited() {
+  if (settings.giftLibraryInited) return;
+  const existing = JSON.parse(localStorage.getItem('giftLibrary') || '[]');
+  if (existing.length === 0) {
+    localStorage.setItem('giftLibrary', JSON.stringify(DEFAULT_GIFT_LIBRARY));
+  }
+  settings.giftLibraryInited = true;
+  await saveSettings();
+}
+
+// ========== 礼包库自动导入 ==========
+async function ensureGiftPacksInited() {
+  if (settings.giftPacksInited) return;
+  // 建立礼物名 -> 礼物对象的索引
+  const giftLib = JSON.parse(localStorage.getItem('giftLibrary') || '[]');
+  const giftMap = {};
+  giftLib.forEach(g => { giftMap[g.name] = g; });
+  const packs = [];
+  DEFAULT_GIFT_PACKS.forEach((p, idx) => {
+    // 计算原价和优惠价
+    const items = p.items.map(name => giftMap[name]).filter(Boolean);
+    if (!items.length) return;
+    const originalCost = items.reduce((s, g) => s + (g.cost || 0), 0);
+    let discount = p.discount;
+    if (items.length >= 6) discount = Math.max(0.7, discount * 0.95);
+    const finalCost = Math.round(originalCost * discount);
+    packs.push({
+      id: 'pack_' + idx,
+      name: p.name,
+      icon: p.icon,
+      desc: p.desc,
+      items: items.map(g => ({ icon: g.icon, name: g.name, cost: g.cost })),
+      originalCost,
+      cost: finalCost,
+      discount,
+      color: p.color,
+      colorLight: '#fff0f5',
+      colorDark: '#ffe3ee'
+    });
+  });
+  settings.giftPacks = packs;
+  settings.giftPacksInited = true;
+  await saveSettings();
+}
+
+// ========== 礼物管理 ==========
 function openGiftManagePanel() {
   const overlay = createModal(`
     <div class="card-list" id="gift-manage-list"></div>
@@ -6868,7 +7590,7 @@ function openGiftSendPanel() {
       await saveSettings();
       updateHeartValue();
       const giftWithOpened = { ...g, opened: false };
-      const msg = { sender: 'me', content: '送你' + g.name, giftData: giftWithOpened, timestamp: Date.now(), readTime: null, pinned: false, pinBy: '', heartMark: null, quoteContent: null };
+      const msg = { sender: 'me', content: '送你' + g.name, giftData: giftWithOpened, timestamp: Date.now(), readTime: null, pinned: false, pinBy: '', pinTime: 0, heartMark: null, quoteContent: null };
       const id = await idbPutReturnId('messages', msg);
       msg.id = id;
       await appendMessage(msg);
@@ -6876,6 +7598,161 @@ function openGiftSendPanel() {
       lastUserMessageTime = Date.now();
       scheduleReadReceipt(msg);
       resetStopTimer();
+      addBigEventOnce('send_gift', '第一次送礼物');
+    });
+    list.appendChild(div);
+  });
+}
+
+// ========== 礼包管理 ==========
+function openGiftPackManagePanel() {
+  const overlay = createModal(`
+    <div class="card-list" id="pack-manage-list"></div>
+    <button class="upload-btn" id="pack-import-btn">导入礼包</button>
+    <button class="upload-btn" id="pack-export-btn">导出礼包</button>`);
+  loadGiftPackList(overlay);
+  overlay.querySelector('#pack-import-btn').addEventListener('click', () => {
+    const inp = document.createElement('input');
+    inp.type = 'file';
+    inp.accept = '.json';
+    inp.onchange = async (e) => {
+      const file = e.target.files[0];
+      if (!file) return;
+      const text = await file.text();
+      const data = JSON.parse(text);
+      const packs = JSON.parse(localStorage.getItem('giftPacks') || '[]');
+      (data.giftPacks || data).forEach(g => packs.push(g));
+      settings.giftPacks = packs;
+      await saveSettings();
+      showToast('礼包已导入');
+      overlay.remove();
+      openGiftPackManagePanel();
+    };
+    inp.click();
+  });
+  overlay.querySelector('#pack-export-btn').addEventListener('click', () => {
+    downloadFile(JSON.stringify({ giftPacks: settings.giftPacks || [] }), '礼包导出.json', 'application/json');
+  });
+}
+
+function loadGiftPackList(overlay) {
+  const packs = settings.giftPacks || [];
+  const list = overlay.querySelector('#pack-manage-list');
+  list.innerHTML = '';
+  if (!packs.length) { list.innerHTML = '<div class="placeholder-tip">还没有礼包</div>'; return; }
+  packs.forEach((p, i) => {
+    const div = document.createElement('div');
+    div.className = 'card-item';
+    const itemsStr = (p.items || []).map(it => it.icon).join(' ');
+    div.innerHTML = `<div class="card-text">${p.icon || '🎁'} ${escapeHtml(p.name)} - ${p.cost}爱意值（原价${p.originalCost}）<br><span style="font-size:11px;color:#8b6f60;">${itemsStr}</span></div>
+      <div class="card-ops"><button class="pack-edit">✎</button><button class="pack-del">✕</button></div>`;
+    div.querySelector('.pack-edit').addEventListener('click', () => openGiftPackEditDialog(i, overlay));
+    div.querySelector('.pack-del').addEventListener('click', async () => {
+      settings.giftPacks.splice(i, 1);
+      await saveSettings();
+      loadGiftPackList(overlay);
+    });
+    list.appendChild(div);
+  });
+}
+
+function openGiftPackEditDialog(index, panelOverlay) {
+  const packs = settings.giftPacks || [];
+  const p = (index >= 0) ? packs[index] : { name: '新礼包', icon: '🎁', desc: '', items: [], discount: 0.88, color: '#ffc4d6' };
+  const isNew = index < 0;
+  const giftLib = JSON.parse(localStorage.getItem('giftLibrary') || '[]');
+  const overlay = createModal(`
+    <div class="big-input-title">${isNew ? '新建礼包' : '编辑礼包'}</div>
+    <input type="text" id="pack-name-input" placeholder="礼包名称" value="${escapeHtml(p.name || '')}" style="width:100%;background:rgba(255,255,255,0.5);border:1px solid rgba(255,255,255,0.6);border-radius:14px;padding:10px 14px;font-size:14px;color:#4a3f3a;outline:none;margin-bottom:8px;">
+    <input type="text" id="pack-icon-input" placeholder="图标" value="${escapeHtml(p.icon || '🎁')}" style="width:100%;background:rgba(255,255,255,0.5);border:1px solid rgba(255,255,255,0.6);border-radius:14px;padding:10px 14px;font-size:14px;color:#4a3f3a;outline:none;margin-bottom:8px;">
+    <input type="text" id="pack-desc-input" placeholder="描述" value="${escapeHtml(p.desc || '')}" style="width:100%;background:rgba(255,255,255,0.5);border:1px solid rgba(255,255,255,0.6);border-radius:14px;padding:10px 14px;font-size:14px;color:#4a3f3a;outline:none;margin-bottom:8px;">
+    <div style="font-size:12px;color:#8b6f60;margin-bottom:4px;">折扣（0.7 = 70%）</div>
+    <input type="number" id="pack-discount-input" step="0.01" min="0.5" max="1" value="${p.discount || 0.88}" style="width:100%;background:rgba(255,255,255,0.5);border:1px solid rgba(255,255,255,0.6);border-radius:14px;padding:10px 14px;font-size:14px;color:#4a3f3a;outline:none;margin-bottom:8px;">
+    <div style="font-size:12px;color:#8b6f60;margin-bottom:4px;">选择礼物（可多选）</div>
+    <div class="card-list" id="pack-gift-picker" style="max-height:30vh;margin-bottom:8px;"></div>
+    <button class="save-btn-center" id="save-pack">保存</button>`);
+  const pickedNames = new Set((p.items || []).map(it => it.name));
+  const picker = overlay.querySelector('#pack-gift-picker');
+  giftLib.forEach(g => {
+    const div = document.createElement('div');
+    div.className = 'card-item';
+    const checked = pickedNames.has(g.name);
+    div.style.cursor = 'pointer';
+    div.innerHTML = `<input type="checkbox" ${checked ? 'checked' : ''} style="margin-right:8px;"><span>${g.icon || '🎁'} ${escapeHtml(g.name)} (${g.cost}爱意值)</span>`;
+    div.addEventListener('click', (e) => {
+      if (e.target.tagName === 'INPUT') return;
+      const cb = div.querySelector('input');
+      cb.checked = !cb.checked;
+    });
+    picker.appendChild(div);
+  });
+  overlay.querySelector('#save-pack').addEventListener('click', async () => {
+    const name = overlay.querySelector('#pack-name-input').value.trim();
+    const icon = overlay.querySelector('#pack-icon-input').value.trim() || '🎁';
+    const desc = overlay.querySelector('#pack-desc-input').value.trim();
+    const discount = Number(overlay.querySelector('#pack-discount-input').value) || 0.88;
+    if (!name) return showToast('请填写礼包名');
+    const chosen = [];
+    picker.querySelectorAll('.card-item').forEach((div, i) => {
+      const cb = div.querySelector('input');
+      if (cb.checked) {
+        const g = giftLib[i];
+        if (g) chosen.push({ icon: g.icon, name: g.name, cost: g.cost });
+      }
+    });
+    if (!chosen.length) return showToast('请至少选一个礼物');
+    const originalCost = chosen.reduce((s, g) => s + (g.cost || 0), 0);
+    let d = discount;
+    if (chosen.length >= 6) d = Math.max(0.7, d * 0.95);
+    const finalCost = Math.round(originalCost * d);
+    const pack = {
+      id: p.id || ('pack_' + Date.now()),
+      name, icon, desc,
+      items: chosen,
+      originalCost,
+      cost: finalCost,
+      discount: d,
+      color: p.color || '#ffc4d6',
+      colorLight: '#fff0f5',
+      colorDark: '#ffe3ee'
+    };
+    if (!settings.giftPacks) settings.giftPacks = [];
+    if (isNew) settings.giftPacks.push(pack);
+    else settings.giftPacks[index] = pack;
+    await saveSettings();
+    overlay.remove();
+    panelOverlay.remove();
+    openGiftPackManagePanel();
+    showToast('礼包已保存');
+  });
+}
+
+// ========== 礼包发送 ==========
+function openGiftPackSendPanel() {
+  const packs = settings.giftPacks || [];
+  if (!packs.length) return showToast('礼包是空的，先去小世界添加');
+  const overlay = createModal(`<div class="card-list" id="pack-send-list"></div>`);
+  const list = overlay.querySelector('#pack-send-list');
+  packs.forEach(p => {
+    const div = document.createElement('div');
+    div.className = 'card-item';
+    const itemsStr = (p.items || []).map(it => it.icon).join(' ');
+    div.innerHTML = `<div class="card-text">${p.icon || '🎁'} ${escapeHtml(p.name)} - ${p.cost}爱意值（原价${p.originalCost}）<br><span style="font-size:11px;color:#8b6f60;">${itemsStr}</span></div>`;
+    div.addEventListener('click', async () => {
+      if (settings.heartValue < p.cost) return showToast('爱意值不足');
+      settings.heartValue -= p.cost;
+      await saveSettings();
+      updateHeartValue();
+      const packWithOpened = { ...p, opened: false };
+      const msg = { sender: 'me', content: '送你' + p.name, packData: packWithOpened, timestamp: Date.now(), readTime: null, pinned: false, pinBy: '', pinTime: 0, heartMark: null, quoteContent: null };
+      const id = await idbPutReturnId('messages', msg);
+      msg.id = id;
+      await appendMessage(msg);
+      overlay.remove();
+      lastUserMessageTime = Date.now();
+      scheduleReadReceipt(msg);
+      resetStopTimer();
+      addBigEventOnce('send_pack', '第一次送礼包');
     });
     list.appendChild(div);
   });
@@ -7254,6 +8131,7 @@ async function openIntimateSendPanel() {
             readTime: null,
             pinned: false,
             pinBy: '',
+            pinTime: 0,
             heartMark: null,
             quoteContent: null
           };
@@ -7264,6 +8142,7 @@ async function openIntimateSendPanel() {
           lastUserMessageTime = Date.now();
           setTempStatus('wantHug', '易遇想抱抱你', 3 * 60000);
           scheduleReadReceipt(msg);
+          addBigEventOnce('intimate', '第一次说悄悄话');
           await triggerIntimateReactions();
           await triggerIntimateReply();
         });
@@ -7274,7 +8153,7 @@ async function openIntimateSendPanel() {
   renderList();
 }
 
-// ========== 亲密触发其他世界反应（凑近/争宠）==========
+// ========== 亲密触发其他世界反应 ==========
 async function triggerIntimateReactions() {
   const others = onlineWorlds.filter(w => w !== settings.currentWorldId);
   if (!others.length) return;
@@ -7301,6 +8180,7 @@ async function triggerIntimateReactions() {
       timestamp: Date.now(),
       pinned: false,
       pinBy: '',
+      pinTime: 0,
       heartMark: null,
       quoteContent: null,
       worldId: wid,
@@ -7322,7 +8202,7 @@ async function triggerIntimateReactions() {
   }
 }
 
-// ========== 亲密回复（他回 2~3 条：字卡/贴纸/互动/礼物/悄悄话 混合）==========
+// ========== 亲密回复 ==========
 async function triggerIntimateReply() {
   if (isReplying || isArchiving) return;
   ensureSomeoneReplies();
@@ -7357,7 +8237,7 @@ async function sendIntimateReplyByType(type, wid) {
     const cards = await getCardsForWorld(wid);
     if (!cards.length) return false;
     const card = cards[Math.floor(Math.random() * cards.length)];
-    const msg = { sender: 'ta', content: card.content, timestamp: Date.now(), pinned: false, pinBy: '', heartMark: null, quoteContent: null, worldId: wid, worldLabel: getWorldLabel(wid) };
+    const msg = { sender: 'ta', content: card.content, timestamp: Date.now(), pinned: false, pinBy: '', pinTime: 0, heartMark: null, quoteContent: null, worldId: wid, worldLabel: getWorldLabel(wid) };
     const id = await idbPutReturnId('messages', msg);
     msg.id = id;
     await appendMessage(msg);
@@ -7368,7 +8248,7 @@ async function sendIntimateReplyByType(type, wid) {
     const stickers = await libGet('stickerLibrary');
     if (!stickers.length) return false;
     const sticker = stickers[Math.floor(Math.random() * stickers.length)];
-    const msg = { sender: 'ta', content: '[贴纸]', imageData: sticker.data, timestamp: Date.now(), pinned: false, pinBy: '', heartMark: null, quoteContent: null, worldId: wid, worldLabel: getWorldLabel(wid) };
+    const msg = { sender: 'ta', content: '[贴纸]', imageData: sticker.data, timestamp: Date.now(), pinned: false, pinBy: '', pinTime: 0, heartMark: null, quoteContent: null, worldId: wid, worldLabel: getWorldLabel(wid) };
     const id = await idbPutReturnId('messages', msg);
     msg.id = id;
     await appendMessage(msg);
@@ -7387,7 +8267,7 @@ async function sendIntimateReplyByType(type, wid) {
       const t = typeof x === 'string' ? x : (x.text || '');
       return t === text;
     });
-    const msg = { sender: 'ta', content: text, interactData: { text, couple: isCouple }, timestamp: Date.now(), pinned: false, pinBy: '', heartMark: null, quoteContent: null, worldId: wid, worldLabel: getWorldLabel(wid) };
+    const msg = { sender: 'ta', content: text, interactData: { text, couple: isCouple }, timestamp: Date.now(), pinned: false, pinBy: '', pinTime: 0, heartMark: null, quoteContent: null, worldId: wid, worldLabel: getWorldLabel(wid) };
     const id = await idbPutReturnId('messages', msg);
     msg.id = id;
     await appendMessage(msg);
@@ -7404,7 +8284,7 @@ async function sendIntimateReplyByType(type, wid) {
     await saveSettings();
     updateHeartValue();
     const giftWithOpened = { ...gift, opened: false };
-    const msg = { sender: 'ta', content: '送你' + gift.name, giftData: giftWithOpened, timestamp: Date.now(), pinned: false, pinBy: '', heartMark: null, quoteContent: null, worldId: wid, worldLabel: getWorldLabel(wid) };
+    const msg = { sender: 'ta', content: '送你' + gift.name, giftData: giftWithOpened, timestamp: Date.now(), pinned: false, pinBy: '', pinTime: 0, heartMark: null, quoteContent: null, worldId: wid, worldLabel: getWorldLabel(wid) };
     const id = await idbPutReturnId('messages', msg);
     msg.id = id;
     await appendMessage(msg);
@@ -7418,7 +8298,7 @@ async function sendIntimateReplyByType(type, wid) {
     const ipool = specific.length ? specific : general;
     if (!ipool.length) return false;
     const text = ipool[Math.floor(Math.random() * ipool.length)];
-    const msg = { sender: 'ta', content: text, intimateData: true, timestamp: Date.now(), pinned: false, pinBy: '', heartMark: null, quoteContent: null, worldId: wid, worldLabel: getWorldLabel(wid) };
+    const msg = { sender: 'ta', content: text, intimateData: true, timestamp: Date.now(), pinned: false, pinBy: '', pinTime: 0, heartMark: null, quoteContent: null, worldId: wid, worldLabel: getWorldLabel(wid) };
     const id = await idbPutReturnId('messages', msg);
     msg.id = id;
     await appendMessage(msg);
@@ -7527,7 +8407,7 @@ async function startLibraryQuiz(quizzes) {
   content += '（请回复选项字母或内容）';
   let pool = onlineWorlds.length ? onlineWorlds : ['real'];
   const wid = pool[Math.floor(Math.random() * pool.length)];
-  const msg = { sender: 'ta', content, timestamp: Date.now(), pinned: false, pinBy: '', heartMark: null, isSystem: true, worldId: wid, worldLabel: getWorldLabel(wid) };
+  const msg = { sender: 'ta', content, timestamp: Date.now(), pinned: false, pinBy: '', pinTime: 0, heartMark: null, isSystem: true, worldId: wid, worldLabel: getWorldLabel(wid) };
   const id = await idbPutReturnId('messages', msg);
   msg.id = id;
   await appendMessage(msg);
@@ -7541,7 +8421,7 @@ async function startCardQuiz(cards) {
   content += '（请回复选项字母或内容）';
   let pool = onlineWorlds.length ? onlineWorlds : ['real'];
   const wid = pool[Math.floor(Math.random() * pool.length)];
-  const msg = { sender: 'ta', content, timestamp: Date.now(), pinned: false, pinBy: '', heartMark: null, isSystem: true, worldId: wid, worldLabel: getWorldLabel(wid) };
+  const msg = { sender: 'ta', content, timestamp: Date.now(), pinned: false, pinBy: '', pinTime: 0, heartMark: null, isSystem: true, worldId: wid, worldLabel: getWorldLabel(wid) };
   const id = await idbPutReturnId('messages', msg);
   msg.id = id;
   await appendMessage(msg);
@@ -7571,7 +8451,7 @@ async function checkQuizAnswer(myAnswer) {
   }
   const myPick = normalizeAnswer(myAnswer, options);
   const wid = quiz.worldId || 'real';
-  const taMsg = { sender: 'ta', content: taPick, timestamp: Date.now(), pinned: false, pinBy: '', heartMark: null, worldId: wid, worldLabel: getWorldLabel(wid) };
+  const taMsg = { sender: 'ta', content: taPick, timestamp: Date.now(), pinned: false, pinBy: '', pinTime: 0, heartMark: null, worldId: wid, worldLabel: getWorldLabel(wid) };
   const tid = await idbPutReturnId('messages', taMsg);
   taMsg.id = tid;
   await appendMessage(taMsg);
@@ -7586,14 +8466,15 @@ async function checkQuizAnswer(myAnswer) {
   }
   await saveSettings();
   updateHeartValue();
-  const resultMsg = { sender: 'ta', content: result, timestamp: Date.now(), pinned: false, pinBy: '', heartMark: null, isSystem: true };
+  const resultMsg = { sender: 'ta', content: result, timestamp: Date.now(), pinned: false, pinBy: '', pinTime: 0, heartMark: null, isSystem: true };
   const rid = await idbPutReturnId('messages', resultMsg);
   resultMsg.id = rid;
   await appendMessage(resultMsg);
+  addBigEventOnce('quiz', '第一次问答');
 }
 
 function scheduleTAQuiz() {
-  const next = Math.random() * (settings.taQuizMax - settings.taQuizMin) + settings.taQuizMin;
+  const next = getFreqMs('taQuiz');
   setTimeout(async () => {
     if (!pendingQuiz && !isReplying && !isArchiving && settings.heartValue >= 5) {
       await startQuiz();
@@ -7641,7 +8522,7 @@ function checkReminders() {
   const card = settings.reminderCards[Math.floor(Math.random() * settings.reminderCards.length)];
   let pool = onlineWorlds.length ? onlineWorlds : ['real'];
   const wid = pool[Math.floor(Math.random() * pool.length)];
-  const msg = { sender: 'ta', content: card, timestamp: Date.now(), pinned: false, pinBy: '', heartMark: null, worldId: wid, worldLabel: getWorldLabel(wid) };
+  const msg = { sender: 'ta', content: card, timestamp: Date.now(), pinned: false, pinBy: '', pinTime: 0, heartMark: null, worldId: wid, worldLabel: getWorldLabel(wid) };
   idbPutReturnId('messages', msg).then(async id => { msg.id = id; await appendMessage(msg); sendNotification(card); addNotification('⏰', '提醒：' + card); });
 }
 setInterval(checkReminders, 30000);
@@ -7756,73 +8637,10 @@ function openQuizPoolPanel() {
   });
 }
 
-// ========== 高维彩蛋 ==========
-function openHighDimPanel() {
-  const overlay = createModal(`
-    <div class="big-input-title">高维彩蛋</div>
-    <div style="font-size:12px;color:#8b6f60;margin-bottom:10px;text-align:center;">易遇偶尔从「世界之外」冒出一句，极低频触发</div>
-    <textarea class="big-input-area" id="highdim-input" placeholder="一行一句" style="min-height:180px;">${(settings.highDimLines || []).join('\n')}</textarea>
-    <button class="save-btn-center" id="save-highdim" style="margin-top:12px;">保存</button>`);
-  overlay.querySelector('#save-highdim').addEventListener('click', async () => {
-    settings.highDimLines = overlay.querySelector('#highdim-input').value.trim().split('\n').map(s => s.trim()).filter(Boolean);
-    await saveSettings();
-    showToast('高维彩蛋已保存');
-    overlay.remove();
-  });
-}
+// 注意：openHighDimPanel / openImportantNotesPanel / scheduleHighDim 均在第22条定义，此处不重复定义
 
-function scheduleHighDim() {
-  const next = (1 + Math.random() * 2) * 86400000;
-  highDimTimer = setTimeout(async () => {
-    if (!isReplying && !isArchiving && (settings.highDimLines || []).length) {
-      const line = settings.highDimLines[Math.floor(Math.random() * settings.highDimLines.length)];
-      const msg = { sender: 'ta', content: line, timestamp: Date.now(), pinned: false, pinBy: '', heartMark: null, quoteContent: null, worldLabel: getWorldLabel() };
-      const id = await idbPutReturnId('messages', msg);
-      msg.id = id;
-      await appendMessage(msg);
-      sendNotification(line);
-      addNotification('✨', '易遇的高维彩蛋');
-      addBigEvent('highdim', '第一次收到高维彩蛋');
-    }
-    scheduleHighDim();
-  }, next);
-}
-
-// ========== 重要记事 ==========
-function openImportantNotesPanel() {
-  const overlay = createModal(`
-    <div class="big-input-title">重要记事</div>
-    <div style="font-size:12px;color:#8b6f60;margin-bottom:10px;text-align:center;">你写下重要的事，易遇会记着，之后偶尔提起来</div>
-    <div class="card-list" id="note-list" style="max-height:30vh;margin-bottom:10px;"></div>
-    <input type="text" id="note-input" placeholder="一行一件，如：我不吃香菜" style="width:100%;background:rgba(255,255,255,0.5);border:1px solid rgba(255,255,255,0.6);border-radius:14px;padding:10px 14px;font-size:14px;color:#4a3f3a;outline:none;margin-bottom:10px;">
-    <button class="save-btn-center" id="add-note">添加</button>`);
-  const list = overlay.querySelector('#note-list');
-  function render() {
-    list.innerHTML = '';
-    (settings.importantNotes || []).forEach((n, i) => {
-      const div = document.createElement('div');
-      div.className = 'card-item';
-      div.innerHTML = `<div class="card-text">${escapeHtml(n.text || n)}</div><div class="card-ops"><button class="note-del">✕</button></div>`;
-      div.querySelector('.note-del').addEventListener('click', async () => {
-        settings.importantNotes.splice(i, 1);
-        await saveSettings();
-        render();
-      });
-      list.appendChild(div);
-    });
-    if (!(settings.importantNotes || []).length) list.innerHTML = '<div class="placeholder-tip">还没有记事</div>';
-  }
-  render();
-  overlay.querySelector('#add-note').addEventListener('click', async () => {
-    const t = overlay.querySelector('#note-input').value.trim();
-    if (!t) return;
-    settings.importantNotes = settings.importantNotes || [];
-    settings.importantNotes.push({ text: t, date: new Date().toISOString().slice(0, 10) });
-    await saveSettings();
-    overlay.querySelector('#note-input').value = '';
-    render();
-  });
-}
+// ========== 问答调度入口（在 init 里调用）==========
+// scheduleTAQuiz 已在本条定义
   // ========== 陪伴 ==========
 function openAccompanyPanel() {
   const overlay = createModal(`
@@ -7877,7 +8695,11 @@ function openAccompanyPanel() {
   overlay.querySelector('#acc-stop').addEventListener('click', async () => {
     const mode = settings.accompanyMode;
     const duration = Date.now() - settings.accompanyStartTime;
-    settings.accompanyStats[mode] = (settings.accompanyStats[mode] || 0) + duration;
+    // 统计拆分：together 用活动名
+    let statKey = mode;
+    if (mode === 'together' && settings.accompanyType) statKey = 'together_' + settings.accompanyType;
+    if (mode === 'companion' && settings.accompanyType) statKey = 'companion_' + settings.accompanyType;
+    settings.accompanyStats[statKey] = (settings.accompanyStats[statKey] || 0) + duration;
     settings.accompanyMode = '';
     settings.accompanyType = '';
     await saveSettings();
@@ -7887,6 +8709,7 @@ function openAccompanyPanel() {
     clearTimeout(accompanyTimer);
     clearTimeout(accompanySleepTimer);
     removeSleepMode();
+    addBigEventOnce('accompany', '第一次陪伴');
   });
 }
 
@@ -7902,11 +8725,11 @@ function openTogetherPanel() {
     div.addEventListener('click', async () => {
       let pool = onlineWorlds.length ? onlineWorlds : ['real'];
       const wid = pool[Math.floor(Math.random() * pool.length)];
-      const myMsg = { sender: 'me', content: '要不要' + a.name + '？', timestamp: Date.now(), pinned: false, pinBy: '', heartMark: null, quoteContent: null };
+      const myMsg = { sender: 'me', content: '要不要' + a.name + '？', timestamp: Date.now(), pinned: false, pinBy: '', pinTime: 0, heartMark: null, quoteContent: null };
       const mid = await idbPutReturnId('messages', myMsg);
       myMsg.id = mid;
       await appendMessage(myMsg);
-      const taMsg = { sender: 'ta', content: '好呀，一起' + a.name, timestamp: Date.now(), pinned: false, pinBy: '', heartMark: null, quoteContent: null, worldId: wid, worldLabel: getWorldLabel(wid) };
+      const taMsg = { sender: 'ta', content: '好呀，一起' + a.name, timestamp: Date.now(), pinned: false, pinBy: '', pinTime: 0, heartMark: null, quoteContent: null, worldId: wid, worldLabel: getWorldLabel(wid) };
       const tid = await idbPutReturnId('messages', taMsg);
       taMsg.id = tid;
       await appendMessage(taMsg);
@@ -7918,7 +8741,7 @@ function openTogetherPanel() {
       overlay.remove();
       lastUserMessageTime = Date.now();
       showToast('和易遇一起' + a.name);
-      addBigEvent('together', '第一次一起活动：' + a.name);
+      addBigEventOnce('together_' + a.name, '第一次一起活动：' + a.name);
       scheduleTogetherMessages();
     });
     list.appendChild(div);
@@ -7951,7 +8774,7 @@ function scheduleSleepMessages() {
       const card = cards[Math.floor(Math.random() * cards.length)];
       let pool = onlineWorlds.length ? onlineWorlds : ['real'];
       const wid = pool[Math.floor(Math.random() * pool.length)];
-      const msg = { sender: 'ta', content: card.content, timestamp: Date.now(), pinned: false, pinBy: '', heartMark: null, worldId: wid, worldLabel: getWorldLabel(wid) };
+      const msg = { sender: 'ta', content: card.content, timestamp: Date.now(), pinned: false, pinBy: '', pinTime: 0, heartMark: null, worldId: wid, worldLabel: getWorldLabel(wid) };
       const id = await idbPutReturnId('messages', msg);
       msg.id = id;
       await appendMessage(msg);
@@ -7968,7 +8791,7 @@ function scheduleDazeMessages() {
     const msgs = ['我在呢', '发呆中', '嗯', '在这'];
     let pool = onlineWorlds.length ? onlineWorlds : ['real'];
     const wid = pool[Math.floor(Math.random() * pool.length)];
-    const msg = { sender: 'ta', content: msgs[Math.floor(Math.random() * msgs.length)], timestamp: Date.now(), pinned: false, pinBy: '', heartMark: null, worldId: wid, worldLabel: getWorldLabel(wid) };
+    const msg = { sender: 'ta', content: msgs[Math.floor(Math.random() * msgs.length)], timestamp: Date.now(), pinned: false, pinBy: '', pinTime: 0, heartMark: null, worldId: wid, worldLabel: getWorldLabel(wid) };
     const id = await idbPutReturnId('messages', msg);
     msg.id = id;
     await appendMessage(msg);
@@ -7993,7 +8816,7 @@ function scheduleCompanionMessages() {
       const card = cards[Math.floor(Math.random() * cards.length)];
       let pool = onlineWorlds.length ? onlineWorlds : ['real'];
       const wid = pool[Math.floor(Math.random() * pool.length)];
-      const msg = { sender: 'ta', content: card.content, timestamp: Date.now(), pinned: false, pinBy: '', heartMark: null, worldId: wid, worldLabel: getWorldLabel(wid) };
+      const msg = { sender: 'ta', content: card.content, timestamp: Date.now(), pinned: false, pinBy: '', pinTime: 0, heartMark: null, worldId: wid, worldLabel: getWorldLabel(wid) };
       const id = await idbPutReturnId('messages', msg);
       msg.id = id;
       await appendMessage(msg);
@@ -8013,7 +8836,7 @@ function scheduleTogetherMessages() {
     else content = hints[Math.floor(Math.random() * hints.length)];
     let pool = onlineWorlds.length ? onlineWorlds : ['real'];
     const wid = pool[Math.floor(Math.random() * pool.length)];
-    const msg = { sender: 'ta', content, timestamp: Date.now(), pinned: false, pinBy: '', heartMark: null, worldId: wid, worldLabel: getWorldLabel(wid) };
+    const msg = { sender: 'ta', content, timestamp: Date.now(), pinned: false, pinBy: '', pinTime: 0, heartMark: null, worldId: wid, worldLabel: getWorldLabel(wid) };
     const id = await idbPutReturnId('messages', msg);
     msg.id = id;
     await appendMessage(msg);
@@ -8025,15 +8848,47 @@ function openAccompanyStats() {
   const overlay = createModal(`<div class="big-input-title">陪伴统计</div><div id="acc-stats-content"></div>`);
   const content = overlay.querySelector('#acc-stats-content');
   const stats = settings.accompanyStats || {};
-  const names = { sleep: '陪睡', daze: '发呆', companion: '陪伴', together: '一起' };
-  let html = '';
+  const modeNames = { sleep: '陪睡', daze: '发呆', companion: '陪伴', together: '一起' };
+  const typeNames = { quiet: '安静型', gentle: '温柔型', clingy: '粘人型', night: '深夜型' };
+  // 整理成 [{label, seconds}]
+  const entries = [];
+  let totalMs = 0;
   Object.keys(stats).forEach(key => {
-    const totalSecs = Math.floor(stats[key] / 1000);
+    const ms = stats[key];
+    totalMs += ms;
+    let label = key;
+    if (key.startsWith('together_')) {
+      label = '一起' + key.slice(9);
+    } else if (key.startsWith('companion_')) {
+      label = '陪伴（' + (typeNames[key.slice(10)] || key.slice(10)) + '）';
+    } else if (modeNames[key]) {
+      label = modeNames[key];
+    }
+    entries.push({ label, ms });
+  });
+  // 排序：按累计时长从多到少
+  entries.sort((a, b) => b.ms - a.ms);
+  let html = '';
+  entries.forEach(e => {
+    const totalSecs = Math.floor(e.ms / 1000);
     const mins = Math.floor(totalSecs / 60);
     const secs = totalSecs % 60;
-    html += `<div class="heart-item"><span class="heart-mark">💗</span><span>${names[key] || key}：${mins}分${secs}秒</span></div>`;
+    const h = Math.floor(mins / 60);
+    const m = mins % 60;
+    const timeStr = h > 0 ? `${h}小时${m}分${secs}秒` : `${mins}分${secs}秒`;
+    html += `<div class="heart-item"><span class="heart-mark">💗</span><span>${escapeHtml(e.label)}：${timeStr}</span></div>`;
   });
-  if (!html) html = '<div class="placeholder-tip">还没有陪伴记录</div>';
+  if (html) {
+    // 总时长
+    const totalSecs = Math.floor(totalMs / 1000);
+    const totalMins = Math.floor(totalSecs / 60);
+    const totalH = Math.floor(totalMins / 60);
+    const totalM = totalMins % 60;
+    const totalStr = totalH > 0 ? `${totalH}小时${totalM}分` : `${totalMins}分`;
+    html += `<div style="margin-top:12px;padding-top:12px;border-top:1px dashed rgba(90,70,60,0.2);font-size:14px;color:#ff6f9c;font-weight:600;text-align:center;">总时长：${totalStr}</div>`;
+  } else {
+    html = '<div class="placeholder-tip">还没有陪伴记录</div>';
+  }
   content.innerHTML = html;
 }
 
@@ -8087,6 +8942,7 @@ async function getHeartMessages() {
 
 function heartMsgTypeLabel(m) {
   if (m.interactData) return '[互动]';
+  if (m.packData) return '[礼包]';
   if (m.giftData) return '[礼物]';
   if (m.imageData) return '[贴纸]';
   if (m.intimateData) return '[悄悄话]';
@@ -8095,6 +8951,7 @@ function heartMsgTypeLabel(m) {
 
 function heartMsgPlainText(m) {
   if (m.interactData) return m.interactData.text || '';
+  if (m.packData) return (m.packData.icon || '🎁') + ' ' + (m.packData.name || '礼包');
   if (m.giftData) return (m.giftData.icon || '🎁') + ' ' + (m.giftData.name || '礼物');
   if (m.imageData) return '[贴纸]';
   if (m.intimateData) return m.content || '';
@@ -8250,6 +9107,7 @@ async function loadPlaybackDates(overlay) {
 
 function playbackMsgHTML(m) {
   if (m.imageData) return `<img src="${m.imageData}" style="max-width:200px;border-radius:12px;display:block;">`;
+  if (m.packData) return `<div class="msg-pack-card"><div class="pack-icon">${m.packData.icon || '🎁'}</div><div class="pack-name">${escapeHtml(m.packData.name || '礼包')}</div></div>`;
   if (m.giftData) return `<div class="msg-gift-card"><div class="msg-gift-icon">${m.giftData.icon || '🎁'}</div><div class="msg-gift-name">${escapeHtml(m.giftData.name || '礼物')}</div></div>`;
   if (m.interactData) return `<div class="msg-interact-text">${escapeHtml(m.interactData.text || '')}</div>`;
   if (m.intimateData) return `<div class="msg-bubble intimate" style="display:inline-block;">${escapeHtml(m.content || '')}</div>`;
@@ -8574,28 +9432,31 @@ function openLetterDetail(letter) {
 }
 
 function scheduleTALetter() {
-  setInterval(async () => {
-    if (Math.random() < settings.taLetterProb && !isReplying && !isArchiving) {
+  const next = getFreqMs('taLetter');
+  setTimeout(async () => {
+    if (!isReplying && !isArchiving) {
       let pool = onlineWorlds.length ? onlineWorlds : ['real'];
       const wid = pool[Math.floor(Math.random() * pool.length)];
       const cards = await getCardsForWorld(wid);
-      if (cards.length < 20) return;
-      const count = 20 + Math.floor(Math.random() * 11);
-      const shuffled = [...cards].sort(() => Math.random() - 0.5);
-      const body = joinCardsAsParagraph(shuffled.slice(0, count).map(c => c.content));
-      const greetings = ['展信佳', '见字如面', '近来可好'];
-      const blessings = ['祝好', '保重', '念你'];
-      const greeting = greetings[Math.floor(Math.random() * greetings.length)];
-      const blessing = blessings[Math.floor(Math.random() * blessings.length)];
-      const fullLetter = `亲爱的${settings.meName}：\n\n    ${greeting}。\n\n    ${body}\n\n    ${blessing}。\n\n                    ${settings.taName}\n                ${new Date().getMonth() + 1}月${new Date().getDate()}日`;
-      const letters = JSON.parse(localStorage.getItem('letters') || '{"received":[],"sent":[]}');
-      letters.received.push({ content: fullLetter, date: new Date().toISOString().slice(0, 10), unread: true, worldId: wid, worldLabel: getWorldLabel(wid) });
-      localStorage.setItem('letters', JSON.stringify(letters));
-      addBigEvent('letter', '收到易遇的一封信');
-      sendNotification('易遇给你写了一封信');
-      addNotification('✉', '易遇给你写了一封信');
+      if (cards.length >= 20) {
+        const count = 20 + Math.floor(Math.random() * 11);
+        const shuffled = [...cards].sort(() => Math.random() - 0.5);
+        const body = joinCardsAsParagraph(shuffled.slice(0, count).map(c => c.content));
+        const greetings = ['展信佳', '见字如面', '近来可好'];
+        const blessings = ['祝好', '保重', '念你'];
+        const greeting = greetings[Math.floor(Math.random() * greetings.length)];
+        const blessing = blessings[Math.floor(Math.random() * blessings.length)];
+        const fullLetter = `亲爱的${settings.meName}：\n\n    ${greeting}。\n\n    ${body}\n\n    ${blessing}。\n\n                    ${settings.taName}\n                ${new Date().getMonth() + 1}月${new Date().getDate()}日`;
+        const letters = JSON.parse(localStorage.getItem('letters') || '{"received":[],"sent":[]}');
+        letters.received.push({ content: fullLetter, date: new Date().toISOString().slice(0, 10), unread: true, worldId: wid, worldLabel: getWorldLabel(wid) });
+        localStorage.setItem('letters', JSON.stringify(letters));
+        addBigEventOnce('letter', '收到易遇的第一封信');
+        sendNotification('易遇给你写了一封信');
+        addNotification('✉', '易遇给你写了一封信');
+      }
     }
-  }, 3600000);
+    scheduleTALetter();
+  }, next);
 }
 
 // ========== 留言笺 ==========
@@ -8661,22 +9522,26 @@ function loadNoteContent(overlay, tab) {
 }
 
 function scheduleTANote() {
-  setInterval(async () => {
-    if (Math.random() < settings.taNoteProb && !isReplying && !isArchiving) {
+  const next = getFreqMs('taNote');
+  setTimeout(async () => {
+    if (!isReplying && !isArchiving) {
       let pool = onlineWorlds.length ? onlineWorlds : ['real'];
       const wid = pool[Math.floor(Math.random() * pool.length)];
       const cards = await getCardsForWorld(wid);
-      if (cards.length < 5) return;
-      const count = 5 + Math.floor(Math.random() * 4);
-      const shuffled = [...cards].sort(() => Math.random() - 0.5);
-      const content = joinCardsAsParagraph(shuffled.slice(0, count).map(c => c.content));
-      const notes = JSON.parse(localStorage.getItem('notes') || '{"ta":[],"me":[]}');
-      notes.ta.push({ content, date: new Date().toISOString().slice(0, 10), worldId: wid, worldLabel: getWorldLabel(wid) });
-      localStorage.setItem('notes', JSON.stringify(notes));
-      sendNotification('易遇给你留了小笺');
-      addNotification('📝', '易遇给你留了小笺');
+      if (cards.length >= 5) {
+        const count = 5 + Math.floor(Math.random() * 4);
+        const shuffled = [...cards].sort(() => Math.random() - 0.5);
+        const content = joinCardsAsParagraph(shuffled.slice(0, count).map(c => c.content));
+        const notes = JSON.parse(localStorage.getItem('notes') || '{"ta":[],"me":[]}');
+        notes.ta.push({ content, date: new Date().toISOString().slice(0, 10), worldId: wid, worldLabel: getWorldLabel(wid) });
+        localStorage.setItem('notes', JSON.stringify(notes));
+        sendNotification('易遇给你留了小笺');
+        addNotification('📝', '易遇给你留了小笺');
+        addBigEventOnce('note', '收到易遇的第一张小笺');
+      }
     }
-  }, 3600000);
+    scheduleTANote();
+  }, next);
 }
 
 // ========== 恋人空间 ==========
@@ -8759,9 +9624,9 @@ function openLoverSpacePanel() {
     d.checkins.me = d.checkins.me || [];
     d.checkins.me.push(today);
     localStorage.setItem('loverCheckins', JSON.stringify(d.checkins));
-    addBigEvent('checkin', '第一次打卡');
+    addBigEventOnce('checkin', '第一次打卡');
     if (getCommonDays(d.checkins.me, d.checkins.ta || []) >= 7) {
-      addBigEvent('checkin7', '共同打卡满 7 天');
+      addBigEventOnce('checkin7', '共同打卡满 7 天');
     }
     overlay.remove();
     unregisterPanelUpdater('lover');
@@ -8856,7 +9721,7 @@ function openLoverPostDialog() {
 }
 
 function scheduleTALoverPost() {
-  const next = Math.random() * (settings.taPostMax - settings.taPostMin) + settings.taPostMin;
+  const next = getFreqMs('taPost');
   setTimeout(async () => {
     if (!isReplying && !isArchiving) {
       let pool = onlineWorlds.length ? onlineWorlds : ['real'];
@@ -8883,6 +9748,7 @@ function scheduleTALoverPost() {
         localStorage.setItem('loverPosts', JSON.stringify(posts));
         sendNotification('易遇发了一条动态');
         addNotification('📷', '易遇发了一条动态');
+        addBigEventOnce('ta_post', '易遇发了第一条动态');
       }
     }
     scheduleTALoverPost();
@@ -9028,7 +9894,7 @@ function scheduleTADailyLife() {
         line = sweets[Math.floor(Math.random() * sweets.length)];
       }
       if (!line) continue;
-      const msg = { sender: 'ta', content: line, timestamp: Date.now(), pinned: false, pinBy: '', heartMark: null, quoteContent: null, worldId: wid, worldLabel: getWorldLabel(wid) };
+      const msg = { sender: 'ta', content: line, timestamp: Date.now(), pinned: false, pinBy: '', pinTime: 0, heartMark: null, quoteContent: null, worldId: wid, worldLabel: getWorldLabel(wid) };
       const id = await idbPutReturnId('messages', msg);
       msg.id = id;
       await appendMessage(msg);
@@ -9109,6 +9975,8 @@ async function restoreFromBackup(data) {
     }
     if (!settings.flowerTypes || !settings.flowerTypes.length) settings.flowerTypes = JSON.parse(JSON.stringify(DEFAULT_FLOWER_TYPES));
     if (!settings.treeTypes || !settings.treeTypes.length) settings.treeTypes = JSON.parse(JSON.stringify(DEFAULT_TREE_TYPES));
+    if (!settings.giftPacks) settings.giftPacks = [];
+    if (!settings.bigEvents) settings.bigEvents = [];
     await saveSettings();
   }
   if (data.cards) {
@@ -9156,7 +10024,7 @@ async function backupNow() {
   const messages = await idbGetAll('messages');
   const mediaAll = await idbGetAll('media');
   const data = {
-    version: '6.5.0',
+    version: '7.0.0',
     exportedAt: new Date().toISOString(),
     settings, cards, messages, media: mediaAll,
     archives: JSON.parse(localStorage.getItem('archives') || '{}'),
@@ -9164,6 +10032,7 @@ async function backupNow() {
     bgLibrary: JSON.parse(localStorage.getItem('bgLibrary') || '[]'),
     stickerLibrary: JSON.parse(localStorage.getItem('stickerLibrary') || '[]'),
     giftLibrary: JSON.parse(localStorage.getItem('giftLibrary') || '[]'),
+    giftPacks: settings.giftPacks || [],
     interactionLibrary: JSON.parse(localStorage.getItem('interactionLibrary') || '{}'),
     quizLibrary: JSON.parse(localStorage.getItem('quizLibrary') || '[]'),
     emojiLibrary: JSON.parse(localStorage.getItem('emojiLibrary') || '[]'),
@@ -9727,23 +10596,26 @@ function makeModalDraggable(overlay, panel, handle) {
 }
 
 function scheduleTAMusicRequest() {
-  setInterval(async () => {
-    if (Math.random() < settings.taMusicProb * 3 && !isReplying && !isArchiving) {
+  const next = getFreqMs('taMusic');
+  setTimeout(async () => {
+    if (!isReplying && !isArchiving) {
       musicList = JSON.parse(localStorage.getItem('musicList') || '[]');
-      if (!musicList.length) return;
-      const song = musicList[Math.floor(Math.random() * musicList.length)];
-      let pool = onlineWorlds.length ? onlineWorlds : ['real'];
-      const wid = pool[Math.floor(Math.random() * pool.length)];
-      const msg = { sender: 'ta', content: '想听《' + song.name + '》了，一起听吗？', timestamp: Date.now(), pinned: false, pinBy: '', heartMark: null, worldId: wid, worldLabel: getWorldLabel(wid) };
-      const id = await idbPutReturnId('messages', msg);
-      msg.id = id;
-      await appendMessage(msg);
-      musicIndex = musicList.indexOf(song);
-      showMusicPlayer();
-      sendNotification(msg.content);
-      addNotification('♪', '易遇想一起听《' + song.name + '》');
+      if (musicList.length) {
+        const song = musicList[Math.floor(Math.random() * musicList.length)];
+        let pool = onlineWorlds.length ? onlineWorlds : ['real'];
+        const wid = pool[Math.floor(Math.random() * pool.length)];
+        const msg = { sender: 'ta', content: '想听《' + song.name + '》了，一起听吗？', timestamp: Date.now(), pinned: false, pinBy: '', pinTime: 0, heartMark: null, worldId: wid, worldLabel: getWorldLabel(wid) };
+        const id = await idbPutReturnId('messages', msg);
+        msg.id = id;
+        await appendMessage(msg);
+        // 不再自动弹出播放器
+        sendNotification(msg.content);
+        addNotification('♪', '易遇想一起听《' + song.name + '》');
+        addBigEventOnce('ta_music', '易遇第一次点歌');
+      }
     }
-  }, 1800000);
+    scheduleTAMusicRequest();
+  }, next);
 }
 
 // ========== 抉择 ==========
@@ -9774,13 +10646,13 @@ function renderChoiceContent(overlay, mode) {
       const options = content.querySelector('#choice-options').value.trim().split('\n').map(s => s.trim()).filter(Boolean);
       if (!question || options.length < 2) return showToast('请填写问题和至少两个选项');
       const pick = options[Math.floor(Math.random() * options.length)];
-      const myMsg = { sender: 'me', content: question + '\n' + options.map((o, i) => String.fromCharCode(65 + i) + '：' + o).join('\n'), timestamp: Date.now(), pinned: false, pinBy: '', heartMark: null, quoteContent: null };
+      const myMsg = { sender: 'me', content: question + '\n' + options.map((o, i) => String.fromCharCode(65 + i) + '：' + o).join('\n'), timestamp: Date.now(), pinned: false, pinBy: '', pinTime: 0, heartMark: null, quoteContent: null };
       const mid = await idbPutReturnId('messages', myMsg);
       myMsg.id = mid;
       await appendMessage(myMsg);
       let pool = onlineWorlds.length ? onlineWorlds : ['real'];
       const wid = pool[Math.floor(Math.random() * pool.length)];
-      const taMsg = { sender: 'ta', content: '我帮你选了：' + pick, timestamp: Date.now(), pinned: false, pinBy: '', heartMark: null, quoteContent: null, worldId: wid, worldLabel: getWorldLabel(wid) };
+      const taMsg = { sender: 'ta', content: '我帮你选了：' + pick, timestamp: Date.now(), pinned: false, pinBy: '', pinTime: 0, heartMark: null, quoteContent: null, worldId: wid, worldLabel: getWorldLabel(wid) };
       const tid = await idbPutReturnId('messages', taMsg);
       taMsg.id = tid;
       await appendMessage(taMsg);
@@ -9795,13 +10667,13 @@ function renderChoiceContent(overlay, mode) {
       if (!decide) return showToast('请输入你要决定的事');
       const pool = settings.decisionPool || ['去做吧'];
       const pick = pool[Math.floor(Math.random() * pool.length)];
-      const myMsg = { sender: 'me', content: '帮我决定：' + decide, timestamp: Date.now(), pinned: false, pinBy: '', heartMark: null, quoteContent: null };
+      const myMsg = { sender: 'me', content: '帮我决定：' + decide, timestamp: Date.now(), pinned: false, pinBy: '', pinTime: 0, heartMark: null, quoteContent: null };
       const mid = await idbPutReturnId('messages', myMsg);
       myMsg.id = mid;
       await appendMessage(myMsg);
       let wpool = onlineWorlds.length ? onlineWorlds : ['real'];
       const wid = wpool[Math.floor(Math.random() * wpool.length)];
-      const taMsg = { sender: 'ta', content: pick, timestamp: Date.now(), pinned: false, pinBy: '', heartMark: null, quoteContent: null, worldId: wid, worldLabel: getWorldLabel(wid) };
+      const taMsg = { sender: 'ta', content: pick, timestamp: Date.now(), pinned: false, pinBy: '', pinTime: 0, heartMark: null, quoteContent: null, worldId: wid, worldLabel: getWorldLabel(wid) };
       const tid = await idbPutReturnId('messages', taMsg);
       taMsg.id = tid;
       await appendMessage(taMsg);
@@ -9816,13 +10688,13 @@ function renderChoiceContent(overlay, mode) {
       if (!question) return showToast('请输入问题');
       const pool = settings.quizPool || ['是'];
       const pick = pool[Math.floor(Math.random() * pool.length)];
-      const myMsg = { sender: 'me', content: question, timestamp: Date.now(), pinned: false, pinBy: '', heartMark: null, quoteContent: null };
+      const myMsg = { sender: 'me', content: question, timestamp: Date.now(), pinned: false, pinBy: '', pinTime: 0, heartMark: null, quoteContent: null };
       const mid = await idbPutReturnId('messages', myMsg);
       myMsg.id = mid;
       await appendMessage(myMsg);
       let wpool = onlineWorlds.length ? onlineWorlds : ['real'];
       const wid = wpool[Math.floor(Math.random() * wpool.length)];
-      const taMsg = { sender: 'ta', content: pick, timestamp: Date.now(), pinned: false, pinBy: '', heartMark: null, quoteContent: null, worldId: wid, worldLabel: getWorldLabel(wid) };
+      const taMsg = { sender: 'ta', content: pick, timestamp: Date.now(), pinned: false, pinBy: '', pinTime: 0, heartMark: null, quoteContent: null, worldId: wid, worldLabel: getWorldLabel(wid) };
       const tid = await idbPutReturnId('messages', taMsg);
       taMsg.id = tid;
       await appendMessage(taMsg);
@@ -9861,7 +10733,7 @@ function renderChoiceContent(overlay, mode) {
       if (!images.length) return showToast('请上传图片');
       const text = content.querySelector('#choice-image-text').value.trim();
       if (text) {
-        const textMsg = { sender: 'me', content: text, timestamp: Date.now(), pinned: false, pinBy: '', heartMark: null, quoteContent: null };
+        const textMsg = { sender: 'me', content: text, timestamp: Date.now(), pinned: false, pinBy: '', pinTime: 0, heartMark: null, quoteContent: null };
         const tid = await idbPutReturnId('messages', textMsg);
         textMsg.id = tid;
         await appendMessage(textMsg);
@@ -9869,18 +10741,18 @@ function renderChoiceContent(overlay, mode) {
       const pickIdx = Math.floor(Math.random() * images.length);
       const pick = images[pickIdx];
       for (const img of images) {
-        const msg = { sender: 'me', content: '[图片]', imageData: img, timestamp: Date.now(), pinned: false, pinBy: '', heartMark: null, quoteContent: null };
+        const msg = { sender: 'me', content: '[图片]', imageData: img, timestamp: Date.now(), pinned: false, pinBy: '', pinTime: 0, heartMark: null, quoteContent: null };
         const id = await idbPutReturnId('messages', msg);
         msg.id = id;
         await appendMessage(msg);
       }
       let wpool = onlineWorlds.length ? onlineWorlds : ['real'];
       const wid = wpool[Math.floor(Math.random() * wpool.length)];
-      const taMsg = { sender: 'ta', content: '我帮你选了第' + (pickIdx + 1) + '张', timestamp: Date.now(), pinned: false, pinBy: '', heartMark: null, quoteContent: null, worldId: wid, worldLabel: getWorldLabel(wid) };
+      const taMsg = { sender: 'ta', content: '我帮你选了第' + (pickIdx + 1) + '张', timestamp: Date.now(), pinned: false, pinBy: '', pinTime: 0, heartMark: null, quoteContent: null, worldId: wid, worldLabel: getWorldLabel(wid) };
       const tid = await idbPutReturnId('messages', taMsg);
       taMsg.id = tid;
       await appendMessage(taMsg);
-      const taImgMsg = { sender: 'ta', content: '[图片]', imageData: pick, timestamp: Date.now(), pinned: false, pinBy: '', heartMark: null, quoteContent: null, worldId: wid, worldLabel: getWorldLabel(wid) };
+      const taImgMsg = { sender: 'ta', content: '[图片]', imageData: pick, timestamp: Date.now(), pinned: false, pinBy: '', pinTime: 0, heartMark: null, quoteContent: null, worldId: wid, worldLabel: getWorldLabel(wid) };
       const tiid = await idbPutReturnId('messages', taImgMsg);
       taImgMsg.id = tiid;
       await appendMessage(taImgMsg);
@@ -9996,8 +10868,8 @@ function checkPeriodCare() {
   const card = cards[Math.floor(Math.random() * cards.length)];
   let pool = onlineWorlds.length ? onlineWorlds : ['real'];
   const wid = pool[Math.floor(Math.random() * pool.length)];
-  const msg = { sender: 'ta', content: card, timestamp: Date.now(), pinned: false, pinBy: '', heartMark: null, worldId: wid, worldLabel: getWorldLabel(wid) };
-  idbPutReturnId('messages', msg).then(async id => { msg.id = id; await appendMessage(msg); sendNotification(card); addNotification('🌸', '易遇的生理期关怀'); addBigEvent('period', '第一次收到生理期关怀'); });
+  const msg = { sender: 'ta', content: card, timestamp: Date.now(), pinned: false, pinBy: '', pinTime: 0, heartMark: null, worldId: wid, worldLabel: getWorldLabel(wid) };
+  idbPutReturnId('messages', msg).then(async id => { msg.id = id; await appendMessage(msg); sendNotification(card); addNotification('🌸', '易遇的生理期关怀'); addBigEventOnce('period', '第一次收到生理期关怀'); });
 }
 setInterval(checkPeriodCare, 3600000);
 
@@ -10019,7 +10891,7 @@ function openDatePanel() {
     const records = JSON.parse(localStorage.getItem('dateRecords') || '[]');
     records.push({ date, place });
     localStorage.setItem('dateRecords', JSON.stringify(records));
-    addBigEvent('date', '第一次约会记录：' + place);
+    addBigEventOnce('date', '第一次约会记录：' + place);
     loadDateRecords(overlay);
   });
 }
@@ -10052,13 +10924,13 @@ function scheduleDateInvite() {
       const card = cards[Math.floor(Math.random() * cards.length)];
       let pool = onlineWorlds.length ? onlineWorlds : ['real'];
       const wid = pool[Math.floor(Math.random() * pool.length)];
-      const msg = { sender: 'ta', content: '今晚来梦里，' + card, timestamp: Date.now(), pinned: false, pinBy: '', heartMark: null, worldId: wid, worldLabel: getWorldLabel(wid) };
+      const msg = { sender: 'ta', content: '今晚来梦里，' + card, timestamp: Date.now(), pinned: false, pinBy: '', pinTime: 0, heartMark: null, worldId: wid, worldLabel: getWorldLabel(wid) };
       const id = await idbPutReturnId('messages', msg);
       msg.id = id;
       await appendMessage(msg);
       sendNotification(msg.content);
       addNotification('🌙', '易遇的梦里邀约');
-      addBigEvent('dream', '第一次收到梦里邀约');
+      addBigEventOnce('dream', '第一次收到梦里邀约');
     }
   }, 7200000);
 }
@@ -10071,7 +10943,7 @@ function scheduleDateRecall() {
       const r = records[Math.floor(Math.random() * records.length)];
       let pool = onlineWorlds.length ? onlineWorlds : ['real'];
       const wid = pool[Math.floor(Math.random() * pool.length)];
-      const msg = { sender: 'ta', content: '还记得' + r.date + '我们在' + r.place + '吗？我很开心', timestamp: Date.now(), pinned: false, pinBy: '', heartMark: null, worldId: wid, worldLabel: getWorldLabel(wid) };
+      const msg = { sender: 'ta', content: '还记得' + r.date + '我们在' + r.place + '吗？我很开心', timestamp: Date.now(), pinned: false, pinBy: '', pinTime: 0, heartMark: null, worldId: wid, worldLabel: getWorldLabel(wid) };
       const id = await idbPutReturnId('messages', msg);
       msg.id = id;
       await appendMessage(msg);
@@ -10149,7 +11021,7 @@ function openWishAddDialog(tab, panelOverlay) {
   });
 }
 
-// ========== 宠物 ==========
+// ========== 宠物（掉落4小时/1点、TA离线也照顾、离家、找回）==========
 function getPets() {
   let pets = JSON.parse(localStorage.getItem('petDataList') || 'null');
   if (!pets) {
@@ -10174,6 +11046,7 @@ function petColor(type) {
 }
 
 function petMoodEmoji(pet) {
+  if (pet.left) return '🥺';
   const min = Math.min(pet.hunger, pet.mood, pet.clean);
   if (min <= 2) return '😿';
   if (min <= 4) return '😐';
@@ -10182,6 +11055,7 @@ function petMoodEmoji(pet) {
 }
 
 function petTip(pet) {
+  if (pet.left) return '离家出走了';
   if (pet.hunger <= 3) return '肚子咕咕叫';
   if (pet.clean <= 3) return '毛毛乱糟糟';
   if (pet.mood <= 3) return '有点闷闷的';
@@ -10210,12 +11084,13 @@ async function renderPetPanel(content, pets) {
     } else {
       avatarHTML = `<div class="pet-avatar" data-pet-idx="${i}">${pet.emoji}</div>`;
     }
-    const allFull = pet.hunger >= 10 && pet.mood >= 10 && pet.clean >= 10;
+    const allFull = pet.hunger >= 10 && pet.mood >= 10 && pet.clean >= 10 && !pet.left;
     const card = document.createElement('div');
-    card.className = 'pet-card' + (allFull ? ' full-glow' : '');
+    card.className = 'pet-card' + (allFull ? ' full-glow' : '') + (pet.left ? ' left-home' : '');
     card.style.setProperty('--pet-color', petColor(pet.type));
     const tip = petTip(pet);
     const careRecord = pet.lastCareWorld ? `<div class="pet-care-record">最近照顾：${escapeHtml(pet.lastCareWorld)}</div>` : '';
+    const leftTip = pet.left ? `<div class="pet-left-tip">💔 离家出走了，快去找回</div>` : '';
     card.innerHTML = `
       <div class="pet-head">
         ${avatarHTML}
@@ -10229,11 +11104,16 @@ async function renderPetPanel(content, pets) {
       <div class="pet-stat-row"><span class="pet-stat-ico">💗</span><div class="pet-stat-bar${pet.mood >= 10 ? ' full' : ''}"><div style="width:${pet.mood * 10}%;background:linear-gradient(90deg,#ffb0c8,#ff7b9c);"></div></div></div>
       <div class="pet-stat-row"><span class="pet-stat-ico">🫧</span><div class="pet-stat-bar${pet.clean >= 10 ? ' full' : ''}"><div style="width:${pet.clean * 10}%;background:linear-gradient(90deg,#9ad4f0,#5ab0e0);"></div></div></div>
       ${careRecord}
+      ${leftTip}
       <div class="pet-actions">
-        <button data-action="feed" data-idx="${i}" title="喂食">🍖</button>
-        <button data-action="play" data-idx="${i}" title="陪玩">🎾</button>
-        <button data-action="clean" data-idx="${i}" title="清洁">🛁</button>
-        <button data-action="del" data-idx="${i}" title="送走">🗑</button>
+        ${pet.left ? `
+          <button data-action="find" data-idx="${i}" title="找回">🔍 找回</button>
+        ` : `
+          <button data-action="feed" data-idx="${i}" title="喂食">🍖</button>
+          <button data-action="play" data-idx="${i}" title="陪玩">🎾</button>
+          <button data-action="clean" data-idx="${i}" title="清洁">🛁</button>
+          <button data-action="del" data-idx="${i}" title="送走">🗑</button>
+        `}
       </div>`;
     content.appendChild(card);
   }
@@ -10266,6 +11146,15 @@ async function renderPetPanel(content, pets) {
       if (action === 'feed') pet.hunger = Math.min(10, pet.hunger + 3);
       else if (action === 'play') pet.mood = Math.min(10, pet.mood + 3);
       else if (action === 'clean') pet.clean = Math.min(10, pet.clean + 4);
+      else if (action === 'find') {
+        // 找回
+        pet.left = false;
+        pet.hunger = Math.max(pet.hunger, 5);
+        pet.mood = Math.max(pet.mood, 5);
+        pet.clean = Math.max(pet.clean, 5);
+        showToast('找回了' + pet.name);
+        addBigEventOnce('pet_found', '第一次找回离家宠物');
+      }
       else if (action === 'del') {
         if (!confirm('确定送走「' + pet.name + '」吗？')) return;
         list.splice(idx, 1);
@@ -10326,63 +11215,81 @@ function openPetAdoptDialog() {
     if (petType === 'custom' && !petImageRef) return showToast('请先选择图片');
     const name = overlay.querySelector('#pet-name-input').value.trim() || '小宠物';
     const typeEmoji = { cat: '🐱', dog: '🐶', rabbit: '🐰', hamster: '🐹', egg: '🥚', custom: '🐾' };
-    const pet = { name, type: petType, emoji: typeEmoji[petType], imageRef: petImageRef, hunger: 8, mood: 8, clean: 8, stage: petType === 'egg' ? 'egg' : 'young', bornDate: new Date().toISOString().slice(0, 10), lastCareWorld: '' };
+    const pet = { name, type: petType, emoji: typeEmoji[petType], imageRef: petImageRef, hunger: 8, mood: 8, clean: 8, stage: petType === 'egg' ? 'egg' : 'young', bornDate: new Date().toISOString().slice(0, 10), lastCareWorld: '', left: false, zeroHours: 0 };
     const list = getPets();
     list.push(pet);
     savePets(list);
     showToast('领养成功');
+    addBigEventOnce('pet_adopt', '第一次领养宠物');
     overlay.remove();
     openPetPanel();
   });
 }
 
+// 每 4 小时掉 1 点
 function checkPetStatus() {
   const list = getPets();
   if (!list.length) return;
   let needCare = false;
   list.forEach(pet => {
+    if (pet.left) return;
     pet.hunger = Math.max(0, pet.hunger - 1);
     pet.mood = Math.max(0, pet.mood - 1);
     pet.clean = Math.max(0, pet.clean - 1);
     if (pet.hunger < 3 || pet.mood < 3 || pet.clean < 3) needCare = true;
+    // 72 小时三值全 0 -> 离家
+    if (pet.hunger === 0 && pet.mood === 0 && pet.clean === 0) {
+      pet.zeroHours = (pet.zeroHours || 0) + 4;
+      if (pet.zeroHours >= 72) {
+        pet.left = true;
+        addNotification('💔', pet.name + '离家出走了');
+        addBigEventOnce('pet_left', '第一次宠物离家');
+      }
+    } else {
+      pet.zeroHours = 0;
+    }
   });
   savePets(list);
   if (needCare) taAutoCarePets();
 }
-setInterval(checkPetStatus, 3600000);
+setInterval(checkPetStatus, 4 * 3600000); // 4小时
 
+// TA 照顾（不需要在线，走通知）
 async function taAutoCarePets() {
-  if (!onlineWorlds.length) return;
   const list = getPets();
   if (!list.length) return;
-  let worstIdx = 0, worstVal = 999;
-  list.forEach((p, i) => {
-    const min = Math.min(p.hunger, p.mood, p.clean);
-    if (min < worstVal) { worstVal = min; worstIdx = i; }
+  let cared = 0;
+  // 所有低于 3 的都补
+  list.forEach(pet => {
+    if (pet.left) return;
+    if (pet.hunger < 3 || pet.mood < 3 || pet.clean < 3) {
+      if (pet.hunger < 3) pet.hunger = Math.max(8, pet.hunger + 5);
+      if (pet.mood < 3) pet.mood = Math.max(8, pet.mood + 5);
+      if (pet.clean < 3) pet.clean = Math.max(8, pet.clean + 5);
+      cared++;
+    }
   });
-  const pet = list[worstIdx];
-  if (pet.hunger <= pet.mood && pet.hunger <= pet.clean) pet.hunger = Math.max(8, Math.min(10, pet.hunger + 4));
-  else if (pet.mood <= pet.clean) pet.mood = Math.max(8, Math.min(10, pet.mood + 4));
-  else pet.clean = Math.max(8, Math.min(10, pet.clean + 5));
+  if (!cared) return;
+  // 世界名（没有在线就默认现实世界）
   let pool = onlineWorlds.length ? onlineWorlds : ['real'];
   const wid = pool[Math.floor(Math.random() * pool.length)];
-  pet.lastCareWorld = getWorldLabel(wid);
+  list.forEach(pet => { if (!pet.left) pet.lastCareWorld = getWorldLabel(wid); });
   savePets(list);
+  addNotification('🐾', '易遇照顾了宠物（' + cared + '只）');
   refreshOpenPanels();
 }
 
 function scheduleTAPetCare() {
-  const next = Math.random() * (settings.taPetCareMax - settings.taPetCareMin) + settings.taPetCareMin;
+  const next = getFreqMs('taPetCare');
   setTimeout(async () => {
     if (!isReplying && !isArchiving) {
       await taAutoCarePets();
-      refreshOpenPanels();
     }
     scheduleTAPetCare();
   }, next);
 }
 
-// ========== 种植 ==========
+// ========== 种植（掉落4小时/1点、TA离线也照顾、枯萎可救）==========
 function getPlantsData() {
   return JSON.parse(localStorage.getItem('plantsData') || '{"flowers":[],"trees":[]}');
 }
@@ -10454,6 +11361,7 @@ function loadPlantContent(overlay, tab) {
         <button class="mini-btn plant-action-btn" data-action="water" data-idx="${i}" ${isWithered ? 'disabled' : ''}>浇水</button>
         <button class="mini-btn plant-action-btn" data-action="fertilize" data-idx="${i}" ${isWithered ? 'disabled' : ''}>施肥</button>
         <button class="mini-btn plant-action-btn" data-action="catch" data-idx="${i}" ${isWithered ? 'disabled' : ''}>捉虫</button>
+        ${isWithered ? `<button class="mini-btn plant-action-btn" data-action="revive" data-idx="${i}" style="color:#7bc47f;">救活</button>` : ''}
         ${isMature && !isWithered ? `<button class="mini-btn plant-action-btn" data-action="harvest" data-idx="${i}" style="color:#e8789f;">采摘</button>` : ''}
         <button class="mini-btn plant-action-btn" data-action="del" data-idx="${i}" style="color:#c33;">删除</button>
       </div>`;
@@ -10485,6 +11393,20 @@ function loadPlantContent(overlay, tab) {
           loadPlantContent(overlay, tab);
           return;
         }
+        if (action === 'revive') {
+          // 玩家救活
+          plant.withered = false;
+          plant.water = 5;
+          plant.nutrient = 5;
+          plant.health = 5;
+          plant.zeroDays = 0;
+          arr[idx] = plant;
+          savePlantsData(data);
+          showToast('救活了');
+          addBigEventOnce('plant_revive', '第一次救活枯萎植物');
+          loadPlantContent(overlay, tab);
+          return;
+        }
         if (action === 'harvest') {
           if (plant.stage < maxStage || plant.water < 10 || plant.nutrient < 10 || plant.health < 10) return showToast('还没成熟');
           settings.heartValue += 30;
@@ -10497,6 +11419,7 @@ function loadPlantContent(overlay, tab) {
           arr[idx] = plant;
           savePlantsData(data);
           showToast('采摘成功，爱意值+30');
+          addBigEventOnce('plant_harvest', '第一次收获');
           loadPlantContent(overlay, tab);
           return;
         }
@@ -10581,6 +11504,7 @@ function addPlant(tab) {
     data[key].push({ type: tab, typeId: pickedType, stage: 0, day: 0, water: 5, nutrient: 5, health: 5, imageRef: plantImageRef, lastCareDate: '', lastCareWorld: '', withered: false, zeroDays: 0 });
     savePlantsData(data);
     showToast('已种下');
+    addBigEventOnce('plant_' + tab, '第一次种' + (tab === 'flower' ? '花' : '树'));
     overlay.remove();
     openPlantPanel();
   });
@@ -10630,6 +11554,7 @@ function openPlantTypeManageDialog(tab) {
   });
 }
 
+// 每 4 小时掉 1 点
 function checkPlantStatus() {
   const data = getPlantsData();
   let changed = false;
@@ -10640,65 +11565,74 @@ function checkPlantStatus() {
       p.nutrient = Math.max(0, p.nutrient - 1);
       p.health = Math.max(0, p.health - 1);
       if (p.water <= 0 || p.health <= 0) {
-        p.zeroDays = (p.zeroDays || 0) + 1;
+        p.zeroDays = (p.zeroDays || 0) + 4;
       } else {
         p.zeroDays = 0;
       }
-      if (p.zeroDays >= 72) p.withered = true;
+      if (p.zeroDays >= 72) {
+        p.withered = true;
+        addNotification('🥀', '有植物枯萎了');
+        addBigEventOnce('plant_wither', '第一次植物枯萎');
+      }
       changed = true;
     });
   });
   if (changed) savePlantsData(data);
 }
-setInterval(checkPlantStatus, 3600000);
+setInterval(checkPlantStatus, 4 * 3600000); // 4小时
 
+// TA 照顾（不需要在线，走通知，可救活枯萎）
 async function taAutoCarePlants() {
-  if (!onlineWorlds.length) return;
   const data = getPlantsData();
   const all = [...data.flowers.map((p, i) => ({ p, key: 'flowers', i })), ...data.trees.map((p, i) => ({ p, key: 'trees', i }))];
   if (!all.length) return;
-  const needCare = all.filter(x => !x.p.withered && (x.p.water < 3 || x.p.nutrient < 3 || x.p.health < 3));
-  if (!needCare.length) return;
-  const pick = needCare[Math.floor(Math.random() * needCare.length)];
-  const plant = pick.p;
-  if (plant.water < 3) plant.water = Math.max(8, Math.min(10, plant.water + 4));
-  else if (plant.nutrient < 3) plant.nutrient = Math.max(8, Math.min(10, plant.nutrient + 4));
-  else plant.health = Math.max(8, Math.min(10, plant.health + 4));
-  const t = new Date().toISOString().slice(0, 10);
-  if (plant.lastCareDate !== t) {
-    plant.day += 1;
-    plant.lastCareDate = t;
-    const typeLib = plant.type === 'flower' ? getFlowerTypes() : getTreeTypes();
-    const ti = typeLib.find(x => x.id === plant.typeId);
-    const maxStage = ti ? (ti.stages.length - 1) : (plant.type === 'flower' ? 3 : 4);
-    if (plant.water >= 5 && plant.nutrient >= 5 && plant.health >= 5) {
-      plant.stage = Math.min(plant.stage + 1, maxStage);
+  let cared = 0;
+  let revived = 0;
+  all.forEach(x => {
+    const plant = x.p;
+    // 救活枯萎
+    if (plant.withered) {
+      plant.zeroDays = (plant.zeroDays || 0) - 24;
+      if (plant.zeroDays <= 0) {
+        plant.withered = false;
+        plant.water = 5;
+        plant.nutrient = 5;
+        plant.health = 5;
+        plant.zeroDays = 0;
+        revived++;
+        cared++;
+      }
+      return;
     }
-  }
+    // 补低于 3 的
+    if (plant.water < 3 || plant.nutrient < 3 || plant.health < 3) {
+      if (plant.water < 3) plant.water = Math.max(8, plant.water + 5);
+      if (plant.nutrient < 3) plant.nutrient = Math.max(8, plant.nutrient + 5);
+      if (plant.health < 3) plant.health = Math.max(8, plant.health + 5);
+      cared++;
+    }
+  });
+  if (!cared) return;
   let pool = onlineWorlds.length ? onlineWorlds : ['real'];
   const wid = pool[Math.floor(Math.random() * pool.length)];
-  plant.lastCareWorld = getWorldLabel(wid);
-  data[pick.key][pick.i] = plant;
+  all.forEach(x => { x.p.lastCareWorld = getWorldLabel(wid); });
   savePlantsData(data);
+  let msg = '易遇照顾了植物（' + cared + '株）';
+  if (revived > 0) msg += '，救活 ' + revived + ' 株';
+  addNotification('🌱', msg);
+  if (revived > 0) addBigEventOnce('plant_ta_revive', '易遇第一次救活植物');
+  refreshOpenPanels();
 }
 
 function scheduleTAPlantCare() {
-  const next = Math.random() * (settings.taPlantCareMax - settings.taPlantCareMin) + settings.taPlantCareMin;
+  const next = getFreqMs('taPlantCare');
   setTimeout(async () => {
     if (!isReplying && !isArchiving) {
       await taAutoCarePlants();
-      refreshOpenPanels();
     }
     scheduleTAPlantCare();
   }, next);
 }
-
-setInterval(async () => {
-  if (onlineWorlds.length && !isReplying && !isArchiving) {
-    await taAutoCarePlants();
-    refreshOpenPanels();
-  }
-}, 3600000);
   // ========== 视频通话 ==========
 const VIDEO_GRADIENTS = [
   'linear-gradient(135deg, #fdd9c8, #f7d4e3, #dcd3f5)',
@@ -10760,6 +11694,7 @@ function startVideoCall() {
         scheduleVideoTASpeak();
         scheduleVideoAutoHangup();
         startVideoPersistTimer();
+        addBigEventOnce('video', '第一次视频通话');
       } else {
         hangupVideoCall('TA正在忙', true);
       }
@@ -10810,7 +11745,7 @@ function incomingVideoCall() {
     scheduleVideoTASpeak();
     scheduleVideoAutoHangup();
     startVideoPersistTimer();
-    addBigEvent('video', '第一次视频通话');
+    addBigEventOnce('video', '第一次视频通话');
   });
   videoCallOverlay.querySelector('#video-reject-btn').addEventListener('click', () => hangupVideoCall('你拒绝了TA的视频通话', true));
   setTimeout(() => {
@@ -10983,7 +11918,7 @@ function hangupVideoCall(reason, isSystem) {
   if (videoCallAnswered && duration > 0) {
     const mins = Math.floor(duration / 60);
     const secs = duration % 60;
-    const sysMsg = { sender: 'ta', content: `${startStr} 开始 · ${endStr} 结束 · 通话 ${mins}分钟${secs}秒`, timestamp: Date.now(), pinned: false, pinBy: '', heartMark: null, isSystem: true };
+    const sysMsg = { sender: 'ta', content: `${startStr} 开始 · ${endStr} 结束 · 通话 ${mins}分钟${secs}秒`, timestamp: Date.now(), pinned: false, pinBy: '', pinTime: 0, heartMark: null, isSystem: true };
     idbPutReturnId('messages', sysMsg).then(async id => { sysMsg.id = id; await appendMessage(sysMsg); });
   } else if (reason) {
     const nowStr = new Date().toLocaleTimeString('zh-CN', { hour: '2-digit', minute: '2-digit' });
@@ -10992,7 +11927,7 @@ function hangupVideoCall(reason, isSystem) {
     else if (reason === 'TA的视频通话未接听') content = `${nowStr} 未接来电`;
     else if (reason === '你拒绝了TA的视频通话') content = `${nowStr} 你拒接了来电`;
     else content = reason;
-    const sysMsg = { sender: 'ta', content, timestamp: Date.now(), pinned: false, pinBy: '', heartMark: null, isSystem: true };
+    const sysMsg = { sender: 'ta', content, timestamp: Date.now(), pinned: false, pinBy: '', pinTime: 0, heartMark: null, isSystem: true };
     idbPutReturnId('messages', sysMsg).then(async id => { sysMsg.id = id; await appendMessage(sysMsg); });
   }
   clearInterval(videoCallTimer);
@@ -11011,7 +11946,7 @@ function hangupVideoCall(reason, isSystem) {
 }
 
 function scheduleTAVideoCall() {
-  const next = Math.random() * (settings.videoCallMax - settings.videoCallMin) + settings.videoCallMin;
+  const next = getFreqMs('videoCall');
   setTimeout(() => {
     if (!videoCallActive) incomingVideoCall();
     scheduleTAVideoCall();
@@ -11089,7 +12024,7 @@ function checkImportantDays() {
         updateHeartValue();
         let pool = onlineWorlds.length ? onlineWorlds : ['real'];
         const wid = pool[Math.floor(Math.random() * pool.length)];
-        const msg = { sender: 'ta', content: '今天是' + d.name + '，我一直记得。爱意值+50', timestamp: Date.now(), pinned: false, pinBy: '', heartMark: null, worldId: wid, worldLabel: getWorldLabel(wid) };
+        const msg = { sender: 'ta', content: '今天是' + d.name + '，我一直记得。爱意值+50', timestamp: Date.now(), pinned: false, pinBy: '', pinTime: 0, heartMark: null, worldId: wid, worldLabel: getWorldLabel(wid) };
         idbPutReturnId('messages', msg).then(async id => { msg.id = id; await appendMessage(msg); sendNotification(msg.content); addNotification('🎂', '今天是' + d.name); });
       }
     }
@@ -11320,7 +12255,7 @@ function checkBondDaily() {
         showToast('熄灭保护已使用');
       } else {
         if (settings.bondDays > settings.bondHistoryBest) settings.bondHistoryBest = settings.bondDays;
-        addBigEvent('bondbreak', '羁绊熄灭（原 ' + settings.bondDays + ' 天）');
+        addBigEventOnce('bondbreak', '羁绊熄灭（原 ' + settings.bondDays + ' 天）');
         settings.bondDays = 0;
         settings.bondProtectUsed = false;
         showToast('羁绊熄灭了');
@@ -11329,9 +12264,9 @@ function checkBondDaily() {
   }
   settings.bondDays += 1;
   settings.bondLastCheckDate = today;
-  if (settings.bondDays === 7) addBigEvent('bond7', '羁绊连续 7 天');
-  if (settings.bondDays === 30) addBigEvent('bond30', '羁绊连续 30 天');
-  if (settings.bondDays === 100) addBigEvent('bond100', '羁绊连续 100 天');
+  if (settings.bondDays === 7) addBigEventOnce('bond7', '羁绊连续 7 天');
+  if (settings.bondDays === 30) addBigEventOnce('bond30', '羁绊连续 30 天');
+  if (settings.bondDays === 100) addBigEventOnce('bond100', '羁绊连续 100 天');
   if (settings.bondDays > 0 && settings.bondDays % 7 === 0) {
     settings.heartValue += 20;
     showToast('连续' + settings.bondDays + '天，爱意值+20');
@@ -11614,8 +12549,8 @@ function openWorldEditDialog(world, panelOverlay) {
   });
 }
 
-// ========== 大事记 ==========
-function addBigEvent(type, text) {
+// ========== 大事记（通用去重写入·唯一定义）==========
+function addBigEventOnce(type, text) {
   settings.bigEvents = settings.bigEvents || [];
   const key = type + '|' + text;
   if (settings.bigEvents.some(ev => (ev.type + '|' + ev.text) === key)) return;
@@ -11640,7 +12575,7 @@ function openTimelinePanel() {
   });
 }
 
-// ========== 高维彩蛋 ==========
+// ========== 高维彩蛋（唯一定义·保留）==========
 function openHighDimPanel() {
   const overlay = createModal(`
     <div class="big-input-title">高维彩蛋</div>
@@ -11655,7 +12590,24 @@ function openHighDimPanel() {
   });
 }
 
-// ========== 重要记事 ==========
+function scheduleHighDim() {
+  const next = (1 + Math.random() * 2) * 86400000;
+  highDimTimer = setTimeout(async () => {
+    if (!isReplying && !isArchiving && (settings.highDimLines || []).length) {
+      const line = settings.highDimLines[Math.floor(Math.random() * settings.highDimLines.length)];
+      const msg = { sender: 'ta', content: line, timestamp: Date.now(), pinned: false, pinBy: '', pinTime: 0, heartMark: null, quoteContent: null, worldLabel: getWorldLabel() };
+      const id = await idbPutReturnId('messages', msg);
+      msg.id = id;
+      await appendMessage(msg);
+      sendNotification(line);
+      addNotification('✨', '易遇的高维彩蛋');
+      addBigEventOnce('highdim', '第一次收到高维彩蛋');
+    }
+    scheduleHighDim();
+  }, next);
+}
+
+// ========== 重要记事（唯一定义·保留）==========
 function openImportantNotesPanel() {
   const overlay = createModal(`
     <div class="big-input-title">重要记事</div>
@@ -11709,19 +12661,25 @@ async function init() {
   await openDB();
   await loadSettings();
   await migrateMediaOnce();
+  // 首次自动导入礼物/礼包
+  await ensureGiftLibraryInited();
+  await ensureGiftPacksInited();
   refreshScheduleTypes();
   renderHeartLine();
   initBallPosition();
   await renderMessages();
   await applyBG();
   updateStatusBar();
-  addBigEventOnce();
+  addBigEventOnce('world_real', '第一次相遇：现实世界 · 医生');
   initOnlineWorlds();
+  // 主动行为（频率制）
   scheduleTAActive();
   scheduleTAAutonomy();
+  scheduleTAQuote();
   scheduleTAInteract();
   scheduleTAGift();
   scheduleTANick();
+  scheduleTASticker();
   scheduleTAAvatarChange();
   scheduleTABGChange();
   scheduleTAVideoCall();
@@ -11769,14 +12727,6 @@ async function init() {
       initParticles();
     }, 300);
   });
-}
-
-function addBigEventOnce() {
-  settings.visitedWorlds = settings.visitedWorlds || [];
-  if (!settings.visitedWorlds.includes('real')) {
-    settings.visitedWorlds.push('real');
-    addBigEvent('world', '第一次相遇：现实世界 · 医生');
-  }
 }
 
 init();

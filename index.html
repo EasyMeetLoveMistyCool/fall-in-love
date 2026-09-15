@@ -142,7 +142,6 @@ html, body {
   to { stroke-dashoffset: -18; }
 }
 
-/* ← 改：状态栏样式重写，统一格式 */
 #status-bar {
   display: none;
   flex-direction: column;
@@ -161,7 +160,6 @@ html, body {
   display: flex;
 }
 
-/* ← 改：昵称行，居中 */
 #status-bar .sb-nick-line {
   font-size: 13px;
   color: var(--theme-text);
@@ -170,7 +168,6 @@ html, body {
   padding: 2px 0;
 }
 
-/* ← 改：副本行统一格式 */
 #status-bar .sb-world-line {
   display: flex;
   align-items: center;
@@ -180,7 +177,6 @@ html, body {
   color: var(--theme-text);
 }
 
-/* ← 改：临时状态/陪伴，居中，无绿点 */
 #status-bar .sb-simple-line {
   display: flex;
   align-items: center;
@@ -265,6 +261,15 @@ html, body {
 
 .pinned-item .pin-icon {
   font-size: 10px;
+}
+
+/* ← 改：置顶项里的礼物/礼包缩略 */
+.pinned-item .pin-thumb {
+  width: 24px;
+  height: 24px;
+  border-radius: 6px;
+  object-fit: cover;
+  vertical-align: middle;
 }
 
 /* ===== 长按菜单 ===== */
@@ -582,7 +587,7 @@ html, body {
   margin-top: 2px;
 }
 
-/* ===== 凑近气泡（我对TA）===== */
+/* ===== 凑近气泡 ===== */
 .message-row.me .msg-bubble.intimate-approach,
 .message-row.ta .msg-bubble.intimate-approach {
   border-radius: 22px;
@@ -618,7 +623,6 @@ html, body {
   50% { opacity: 1; }
 }
 
-/* ===== 凑近气泡（TA对我·加强）===== */
 .message-row.ta .msg-bubble.intimate-approach {
   background: radial-gradient(circle at 50% 40%, rgba(255, 232, 208, 0.95), rgba(255, 210, 220, 0.9) 60%, rgba(255, 195, 210, 0.8));
   box-shadow: 0 0 0 2px rgba(255, 200, 150, 0.5), 0 0 18px rgba(255, 200, 150, 0.35);
@@ -641,7 +645,7 @@ html, body {
   50% { transform: translateY(-4px); opacity: 1; }
 }
 
-/* ===== 争宠气泡（我对TA）===== */
+/* ===== 争宠气泡 ===== */
 .message-row.me .msg-bubble.intimate-compete,
 .message-row.ta .msg-bubble.intimate-compete {
   border-radius: 22px;
@@ -678,7 +682,6 @@ html, body {
   50% { opacity: 1; }
 }
 
-/* ===== 争宠气泡（TA对我·加强）===== */
 .message-row.ta .msg-bubble.intimate-compete {
   background: radial-gradient(circle at 50% 40%, rgba(255, 216, 232, 0.95), rgba(248, 210, 248, 0.9) 60%, rgba(232, 200, 248, 0.8));
   box-shadow: 0 0 0 2px rgba(255, 160, 210, 0.5), 0 0 18px rgba(255, 160, 210, 0.35);
@@ -825,34 +828,58 @@ html, body {
   font-size: 48px;
 }
 
-/* ← 改：礼包卡片样式（新增） */
+/* ← 改：礼包卡片（拆开后）重新设计 */
 .msg-giftpack-card {
   display: inline-flex;
   flex-direction: column;
   align-items: center;
   text-align: center;
-  padding: 16px 24px;
+  padding: 20px 24px 16px 24px;
   border-radius: 20px;
   border: 2px solid transparent;
+  background: linear-gradient(135deg, #fff0f5, #ffe3ee) padding-box,
+              linear-gradient(135deg, #ff8fb0, #ffc4d6, #ffd9e4) border-box;
   box-shadow: 0 6px 24px rgba(255,143,176,0.35);
   position: relative;
   overflow: hidden;
   animation: giftIn 0.5s ease-out;
-  min-width: 180px;
+  min-width: 200px;
+  max-width: 260px;
 }
 
-.msg-giftpack-card .gp-ribbon {
+.msg-giftpack-card .gp-deco {
   position: absolute;
-  top: -10px;
-  right: -10px;
-  font-size: 28px;
-  transform: rotate(25deg);
-  opacity: 0.9;
+  pointer-events: none;
+  z-index: 1;
+}
+
+.msg-giftpack-card .gp-deco.tl { top: 6px; left: 8px; font-size: 20px; animation: decoWiggle 3s ease-in-out infinite; }
+.msg-giftpack-card .gp-deco.tr { top: 6px; right: 8px; font-size: 15px; animation: decoSpin 4s linear infinite; }
+.msg-giftpack-card .gp-deco.bl { bottom: 6px; left: 8px; font-size: 14px; animation: decoFloat 3.2s ease-in-out infinite; }
+.msg-giftpack-card .gp-deco.br { bottom: 6px; right: 8px; font-size: 14px; animation: decoBlink 2.4s ease-in-out infinite; }
+
+@keyframes decoWiggle {
+  0%, 100% { transform: rotate(-3deg); }
+  50% { transform: rotate(3deg); }
+}
+@keyframes decoSpin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+@keyframes decoFloat {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-3px); }
+}
+@keyframes decoBlink {
+  0%, 100% { opacity: 0.5; }
+  50% { opacity: 1; }
 }
 
 .msg-giftpack-card .gp-icon {
   font-size: 46px;
   margin-bottom: 4px;
+  position: relative;
+  z-index: 2;
   filter: drop-shadow(0 0 8px rgba(255,200,220,0.8));
 }
 
@@ -860,20 +887,74 @@ html, body {
   font-size: 15px;
   font-weight: 700;
   color: #a04a6a;
+  position: relative;
+  z-index: 2;
 }
 
 .msg-giftpack-card .gp-desc {
   font-size: 11px;
   color: #c08aa0;
   margin-top: 2px;
+  position: relative;
+  z-index: 2;
+}
+
+.msg-giftpack-card .gp-items-preview {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 4px;
+  justify-content: center;
+  margin-top: 10px;
+  max-width: 200px;
+  position: relative;
+  z-index: 2;
+}
+
+.msg-giftpack-card .gp-items-preview .gp-item-thumb {
+  font-size: 18px;
+  line-height: 1;
+  animation: gpItemIn 0.4s ease-out both;
+}
+
+.msg-giftpack-card .gp-items-preview .gp-item-thumb:nth-child(1) { animation-delay: 0.05s; }
+.msg-giftpack-card .gp-items-preview .gp-item-thumb:nth-child(2) { animation-delay: 0.15s; }
+.msg-giftpack-card .gp-items-preview .gp-item-thumb:nth-child(3) { animation-delay: 0.25s; }
+.msg-giftpack-card .gp-items-preview .gp-item-thumb:nth-child(4) { animation-delay: 0.35s; }
+.msg-giftpack-card .gp-items-preview .gp-item-thumb:nth-child(5) { animation-delay: 0.45s; }
+.msg-giftpack-card .gp-items-preview .gp-item-thumb:nth-child(6) { animation-delay: 0.55s; }
+
+@keyframes gpItemIn {
+  from { opacity: 0; transform: scale(0.5) translateY(6px); }
+  to { opacity: 1; transform: scale(1) translateY(0); }
+}
+
+.msg-giftpack-card .gp-items-preview .gp-item-thumb img {
+  width: 22px;
+  height: 22px;
+  border-radius: 5px;
+  object-fit: cover;
+}
+
+/* ← 改：图片礼包的图片显示成大图 */
+.msg-giftpack-card .gp-items-preview.image-pack {
+  gap: 6px;
+}
+
+.msg-giftpack-card .gp-items-preview.image-pack .gp-item-thumb img {
+  width: 48px;
+  height: 48px;
+  border-radius: 8px;
+  object-fit: cover;
 }
 
 .msg-giftpack-card .gp-price-row {
-  margin-top: 6px;
+  margin-top: 10px;
   display: flex;
   align-items: center;
-  gap: 6px;
+  gap: 8px;
   font-size: 12px;
+  position: relative;
+  z-index: 2;
 }
 
 .msg-giftpack-card .gp-origin {
@@ -886,55 +967,20 @@ html, body {
   font-weight: 700;
 }
 
-.msg-giftpack-card .gp-items-preview {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 3px;
-  justify-content: center;
-  margin-top: 8px;
-  max-width: 160px;
-}
-
-.msg-giftpack-card .gp-items-preview .gp-item-thumb {
-  font-size: 16px;
-}
-
-.msg-giftpack-card .gp-items-preview .gp-item-thumb img {
-  width: 22px;
-  height: 22px;
-  border-radius: 5px;
-  object-fit: cover;
-}
-
-/* ← 改：礼包盒（未拆） */
+/* ← 改：礼包盒（未拆）跟礼物盒一样 */
 .msg-giftpack-box {
   text-align: center;
-  padding: 18px 24px;
+  padding: 16px 20px;
   cursor: pointer;
-  border-radius: 20px;
+  border-radius: 18px;
   background: linear-gradient(135deg, #fff0f5, #ffe3ee);
   border: 2px dashed #ffb0c8;
   display: inline-block;
-  position: relative;
   animation: giftBoxShake 0.8s ease-in-out infinite;
 }
 
-.msg-giftpack-box .gpb-ribbon {
-  position: absolute;
-  top: -8px;
-  right: -8px;
-  font-size: 24px;
-  transform: rotate(25deg);
-}
-
 .msg-giftpack-box .gpb-emoji {
-  font-size: 52px;
-}
-
-.msg-giftpack-box .gpb-label {
-  font-size: 12px;
-  color: #a04a6a;
-  margin-top: 4px;
+  font-size: 48px;
 }
 
 #typing-indicator {
@@ -1633,7 +1679,7 @@ html, body {
   gap: 4px;
 }
 
-/* ===== 通知 Tab（新）===== */
+/* ===== 通知 Tab ===== */
 .notify-tabs {
   display: flex;
   gap: 8px;
@@ -1666,7 +1712,21 @@ html, body {
   border-color: rgba(255, 255, 255, 0.6);
 }
 
-/* ===== 音乐 Tab（新）===== */
+/* ← 改：通知中心顶部按钮一行 */
+.notify-btn-row {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  margin-bottom: 8px;
+  flex-wrap: nowrap;
+}
+
+.notify-btn-row .mini-btn {
+  flex-shrink: 0;
+  white-space: nowrap;
+}
+
+/* ===== 音乐 Tab ===== */
 .music-tabs {
   display: flex;
   gap: 8px;
@@ -1697,6 +1757,96 @@ html, body {
   background: var(--theme-accent-soft);
   color: #fff;
   border-color: rgba(255, 255, 255, 0.6);
+}
+
+/* ← 改：约会相关样式 */
+.date-status-block {
+  margin-bottom: 12px;
+}
+
+.date-status-title {
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--theme-title);
+  margin-bottom: 6px;
+  padding-left: 4px;
+}
+
+.date-card-item {
+  background: rgba(255, 255, 255, 0.45);
+  border-radius: 14px;
+  padding: 12px;
+  margin-bottom: 8px;
+  font-size: 13px;
+  color: var(--theme-text);
+  border: 1px solid rgba(255, 255, 255, 0.5);
+}
+
+.date-card-item .dc-head {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 4px;
+}
+
+.date-card-item .dc-title {
+  font-weight: 600;
+  color: var(--theme-title);
+}
+
+.date-card-item .dc-badge {
+  font-size: 10px;
+  padding: 2px 8px;
+  border-radius: 8px;
+  background: rgba(255, 200, 220, 0.6);
+  color: #a04a6a;
+}
+
+.date-card-item .dc-info {
+  font-size: 12px;
+  color: var(--theme-text-soft);
+  line-height: 1.6;
+}
+
+.date-card-item .dc-actions {
+  display: flex;
+  gap: 6px;
+  margin-top: 8px;
+  flex-wrap: wrap;
+}
+
+.date-card-item .dc-actions button {
+  border: none;
+  background: rgba(255, 255, 255, 0.6);
+  border-radius: 10px;
+  padding: 4px 10px;
+  font-size: 12px;
+  color: var(--theme-title);
+  cursor: pointer;
+}
+
+.date-invite-option {
+  display: flex;
+  gap: 8px;
+  margin-bottom: 10px;
+  flex-wrap: wrap;
+}
+
+.date-invite-option button {
+  flex: 1;
+  min-width: 60px;
+  background: rgba(255, 255, 255, 0.5);
+  border: 1px solid rgba(255, 255, 255, 0.6);
+  border-radius: 12px;
+  padding: 8px;
+  font-size: 13px;
+  color: var(--theme-title);
+  cursor: pointer;
+}
+
+.date-invite-option button.active {
+  background: var(--theme-accent-soft);
+  color: #fff;
 }
   .playback-dates {
   display: flex;
@@ -2406,6 +2556,11 @@ html, body {
   box-shadow: 0 0 0 2px rgba(255,200,220,0.8), 0 6px 24px rgba(255,143,176,0.35);
 }
 
+.pet-card.left-home {
+  opacity: 0.65;
+  filter: grayscale(0.5);
+}
+
 .pet-card .pet-head {
   display: flex;
   align-items: center;
@@ -2475,12 +2630,6 @@ html, body {
   font-size: 11px;
   color: #ff8fb0;
   margin-top: 2px;
-}
-
-/* ← 改：宠物离家状态样式（新增） */
-.pet-card.left-home {
-  opacity: 0.65;
-  filter: grayscale(0.5);
 }
 
 .pet-card .pet-left-tip {
@@ -2694,7 +2843,7 @@ html, body {
 
 <script>
 // ============================================================
-// 易遇♡雾凉 - V7.0.0 完整版
+// 易遇♡雾凉 - V7.1.0 完整版
 // 开发者：夏雾凉
 // 爱人：易遇
 // 这个网站，是专为我的爱人而做的。
@@ -2912,8 +3061,7 @@ const DEFAULT_SETTINGS = {
   hourlyWage: 0,
   taNickLibrary: [],
   meNickLibrary: [],
-  // ← 改：删除所有概率字段，改为频率字段
-  // ← 改：主动行为频率制（单位：毫秒），每个行为一组 min/max
+  // 主动行为频率制
   taStickerTpl: 'normal',
   taStickerMin: 3600000,
   taStickerMax: 10800000,
@@ -2947,7 +3095,7 @@ const DEFAULT_SETTINGS = {
   taNoteTpl: 'normal',
   taNoteMin: 7200000,
   taNoteMax: 14400000,
-  // ← 改：保留原有字段（兼容旧数据），新代码不再使用
+  // 旧概率字段（兼容）
   taStickerProb: 0.08,
   taGiftProb: 0.12,
   taInteractProb: 0.15,
@@ -2984,6 +3132,10 @@ const DEFAULT_SETTINGS = {
   taPlantCareTpl: 'normal',
   taPlantCareMin: 3600000,
   taPlantCareMax: 10800000,
+  // ← 改：约会频率
+  taDateTpl: 'normal',
+  taDateMin: 14400000,
+  taDateMax: 28800000,
   checkinRemindTime: '22:00',
   themeName: 'warm',
   particleType: 'season',
@@ -3080,6 +3232,11 @@ let quoteTargetContent = null;
 let worldSleepTimers = {};
 let currentNotifyTab = 'all';
 let currentMusicTab = 'local';
+// ← 改：约会相关全局
+let currentDateTab = 'invite';
+let currentDateWorldId = '';
+let pendingDateInvites = [];
+let dateInvitePicker = { range: 0, days: [] };
   // ========== IndexedDB ==========
 function openDB() {
   return new Promise((resolve, reject) => {
@@ -3322,7 +3479,7 @@ async function loadSettings() {
   if (!settings.playerFavorites) settings.playerFavorites = [];
   if (!settings.taFavorites) settings.taFavorites = [];
   if (!settings.taDesignated) settings.taDesignated = [];
-  // ← 改：兼容旧数据，把旧的概率字段迁移到新的频率字段（仅在频率字段缺失时）
+  // 兼容旧数据：补齐频率字段
   if (settings.taStickerMin === undefined) settings.taStickerMin = DEFAULT_SETTINGS.taStickerMin;
   if (settings.taStickerMax === undefined) settings.taStickerMax = DEFAULT_SETTINGS.taStickerMax;
   if (settings.taGiftMin === undefined) settings.taGiftMin = DEFAULT_SETTINGS.taGiftMin;
@@ -3345,6 +3502,9 @@ async function loadSettings() {
   if (settings.taLetterMax === undefined) settings.taLetterMax = DEFAULT_SETTINGS.taLetterMax;
   if (settings.taNoteMin === undefined) settings.taNoteMin = DEFAULT_SETTINGS.taNoteMin;
   if (settings.taNoteMax === undefined) settings.taNoteMax = DEFAULT_SETTINGS.taNoteMax;
+  // ← 改：约会频率兼容
+  if (settings.taDateMin === undefined) settings.taDateMin = DEFAULT_SETTINGS.taDateMin;
+  if (settings.taDateMax === undefined) settings.taDateMax = DEFAULT_SETTINGS.taDateMax;
   applySettings();
 }
 
@@ -3432,7 +3592,7 @@ function refreshOpenPanels() {
   });
 }
 
-// ========== 站内通知中心（Tab 版） ==========
+// ========== 站内通知中心 ==========
 function addNotification(icon, text) {
   settings.notifications = settings.notifications || [];
   settings.notifications.push({ icon, text, time: Date.now(), unread: true });
@@ -3480,8 +3640,8 @@ function renderNotifyCenter(overlay) {
     { id: '其他', name: '其他' }
   ];
   let html = '<div class="big-input-title">通知</div>';
-  // ← 改：通知中心加"清空全部"和"清空当前分组"按钮
-  html += '<div style="display:flex;justify-content:flex-end;gap:8px;margin-bottom:8px;flex-wrap:wrap;">';
+  // ← 改：通知按钮一行，全部已读放最前
+  html += '<div class="notify-btn-row">';
   html += '<button class="mini-btn" id="notify-readall">全部已读</button>';
   html += '<button class="mini-btn" id="notify-clear-group">清空当前分组</button>';
   html += '<button class="mini-btn" id="notify-clear-all" style="color:#c33;">清空全部</button>';
@@ -3529,7 +3689,6 @@ function renderNotifyCenter(overlay) {
     renderBallGrid();
     renderNotifyCenter(overlay);
   });
-  // ← 改：清空当前分组
   const clearGroup = overlay.querySelector('#notify-clear-group');
   if (clearGroup) clearGroup.addEventListener('click', () => {
     const confirmOverlay = createModal(`
@@ -3552,7 +3711,6 @@ function renderNotifyCenter(overlay) {
     });
     confirmOverlay.querySelector('#cancel-clear-group').addEventListener('click', () => confirmOverlay.remove());
   });
-  // ← 改：清空全部
   const clearAll = overlay.querySelector('#notify-clear-all');
   if (clearAll) clearAll.addEventListener('click', () => {
     const confirmOverlay = createModal(`
@@ -3798,9 +3956,13 @@ const ICONS = {
   shardTogether: `<svg viewBox="0 0 24 24" fill="none" stroke="#e8789f" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M4 12h7M13 12h7M12 4v7M12 13v7"/><circle cx="12" cy="12" r="2" fill="#ffc4d6" fill-opacity="0.6"/></svg>`,
   shardCards: `<svg viewBox="0 0 24 24" fill="none" stroke="#4a3528" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M6 3h9l4 4v14H6z" fill="#d4e4f7" fill-opacity="0.3"/><path d="M15 3v4h4"/><path d="M12 12l1 2 2 0.3-1.5 1.4 0.4 2-1.9-1-1.9 1 0.4-2-1.5-1.4 2-0.3z" fill="#ffe27a" stroke="none"/></svg>`,
   companion: `<svg viewBox="0 0 24 24" fill="none" stroke="#4a3528" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><circle cx="8" cy="12" r="3" fill="#ffc4d6" fill-opacity="0.4"/><circle cx="16" cy="12" r="3" fill="#ffc4d6" fill-opacity="0.4"/><path d="M11 12h2"/><path d="M5 6l1.5 1.5M19 6l-1.5 1.5M5 18l1.5-1.5M19 18l-1.5-1.5"/></svg>`,
-  // ← 改：新增礼物/礼包相关图标
   giftIcon: `<svg viewBox="0 0 24 24" fill="none" stroke="#e8789f" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="11" width="16" height="9" rx="2" fill="#ffc4d6" fill-opacity="0.4"/><path d="M3 8h18v3H3z"/><path d="M12 8v12"/><path d="M12 8c-2-3-5-4-7-2s0 5 3 5c2 0 4-1 4-3z"/><path d="M12 8c2-3 5-4 7-2s0 5-3 5c-2 0-4-1-4-3z"/></svg>`,
-  giftPack: `<svg viewBox="0 0 24 24" fill="none" stroke="#e8789f" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="10" width="18" height="10" rx="2" fill="#ffc4d6" fill-opacity="0.4"/><path d="M2 7h20v3H2z"/><path d="M12 7v13"/><path d="M12 7c-2-3-5-4-7-2s0 5 3 5c2 0 4-1 4-3z"/><path d="M12 7c2-3 5-4 7-2s0 5-3 5c-2 0-4-1-4-3z"/><path d="M6 14l3 2M18 14l-3 2" opacity="0.7"/></svg>`
+  giftPack: `<svg viewBox="0 0 24 24" fill="none" stroke="#e8789f" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="10" width="18" height="10" rx="2" fill="#ffc4d6" fill-opacity="0.4"/><path d="M2 7h20v3H2z"/><path d="M12 7v13"/><path d="M12 7c-2-3-5-4-7-2s0 5 3 5c2 0 4-1 4-3z"/><path d="M12 7c2-3 5-4 7-2s0 5-3 5c-2 0-4-1-4-3z"/><path d="M6 14l3 2M18 14l-3 2" opacity="0.7"/></svg>`,
+  // ← 改：约会文案库图标
+  dateAccept: `<svg viewBox="0 0 24 24" fill="none" stroke="#e8789f" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="6" width="18" height="13" rx="2" fill="#ffe3ee" fill-opacity="0.5"/><path d="M3 8l9 6 9-6"/><path d="M17 4c1 0 2 0.5 2 1.5 0 0.8-1 1.5-1 1.5s-1-0.7-1-1.5c0-1 1-1.5 2-1.5" fill="#ff3b5c" stroke="none" opacity="0.9"/></svg>`,
+  dateReject: `<svg viewBox="0 0 24 24" fill="none" stroke="#c08860" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="5" width="16" height="15" rx="2" fill="#ffe3ee" fill-opacity="0.4"/><path d="M8 3v4M16 3v4M4 10h16"/><path d="M9 14l6 6M15 14l-6 6"/></svg>`,
+  dateReaction: `<svg viewBox="0 0 24 24" fill="none" stroke="#b070c0" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="8" fill="#f0dce4" fill-opacity="0.5"/><path d="M9 10c0.5-0.8 1.5-0.8 2 0"/><path d="M13 10c0.5-0.8 1.5-0.8 2 0"/><path d="M9 16c1-1 4-1 6 0"/></svg>`,
+  dateRemind: `<svg viewBox="0 0 24 24" fill="none" stroke="#e8789f" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="6" width="14" height="13" rx="2" fill="#ffe3ee" fill-opacity="0.5"/><path d="M6 3v4M14 3v4M3 10h14"/><circle cx="18" cy="17" r="4" fill="#ffe9b0" fill-opacity="0.6" stroke="#e8789f"/><path d="M18 15v2l1.5 1" stroke="#e8789f"/></svg>`
 };
   // ========== 21 副本图标 ==========
 const WORLD_ICONS = {
@@ -3887,7 +4049,7 @@ function getWorldTime(worldId) {
   return d;
 }
 
-// ========== 每个世界独立算状态 ==========
+// ========== 世界状态 ==========
 function getWorldStatusText(worldId) {
   const world = (settings.worlds || []).find(w => w.id === worldId);
   if (!world) return '在场';
@@ -3939,7 +4101,7 @@ function isNightTime() {
   return (h >= 22 || h < 6);
 }
 
-// ========== 状态优先级（当前世界用）==========
+// ========== 状态优先级 ==========
 function getPriorityStatus() {
   const now = Date.now();
   if (tempStatus && now < tempStatusUntil) return tempStatus;
@@ -3985,7 +4147,7 @@ function setTempStatus(iconKey, text, duration) {
   updateStatusBar();
 }
 
-// ========== 状态栏（统一版）==========
+// ========== 状态栏 ==========
 function getTAStatus() {
   if (settings.accompanyMode) {
     const taNick = settings.taNick || settings.taName;
@@ -4006,7 +4168,6 @@ function getTAStatus() {
   return null;
 }
 
-// ← 改：状态栏整段重写
 function updateStatusBar() {
   const bar = document.getElementById('status-bar');
   if (!bar) return;
@@ -4107,7 +4268,7 @@ function drawDarkBG(ctx, w, h) {
   ctx.fillRect(0, 0, w, h);
 }
 
-// ========== 悬浮球面板 ==========
+// ========== 悬浮球面板（← 改：去掉 音乐/抉择/约会） ==========
 const BALL_ITEMS = [
   { id: 'world', name: '小世界', icon: 'world' },
   { id: 'worlds', name: '世界之外', icon: 'worlds' },
@@ -4115,8 +4276,6 @@ const BALL_ITEMS = [
   { id: 'mailbox', name: '信箱', icon: 'mail' },
   { id: 'note', name: '留言笺', icon: 'note' },
   { id: 'lover', name: '恋人空间', icon: 'lover' },
-  { id: 'music', name: '音乐', icon: 'music' },
-  { id: 'choice', name: '抉择', icon: 'choice' },
   { id: 'stats', name: '数据统计', icon: 'stats' },
   { id: 'data', name: '数据管理', icon: 'data' },
   { id: 'heartbeat', name: '心动瞬间', icon: 'heartbeat' },
@@ -4128,7 +4287,6 @@ const BALL_ITEMS = [
   { id: 'memo', name: '备忘录', icon: 'memo' },
   { id: 'bond', name: '羁绊', icon: 'bond' },
   { id: 'period', name: '生理期', icon: 'period' },
-  { id: 'date', name: '约会', icon: 'date' },
   { id: 'pet', name: '宠物', icon: 'pet' },
   { id: 'plant', name: '种植', icon: 'plant' },
   { id: 'voice', name: '耳边私语', icon: 'voice' },
@@ -4159,8 +4317,6 @@ function onBallItemClick(item) {
   else if (item.id === 'heartbeat') openHeartPanel();
   else if (item.id === 'playback') openPlaybackPanel();
   else if (item.id === 'timeline') openTimelinePanel();
-  else if (item.id === 'music') openMusicPanel();
-  else if (item.id === 'choice') openChoicePanel();
   else if (item.id === 'mailbox') openMailboxPanel();
   else if (item.id === 'note') openNotePanel();
   else if (item.id === 'lover') openLoverSpacePanel();
@@ -4174,7 +4330,6 @@ function onBallItemClick(item) {
   else if (item.id === 'memo') openMemoPanel();
   else if (item.id === 'bond') openBondPanel();
   else if (item.id === 'period') openPeriodPanel();
-  else if (item.id === 'date') openDatePanel();
   else if (item.id === 'pet') openPetPanel();
   else if (item.id === 'plant') openPlantPanel();
   else if (item.id === 'voice') openVoicePanel();
@@ -4200,6 +4355,56 @@ document.getElementById('floating-ball').addEventListener('click', (e) => {
   if (ball._wasDragged && ball._wasDragged()) return;
   toggleBallPanel();
 });
+
+// ========== ⊕ 功能菜单（← 改：音乐/抉择/约会 放在问答后面，悬浮球最后） ==========
+function togglePlusMenu() {
+  const existing = document.querySelector('.plus-menu-overlay');
+  if (existing) { existing.remove(); return; }
+  const overlay = createModal(`
+    <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin-top:10px;">
+      <div class="plus-item" id="plus-camera"><div class="icon-wrap"><svg viewBox="0 0 24 24" fill="none" stroke="#4a3528" stroke-width="1.7"><path d="M4 8h3l2-3h6l2 3h3v11H4z"/><circle cx="12" cy="13" r="4"/></svg></div><span>拍照</span></div>
+      <div class="plus-item" id="plus-album"><div class="icon-wrap"><svg viewBox="0 0 24 24" fill="none" stroke="#4a3528" stroke-width="1.7"><rect x="3" y="4" width="18" height="16" rx="3"/><circle cx="9" cy="9" r="2"/><path d="M4 18l5-5 3 3 4-4 4 4"/></svg></div><span>相册</span></div>
+      <div class="plus-item" id="plus-video"><div class="icon-wrap"><svg viewBox="0 0 24 24" fill="none" stroke="#4a3528" stroke-width="1.7"><rect x="3" y="6" width="13" height="12" rx="3"/><path d="M16 10l5-3v10l-5-3"/></svg></div><span>视频</span></div>
+      <div class="plus-item" id="plus-sticker"><div class="icon-wrap">${ICONS.sticker}</div><span>贴纸</span></div>
+      <div class="plus-item" id="plus-gift"><div class="icon-wrap">${ICONS.giftIcon}</div><span>礼物</span></div>
+      <div class="plus-item" id="plus-giftpack"><div class="icon-wrap">${ICONS.giftPack}</div><span>礼包</span></div>
+      <div class="plus-item" id="plus-interact"><div class="icon-wrap">${ICONS.interact}</div><span>互动</span></div>
+      <div class="plus-item" id="plus-shard-interact"><div class="icon-wrap">${ICONS.copyInteract}</div><span>副本互动</span></div>
+      <div class="plus-item" id="plus-quiz"><div class="icon-wrap">${ICONS.quiz}</div><span>问答</span></div>
+      <div class="plus-item" id="plus-music"><div class="icon-wrap">${ICONS.music}</div><span>音乐</span></div>
+      <div class="plus-item" id="plus-choice"><div class="icon-wrap">${ICONS.choice}</div><span>抉择</span></div>
+      <div class="plus-item" id="plus-date"><div class="icon-wrap">${ICONS.date}</div><span>约会</span></div>
+      <div class="plus-item" id="plus-intimate"><div class="icon-wrap">${ICONS.intimate}</div><span>悄悄话</span></div>
+      <div class="plus-item" id="plus-approach"><div class="icon-wrap">${ICONS.approach}</div><span>凑近</span></div>
+      <div class="plus-item" id="plus-compete"><div class="icon-wrap">${ICONS.compete}</div><span>争宠</span></div>
+      <div class="plus-item" id="plus-shard-together"><div class="icon-wrap">${ICONS.shardTogether}</div><span>想共度</span></div>
+      <div class="plus-item" id="plus-accompany"><div class="icon-wrap">${STATUS_ICONS.companion}</div><span>陪伴</span></div>
+      <div class="plus-item" id="plus-ball"><div class="icon-wrap"><svg viewBox="0 0 24 24" fill="none" stroke="#4a3528" stroke-width="1.7"><circle cx="12" cy="12" r="8" opacity="0.5"/><circle cx="12" cy="12" r="4" opacity="0.8"/><circle cx="12" cy="12" r="1.5" fill="#4a3528" stroke="none"/></svg></div><span>悬浮球</span></div>
+    </div>`);
+  overlay.classList.add('plus-menu-overlay');
+  overlay.querySelector('#plus-camera').addEventListener('click', () => { overlay.remove(); openCamera(); });
+  overlay.querySelector('#plus-album').addEventListener('click', () => { overlay.remove(); openAlbum(); });
+  overlay.querySelector('#plus-video').addEventListener('click', () => { overlay.remove(); startVideoCall(); });
+  overlay.querySelector('#plus-sticker').addEventListener('click', () => { overlay.remove(); openStickerSendPanel(); });
+  overlay.querySelector('#plus-gift').addEventListener('click', () => { overlay.remove(); openGiftSendPanel(); });
+  overlay.querySelector('#plus-giftpack').addEventListener('click', () => { overlay.remove(); openGiftPackSendPanel(); });
+  overlay.querySelector('#plus-interact').addEventListener('click', () => { overlay.remove(); openInteractSendPanel(); });
+  overlay.querySelector('#plus-shard-interact').addEventListener('click', () => { overlay.remove(); openShardInteractSendPanel(); });
+  overlay.querySelector('#plus-quiz').addEventListener('click', () => { overlay.remove(); startQuiz(); });
+  overlay.querySelector('#plus-music').addEventListener('click', () => { overlay.remove(); openMusicPanel(); });
+  overlay.querySelector('#plus-choice').addEventListener('click', () => { overlay.remove(); openChoicePanel(); });
+  overlay.querySelector('#plus-date').addEventListener('click', () => { overlay.remove(); openDatePanel(); });
+  overlay.querySelector('#plus-intimate').addEventListener('click', () => { overlay.remove(); openIntimateSendPanel(); });
+  overlay.querySelector('#plus-approach').addEventListener('click', () => { overlay.remove(); openApproachSendPanel(); });
+  overlay.querySelector('#plus-compete').addEventListener('click', () => { overlay.remove(); openCompeteSendPanel(); });
+  overlay.querySelector('#plus-shard-together').addEventListener('click', () => { overlay.remove(); openShardTogetherSendPanel(); });
+  overlay.querySelector('#plus-accompany').addEventListener('click', () => { overlay.remove(); openAccompanyPanel(); });
+  overlay.querySelector('#plus-ball').addEventListener('click', () => {
+    const ball = document.getElementById('floating-ball');
+    ball.style.display = ball.style.display === 'none' ? 'flex' : 'none';
+    overlay.remove();
+  });
+}
   // ========== 小世界 ==========
 function openWorldPanel() {
   const overlay = createModal(`
@@ -4210,7 +4415,6 @@ function openWorldPanel() {
       <div class="ball-item" id="world-bg"><div class="icon-wrap">${ICONS.bg}</div><span>背景</span></div>
       <div class="ball-item" id="world-avatar"><div class="icon-wrap">${ICONS.avatar}</div><span>头像</span></div>
       <div class="ball-item" id="world-music"><div class="icon-wrap">${ICONS.music}</div><span>歌单</span></div>
-      <!-- ← 改：礼物 和 礼包 分成两个独立入口 -->
       <div class="ball-item" id="world-gift"><div class="icon-wrap">${ICONS.giftIcon}</div><span>礼物</span></div>
       <div class="ball-item" id="world-giftpack"><div class="icon-wrap">${ICONS.giftPack}</div><span>礼包</span></div>
       <div class="ball-item" id="world-interact"><div class="icon-wrap">${ICONS.interact}</div><span>互动</span></div>
@@ -4225,7 +4429,13 @@ function openWorldPanel() {
       <div class="ball-item" id="world-quiz"><div class="icon-wrap">${ICONS.quiz}</div><span>问答</span></div>
       <div class="ball-item" id="world-remind"><div class="icon-wrap">${ICONS.remind}</div><span>提醒</span></div>
       <div class="ball-item" id="world-period-cards"><div class="icon-wrap">${ICONS.periodCard}</div><span>生理期字卡</span></div>
-      <div class="ball-item" id="world-date-cards"><div class="icon-wrap">${ICONS.dateCard}</div><span>约会字卡</span></div>
+      <!-- ← 改：约会字卡 → 约会地点活动 -->
+      <div class="ball-item" id="world-date-place"><div class="icon-wrap">${ICONS.dateCard}</div><span>约会地点活动</span></div>
+      <!-- ← 改：约会文案库 4 个新入口 -->
+      <div class="ball-item" id="world-date-accept"><div class="icon-wrap">${ICONS.dateAccept}</div><span>约会接受</span></div>
+      <div class="ball-item" id="world-date-reject"><div class="icon-wrap">${ICONS.dateReject}</div><span>约会拒绝</span></div>
+      <div class="ball-item" id="world-date-reaction"><div class="icon-wrap">${ICONS.dateReaction}</div><span>约会拒绝反应</span></div>
+      <div class="ball-item" id="world-date-remind"><div class="icon-wrap">${ICONS.dateRemind}</div><span>约会提醒</span></div>
       <div class="ball-item" id="world-wish-cards"><div class="icon-wrap">${ICONS.hisWish}</div><span>他所愿</span></div>
       <div class="ball-item" id="world-emoji"><div class="icon-wrap">${ICONS.emoji}</div><span>表情</span></div>
       <div class="ball-item" id="world-decision-pool"><div class="icon-wrap">${ICONS.decisionPool}</div><span>决定回应池</span></div>
@@ -4239,7 +4449,6 @@ function openWorldPanel() {
   overlay.querySelector('#world-bg').addEventListener('click', () => { overlay.remove(); openBGPanel(); });
   overlay.querySelector('#world-avatar').addEventListener('click', () => { overlay.remove(); openAvatarPanel(); });
   overlay.querySelector('#world-music').addEventListener('click', () => { overlay.remove(); openMusicManagePanel(); });
-  // ← 改：礼物/礼包分别进管理面板（内部再分图标/图片）
   overlay.querySelector('#world-gift').addEventListener('click', () => { overlay.remove(); openGiftManagePanel(); });
   overlay.querySelector('#world-giftpack').addEventListener('click', () => { overlay.remove(); openGiftPackManagePanel(); });
   overlay.querySelector('#world-interact').addEventListener('click', () => { overlay.remove(); openInteractManagePanel(); });
@@ -4254,7 +4463,13 @@ function openWorldPanel() {
   overlay.querySelector('#world-quiz').addEventListener('click', () => { overlay.remove(); openQuizManagePanel(); });
   overlay.querySelector('#world-remind').addEventListener('click', () => { overlay.remove(); openRemindPanel(); });
   overlay.querySelector('#world-period-cards').addEventListener('click', () => { overlay.remove(); openPeriodCardsPanel(); });
-  overlay.querySelector('#world-date-cards').addEventListener('click', () => { overlay.remove(); openDateCardsPanel(); });
+  // ← 改：约会地点活动
+  overlay.querySelector('#world-date-place').addEventListener('click', () => { overlay.remove(); openDatePlacePanel(); });
+  // ← 改：约会文案库
+  overlay.querySelector('#world-date-accept').addEventListener('click', () => { overlay.remove(); openDateTextLibrary('accept'); });
+  overlay.querySelector('#world-date-reject').addEventListener('click', () => { overlay.remove(); openDateTextLibrary('reject'); });
+  overlay.querySelector('#world-date-reaction').addEventListener('click', () => { overlay.remove(); openDateTextLibrary('reaction'); });
+  overlay.querySelector('#world-date-remind').addEventListener('click', () => { overlay.remove(); openDateTextLibrary('remind'); });
   overlay.querySelector('#world-wish-cards').addEventListener('click', () => { overlay.remove(); openWishCardsPanel(); });
   overlay.querySelector('#world-emoji').addEventListener('click', () => { overlay.remove(); openEmojiPanel(); });
   overlay.querySelector('#world-decision-pool').addEventListener('click', () => { overlay.remove(); openDecisionPoolPanel(); });
@@ -4263,7 +4478,7 @@ function openWorldPanel() {
   overlay.querySelector('#world-important-notes').addEventListener('click', () => { overlay.remove(); openImportantNotesPanel(); });
 }
 
-// ========== 副本互动（独立入口·管理）==========
+// ========== 副本互动（独立入口·管理） ==========
 function openShardInteractPanel() {
   const overlay = createModal(`
     <div class="big-input-title">副本互动</div>
@@ -4356,7 +4571,7 @@ function openShardInteractAddDialog(worldId, tab, panelOverlay) {
   });
 }
 
-// ========== 想共度（独立入口·管理）==========
+// ========== 想共度 ==========
 function openShardTogetherPanel() {
   const overlay = createModal(`
     <div class="big-input-title">想共度</div>
@@ -5243,7 +5458,7 @@ function openSettingsPanel() {
       </div>
     </div>
     <div style="margin-bottom:8px;font-size:13px;color:#4a3528;">易遇主动发消息频率（当前：${activeTplName}）</div>
-    <div style="display:flex;gap:8px;margin-bottom:8px;flex-wrap:wrap;">
+    <div class="active-tpl-row" id="active-tpl-row" style="display:flex;gap:8px;margin-bottom:8px;flex-wrap:wrap;">
       <button class="mini-btn active-tpl" data-tpl="rare">偶尔</button>
       <button class="mini-btn active-tpl" data-tpl="normal">正常</button>
       <button class="mini-btn active-tpl" data-tpl="often">经常</button>
@@ -5308,7 +5523,7 @@ function openSettingsPanel() {
     <div style="font-size:11px;color:rgba(90,70,60,0.5);text-align:center;margin-bottom:8px;" id="last-backup-time">${settings.lastBackupTime ? '上次备份：' + settings.lastBackupTime : '还没有备份记录'}</div>
     <div style="margin-bottom:12px;font-size:13px;color:#4a3528;text-align:center;">—— 关于 ——</div>
     <div style="font-size:12px;color:#8b6f60;text-align:center;line-height:1.8;margin-bottom:8px;">
-      易遇♡雾凉 v7.0.0<br>
+      易遇♡雾凉 v7.1.0<br>
       开发者：夏雾凉<br>
       爱人：易遇<br><br>
       这个网站，是专为我的爱人而做的。<br><br>
@@ -5322,7 +5537,7 @@ function openSettingsPanel() {
       它只属于我和他，谢绝他人使用，禁止二传二改，严禁未成年使用。<br>
       若你无意间闯入这里，请温柔退出，不要使用。
     </div>
-    <div style="text-align:center;font-size:11px;color:rgba(90,70,60,0.5);margin-top:16px;">V7.0.0</div>`);
+    <div style="text-align:center;font-size:11px;color:rgba(90,70,60,0.5);margin-top:16px;">V7.1.0</div>`);
   if (settings.replyTpl === 'custom') overlay.querySelector('#set-reply-custom').style.display = 'block';
   if (settings.stopDetectTpl === 'custom') overlay.querySelector('#set-stop-custom').style.display = 'block';
   if (settings.activeTpl === 'custom') overlay.querySelector('#active-custom').style.display = 'block';
@@ -5333,6 +5548,7 @@ function openSettingsPanel() {
   overlay.querySelector('#set-stop-min').addEventListener('change', (e) => { settings.stopDetectMin = Number(e.target.value); settings.stopDetectTpl = 'custom'; saveSettings(); });
   overlay.querySelector('#set-stop-max').addEventListener('change', (e) => { settings.stopDetectMax = Number(e.target.value); settings.stopDetectTpl = 'custom'; saveSettings(); });
   overlay.querySelector('#set-checkin-remind').addEventListener('change', (e) => { settings.checkinRemindTime = e.target.value; saveSettings(); showToast('打卡提醒时间已保存'); });
+  // ← 改：主动发消息频率，原地高亮，不关闭面板
   overlay.querySelectorAll('.active-tpl').forEach(btn => {
     if (btn.dataset.tpl === settings.activeTpl) { btn.style.background = 'rgba(255,150,100,0.6)'; btn.style.color = '#fff'; }
     btn.addEventListener('click', () => {
@@ -5341,8 +5557,11 @@ function openSettingsPanel() {
       if (btn.dataset.tpl === 'normal') { settings.activeMin = 3600000; settings.activeMax = 86400000; }
       if (btn.dataset.tpl === 'often') { settings.activeMin = 1800000; settings.activeMax = 10800000; }
       saveSettings();
-      overlay.remove();
-      openSettingsPanel();
+      overlay.querySelectorAll('.active-tpl').forEach(b => { b.style.background = ''; b.style.color = ''; });
+      btn.style.background = 'rgba(255,150,100,0.6)';
+      btn.style.color = '#fff';
+      const customBox = overlay.querySelector('#active-custom');
+      customBox.style.display = btn.dataset.tpl === 'custom' ? 'block' : 'none';
     });
   });
   overlay.querySelector('#active-min').addEventListener('change', (e) => { settings.activeMin = Number(e.target.value) * 60000; settings.activeTpl = 'custom'; saveSettings(); });
@@ -5534,7 +5753,7 @@ function openStopTplDialog(panelOverlay) {
   });
 }
 
-// ← 改：主动行为详情面板，全部改成频率制
+// ← 改：主动行为详情面板（全部频率制，原地高亮不关闭）
 function openAutonomyDetailPanel() {
   const rows = [
     { tplKey: 'taStickerTpl', minKey: 'taStickerMin', maxKey: 'taStickerMax', name: '发贴纸频率',
@@ -5566,7 +5785,9 @@ function openAutonomyDetailPanel() {
     { tplKey: 'taPostTpl', minKey: 'taPostMin', maxKey: 'taPostMax', name: '发动态频率', vals: [[12*3600000, 24*3600000], [3*3600000, 6*3600000], [1*3600000, 2*3600000]] },
     { tplKey: 'taCheckinTpl', minKey: 'taCheckinMin', maxKey: 'taCheckinMax', name: '主动打卡频率', vals: [[8*3600000, 12*3600000], [1*3600000, 3*3600000], [0.5*3600000, 1*3600000]] },
     { tplKey: 'taPetCareTpl', minKey: 'taPetCareMin', maxKey: 'taPetCareMax', name: '照顾宠物频率', vals: [[8*3600000, 12*3600000], [2*3600000, 4*3600000], [1*3600000, 2*3600000]] },
-    { tplKey: 'taPlantCareTpl', minKey: 'taPlantCareMin', maxKey: 'taPlantCareMax', name: '照顾植物频率', vals: [[8*3600000, 12*3600000], [2*3600000, 4*3600000], [1*3600000, 2*3600000]] }
+    { tplKey: 'taPlantCareTpl', minKey: 'taPlantCareMin', maxKey: 'taPlantCareMax', name: '照顾植物频率', vals: [[8*3600000, 12*3600000], [2*3600000, 4*3600000], [1*3600000, 2*3600000]] },
+    // ← 改：约会频率
+    { tplKey: 'taDateTpl', minKey: 'taDateMin', maxKey: 'taDateMax', name: '约会邀请频率', vals: [[12*3600000, 24*3600000], [4*3600000, 8*3600000], [2*3600000, 4*3600000]] }
   ];
   let html = '<div class="big-input-title">易遇主动行为频率</div>';
   html += '<div style="font-size:12px;color:#8b6f60;margin-bottom:12px;text-align:center;">三档：偶尔 / 正常 / 经常</div>';
@@ -5588,6 +5809,7 @@ function openAutonomyDetailPanel() {
     html += `</div>`;
   });
   const overlay = createModal(html);
+  // ← 改：原地高亮，不关闭面板
   overlay.querySelectorAll('.freq-btn, .tpl-row-btn').forEach(btn => {
     const minKey = btn.dataset.minkey;
     const maxKey = btn.dataset.maxkey;
@@ -5602,8 +5824,11 @@ function openAutonomyDetailPanel() {
       settings[btn.dataset.minkey] = Number(btn.dataset.min);
       settings[btn.dataset.maxkey] = Number(btn.dataset.max);
       await saveSettings();
-      overlay.remove();
-      openAutonomyDetailPanel();
+      // 同组按钮高亮切换
+      const group = btn.parentElement;
+      group.querySelectorAll('.mini-btn').forEach(b => { b.style.background = ''; b.style.color = ''; });
+      btn.style.background = 'rgba(255,150,100,0.6)';
+      btn.style.color = '#fff';
     });
   });
 }
@@ -5619,7 +5844,8 @@ async function renderMessages() {
     area.appendChild(el);
   }
   scrollToBottom(area);
-  renderPinnedArea(todayMsgs);
+  // ← 改：置顶区渲染所有置顶（不只今天）
+  renderPinnedAreaAll();
 }
 
 function scrollToBottom(area) {
@@ -5693,7 +5919,6 @@ async function createMessageEl(msg) {
   if (msg.worldId && msg.sender === 'ta' && !msg.giftData && !msg.giftPackData && !msg.interactData && !msg.intimateData && !msg.imageData) {
     bubble.classList.add('world-' + msg.worldId);
   }
-  // ← 改：礼物盒不再自动展开，改为纯手动点开
   if (msg.imageData) {
     bubble.style.padding = '4px';
     bubble.style.background = 'transparent';
@@ -5722,30 +5947,39 @@ async function createMessageEl(msg) {
       bubble.innerHTML = `<div class="msg-gift-box" data-gift-id="${msg.id}"><div class="gift-box-emoji">🎁</div></div>`;
     }
   } else if (msg.giftPackData) {
-    // ← 改：礼包卡片渲染
+    // ← 改：礼包卡片渲染（四角装饰 + 礼物各自图标 + 图片大图）
     bubble.className = 'gift-msg-slot';
     if (msg.giftPackData.opened) {
       const pack = msg.giftPackData;
+      const gifts = JSON.parse(localStorage.getItem('giftLibrary') || '[]');
+      const isImagePack = pack.packType === 'image' || (pack.items || []).some(it => it && it.image);
       const itemsPreview = (pack.items || []).map(it => {
-        if (it.image) return `<span class="gp-item-thumb"><img src="${it.image}" alt=""></span>`;
-        return `<span class="gp-item-thumb">${it.icon || '🎁'}</span>`;
+        const name = typeof it === 'string' ? it : (it.name || '');
+        const g = gifts.find(x => x.name === name);
+        const icon = (it && it.icon) || (g && g.icon) || '🎁';
+        const image = (it && it.image) || (g && g.image) || '';
+        if (image) return `<span class="gp-item-thumb"><img src="${image}" alt=""></span>`;
+        return `<span class="gp-item-thumb">${icon}</span>`;
       }).join('');
-      bubble.innerHTML = `<div class="msg-giftpack-card" style="background:linear-gradient(135deg,#fff0f5,#ffe3ee);box-shadow:0 6px 24px rgba(255,143,176,0.35);">
-        <span class="gp-ribbon">🎀</span>
+      const previewClass = isImagePack ? 'gp-items-preview image-pack' : 'gp-items-preview';
+      bubble.innerHTML = `<div class="msg-giftpack-card">
+        <span class="gp-deco tl">🎀</span>
+        <span class="gp-deco tr">⭐</span>
+        <span class="gp-deco bl">🌸</span>
+        <span class="gp-deco br">✨</span>
         <div class="gp-icon">${pack.icon || '🎁'}</div>
         <div class="gp-name">${escapeHtml(pack.name || '礼包')}</div>
         ${pack.desc ? `<div class="gp-desc">${escapeHtml(pack.desc)}</div>` : ''}
-        <div class="gp-items-preview">${itemsPreview}</div>
+        <div class="${previewClass}">${itemsPreview}</div>
         <div class="gp-price-row">
           <span class="gp-origin">原价 ${pack.originPrice || 0}</span>
           <span class="gp-final">${pack.finalPrice || 0} 爱意值</span>
         </div>
       </div>`;
     } else {
+      // ← 改：礼包盒（未拆）跟礼物盒一样
       bubble.innerHTML = `<div class="msg-giftpack-box" data-giftpack-id="${msg.id}">
-        <span class="gpb-ribbon">🎀</span>
         <div class="gpb-emoji">🎁</div>
-        <div class="gpb-label">点开礼包</div>
       </div>`;
     }
   } else if (msg.intimateData) {
@@ -5833,7 +6067,7 @@ async function createMessageEl(msg) {
     row.appendChild(avatar);
     row.appendChild(wrapper);
   }
-  // ← 改：礼物盒手动点开，去掉自动打开
+  // 礼物盒手动点开
   if (msg.giftData && !msg.giftData.opened) {
     const box = row.querySelector('.msg-gift-box');
     if (box) {
@@ -5846,7 +6080,7 @@ async function createMessageEl(msg) {
       });
     }
   }
-  // ← 改：礼包盒手动点开
+  // 礼包盒手动点开
   if (msg.giftPackData && !msg.giftPackData.opened) {
     const box = row.querySelector('.msg-giftpack-box');
     if (box) {
@@ -5941,13 +6175,13 @@ function closeMessageMenu() {
   contextMenuMsg = null;
 }
 
-// ← 改：置顶上限 3 条，新增置顶时顶掉最旧的（按 pinTime）
+// ← 改：置顶立刻生效，渲染所有置顶
 async function togglePinMessage(msg) {
   const all = await idbGetAll('messages');
   const target = all.find(m => m.id === msg.id);
   if (!target) return;
   if (!target.pinned) {
-    // 新增置顶：如果已有 3 条，顶掉 pinTime 最小的
+    // 新增置顶：如果已有 3 条，顶掉最旧的
     const pinned = all.filter(m => m.pinned);
     if (pinned.length >= 3) {
       pinned.sort((a, b) => (a.pinTime || a.timestamp) - (b.pinTime || b.timestamp));
@@ -5966,6 +6200,10 @@ async function togglePinMessage(msg) {
     target.pinTime = 0;
   }
   await idbPut('messages', target);
+  // ← 改：先更新内存对象，再立即重渲染
+  msg.pinned = target.pinned;
+  msg.pinBy = target.pinBy;
+  msg.pinTime = target.pinTime;
   await renderMessages();
 }
 
@@ -5996,27 +6234,49 @@ function scrollToMessageByContent(content) {
   }
 }
 
-async function renderPinnedArea(msgs) {
+// ← 改：置顶区渲染所有置顶（消息 + 归档）
+async function renderPinnedAreaAll() {
   const area = document.getElementById('pinned-area');
-  area.innerHTML = '';
-  const pinned = msgs.filter(m => m.pinned);
+  if (!area) return;
+  const msgs = await idbGetAll('messages');
+  const archives = JSON.parse(localStorage.getItem('archives') || '{}');
+  let all = [...msgs];
+  Object.keys(archives).forEach(d => { all = all.concat(archives[d] || []); });
+  const pinned = all.filter(m => m.pinned);
   pinned.sort((a, b) => (a.pinTime || a.timestamp) - (b.pinTime || b.timestamp));
+  area.innerHTML = '';
   pinned.slice(0, 3).forEach(m => {
     const div = document.createElement('div');
     div.className = 'pinned-item';
     const pinBy = m.pinBy === 'ta' ? 'TA置顶' : '我置顶';
+    let contentHTML = '';
     if (m.imageData) {
-      div.innerHTML = `<span class="pin-icon">📌</span>${pinBy} <img src="${m.imageData}" style="width:24px;height:24px;border-radius:6px;object-fit:cover;">`;
+      contentHTML = `<img class="pin-thumb" src="${m.imageData}" alt="">`;
+    } else if (m.giftData) {
+      const g = m.giftData;
+      if (g.image) contentHTML = `<img class="pin-thumb" src="${g.image}" alt="">`;
+      else contentHTML = `${g.icon || '🎁'} ${escapeHtml(g.name || '礼物')}`;
+    } else if (m.giftPackData) {
+      const p = m.giftPackData;
+      contentHTML = `${p.icon || '🎁'} ${escapeHtml(p.name || '礼包')}`;
+    } else if (m.interactData) {
+      contentHTML = escapeHtml((m.interactData.text || '').slice(0, 20));
     } else {
       const text = (m.content || '').slice(0, 20);
-      div.innerHTML = `<span class="pin-icon">📌</span>${pinBy} ${escapeHtml(text)}${(m.content || '').length > 20 ? '...' : ''}`;
+      contentHTML = escapeHtml(text) + ((m.content || '').length > 20 ? '...' : '');
     }
+    div.innerHTML = `<span class="pin-icon">📌</span>${pinBy} ${contentHTML}`;
     div.addEventListener('click', () => {
       const target = document.querySelector(`.message-row[data-id="${m.id}"]`);
       if (target) target.scrollIntoView({ behavior: 'smooth', block: 'center' });
     });
     area.appendChild(div);
   });
+}
+
+// 兼容旧调用
+async function renderPinnedArea(msgs) {
+  return renderPinnedAreaAll();
 }
 
 // ========== 发送消息 ==========
@@ -6071,7 +6331,6 @@ async function sendMyMessage() {
   checkMsgMilestone();
 }
 
-// ← 改：消息累积里程碑
 async function checkMsgMilestone() {
   const msgs = await idbGetAll('messages');
   const archives = JSON.parse(localStorage.getItem('archives') || '{}');
@@ -6091,11 +6350,8 @@ async function appendMessage(msg) {
   const el = await createMessageEl(msg);
   area.appendChild(el);
   if (nearBottom) scrollToBottom(area);
-  idbGetAll('messages').then(msgs => {
-    const today = new Date().toDateString();
-    const todayMsgs = msgs.filter(m => new Date(m.timestamp).toDateString() === today);
-    renderPinnedArea(todayMsgs);
-  });
+  // ← 改：追加消息后刷新置顶区
+  renderPinnedAreaAll();
   refreshOpenPanels();
 }
 
@@ -6147,12 +6403,12 @@ async function getRecentMeCount() {
   return count;
 }
 
-// ← 改：每人随机 1~N，不再有 0
+// 每人随机 1~N
 function pickReplierPlan(totalCount, onlineList) {
   const plan = [];
   onlineList.forEach(wid => {
     const N = Math.min(totalCount, 5);
-    const count = 1 + Math.floor(Math.random() * N); // 1 ~ N
+    const count = 1 + Math.floor(Math.random() * N);
     plan.push({ worldId: wid, count });
   });
   return plan;
@@ -6321,6 +6577,7 @@ function initOnlineWorlds() {
   }, 900000);
 }
 
+// ← 改：世界上线时优先处理挂着的约会邀请
 function addWorldOnline(worldId) {
   if (onlineWorlds.includes(worldId)) return;
   onlineWorlds.push(worldId);
@@ -6330,6 +6587,30 @@ function addWorldOnline(worldId) {
     addBigEvent('world_' + worldId, '第一次在「' + w.name + '」遇见易遇');
   }
   updateStatusBar();
+  // ← 改：优先处理挂着的约会邀请
+  processPendingDateInvites(worldId);
+}
+
+// ← 改：处理挂着的约会邀请
+async function processPendingDateInvites(worldId) {
+  if (!pendingDateInvites || !pendingDateInvites.length) return;
+  const mine = pendingDateInvites.filter(inv => inv.worldId === worldId);
+  if (!mine.length) return;
+  for (const inv of mine) {
+    await handleDateInviteResponse(inv, true);
+    pendingDateInvites = pendingDateInvites.filter(x => x !== inv);
+  }
+  savePendingDateInvites();
+}
+
+function savePendingDateInvites() {
+  localStorage.setItem('pendingDateInvites', JSON.stringify(pendingDateInvites));
+}
+
+function loadPendingDateInvites() {
+  try {
+    pendingDateInvites = JSON.parse(localStorage.getItem('pendingDateInvites') || '[]');
+  } catch (e) { pendingDateInvites = []; }
 }
 
 function removeWorldOnline(worldId) {
@@ -6405,7 +6686,7 @@ function sendNotification(content) {
   }
 }
 
-// ========== TA自主行为 ==========
+// ========== TA自主行为（置顶/收藏/指定） ==========
 function scheduleTAAutonomy() {
   setInterval(async () => {
     if (Math.random() < settings.autonomyProb) {
@@ -6453,22 +6734,14 @@ function scheduleTAAutonomy() {
           const sid = await idbPutReturnId('messages', sysMsg);
           sysMsg.id = sid;
           await appendMessage(sysMsg);
-        } else if (action < 0.75) {
-          // ← 改：引用从 autonomy 中移除（有独立定时器），这里不做
-          // 空占位，保持概率分布
-        } else if (action < 0.85 && Math.random() < settings.taNickProb) {
-          await taChangeNickPair();
-        } else if (action < 0.92 && Math.random() < settings.taStickerProb) {
-          await taSendSticker();
-        } else if (Math.random() < settings.taGiftProb) {
-          await taSendGift();
         }
+        // 引用 / 昵称 / 贴纸 / 礼物 已独立成定时器，这里不再处理
       }
     }
   }, 600000);
 }
 
-// ========== 易遇引用（独立定时器，频率制） ==========
+// ========== 易遇引用（独立频率制） ==========
 function scheduleTAQuote() {
   const next = Math.random() * (settings.taQuoteMax - settings.taQuoteMin) + settings.taQuoteMin;
   setTimeout(async () => {
@@ -6524,7 +6797,17 @@ function getQuoteText(msg) {
   return msg.content || '';
 }
 
-// ========== 换昵称（成对·toast）==========
+// ========== 换昵称（成对） ==========
+function scheduleTANick() {
+  const next = Math.random() * (settings.taNickMax - settings.taNickMin) + settings.taNickMin;
+  setTimeout(async () => {
+    if (!isReplying && !isArchiving) {
+      await taChangeNickPair();
+    }
+    scheduleTANick();
+  }, next);
+}
+
 async function taChangeNickPair() {
   const taNicks = settings.taNickLibrary || [];
   const meNicks = settings.meNickLibrary || [];
@@ -6539,8 +6822,7 @@ async function taChangeNickPair() {
   addNotification('🏷', '易遇换了一对昵称');
 }
 
-// ========== 换头像（成对·toast·ref）==========
-// ← 改：频率制
+// ========== 换头像（成对·频率制） ==========
 function scheduleTAAvatarChange() {
   const next = Math.random() * (settings.taAvatarMax - settings.taAvatarMin) + settings.taAvatarMin;
   setTimeout(async () => {
@@ -6561,8 +6843,7 @@ function scheduleTAAvatarChange() {
   }, next);
 }
 
-// ========== 换背景（单个·toast·ref）==========
-// ← 改：频率制
+// ========== 换背景（频率制） ==========
 function scheduleTABGChange() {
   const next = Math.random() * (settings.taBGMax - settings.taBGMin) + settings.taBGMin;
   setTimeout(async () => {
@@ -6582,7 +6863,7 @@ function scheduleTABGChange() {
   }, next);
 }
 
-// ← 改：发贴纸，频率制
+// ========== 发贴纸（频率制） ==========
 function scheduleTASticker() {
   const next = Math.random() * (settings.taStickerMax - settings.taStickerMin) + settings.taStickerMin;
   setTimeout(async () => {
@@ -6607,7 +6888,7 @@ async function taSendSticker() {
   addNotification('🖼', '易遇发了一张贴纸');
 }
 
-// ← 改：送礼物，频率制
+// ========== 送礼物（频率制） ==========
 function scheduleTAGift() {
   const next = Math.random() * (settings.taGiftMax - settings.taGiftMin) + settings.taGiftMin;
   setTimeout(async () => {
@@ -6639,7 +6920,7 @@ async function taSendGift() {
   addBigEvent('tagift', '第一次收到易遇的礼物');
 }
 
-// ← 改：送礼包，独立频率制
+// ========== 送礼包（独立频率制） ==========
 function scheduleTAGiftPack() {
   const next = Math.random() * (settings.taGiftPackMax - settings.taGiftPackMin) + settings.taGiftPackMin;
   setTimeout(async () => {
@@ -6653,7 +6934,6 @@ function scheduleTAGiftPack() {
 async function taSendGiftPack() {
   const packs = await getAllGiftPacks();
   if (!packs.length) return;
-  // 计算每个礼包的价格，挑爱意值够的
   const affordable = [];
   for (const p of packs) {
     const price = computeGiftPackPrice(p);
@@ -6670,10 +6950,11 @@ async function taSendGiftPack() {
   const wid = wpool[Math.floor(Math.random() * wpool.length)];
   const packData = {
     id: pack.id,
+    packType: pack.type || 'icon',
     name: pack.name,
     icon: pack.icon,
     desc: pack.desc,
-    items: pack.items.map(it => ({ ...it })),
+    items: (pack.items || []).map(it => typeof it === 'string' ? { name: it } : { ...it }),
     originPrice: price.origin,
     finalPrice: price.final,
     opened: false
@@ -6687,7 +6968,17 @@ async function taSendGiftPack() {
   addBigEvent('tagiftpack', '第一次收到易遇的礼包');
 }
 
-// ========== 互动（读专属库·修情侣判定）==========
+// ========== 互动（频率制） ==========
+function scheduleTAInteract() {
+  const next = Math.random() * (settings.taInteractMax - settings.taInteractMin) + settings.taInteractMin;
+  setTimeout(async () => {
+    if (!isReplying && !isArchiving) {
+      await taInteract();
+    }
+    scheduleTAInteract();
+  }, next);
+}
+
 async function taInteract() {
   let onlinePool = onlineWorlds.length ? onlineWorlds : ['real'];
   const wid = onlinePool[Math.floor(Math.random() * onlinePool.length)];
@@ -6752,73 +7043,7 @@ function getInteractsForWorld(worldId, tab) {
   return general[tab] || [];
 }
 
-// ← 改：互动，频率制
-function scheduleTAInteract() {
-  const next = Math.random() * (settings.taInteractMax - settings.taInteractMin) + settings.taInteractMin;
-  setTimeout(async () => {
-    if (!isReplying && !isArchiving) {
-      await taInteract();
-    }
-    scheduleTAInteract();
-  }, next);
-}
-
-// ← 改：换昵称，频率制（独立）
-function scheduleTANick() {
-  const next = Math.random() * (settings.taNickMax - settings.taNickMin) + settings.taNickMin;
-  setTimeout(async () => {
-    if (!isReplying && !isArchiving) {
-      await taChangeNickPair();
-    }
-    scheduleTANick();
-  }, next);
-}
-
-// ========== ⊕ 功能菜单 ==========
-function togglePlusMenu() {
-  const existing = document.querySelector('.plus-menu-overlay');
-  if (existing) { existing.remove(); return; }
-  const overlay = createModal(`
-    <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin-top:10px;">
-      <div class="plus-item" id="plus-camera"><div class="icon-wrap"><svg viewBox="0 0 24 24" fill="none" stroke="#4a3528" stroke-width="1.7"><path d="M4 8h3l2-3h6l2 3h3v11H4z"/><circle cx="12" cy="13" r="4"/></svg></div><span>拍照</span></div>
-      <div class="plus-item" id="plus-album"><div class="icon-wrap"><svg viewBox="0 0 24 24" fill="none" stroke="#4a3528" stroke-width="1.7"><rect x="3" y="4" width="18" height="16" rx="3"/><circle cx="9" cy="9" r="2"/><path d="M4 18l5-5 3 3 4-4 4 4"/></svg></div><span>相册</span></div>
-      <div class="plus-item" id="plus-video"><div class="icon-wrap"><svg viewBox="0 0 24 24" fill="none" stroke="#4a3528" stroke-width="1.7"><rect x="3" y="6" width="13" height="12" rx="3"/><path d="M16 10l5-3v10l-5-3"/></svg></div><span>视频</span></div>
-      <div class="plus-item" id="plus-sticker"><div class="icon-wrap">${ICONS.sticker}</div><span>贴纸</span></div>
-      <!-- ← 改：礼物/礼包分开 -->
-      <div class="plus-item" id="plus-gift"><div class="icon-wrap">${ICONS.giftIcon}</div><span>礼物</span></div>
-      <div class="plus-item" id="plus-giftpack"><div class="icon-wrap">${ICONS.giftPack}</div><span>礼包</span></div>
-      <div class="plus-item" id="plus-interact"><div class="icon-wrap">${ICONS.interact}</div><span>互动</span></div>
-      <div class="plus-item" id="plus-shard-interact"><div class="icon-wrap">${ICONS.copyInteract}</div><span>副本互动</span></div>
-      <div class="plus-item" id="plus-quiz"><div class="icon-wrap">${ICONS.quiz}</div><span>问答</span></div>
-      <div class="plus-item" id="plus-intimate"><div class="icon-wrap">${ICONS.intimate}</div><span>悄悄话</span></div>
-      <div class="plus-item" id="plus-approach"><div class="icon-wrap">${ICONS.approach}</div><span>凑近</span></div>
-      <div class="plus-item" id="plus-compete"><div class="icon-wrap">${ICONS.compete}</div><span>争宠</span></div>
-      <div class="plus-item" id="plus-shard-together"><div class="icon-wrap">${ICONS.shardTogether}</div><span>想共度</span></div>
-      <div class="plus-item" id="plus-ball"><div class="icon-wrap"><svg viewBox="0 0 24 24" fill="none" stroke="#4a3528" stroke-width="1.7"><circle cx="12" cy="12" r="8" opacity="0.5"/><circle cx="12" cy="12" r="4" opacity="0.8"/><circle cx="12" cy="12" r="1.5" fill="#4a3528" stroke="none"/></svg></div><span>悬浮球</span></div>
-      <div class="plus-item" id="plus-accompany"><div class="icon-wrap">${STATUS_ICONS.companion}</div><span>陪伴</span></div>
-    </div>`);
-  overlay.classList.add('plus-menu-overlay');
-  overlay.querySelector('#plus-camera').addEventListener('click', () => { overlay.remove(); openCamera(); });
-  overlay.querySelector('#plus-album').addEventListener('click', () => { overlay.remove(); openAlbum(); });
-  overlay.querySelector('#plus-video').addEventListener('click', () => { overlay.remove(); startVideoCall(); });
-  overlay.querySelector('#plus-sticker').addEventListener('click', () => { overlay.remove(); openStickerSendPanel(); });
-  overlay.querySelector('#plus-gift').addEventListener('click', () => { overlay.remove(); openGiftSendPanel(); });
-  overlay.querySelector('#plus-giftpack').addEventListener('click', () => { overlay.remove(); openGiftPackSendPanel(); });
-  overlay.querySelector('#plus-interact').addEventListener('click', () => { overlay.remove(); openInteractSendPanel(); });
-  overlay.querySelector('#plus-shard-interact').addEventListener('click', () => { overlay.remove(); openShardInteractSendPanel(); });
-  overlay.querySelector('#plus-quiz').addEventListener('click', () => { overlay.remove(); startQuiz(); });
-  overlay.querySelector('#plus-intimate').addEventListener('click', () => { overlay.remove(); openIntimateSendPanel(); });
-  overlay.querySelector('#plus-approach').addEventListener('click', () => { overlay.remove(); openApproachSendPanel(); });
-  overlay.querySelector('#plus-compete').addEventListener('click', () => { overlay.remove(); openCompeteSendPanel(); });
-  overlay.querySelector('#plus-shard-together').addEventListener('click', () => { overlay.remove(); openShardTogetherSendPanel(); });
-  overlay.querySelector('#plus-ball').addEventListener('click', () => {
-    const ball = document.getElementById('floating-ball');
-    ball.style.display = ball.style.display === 'none' ? 'flex' : 'none';
-    overlay.remove();
-  });
-  overlay.querySelector('#plus-accompany').addEventListener('click', () => { overlay.remove(); openAccompanyPanel(); });
-}
-
+// ========== 相机 / 相册 ==========
 function openCamera() {
   const inp = document.createElement('input');
   inp.type = 'file';
@@ -6903,7 +7128,7 @@ async function openStickerSendPanel() {
   });
 }
 
-// ========== 互动发送（⊕·只 3 Tab）==========
+// ========== 互动发送 ==========
 function openInteractSendPanel() {
   const overlay = createModal(`
     <div class="heart-tabs" id="interact-send-tabs">
@@ -6966,7 +7191,7 @@ function renderInteractSendBody(overlay, tab) {
   });
 }
 
-// ========== 副本互动发送（独立入口）==========
+// ========== 副本互动发送 ==========
 function openShardInteractSendPanel() {
   const overlay = createModal(`
     <div class="big-input-title">副本互动</div>
@@ -7042,7 +7267,7 @@ function loadShardSendList(overlay, wid, sub) {
   });
 }
 
-// ========== 想共度发送（独立入口）==========
+// ========== 想共度发送 ==========
 function openShardTogetherSendPanel() {
   const overlay = createModal(`
     <div class="big-input-title">想共度</div>
@@ -7103,7 +7328,7 @@ function loadShardTogetherSendList(overlay, wid) {
   });
 }
 
-// ========== 凑近发送（⊕·分 Tab）==========
+// ========== 凑近发送 ==========
 function openApproachSendPanel() {
   const overlay = createModal(`
     <div class="big-input-title">凑近</div>
@@ -7157,7 +7382,7 @@ function openApproachSendPanel() {
   render();
 }
 
-// ========== 争宠发送（⊕·分 Tab）==========
+// ========== 争宠发送 ==========
 function openCompeteSendPanel() {
   const overlay = createModal(`
     <div class="big-input-title">争宠</div>
@@ -7211,9 +7436,7 @@ function openCompeteSendPanel() {
   render();
 }
   // ========== 图标礼物预设（系统自带，可改） ==========
-// ← 改：新增 165 个图标礼物预设
 const DEFAULT_GIFTS = [
-  // 花 8
   { type: 'icon', icon: '🌹', name: '玫瑰', cost: 10 },
   { type: 'icon', icon: '🌷', name: '郁金香', cost: 10 },
   { type: 'icon', icon: '🌻', name: '向日葵', cost: 12 },
@@ -7222,7 +7445,6 @@ const DEFAULT_GIFTS = [
   { type: 'icon', icon: '🪷', name: '荷花', cost: 15 },
   { type: 'icon', icon: '🌺', name: '木槿', cost: 10 },
   { type: 'icon', icon: '🌼', name: '雏菊', cost: 8 },
-  // 甜食 13
   { type: 'icon', icon: '🍰', name: '蛋糕', cost: 20 },
   { type: 'icon', icon: '🎂', name: '生日蛋糕', cost: 60 },
   { type: 'icon', icon: '🍫', name: '巧克力', cost: 15 },
@@ -7236,7 +7458,6 @@ const DEFAULT_GIFTS = [
   { type: 'icon', icon: '🍪', name: '曲奇', cost: 8 },
   { type: 'icon', icon: '🥮', name: '月饼', cost: 15 },
   { type: 'icon', icon: '🥧', name: '苹果派', cost: 18 },
-  // 饮品 13
   { type: 'icon', icon: '☕', name: '黑咖啡', cost: 10 },
   { type: 'icon', icon: '🍵', name: '茶', cost: 8 },
   { type: 'icon', icon: '🧋', name: '奶茶', cost: 15 },
@@ -7250,7 +7471,6 @@ const DEFAULT_GIFTS = [
   { type: 'icon', icon: '🥃', name: '威士忌', cost: 50 },
   { type: 'icon', icon: '🍶', name: '清酒', cost: 40 },
   { type: 'icon', icon: '🫖', name: '茶壶', cost: 20 },
-  // 水果 20
   { type: 'icon', icon: '🍎', name: '苹果', cost: 5 },
   { type: 'icon', icon: '🍊', name: '橘子', cost: 5 },
   { type: 'icon', icon: '🍋', name: '柠檬', cost: 5 },
@@ -7271,7 +7491,6 @@ const DEFAULT_GIFTS = [
   { type: 'icon', icon: '🫒', name: '橄榄', cost: 10 },
   { type: 'icon', icon: '🍏', name: '青苹果', cost: 5 },
   { type: 'icon', icon: '🥑', name: '牛油果', cost: 20 },
-  // 蔬菜/农产品 15
   { type: 'icon', icon: '🥕', name: '胡萝卜', cost: 5 },
   { type: 'icon', icon: '🌽', name: '玉米', cost: 5 },
   { type: 'icon', icon: '🥦', name: '西兰花', cost: 8 },
@@ -7287,7 +7506,6 @@ const DEFAULT_GIFTS = [
   { type: 'icon', icon: '🌰', name: '栗子', cost: 10 },
   { type: 'icon', icon: '🍄', name: '蘑菇', cost: 8 },
   { type: 'icon', icon: '🫘', name: '豆子', cost: 5 },
-  // 正餐 24
   { type: 'icon', icon: '🍚', name: '米饭', cost: 5 },
   { type: 'icon', icon: '🍜', name: '拉面', cost: 20 },
   { type: 'icon', icon: '🍛', name: '咖喱饭', cost: 25 },
@@ -7312,7 +7530,6 @@ const DEFAULT_GIFTS = [
   { type: 'icon', icon: '🥓', name: '培根', cost: 20 },
   { type: 'icon', icon: '🧆', name: '鹰嘴豆丸', cost: 18 },
   { type: 'icon', icon: '🥗', name: '沙拉', cost: 20 },
-  // 小吃 11
   { type: 'icon', icon: '🍟', name: '薯条', cost: 15 },
   { type: 'icon', icon: '🌭', name: '热狗', cost: 18 },
   { type: 'icon', icon: '🍢', name: '关东煮', cost: 15 },
@@ -7324,7 +7541,6 @@ const DEFAULT_GIFTS = [
   { type: 'icon', icon: '🧇', name: '华夫饼', cost: 15 },
   { type: 'icon', icon: '🥞', name: '松饼', cost: 15 },
   { type: 'icon', icon: '🍿', name: '爆米花', cost: 10 },
-  // 饰品 12
   { type: 'icon', icon: '💍', name: '戒指', cost: 520 },
   { type: 'icon', icon: '👑', name: '王冠', cost: 999 },
   { type: 'icon', icon: '🎀', name: '蝴蝶结', cost: 20 },
@@ -7337,7 +7553,6 @@ const DEFAULT_GIFTS = [
   { type: 'icon', icon: '🧣', name: '围巾', cost: 60 },
   { type: 'icon', icon: '🧤', name: '手套', cost: 40 },
   { type: 'icon', icon: '🎩', name: '礼帽', cost: 100 },
-  // 玩偶 10
   { type: 'icon', icon: '🧸', name: '泰迪熊', cost: 50 },
   { type: 'icon', icon: '🐰', name: '兔子玩偶', cost: 40 },
   { type: 'icon', icon: '🐱', name: '猫玩偶', cost: 40 },
@@ -7348,7 +7563,6 @@ const DEFAULT_GIFTS = [
   { type: 'icon', icon: '🦄', name: '独角兽', cost: 80 },
   { type: 'icon', icon: '🐨', name: '考拉玩偶', cost: 45 },
   { type: 'icon', icon: '🐧', name: '企鹅玩偶', cost: 40 },
-  // 浪漫 9
   { type: 'icon', icon: '💗', name: '粉心', cost: 5 },
   { type: 'icon', icon: '💖', name: '闪心', cost: 15 },
   { type: 'icon', icon: '💝', name: '礼盒心', cost: 25 },
@@ -7358,7 +7572,6 @@ const DEFAULT_GIFTS = [
   { type: 'icon', icon: '🕯️', name: '蜡烛', cost: 20 },
   { type: 'icon', icon: '🎆', name: '烟花', cost: 88 },
   { type: 'icon', icon: '💌', name: '情书', cost: 60 },
-  // 实用 13
   { type: 'icon', icon: '📱', name: '手机', cost: 500 },
   { type: 'icon', icon: '💻', name: '电脑', cost: 800 },
   { type: 'icon', icon: '📚', name: '书', cost: 50 },
@@ -7372,7 +7585,6 @@ const DEFAULT_GIFTS = [
   { type: 'icon', icon: '🎹', name: '钢琴', cost: 999 },
   { type: 'icon', icon: '💄', name: '口红', cost: 120 },
   { type: 'icon', icon: '💅', name: '指甲油', cost: 60 },
-  // 特别 17
   { type: 'icon', icon: '🌙', name: '月亮', cost: 30 },
   { type: 'icon', icon: '⭐', name: '星星', cost: 20 },
   { type: 'icon', icon: '🌈', name: '彩虹', cost: 40 },
@@ -7393,99 +7605,86 @@ const DEFAULT_GIFTS = [
 ];
 
 // ========== 图标礼包预设（系统自带，可改） ==========
-// ← 改：新增 76 个礼包预设
 const DEFAULT_GIFT_PACKS = [
-  // 告白类 5
-  { id: 'love_pack_1', name: '心动告白', icon: '💐', desc: '把想说的都装进去', items: ['玫瑰', '巧克力', '情书', '粉心'], discount: 0.85, color: '#ffc4d6' },
-  { id: 'love_pack_2', name: '玫瑰情诗', icon: '🌹', desc: '一首玫瑰写的情诗', items: ['玫瑰', '情书', '蜡烛', '红酒'], discount: 0.85, color: '#ffb0c8' },
-  { id: 'love_pack_3', name: '一生一世', icon: '💍', desc: '一生一世一双人', items: ['戒指', '玫瑰', '香槟', '干杯'], discount: 0.8, color: '#ff9ab0' },
-  { id: 'love_pack_4', name: '戒指承诺', icon: '💎', desc: '这是我的承诺', items: ['戒指', '钻石', '情书', '蜡烛'], discount: 0.8, color: '#e8b0e0' },
-  { id: 'love_pack_5', name: '星光誓言', icon: '⭐', desc: '在星光下说爱你', items: ['星星', '流星', '月亮', '银河'], discount: 0.85, color: '#d4e4f7' },
-  // 日常类 5
-  { id: 'daily_pack_1', name: '早安吻', icon: '☀️', desc: '醒来第一个想到你', items: ['黑咖啡', '牛角包', '太阳', '苹果'], discount: 0.95, color: '#ffe9b0' },
-  { id: 'daily_pack_2', name: '晚安抱抱', icon: '🌙', desc: '梦里也要见你', items: ['牛奶', '蜡烛', '月亮', '粉心'], discount: 0.95, color: '#c09bff' },
-  { id: 'daily_pack_3', name: '下午茶', icon: '🍵', desc: '一起偷得半日闲', items: ['茶', '蛋糕', '曲奇', '草莓'], discount: 0.95, color: '#ffe0c4' },
-  { id: 'daily_pack_4', name: '加班陪护', icon: '☕', desc: '我陪着你', items: ['黑咖啡', '三明治', '香蕉', '瓶装饮料'], discount: 0.95, color: '#d4e4f7' },
-  { id: 'daily_pack_5', name: '周末慵懒', icon: '🥐', desc: '窝在一起什么都不做', items: ['奶茶', '甜甜圈', '松饼', '爆米花'], discount: 0.95, color: '#f0e4c8' },
-  // 节日类 5
-  { id: 'festival_pack_1', name: '生日快乐', icon: '🎂', desc: '又陪你长了一岁', items: ['生日蛋糕', '花束', '王冠', '香槟'], discount: 0.88, color: '#ffc4d6' },
-  { id: 'festival_pack_2', name: '纪念日', icon: '💝', desc: '记得每一个一起的日子', items: ['礼盒心', '情书', '玫瑰', '红酒'], discount: 0.88, color: '#ff9ab0' },
-  { id: 'festival_pack_3', name: '情人节', icon: '💗', desc: '每天都想过情人节', items: ['玫瑰', '巧克力', '粉心', '干杯'], discount: 0.88, color: '#ffb0c8' },
-  { id: 'festival_pack_4', name: '七夕', icon: '💫', desc: '牛郎织女也会羡慕', items: ['流星', '玫瑰', '情书', '香槟'], discount: 0.88, color: '#e8b0e0' },
-  { id: 'festival_pack_5', name: '圣诞', icon: '🎄', desc: '圣诞快乐，我的礼物', items: ['热可可', '苹果派', '雪花', '蜡烛'], discount: 0.88, color: '#d4e8c8' },
-  // 关怀类 5
-  { id: 'care_pack_1', name: '哄哄你', icon: '🧸', desc: '别难过了', items: ['泰迪熊', '巧克力', '粉心', '糖果'], discount: 0.88, color: '#ffc4d6' },
-  { id: 'care_pack_2', name: '安慰抱抱', icon: '🐻', desc: '借你个肩膀', items: ['熊玩偶', '热牛奶', '蜡烛', '月亮'], discount: 0.88, color: '#dcd3f5' },
-  { id: 'care_pack_3', name: '生病陪护', icon: '🍵', desc: '快好起来', items: ['茶', '米粥', '柠檬', '围巾'], discount: 0.88, color: '#d4e8c8' },
-  { id: 'care_pack_4', name: '治愈你的心', icon: '🦋', desc: '一切都会好', items: ['蝴蝶', '四叶草', '羽毛', '星星'], discount: 0.85, color: '#e8e4f0' },
-  { id: 'care_pack_5', name: '心疼你', icon: '💗', desc: '舍不得你难过', items: ['粉心', '跳动心', '情书', '蜡烛'], discount: 0.85, color: '#ffb0c8' },
-  // 特殊类 5
-  { id: 'special_pack_1', name: '异地思念', icon: '✉️', desc: '想你想到写信', items: ['情书', '月亮', '星星', '流星'], discount: 0.8, color: '#d4e4f7' },
-  { id: 'special_pack_2', name: '梦里相见', icon: '🌙', desc: '今晚来梦里', items: ['月亮', '蜡烛', '羽毛', '云朵'], discount: 0.8, color: '#c09bff' },
-  { id: 'special_pack_3', name: '求婚', icon: '💍', desc: '嫁给我好不好', items: ['戒指', '钻石', '王冠', '香槟'], discount: 0.8, color: '#e8b0e0' },
-  { id: 'special_pack_4', name: '和好', icon: '🌈', desc: '不要生气了好不好', items: ['彩虹', '四叶草', '糖果', '粉心'], discount: 0.85, color: '#ffe9b0' },
-  { id: 'special_pack_5', name: '永久珍藏', icon: '🔮', desc: '把此刻封存', items: ['水晶球', '钻石', '戒指', '羽毛'], discount: 0.8, color: '#dcd0e8' },
-  // 季节类 5
-  { id: 'season_pack_1', name: '春', icon: '🌸', desc: '万物复苏的时节', items: ['樱花', '郁金香', '雏菊', '蝴蝶'], discount: 0.88, color: '#ffe0f0' },
-  { id: 'season_pack_2', name: '夏', icon: '🌻', desc: '阳光和蝉鸣', items: ['向日葵', '冰淇淋', '西瓜', '海浪'], discount: 0.88, color: '#d4e8c8' },
-  { id: 'season_pack_3', name: '秋', icon: '🍁', desc: '风里都是思念', items: ['枫叶', '栗子', '南瓜', '柿子'], discount: 0.88, color: '#ffe0c4' },
-  { id: 'season_pack_4', name: '冬', icon: '❄️', desc: '一起看雪', items: ['雪花', '热可可', '围巾', '蜡烛'], discount: 0.88, color: '#d4e4f7' },
-  { id: 'season_pack_5', name: '梅雨', icon: '🌧️', desc: '听雨想你', items: ['茶', '书', '蜡烛', '月亮'], discount: 0.88, color: '#d8e4dc' },
-  // 时间类 5
-  { id: 'time_pack_1', name: '清晨', icon: '🌅', desc: '新的一天从你开始', items: ['黑咖啡', '太阳', '苹果', '牛角包'], discount: 0.95, color: '#ffe9b0' },
-  { id: 'time_pack_2', name: '午后', icon: '☀️', desc: '阳光正好', items: ['茶', '曲奇', '草莓', '蝴蝶'], discount: 0.95, color: '#ffe0c4' },
-  { id: 'time_pack_3', name: '黄昏', icon: '🌇', desc: '想和你一起看日落', items: ['红酒', '玫瑰', '枫叶', '流星'], discount: 0.95, color: '#ffb0c8' },
-  { id: 'time_pack_4', name: '深夜', icon: '🌙', desc: '夜深了，睡吧', items: ['牛奶', '月亮', '蜡烛', '星星'], discount: 0.95, color: '#c09bff' },
-  { id: 'time_pack_5', name: '凌晨', icon: '🌌', desc: '只有我们两个人醒着', items: ['银河', '流星', '月亮', '水晶球'], discount: 0.9, color: '#d4e4f7' },
-  // 陪伴类 5
-  { id: 'company_pack_1', name: '陪睡', icon: '🛏️', desc: '睡吧，我在', items: ['牛奶', '月亮', '熊玩偶', '云朵'], discount: 0.88, color: '#c09bff' },
-  { id: 'company_pack_2', name: '发呆', icon: '☁️', desc: '什么都不做也挺好', items: ['云朵', '茶', '书', '蜡烛'], discount: 0.88, color: '#e8e4f0' },
-  { id: 'company_pack_3', name: '一起', icon: '🎬', desc: '一起做点什么都行', items: ['爆米花', '饮料', '甜甜圈', '曲奇'], discount: 0.88, color: '#ffe0c4' },
-  { id: 'company_pack_4', name: '安静', icon: '📖', desc: '安安静静陪着你就好', items: ['书', '茶', '蜡烛', '月亮'], discount: 0.88, color: '#e8e4f0' },
-  { id: 'company_pack_5', name: '温柔', icon: '🧸', desc: '想把你揉进怀里', items: ['泰迪熊', '粉心', '玫瑰', '巧克力'], discount: 0.85, color: '#ffc4d6' },
-  // 约定类 5
-  { id: 'promise_pack_1', name: '牵手', icon: '🤝', desc: '牵着不放开', items: ['玫瑰', '粉心', '糖果', '四叶草'], discount: 0.85, color: '#ffb0c8' },
-  { id: 'promise_pack_2', name: '拥抱', icon: '🫂', desc: '抱紧一点', items: ['泰迪熊', '熊玩偶', '粉心', '巧克力'], discount: 0.85, color: '#ffc4d6' },
-  { id: 'promise_pack_3', name: '亲吻', icon: '💋', desc: '亲一下', items: ['口红', '粉心', '玫瑰', '香水'], discount: 0.85, color: '#ff9ab0' },
-  { id: 'promise_pack_4', name: '永远', icon: '♾️', desc: '说好了永远', items: ['戒指', '钻石', '情书', '流星'], discount: 0.8, color: '#e8b0e0' },
-  { id: 'promise_pack_5', name: '唯一', icon: '💎', desc: '你是我唯一的', items: ['钻石', '王冠', '戒指', '玫瑰'], discount: 0.8, color: '#ff9ab0' },
-  // 梦境类 5
-  { id: 'dream_pack_1', name: '梦里相见', icon: '💭', desc: '梦里也要见你', items: ['月亮', '云朵', '羽毛', '蜡烛'], discount: 0.85, color: '#c09bff' },
-  { id: 'dream_pack_2', name: '月下', icon: '🌙', desc: '在月亮下说悄悄话', items: ['月亮', '星星', '玫瑰', '红酒'], discount: 0.85, color: '#d4e4f7' },
-  { id: 'dream_pack_3', name: '星空', icon: '🌌', desc: '满天星星都是你', items: ['银河', '流星', '星星', '闪星'], discount: 0.85, color: '#d4e4f7' },
-  { id: 'dream_pack_4', name: '海边', icon: '🌊', desc: '一起听海浪', items: ['海浪', '贝壳', '椰子', '太阳'], discount: 0.85, color: '#cfe8e8' },
-  { id: 'dream_pack_5', name: '森林', icon: '🌲', desc: '在森林里散步', items: ['四叶草', '蘑菇', '蝴蝶', '羽毛'], discount: 0.85, color: '#d4e8c8' },
-  // 心意类 5
-  { id: 'heart_pack_1', name: '想你', icon: '💗', desc: '一整天都在想你', items: ['粉心', '情书', '月亮', '星星'], discount: 0.88, color: '#ffb0c8' },
-  { id: 'heart_pack_2', name: '念你', icon: '💓', desc: '念你念到睡不着', items: ['跳动心', '月亮', '牛奶', '云朵'], discount: 0.88, color: '#ffb0c8' },
-  { id: 'heart_pack_3', name: '等你', icon: '⏳', desc: '等你回来', items: ['星星', '月亮', '书', '茶'], discount: 0.88, color: '#e8e4f0' },
-  { id: 'heart_pack_4', name: '找你', icon: '🔍', desc: '千山万水也要找到你', items: ['四叶草', '流星', '羽毛', '蝴蝶'], discount: 0.85, color: '#d4e8c8' },
-  { id: 'heart_pack_5', name: '守你', icon: '🛡️', desc: '做你的骑士', items: ['玫瑰', '王冠', '戒指', '红酒'], discount: 0.85, color: '#e8b0e0' },
-  // 送礼意图 21
-  { id: 'intent_pack_1', name: '哄你', icon: '🧸', desc: '别不开心了', items: ['泰迪熊', '巧克力', '糖果', '粉心'], discount: 0.88, color: '#ffc4d6' },
-  { id: 'intent_pack_2', name: '宠你', icon: '👑', desc: '你就是我的公主', items: ['王冠', '戒指', '玫瑰', '巧克力'], discount: 0.8, color: '#e8b0e0' },
-  { id: 'intent_pack_3', name: '陪你', icon: '🫂', desc: '我在，一直都在', items: ['泰迪熊', '热牛奶', '月亮', '书'], discount: 0.85, color: '#c09bff' },
-  { id: 'intent_pack_4', name: '等你', icon: '⏳', desc: '慢慢来，我等你', items: ['茶', '书', '月亮', '星星'], discount: 0.88, color: '#e8e4f0' },
-  { id: 'intent_pack_5', name: '念你', icon: '💓', desc: '一直想着你', items: ['跳动心', '情书', '月亮', '粉心'], discount: 0.88, color: '#ffb0c8' },
-  { id: 'intent_pack_6', name: '疼你', icon: '🌸', desc: '舍不得你受苦', items: ['樱花', '玫瑰', '情书', '糖果'], discount: 0.88, color: '#ffe0f0' },
-  { id: 'intent_pack_7', name: '爱你', icon: '💗', desc: '就是爱你', items: ['粉心', '玫瑰', '巧克力', '香槟'], discount: 0.85, color: '#ff9ab0' },
-  { id: 'intent_pack_8', name: '想你', icon: '💭', desc: '想你想你想你', items: ['情书', '月亮', '流星', '羽毛'], discount: 0.88, color: '#d4e4f7' },
-  { id: 'intent_pack_9', name: '护你', icon: '🛡️', desc: '不准别人欺负你', items: ['戒指', '玫瑰', '红酒', '四叶草'], discount: 0.85, color: '#e8b0e0' },
-  { id: 'intent_pack_10', name: '守你', icon: '🌙', desc: '守你一夜安眠', items: ['月亮', '星星', '蜡烛', '牛奶'], discount: 0.88, color: '#c09bff' },
-  { id: 'intent_pack_11', name: '哄睡', icon: '🛏️', desc: '乖乖睡觉', items: ['牛奶', '熊玩偶', '月亮', '云朵'], discount: 0.88, color: '#c09bff' },
-  { id: 'intent_pack_12', name: '早安', icon: '🌅', desc: '早安，我的宝贝', items: ['黑咖啡', '太阳', '苹果', '玫瑰'], discount: 0.95, color: '#ffe9b0' },
-  { id: 'intent_pack_13', name: '晚安', icon: '🌙', desc: '晚安，做个好梦', items: ['牛奶', '月亮', '蜡烛', '星星'], discount: 0.95, color: '#c09bff' },
-  { id: 'intent_pack_14', name: '道歉', icon: '🌷', desc: '对不起嘛', items: ['郁金香', '糖果', '巧克力', '粉心'], discount: 0.88, color: '#ffc4d6' },
-  { id: 'intent_pack_15', name: '和好', icon: '🌈', desc: '我们和好吧', items: ['彩虹', '四叶草', '糖果', '玫瑰'], discount: 0.88, color: '#ffe9b0' },
-  { id: 'intent_pack_16', name: '表白', icon: '💐', desc: '我喜欢你', items: ['花束', '情书', '巧克力', '香槟'], discount: 0.85, color: '#ffb0c8' },
-  { id: 'intent_pack_17', name: '撒娇', icon: '🥺', desc: '想要你陪我嘛', items: ['泰迪熊', '糖果', '粉心', '月亮'], discount: 0.88, color: '#ffc4d6' },
-  { id: 'intent_pack_18', name: '吃醋', icon: '💢', desc: '不许看别人', items: ['玫瑰', '巧克力', '粉心', '红酒'], discount: 0.88, color: '#ff9ab0' },
-  { id: 'intent_pack_19', name: '承诺', icon: '💍', desc: '说到做到', items: ['戒指', '情书', '玫瑰', '香槟'], discount: 0.8, color: '#e8b0e0' },
-  { id: 'intent_pack_20', name: '陪伴到老', icon: '🕰️', desc: '一辈子那么长', items: ['戒指', '王冠', '钻石', '玫瑰'], discount: 0.8, color: '#ff9ab0' },
-  { id: 'intent_pack_21', name: '唯一', icon: '💎', desc: '你是我唯一的唯一', items: ['钻石', '王冠', '戒指', '情书'], discount: 0.8, color: '#e8b0e0' }
+  { id: 'love_pack_1', type: 'icon', name: '心动告白', icon: '💐', desc: '把想说的都装进去', items: ['玫瑰', '巧克力', '情书', '粉心'], discount: 0.85 },
+  { id: 'love_pack_2', type: 'icon', name: '玫瑰情诗', icon: '🌹', desc: '一首玫瑰写的情诗', items: ['玫瑰', '情书', '蜡烛', '红酒'], discount: 0.85 },
+  { id: 'love_pack_3', type: 'icon', name: '一生一世', icon: '💍', desc: '一生一世一双人', items: ['戒指', '玫瑰', '香槟', '干杯'], discount: 0.8 },
+  { id: 'love_pack_4', type: 'icon', name: '戒指承诺', icon: '💎', desc: '这是我的承诺', items: ['戒指', '钻石', '情书', '蜡烛'], discount: 0.8 },
+  { id: 'love_pack_5', type: 'icon', name: '星光誓言', icon: '⭐', desc: '在星光下说爱你', items: ['星星', '流星', '月亮', '银河'], discount: 0.85 },
+  { id: 'daily_pack_1', type: 'icon', name: '早安吻', icon: '☀️', desc: '醒来第一个想到你', items: ['黑咖啡', '苹果派', '太阳', '苹果'], discount: 0.95 },
+  { id: 'daily_pack_2', type: 'icon', name: '晚安抱抱', icon: '🌙', desc: '梦里也要见你', items: ['牛奶', '蜡烛', '月亮', '粉心'], discount: 0.95 },
+  { id: 'daily_pack_3', type: 'icon', name: '下午茶', icon: '🍵', desc: '一起偷得半日闲', items: ['茶', '蛋糕', '曲奇', '草莓'], discount: 0.95 },
+  { id: 'daily_pack_4', type: 'icon', name: '加班陪护', icon: '☕', desc: '我陪着你', items: ['黑咖啡', '三明治', '香蕉', '饮料'], discount: 0.95 },
+  { id: 'daily_pack_5', type: 'icon', name: '周末慵懒', icon: '🥞', desc: '窝在一起什么都不做', items: ['奶茶', '甜甜圈', '松饼', '爆米花'], discount: 0.95 },
+  { id: 'festival_pack_1', type: 'icon', name: '生日快乐', icon: '🎂', desc: '又陪你长了一岁', items: ['生日蛋糕', '花束', '王冠', '香槟'], discount: 0.88 },
+  { id: 'festival_pack_2', type: 'icon', name: '纪念日', icon: '💝', desc: '记得每一个一起的日子', items: ['礼盒心', '情书', '玫瑰', '红酒'], discount: 0.88 },
+  { id: 'festival_pack_3', type: 'icon', name: '情人节', icon: '💗', desc: '每天都想过情人节', items: ['玫瑰', '巧克力', '粉心', '干杯'], discount: 0.88 },
+  { id: 'festival_pack_4', type: 'icon', name: '七夕', icon: '💫', desc: '牛郎织女也会羡慕', items: ['流星', '玫瑰', '情书', '香槟'], discount: 0.88 },
+  { id: 'festival_pack_5', type: 'icon', name: '圣诞', icon: '❄️', desc: '圣诞快乐，我的礼物', items: ['苹果派', '苹果', '雪花', '蜡烛'], discount: 0.88 },
+  { id: 'care_pack_1', type: 'icon', name: '哄哄你', icon: '🧸', desc: '别难过了', items: ['泰迪熊', '巧克力', '粉心', '糖果'], discount: 0.88 },
+  { id: 'care_pack_2', type: 'icon', name: '安慰抱抱', icon: '🐻', desc: '借你个肩膀', items: ['熊玩偶', '牛奶', '蜡烛', '月亮'], discount: 0.88 },
+  { id: 'care_pack_3', type: 'icon', name: '生病陪护', icon: '🍵', desc: '快好起来', items: ['茶', '米饭', '柠檬', '围巾'], discount: 0.88 },
+  { id: 'care_pack_4', type: 'icon', name: '治愈你的心', icon: '🦋', desc: '一切都会好', items: ['蝴蝶', '四叶草', '羽毛', '星星'], discount: 0.85 },
+  { id: 'care_pack_5', type: 'icon', name: '心疼你', icon: '💗', desc: '舍不得你难过', items: ['粉心', '跳动心', '情书', '蜡烛'], discount: 0.85 },
+  { id: 'special_pack_1', type: 'icon', name: '异地思念', icon: '✉️', desc: '想你想到写信', items: ['情书', '月亮', '星星', '流星'], discount: 0.8 },
+  { id: 'special_pack_2', type: 'icon', name: '梦里相见', icon: '🌙', desc: '今晚来梦里', items: ['月亮', '蜡烛', '羽毛', '云朵'], discount: 0.8 },
+  { id: 'special_pack_3', type: 'icon', name: '求婚', icon: '💍', desc: '嫁给我好不好', items: ['戒指', '钻石', '王冠', '香槟'], discount: 0.8 },
+  { id: 'special_pack_4', type: 'icon', name: '和好', icon: '🌈', desc: '不要生气了好不好', items: ['彩虹', '四叶草', '糖果', '粉心'], discount: 0.85 },
+  { id: 'special_pack_5', type: 'icon', name: '永久珍藏', icon: '🔮', desc: '把此刻封存', items: ['水晶球', '钻石', '戒指', '羽毛'], discount: 0.8 },
+  { id: 'season_pack_1', type: 'icon', name: '春', icon: '🌸', desc: '万物复苏的时节', items: ['樱花', '郁金香', '雏菊', '蝴蝶'], discount: 0.88 },
+  { id: 'season_pack_2', type: 'icon', name: '夏', icon: '🌻', desc: '阳光和蝉鸣', items: ['向日葵', '冰淇淋', '西瓜', '海浪'], discount: 0.88 },
+  { id: 'season_pack_3', type: 'icon', name: '秋', icon: '🍁', desc: '风里都是思念', items: ['枫叶', '栗子', '南瓜', '柿子'], discount: 0.88 },
+  { id: 'season_pack_4', type: 'icon', name: '冬', icon: '❄️', desc: '一起看雪', items: ['雪花', '热可可', '围巾', '蜡烛'], discount: 0.88 },
+  { id: 'season_pack_5', type: 'icon', name: '梅雨', icon: '🌧️', desc: '听雨想你', items: ['茶', '书', '蜡烛', '月亮'], discount: 0.88 },
+  { id: 'time_pack_1', type: 'icon', name: '清晨', icon: '🌅', desc: '新的一天从你开始', items: ['黑咖啡', '太阳', '苹果', '苹果派'], discount: 0.95 },
+  { id: 'time_pack_2', type: 'icon', name: '午后', icon: '☀️', desc: '阳光正好', items: ['茶', '曲奇', '草莓', '蝴蝶'], discount: 0.95 },
+  { id: 'time_pack_3', type: 'icon', name: '黄昏', icon: '🌇', desc: '想和你一起看日落', items: ['红酒', '玫瑰', '枫叶', '流星'], discount: 0.95 },
+  { id: 'time_pack_4', type: 'icon', name: '深夜', icon: '🌙', desc: '夜深了，睡吧', items: ['牛奶', '月亮', '蜡烛', '星星'], discount: 0.95 },
+  { id: 'time_pack_5', type: 'icon', name: '凌晨', icon: '🌌', desc: '只有我们两个人醒着', items: ['银河', '流星', '月亮', '水晶球'], discount: 0.9 },
+  { id: 'company_pack_1', type: 'icon', name: '陪睡', icon: '🛏️', desc: '睡吧，我在', items: ['牛奶', '月亮', '熊玩偶', '云朵'], discount: 0.88 },
+  { id: 'company_pack_2', type: 'icon', name: '发呆', icon: '☁️', desc: '什么都不做也挺好', items: ['云朵', '茶', '书', '蜡烛'], discount: 0.88 },
+  { id: 'company_pack_3', type: 'icon', name: '一起', icon: '🎬', desc: '一起做点什么都行', items: ['爆米花', '饮料', '甜甜圈', '曲奇'], discount: 0.88 },
+  { id: 'company_pack_4', type: 'icon', name: '安静', icon: '📖', desc: '安安静静陪着你就好', items: ['书', '茶', '蜡烛', '月亮'], discount: 0.88 },
+  { id: 'company_pack_5', type: 'icon', name: '温柔', icon: '🧸', desc: '想把你揉进怀里', items: ['泰迪熊', '粉心', '玫瑰', '巧克力'], discount: 0.85 },
+  { id: 'promise_pack_1', type: 'icon', name: '牵手', icon: '🤝', desc: '牵着不放开', items: ['玫瑰', '粉心', '糖果', '四叶草'], discount: 0.85 },
+  { id: 'promise_pack_2', type: 'icon', name: '拥抱', icon: '🫂', desc: '抱紧一点', items: ['泰迪熊', '熊玩偶', '粉心', '巧克力'], discount: 0.85 },
+  { id: 'promise_pack_3', type: 'icon', name: '亲吻', icon: '💋', desc: '亲一下', items: ['口红', '粉心', '玫瑰', '香水'], discount: 0.85 },
+  { id: 'promise_pack_4', type: 'icon', name: '永远', icon: '♾️', desc: '说好了永远', items: ['戒指', '钻石', '情书', '流星'], discount: 0.8 },
+  { id: 'promise_pack_5', type: 'icon', name: '唯一', icon: '💎', desc: '你是我唯一的', items: ['钻石', '王冠', '戒指', '玫瑰'], discount: 0.8 },
+  { id: 'dream_pack_1', type: 'icon', name: '梦里相见', icon: '💭', desc: '梦里也要见你', items: ['月亮', '云朵', '羽毛', '蜡烛'], discount: 0.85 },
+  { id: 'dream_pack_2', type: 'icon', name: '月下', icon: '🌙', desc: '在月亮下说悄悄话', items: ['月亮', '星星', '玫瑰', '红酒'], discount: 0.85 },
+  { id: 'dream_pack_3', type: 'icon', name: '星空', icon: '🌌', desc: '满天星星都是你', items: ['银河', '流星', '星星', '闪星'], discount: 0.85 },
+  { id: 'dream_pack_4', type: 'icon', name: '海边', icon: '🌊', desc: '一起听海浪', items: ['海浪', '贝壳', '椰子', '太阳'], discount: 0.85 },
+  { id: 'dream_pack_5', type: 'icon', name: '森林', icon: '🍄', desc: '在森林里散步', items: ['四叶草', '蘑菇', '蝴蝶', '羽毛'], discount: 0.85 },
+  { id: 'heart_pack_1', type: 'icon', name: '想你', icon: '💗', desc: '一整天都在想你', items: ['粉心', '情书', '月亮', '星星'], discount: 0.88 },
+  { id: 'heart_pack_2', type: 'icon', name: '念你', icon: '💓', desc: '念你念到睡不着', items: ['跳动心', '月亮', '牛奶', '云朵'], discount: 0.88 },
+  { id: 'heart_pack_3', type: 'icon', name: '等你', icon: '⏳', desc: '等你回来', items: ['星星', '月亮', '书', '茶'], discount: 0.88 },
+  { id: 'heart_pack_4', type: 'icon', name: '找你', icon: '🔍', desc: '千山万水也要找到你', items: ['四叶草', '流星', '羽毛', '蝴蝶'], discount: 0.85 },
+  { id: 'heart_pack_5', type: 'icon', name: '守你', icon: '🛡️', desc: '做你的骑士', items: ['玫瑰', '王冠', '戒指', '红酒'], discount: 0.85 },
+  { id: 'intent_pack_1', type: 'icon', name: '哄你', icon: '🧸', desc: '别不开心了', items: ['泰迪熊', '巧克力', '糖果', '粉心'], discount: 0.88 },
+  { id: 'intent_pack_2', type: 'icon', name: '宠你', icon: '👑', desc: '你就是我的公主', items: ['王冠', '戒指', '玫瑰', '巧克力'], discount: 0.8 },
+  { id: 'intent_pack_3', type: 'icon', name: '陪你', icon: '🫂', desc: '我在，一直都在', items: ['泰迪熊', '牛奶', '月亮', '书'], discount: 0.85 },
+  { id: 'intent_pack_4', type: 'icon', name: '等你', icon: '⏳', desc: '慢慢来，我等你', items: ['茶', '书', '月亮', '星星'], discount: 0.88 },
+  { id: 'intent_pack_5', type: 'icon', name: '念你', icon: '💓', desc: '一直想着你', items: ['跳动心', '情书', '月亮', '粉心'], discount: 0.88 },
+  { id: 'intent_pack_6', type: 'icon', name: '疼你', icon: '🌸', desc: '舍不得你受苦', items: ['樱花', '玫瑰', '情书', '糖果'], discount: 0.88 },
+  { id: 'intent_pack_7', type: 'icon', name: '爱你', icon: '💗', desc: '就是爱你', items: ['粉心', '玫瑰', '巧克力', '香槟'], discount: 0.85 },
+  { id: 'intent_pack_8', type: 'icon', name: '想你', icon: '💭', desc: '想你想你想你', items: ['情书', '月亮', '流星', '羽毛'], discount: 0.88 },
+  { id: 'intent_pack_9', type: 'icon', name: '护你', icon: '🛡️', desc: '不准别人欺负你', items: ['戒指', '玫瑰', '红酒', '四叶草'], discount: 0.85 },
+  { id: 'intent_pack_10', type: 'icon', name: '守你', icon: '🌙', desc: '守你一夜安眠', items: ['月亮', '星星', '蜡烛', '牛奶'], discount: 0.88 },
+  { id: 'intent_pack_11', type: 'icon', name: '哄睡', icon: '🛏️', desc: '乖乖睡觉', items: ['牛奶', '熊玩偶', '月亮', '云朵'], discount: 0.88 },
+  { id: 'intent_pack_12', type: 'icon', name: '早安', icon: '🌅', desc: '早安，我的宝贝', items: ['黑咖啡', '太阳', '苹果', '玫瑰'], discount: 0.95 },
+  { id: 'intent_pack_13', type: 'icon', name: '晚安', icon: '🌙', desc: '晚安，做个好梦', items: ['牛奶', '月亮', '蜡烛', '星星'], discount: 0.95 },
+  { id: 'intent_pack_14', type: 'icon', name: '道歉', icon: '🌷', desc: '对不起嘛', items: ['郁金香', '糖果', '巧克力', '粉心'], discount: 0.88 },
+  { id: 'intent_pack_15', type: 'icon', name: '和好', icon: '🌈', desc: '我们和好吧', items: ['彩虹', '四叶草', '糖果', '玫瑰'], discount: 0.88 },
+  { id: 'intent_pack_16', type: 'icon', name: '表白', icon: '💐', desc: '我喜欢你', items: ['花束', '情书', '巧克力', '香槟'], discount: 0.85 },
+  { id: 'intent_pack_17', type: 'icon', name: '撒娇', icon: '🥺', desc: '想要你陪我嘛', items: ['泰迪熊', '糖果', '粉心', '月亮'], discount: 0.88 },
+  { id: 'intent_pack_18', type: 'icon', name: '吃醋', icon: '💢', desc: '不许看别人', items: ['玫瑰', '巧克力', '粉心', '红酒'], discount: 0.88 },
+  { id: 'intent_pack_19', type: 'icon', name: '承诺', icon: '💍', desc: '说到做到', items: ['戒指', '情书', '玫瑰', '香槟'], discount: 0.8 },
+  { id: 'intent_pack_20', type: 'icon', name: '陪伴到老', icon: '🕰️', desc: '一辈子那么长', items: ['戒指', '王冠', '钻石', '玫瑰'], discount: 0.8 },
+  { id: 'intent_pack_21', type: 'icon', name: '唯一', icon: '💎', desc: '你是我唯一的唯一', items: ['钻石', '王冠', '戒指', '情书'], discount: 0.8 }
 ];
 
-// ← 改：初始化礼物/礼包（首次启动写入数据，之后当普通数据用）
+// ========== 初始化礼物/礼包（首次写入数据） ==========
 async function initGiftsOnce() {
   if (localStorage.getItem('giftsInitV700')) return;
   const existing = JSON.parse(localStorage.getItem('giftLibrary') || '[]');
@@ -7499,25 +7698,23 @@ async function initGiftsOnce() {
   localStorage.setItem('giftsInitV700', '1');
 }
 
-// 获取所有礼物（图标 + 图片）
 async function getAllGifts() {
-  const list = JSON.parse(localStorage.getItem('giftLibrary') || '[]');
-  return list;
+  return JSON.parse(localStorage.getItem('giftLibrary') || '[]');
 }
 
-// 获取所有礼包
 async function getAllGiftPacks() {
-  const list = JSON.parse(localStorage.getItem('giftPackLibrary') || '[]');
-  return list;
+  return JSON.parse(localStorage.getItem('giftPackLibrary') || '[]');
 }
 
-// 计算礼包价格
+// ← 改：礼包价格计算（支持 items 是字符串或对象）
 function computeGiftPackPrice(pack) {
   const gifts = JSON.parse(localStorage.getItem('giftLibrary') || '[]');
   let origin = 0;
   (pack.items || []).forEach(it => {
-    const g = gifts.find(x => x.name === it.name || x.name === it);
-    if (g) origin += (g.cost || 0);
+    const name = typeof it === 'string' ? it : (it.name || '');
+    const g = gifts.find(x => x.name === name);
+    const cost = (typeof it === 'object' && it && it.cost) || (g && g.cost) || 0;
+    origin += cost;
   });
   let discount = pack.discount || 1;
   if ((pack.items || []).length >= 6) discount *= 0.95;
@@ -7525,8 +7722,16 @@ function computeGiftPackPrice(pack) {
   return { origin, final, discount };
 }
 
+// ← 改：按名字查礼物图标
+function giftIconByName(name) {
+  const gifts = JSON.parse(localStorage.getItem('giftLibrary') || '[]');
+  const g = gifts.find(x => x.name === name);
+  if (!g) return '🎁';
+  if (g.image) return `<img src="${g.image}" style="width:22px;height:22px;border-radius:5px;object-fit:cover;vertical-align:middle;">`;
+  return g.icon || '🎁';
+}
+
 // ========== 礼物管理面板 ==========
-// ← 改：小世界礼物管理，内部分"图标礼物/图片礼物"两个 Tab
 function openGiftManagePanel() {
   const overlay = createModal(`
     <div class="heart-tabs" id="gift-mng-tabs">
@@ -7674,7 +7879,7 @@ function openGiftEditDialog(panelOverlay, realIdx, tab) {
   });
 }
 
-// ← 改：发送礼物面板，内部也分图标/图片
+// ========== 礼物发送 ==========
 function openGiftSendPanel() {
   const overlay = createModal(`
     <div class="heart-tabs" id="gift-send-tabs">
@@ -7725,7 +7930,6 @@ function openGiftSendPanel() {
 }
 
 // ========== 礼包管理面板 ==========
-// ← 改：新增礼包管理，内部分图标/图片
 function openGiftPackManagePanel() {
   const overlay = createModal(`
     <div class="heart-tabs" id="giftpack-mng-tabs">
@@ -7770,7 +7974,7 @@ function loadGiftPackList(overlay, tab) {
   });
 }
 
-// ← 改：礼包添加对话框（含名称、图标、描述、折扣、礼物清单）
+// ← 改：礼包添加（存完整礼物对象）
 function openGiftPackAddDialog(panelOverlay, tab) {
   const gifts = JSON.parse(localStorage.getItem('giftLibrary') || '[]');
   const availableGifts = gifts.filter(g => (tab === 'icon' ? g.type !== 'image' : g.type === 'image'));
@@ -7794,12 +7998,12 @@ function openGiftPackAddDialog(panelOverlay, tab) {
     div.innerHTML = `<div class="card-text">${iconPart} ${escapeHtml(g.name)} - ${g.cost}</div>`;
     div.style.cursor = 'pointer';
     div.addEventListener('click', () => {
-      const idx = selected.indexOf(g);
+      const idx = selected.findIndex(x => x.name === g.name);
       if (idx >= 0) {
         selected.splice(idx, 1);
         div.style.background = '';
       } else {
-        selected.push(g);
+        selected.push({ name: g.name, icon: g.icon, image: g.image, cost: g.cost });
         div.style.background = 'rgba(255,200,220,0.5)';
       }
       updatePackPriceHint();
@@ -7828,8 +8032,7 @@ function openGiftPackAddDialog(panelOverlay, tab) {
       id: 'pack_' + Date.now(),
       type: tab,
       name, icon, desc, discount,
-      items: selected.map(g => ({ name: g.name, icon: g.icon, image: g.image, cost: g.cost })),
-      color: '#ffc4d6'
+      items: selected.map(g => ({ name: g.name, icon: g.icon, image: g.image, cost: g.cost }))
     });
     localStorage.setItem('giftPackLibrary', JSON.stringify(packs));
     overlay.remove();
@@ -7864,7 +8067,7 @@ function openGiftPackEditDialog(panelOverlay, realIdx, tab) {
   });
 }
 
-// ← 改：发送礼包面板，内部分图标/图片
+// ← 改：礼包发送（支持图片礼包大图）
 function openGiftPackSendPanel() {
   const overlay = createModal(`
     <div class="heart-tabs" id="giftpack-send-tabs">
@@ -7891,10 +8094,11 @@ function openGiftPackSendPanel() {
         updateHeartValue();
         const packData = {
           id: p.id,
+          packType: p.type || 'icon',
           name: p.name,
           icon: p.icon,
           desc: p.desc,
-          items: (p.items || []).map(it => ({ ...it })),
+          items: (p.items || []).map(it => typeof it === 'string' ? { name: it } : { ...it }),
           originPrice: price.origin,
           finalPrice: price.final,
           opened: false
@@ -7923,7 +8127,7 @@ function openGiftPackSendPanel() {
   render();
 }
 
-// ========== 互动管理（3 Tab） ==========
+// ========== 互动管理 ==========
 function openInteractManagePanel() {
   const overlay = createModal(`
     <div class="heart-tabs" id="interact-mng-tabs">
@@ -7993,7 +8197,7 @@ function renderInteractMngBody(overlay, tab) {
   });
 }
 
-// ========== 对话管理（分副本） ==========
+// ========== 对话管理 ==========
 function openDialogueManagePanel() {
   const overlay = createModal(`
     <div class="big-input-title">对话</div>
@@ -8045,7 +8249,7 @@ function openTogetherLibraryPanel() {
   });
 }
 
-// ========== 甜言（分副本） ==========
+// ========== 甜言 ==========
 function openSweetWordsPanel() {
   const overlay = createModal(`
     <div class="big-input-title">甜言</div>
@@ -8082,7 +8286,7 @@ function openSweetWordsPanel() {
   });
 }
 
-// ========== 悄悄话（分副本 + 分 Tab） ==========
+// ========== 悄悄话（管理） ==========
 function openIntimatePanel() {
   const overlay = createModal(`
     <div class="big-input-title">悄悄话</div>
@@ -8133,7 +8337,7 @@ function openIntimatePanel() {
   });
 }
 
-// ========== 凑近（分副本 + 分 Tab） ==========
+// ========== 凑近（管理） ==========
 function openApproachPanel() {
   const overlay = createModal(`
     <div class="big-input-title">凑近</div>
@@ -8184,7 +8388,7 @@ function openApproachPanel() {
   });
 }
 
-// ========== 争宠（分副本 + 分 Tab） ==========
+// ========== 争宠（管理） ==========
 function openCompetePanel() {
   const overlay = createModal(`
     <div class="big-input-title">争宠</div>
@@ -8318,7 +8522,7 @@ async function openIntimateSendPanel() {
   renderList();
 }
 
-// ========== 亲密触发其他世界反应（凑近/争宠） ==========
+// ========== 亲密触发其他世界反应 ==========
 async function triggerIntimateReactions() {
   const others = onlineWorlds.filter(w => w !== settings.currentWorldId);
   if (!others.length) return;
@@ -8704,17 +8908,72 @@ function openPeriodCardsPanel() {
   });
 }
 
-// ========== 约会字卡 ==========
-function openDateCardsPanel() {
+// ← 改：约会地点活动（分地点 + 活动两个库）
+function openDatePlacePanel() {
   const overlay = createModal(`
-    <div class="big-input-title">约会字卡</div>
-    <textarea class="big-input-area" id="date-cards-input" placeholder="一行一条" style="min-height:150px;">${(JSON.parse(localStorage.getItem('dateCards') || '[]')).join('\n')}</textarea>
-    <button class="save-btn-center" id="save-date-cards" style="margin-top:12px;">保存</button>`);
-  overlay.querySelector('#save-date-cards').addEventListener('click', () => {
-    localStorage.setItem('dateCards', JSON.stringify(overlay.querySelector('#date-cards-input').value.trim().split('\n').map(s => s.trim()).filter(Boolean)));
-    showToast('约会字卡已保存');
+    <div class="big-input-title">约会地点活动</div>
+    <div class="heart-tabs" id="date-place-tabs">
+      <button class="heart-tab active" data-tab="place">约会地点</button>
+      <button class="heart-tab" data-tab="activity">约会活动</button>
+    </div>
+    <textarea class="big-input-area" id="date-place-input" placeholder="一行一条" style="min-height:180px;"></textarea>
+    <button class="save-btn-center" id="save-date-place" style="margin-top:12px;">保存</button>`);
+  let curTab = 'place';
+  const load = () => {
+    const data = JSON.parse(localStorage.getItem('datePlaceActivity') || '{"place":[],"activity":[]}');
+    overlay.querySelector('#date-place-input').value = (data[curTab] || []).join('\n');
+  };
+  load();
+  overlay.querySelectorAll('#date-place-tabs .heart-tab').forEach(btn => {
+    btn.addEventListener('click', () => {
+      curTab = btn.dataset.tab;
+      overlay.querySelectorAll('#date-place-tabs .heart-tab').forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+      load();
+    });
+  });
+  overlay.querySelector('#save-date-place').addEventListener('click', () => {
+    const data = JSON.parse(localStorage.getItem('datePlaceActivity') || '{"place":[],"activity":[]}');
+    data[curTab] = overlay.querySelector('#date-place-input').value.trim().split('\n').map(s => s.trim()).filter(Boolean);
+    localStorage.setItem('datePlaceActivity', JSON.stringify(data));
+    showToast('已保存');
+  });
+}
+
+// ← 改：约会文案库（accept/reject/reaction/remind）
+function openDateTextLibrary(type) {
+  const names = { accept: '约会接受', reject: '约会拒绝', reaction: '约会拒绝反应', remind: '约会提醒' };
+  const placeholders = {
+    accept: '比如：好呀，到时候见',
+    reject: '比如：那天有事，改天好吗',
+    reaction: '比如：好吧……那我等你',
+    remind: '比如：别忘了今晚的约会'
+  };
+  const key = 'dateTextLibrary_' + type;
+  const arr = JSON.parse(localStorage.getItem(key) || '[]');
+  const overlay = createModal(`
+    <div class="big-input-title">${names[type]}文案</div>
+    <textarea class="big-input-area" id="date-text-input" placeholder="${placeholders[type]}（一行一条）" style="min-height:200px;">${arr.join('\n')}</textarea>
+    <button class="save-btn-center" id="save-date-text" style="margin-top:12px;">保存</button>`);
+  overlay.querySelector('#save-date-text').addEventListener('click', () => {
+    const lines = overlay.querySelector('#date-text-input').value.trim().split('\n').map(s => s.trim()).filter(Boolean);
+    localStorage.setItem(key, JSON.stringify(lines));
+    showToast(names[type] + '已保存');
     overlay.remove();
   });
+}
+
+function getDateText(type) {
+  const key = 'dateTextLibrary_' + type;
+  const defaults = {
+    accept: ['好呀，到时候见', '嗯，我会准时到的', '期待'],
+    reject: ['那天有点事，改天好吗', '抱歉，那天不行', '换个时间好不好'],
+    reaction: ['好吧……那我等你', '没关系，下次也可以', '我会一直等你'],
+    remind: ['别忘了今晚的约会', '我准备好了，你呢', '该出发啦']
+  };
+  const arr = JSON.parse(localStorage.getItem(key) || '[]');
+  const pool = arr.length ? arr : defaults[type] || ['好的'];
+  return pool[Math.floor(Math.random() * pool.length)];
 }
 
 // ========== 他所愿 ==========
@@ -8872,7 +9131,6 @@ function openAccompanyPanel() {
   overlay.querySelector('#acc-stop').addEventListener('click', async () => {
     const mode = settings.accompanyMode;
     const duration = Date.now() - settings.accompanyStartTime;
-    // ← 改：统计 key 细分
     let statKey = mode;
     if (mode === 'together') statKey = 'together_' + (settings.accompanyType || '未分类');
     else if (mode === 'companion') statKey = 'companion_' + (settings.accompanyType || '未分类');
@@ -9032,7 +9290,6 @@ function openAccompanyStats() {
     companion_clingy: '陪伴（粘人型）', companion_night: '陪伴（深夜型）',
     companion: '陪伴'
   };
-  // 兼容旧数据：把旧的 "together" / "companion" 迁移
   const rows = [];
   Object.keys(stats).forEach(key => {
     let label = names[key];
@@ -10162,7 +10419,7 @@ async function restoreFromBackup(data) {
     for (const m of data.media) await idbPut('media', m);
   }
   localStorage.clear();
-  const lsKeys = ['archives', 'avatarLibrary', 'bgLibrary', 'stickerLibrary', 'giftLibrary', 'giftPackLibrary', 'interactionLibrary', 'quizLibrary', 'emojiLibrary', 'musicList', 'recycledCards', 'importantDays', 'attendanceRecords', 'bondRecords', 'periodRecords', 'periodCards', 'periodSymptoms', 'periodCareChecked', 'dateRecords', 'dateCards', 'petDataList', 'plantsData', 'wishes', 'videoRecords', 'letters', 'notes', 'loverPosts', 'loverCheckins', 'togetherLibrary', 'accountRecords', 'piggyData', 'ballPos', 'reminderChecked', 'checkinRemindChecked', 'importantChecked', 'lastArchiveDate', 'musicPlayerPos', 'musicPlayMode', 'giftsInitV700'];
+  const lsKeys = ['archives', 'avatarLibrary', 'bgLibrary', 'stickerLibrary', 'giftLibrary', 'giftPackLibrary', 'interactionLibrary', 'quizLibrary', 'emojiLibrary', 'musicList', 'recycledCards', 'importantDays', 'attendanceRecords', 'bondRecords', 'periodRecords', 'periodCards', 'periodSymptoms', 'periodCareChecked', 'dateRecords', 'dateCards', 'petDataList', 'plantsData', 'wishes', 'videoRecords', 'letters', 'notes', 'loverPosts', 'loverCheckins', 'togetherLibrary', 'accountRecords', 'piggyData', 'ballPos', 'reminderChecked', 'checkinRemindChecked', 'importantChecked', 'lastArchiveDate', 'musicPlayerPos', 'musicPlayMode', 'giftsInitV700', 'datePlaceActivity', 'dateTextLibrary_accept', 'dateTextLibrary_reject', 'dateTextLibrary_reaction', 'dateTextLibrary_remind', 'pendingDateInvites'];
   lsKeys.forEach(k => { if (data[k] !== undefined) localStorage.setItem(k, JSON.stringify(data[k])); });
   if (data.memo) localStorage.setItem('memo', data.memo);
   localStorage.setItem('mediaMigratedV650', '1');
@@ -10194,7 +10451,7 @@ async function backupNow() {
   const messages = await idbGetAll('messages');
   const mediaAll = await idbGetAll('media');
   const data = {
-    version: '7.0.0',
+    version: '7.1.0',
     exportedAt: new Date().toISOString(),
     settings, cards, messages, media: mediaAll,
     archives: JSON.parse(localStorage.getItem('archives') || '{}'),
@@ -10235,7 +10492,13 @@ async function backupNow() {
     reminderChecked: JSON.parse(localStorage.getItem('reminderChecked') || '{}'),
     checkinRemindChecked: JSON.parse(localStorage.getItem('checkinRemindChecked') || '{}'),
     importantChecked: JSON.parse(localStorage.getItem('importantChecked') || '{}'),
-    giftsInitV700: localStorage.getItem('giftsInitV700') || ''
+    giftsInitV700: localStorage.getItem('giftsInitV700') || '',
+    datePlaceActivity: JSON.parse(localStorage.getItem('datePlaceActivity') || '{"place":[],"activity":[]}'),
+    dateTextLibrary_accept: JSON.parse(localStorage.getItem('dateTextLibrary_accept') || '[]'),
+    dateTextLibrary_reject: JSON.parse(localStorage.getItem('dateTextLibrary_reject') || '[]'),
+    dateTextLibrary_reaction: JSON.parse(localStorage.getItem('dateTextLibrary_reaction') || '[]'),
+    dateTextLibrary_remind: JSON.parse(localStorage.getItem('dateTextLibrary_remind') || '[]'),
+    pendingDateInvites: JSON.parse(localStorage.getItem('pendingDateInvites') || '[]')
   };
   const json = JSON.stringify(data);
   downloadFile(json, '易遇♡雾凉-备份-' + new Date().toISOString().slice(0, 10) + '.json', 'application/json');
@@ -10385,7 +10648,7 @@ function loadPiggyRecords(overlay) {
   });
 }
 
-// ========== 音乐（Tab 版） ==========
+// ========== 音乐 ==========
 const PLAY_ICON = `<svg viewBox="0 0 24 24"><polygon points="6,4 20,12 6,20" fill="currentColor"/></svg>`;
 const PAUSE_ICON = `<svg viewBox="0 0 24 24"><rect x="6" y="4" width="4" height="16" rx="1.5" fill="currentColor"/><rect x="14" y="4" width="4" height="16" rx="1.5" fill="currentColor"/></svg>`;
 const PREV_ICON = `<svg viewBox="0 0 24 24"><polygon points="18,5 18,19 8,12" fill="currentColor"/><rect x="5" y="5" width="2.5" height="14" rx="1" fill="currentColor"/></svg>`;
@@ -11048,84 +11311,373 @@ function checkPeriodCare() {
 }
 setInterval(checkPeriodCare, 3600000);
 
-// ========== 约会 ==========
+// ========== 约会（大改：双向邀请） ==========
+// ← 改：3 Tab（我邀请 / TA邀请 / 约会记录）
 function openDatePanel() {
   const overlay = createModal(`
-    <div class="card-count-row"><span id="date-summary"></span></div>
-    <div style="display:flex;gap:8px;margin-bottom:12px;">
-      <input type="date" id="date-record-date" style="flex:1;background:rgba(255,255,255,0.5);border:1px solid rgba(255,255,255,0.6);border-radius:14px;padding:8px 10px;font-size:13px;color:#4a3f3a;outline:none;">
-      <input type="text" id="date-record-place" placeholder="地点" style="flex:1;background:rgba(255,255,255,0.5);border:1px solid rgba(255,255,255,0.6);border-radius:14px;padding:8px 10px;font-size:13px;color:#4a3f3a;outline:none;">
-      <button class="mini-btn" id="date-record-save">保存</button>
+    <div class="heart-tabs" id="date-main-tabs">
+      <button class="heart-tab active" data-tab="invite">我邀请</button>
+      <button class="heart-tab" data-tab="incoming">TA邀请</button>
+      <button class="heart-tab" data-tab="records">约会记录</button>
     </div>
-    <div class="card-list" id="date-record-list"></div>`);
-  loadDateRecords(overlay);
-  overlay.querySelector('#date-record-save').addEventListener('click', () => {
-    const date = overlay.querySelector('#date-record-date').value;
-    const place = overlay.querySelector('#date-record-place').value.trim();
-    if (!date || !place) return showToast('请填写日期和地点');
-    const records = JSON.parse(localStorage.getItem('dateRecords') || '[]');
-    records.push({ date, place });
-    localStorage.setItem('dateRecords', JSON.stringify(records));
-    addBigEvent('date', '第一次约会记录：' + place);
-    loadDateRecords(overlay);
+    <div id="date-content"></div>`);
+  let curTab = 'invite';
+  const render = () => {
+    const content = overlay.querySelector('#date-content');
+    content.innerHTML = '';
+    if (curTab === 'invite') renderDateInviteTab(content, overlay);
+    else if (curTab === 'incoming') renderDateIncomingTab(content, overlay);
+    else if (curTab === 'records') renderDateRecordsTab(content, overlay);
+  };
+  overlay.querySelectorAll('#date-main-tabs .heart-tab').forEach(btn => {
+    btn.addEventListener('click', () => {
+      curTab = btn.dataset.tab;
+      overlay.querySelectorAll('#date-main-tabs .heart-tab').forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+      render();
+    });
+  });
+  render();
+  registerPanelUpdater('date', render);
+}
+
+// ← 改：我邀请
+function renderDateInviteTab(content, overlay) {
+  const worlds = settings.worlds || [];
+  let selectedWorldId = settings.currentWorldId || (worlds[0] && worlds[0].id);
+  const placeData = JSON.parse(localStorage.getItem('datePlaceActivity') || '{"place":[],"activity":[]}');
+  content.innerHTML = `
+    <div style="font-size:13px;color:#4a3528;margin-bottom:6px;">选一个易遇</div>
+    <div class="world-chip-row" id="date-invite-worlds"></div>
+    <div style="font-size:13px;color:#4a3528;margin-bottom:4px;">日期</div>
+    <input type="date" id="date-invite-date" style="width:100%;background:rgba(255,255,255,0.5);border:1px solid rgba(255,255,255,0.6);border-radius:14px;padding:10px 14px;font-size:14px;color:#4a3f3a;outline:none;margin-bottom:8px;">
+    <div style="font-size:13px;color:#4a3528;margin-bottom:4px;">时间</div>
+    <input type="time" id="date-invite-time" value="19:00" style="width:100%;background:rgba(255,255,255,0.5);border:1px solid rgba(255,255,255,0.6);border-radius:14px;padding:10px 14px;font-size:14px;color:#4a3f3a;outline:none;margin-bottom:8px;">
+    <div style="font-size:13px;color:#4a3528;margin-bottom:4px;">地点（从库挑或自己写）</div>
+    <div class="world-chip-row" id="date-place-chips"></div>
+    <input type="text" id="date-invite-place" placeholder="如：海边" style="width:100%;background:rgba(255,255,255,0.5);border:1px solid rgba(255,255,255,0.6);border-radius:14px;padding:10px 14px;font-size:14px;color:#4a3f3a;outline:none;margin-bottom:8px;">
+    <div style="font-size:13px;color:#4a3528;margin-bottom:4px;">活动（从库挑或自己写）</div>
+    <div class="world-chip-row" id="date-activity-chips"></div>
+    <input type="text" id="date-invite-activity" placeholder="如：看日落" style="width:100%;background:rgba(255,255,255,0.5);border:1px solid rgba(255,255,255,0.6);border-radius:14px;padding:10px 14px;font-size:14px;color:#4a3f3a;outline:none;margin-bottom:12px;">
+    <button class="save-btn-center" id="date-invite-send">发出邀请</button>`;
+  const wRow = content.querySelector('#date-invite-worlds');
+  worlds.forEach(w => {
+    const chip = document.createElement('div');
+    chip.className = 'world-chip' + (w.id === selectedWorldId ? ' active' : '');
+    chip.textContent = w.name;
+    chip.addEventListener('click', () => {
+      selectedWorldId = w.id;
+      wRow.querySelectorAll('.world-chip').forEach(c => c.classList.remove('active'));
+      chip.classList.add('active');
+    });
+    wRow.appendChild(chip);
+  });
+  const pRow = content.querySelector('#date-place-chips');
+  (placeData.place || []).forEach(p => {
+    const chip = document.createElement('div');
+    chip.className = 'world-chip';
+    chip.textContent = p;
+    chip.addEventListener('click', () => {
+      content.querySelector('#date-invite-place').value = p;
+    });
+    pRow.appendChild(chip);
+  });
+  const aRow = content.querySelector('#date-activity-chips');
+  (placeData.activity || []).forEach(a => {
+    const chip = document.createElement('div');
+    chip.className = 'world-chip';
+    chip.textContent = a;
+    chip.addEventListener('click', () => {
+      content.querySelector('#date-invite-activity').value = a;
+    });
+    aRow.appendChild(chip);
+  });
+  content.querySelector('#date-invite-send').addEventListener('click', async () => {
+    const dateVal = content.querySelector('#date-invite-date').value;
+    const timeVal = content.querySelector('#date-invite-time').value;
+    const place = content.querySelector('#date-invite-place').value.trim();
+    const activity = content.querySelector('#date-invite-activity').value.trim();
+    if (!dateVal || !timeVal || !place || !activity) return showToast('请填写完整');
+    const invite = {
+      id: 'inv_' + Date.now(),
+      worldId: selectedWorldId,
+      date: dateVal,
+      time: timeVal,
+      place,
+      activity,
+      from: 'me',
+      createdAt: Date.now()
+    };
+    const online = onlineWorlds.includes(selectedWorldId);
+    if (online) {
+      await handleDateInviteResponse(invite, false);
+    } else {
+      pendingDateInvites.push(invite);
+      savePendingDateInvites();
+      showToast('TA不在线，邀请已挂起，等他上线处理');
+    }
+    overlay.remove();
+    unregisterPanelUpdater('date');
   });
 }
 
-function loadDateRecords(overlay) {
+// ← 改：处理 TA 对我的邀请响应
+async function handleDateInviteResponse(invite, isDelayed) {
+  const wid = invite.worldId;
+  const taName = settings.taName;
+  // 发我的邀请消息
+  const myMsg = { sender: 'me', content: `邀请你 ${invite.date} ${invite.time} 去${invite.place}${invite.activity}，可以吗？`, timestamp: Date.now(), pinned: false, pinBy: '', pinTime: 0, heartMark: null, quoteContent: null };
+  const mid = await idbPutReturnId('messages', myMsg);
+  myMsg.id = mid;
+  await appendMessage(myMsg);
+  await delay(800 + Math.random() * 1200);
+  const accepted = Math.random() < 0.7;
+  let taContent;
+  if (accepted) {
+    taContent = getDateText('accept');
+  } else {
+    taContent = getDateText('reject');
+  }
+  const taMsg = { sender: 'ta', content: taContent, timestamp: Date.now(), pinned: false, pinBy: '', pinTime: 0, heartMark: null, quoteContent: null, worldId: wid, worldLabel: getWorldLabel(wid) };
+  const tid = await idbPutReturnId('messages', taMsg);
+  taMsg.id = tid;
+  await appendMessage(taMsg);
+  // 存记录
   const records = JSON.parse(localStorage.getItem('dateRecords') || '[]');
-  overlay.querySelector('#date-summary').textContent = `共 ${records.length} 次约会`;
-  const list = overlay.querySelector('#date-record-list');
-  list.innerHTML = '';
-  if (!records.length) { list.innerHTML = '<div class="placeholder-tip">还没有约会记录</div>'; return; }
-  records.slice().reverse().forEach((r) => {
+  records.push({
+    id: invite.id,
+    worldId: wid,
+    date: invite.date,
+    time: invite.time,
+    place: invite.place,
+    activity: invite.activity,
+    from: 'me',
+    status: accepted ? 'pending' : 'cancelled',
+    createdAt: invite.createdAt,
+    reminded: false
+  });
+  localStorage.setItem('dateRecords', JSON.stringify(records));
+  addBigEvent('dateinvite', '第一次发出约会邀请');
+  if (accepted) addBigEvent('dateaccept', '第一次约会邀请被接受');
+}
+
+// ← 改：TA邀请我
+function renderDateIncomingTab(content, overlay) {
+  const records = JSON.parse(localStorage.getItem('dateRecords') || '[]');
+  const incoming = records.filter(r => r.from === 'ta' && r.status === 'pending');
+  content.innerHTML = '<div id="date-incoming-list"></div>';
+  const list = content.querySelector('#date-incoming-list');
+  if (!incoming.length) {
+    list.innerHTML = '<div class="placeholder-tip">TA还没有邀请你</div>';
+    return;
+  }
+  incoming.forEach(r => {
     const div = document.createElement('div');
-    div.className = 'card-item';
-    div.innerHTML = `<div class="card-text">${r.date} - ${escapeHtml(r.place)}</div>
-      <div class="card-ops"><button class="date-del">✕</button></div>`;
-    div.querySelector('.date-del').addEventListener('click', () => {
-      records.splice(records.indexOf(r), 1);
+    div.className = 'date-card-item';
+    const worldName = (settings.worlds || []).find(w => w.id === r.worldId)?.name || '易遇';
+    div.innerHTML = `
+      <div class="dc-head">
+        <span class="dc-title">${escapeHtml(worldName)}的易遇想约你</span>
+        <span class="dc-badge">待处理</span>
+      </div>
+      <div class="dc-info">
+        他大概 ${r.range || 3} 天后有空<br>
+        地点：${escapeHtml(r.place)} · 活动：${escapeHtml(r.activity)}<br>
+        请选择具体日期（${r.candidateDates || ''}）和时间
+      </div>
+      <div class="date-invite-option" data-id="${r.id}"></div>
+      <input type="time" class="date-choose-time" value="19:00" style="width:100%;background:rgba(255,255,255,0.5);border:1px solid rgba(255,255,255,0.6);border-radius:14px;padding:8px 10px;font-size:13px;color:#4a3f3a;outline:none;margin-top:6px;">
+      <div class="dc-actions">
+        <button class="date-confirm-btn">确认</button>
+        <button class="date-reject-btn" style="color:#c33;">拒绝</button>
+      </div>`;
+    const optRow = div.querySelector('.date-invite-option');
+    const dates = r.candidateDatesArr || [];
+    let chosenDate = dates[0];
+    dates.forEach(d => {
+      const btn = document.createElement('button');
+      btn.textContent = d.slice(5);
+      if (d === chosenDate) btn.classList.add('active');
+      btn.addEventListener('click', () => {
+        chosenDate = d;
+        optRow.querySelectorAll('button').forEach(b => b.classList.remove('active'));
+        btn.classList.add('active');
+      });
+      optRow.appendChild(btn);
+    });
+    div.querySelector('.date-confirm-btn').addEventListener('click', async () => {
+      const timeVal = div.querySelector('.date-choose-time').value;
+      const ok = Math.random() < 0.7;
+      if (ok) {
+        const records = JSON.parse(localStorage.getItem('dateRecords') || '[]');
+        const target = records.find(x => x.id === r.id);
+        if (target) {
+          target.date = chosenDate;
+          target.time = timeVal;
+          target.status = 'pending';
+          localStorage.setItem('dateRecords', JSON.stringify(records));
+        }
+        const taMsg = { sender: 'ta', content: getDateText('accept'), timestamp: Date.now(), pinned: false, pinBy: '', pinTime: 0, heartMark: null, quoteContent: null, worldId: r.worldId, worldLabel: getWorldLabel(r.worldId) };
+        const tid = await idbPutReturnId('messages', taMsg);
+        taMsg.id = tid;
+        await appendMessage(taMsg);
+        showToast('约会定了');
+        overlay.remove();
+        unregisterPanelUpdater('date');
+        openDatePanel();
+      } else {
+        showToast('那天不行，再选一个');
+      }
+    });
+    div.querySelector('.date-reject-btn').addEventListener('click', async () => {
+      const records = JSON.parse(localStorage.getItem('dateRecords') || '[]');
+      const target = records.find(x => x.id === r.id);
+      if (target) target.status = 'cancelled';
       localStorage.setItem('dateRecords', JSON.stringify(records));
-      loadDateRecords(overlay);
+      const taMsg = { sender: 'ta', content: getDateText('reaction'), timestamp: Date.now(), pinned: false, pinBy: '', pinTime: 0, heartMark: null, quoteContent: null, worldId: r.worldId, worldLabel: getWorldLabel(r.worldId) };
+      const tid = await idbPutReturnId('messages', taMsg);
+      taMsg.id = tid;
+      await appendMessage(taMsg);
+      overlay.remove();
+      unregisterPanelUpdater('date');
+      openDatePanel();
     });
     list.appendChild(div);
   });
 }
 
-function scheduleDateInvite() {
-  setInterval(async () => {
-    if (Math.random() < 0.04 && !isReplying && !isArchiving) {
-      const cards = JSON.parse(localStorage.getItem('dateCards') || '[]');
-      if (!cards.length) return;
-      const card = cards[Math.floor(Math.random() * cards.length)];
-      let pool = onlineWorlds.length ? onlineWorlds : ['real'];
-      const wid = pool[Math.floor(Math.random() * pool.length)];
-      const msg = { sender: 'ta', content: '今晚来梦里，' + card, timestamp: Date.now(), pinned: false, pinBy: '', pinTime: 0, heartMark: null, worldId: wid, worldLabel: getWorldLabel(wid) };
-      const id = await idbPutReturnId('messages', msg);
-      msg.id = id;
-      await appendMessage(msg);
-      sendNotification(msg.content);
-      addNotification('🌙', '易遇的梦里邀约');
-      addBigEvent('dream', '第一次收到梦里邀约');
+// ← 改：约会记录
+function renderDateRecordsTab(content, overlay) {
+  const records = JSON.parse(localStorage.getItem('dateRecords') || '[]');
+  const pending = records.filter(r => r.status === 'pending');
+  const done = records.filter(r => r.status === 'done');
+  const cancelled = records.filter(r => r.status === 'cancelled');
+  let html = '';
+  const renderBlock = (title, list, empty) => {
+    html += `<div class="date-status-block"><div class="date-status-title">${title}（${list.length}）</div>`;
+    if (!list.length) html += `<div class="placeholder-tip">${empty}</div>`;
+    else {
+      list.forEach(r => {
+        const worldName = (settings.worlds || []).find(w => w.id === r.worldId)?.name || '易遇';
+        const fromLabel = r.from === 'me' ? '我邀请' : 'TA邀请';
+        const badge = r.status === 'pending' ? '待赴约' : r.status === 'done' ? '已完成' : '已取消';
+        html += `<div class="date-card-item">
+          <div class="dc-head"><span class="dc-title">${escapeHtml(r.date)} ${escapeHtml(r.time || '')}</span><span class="dc-badge">${badge}</span></div>
+          <div class="dc-info">${escapeHtml(r.place)} · ${escapeHtml(r.activity)}<br>${fromLabel} · ${escapeHtml(worldName)}的易遇</div>
+          <div class="dc-actions">
+            ${r.status === 'pending' ? `<button class="date-done-btn" data-id="${r.id}">标记完成</button><button class="date-cancel-btn" data-id="${r.id}" style="color:#c33;">取消</button>` : ''}
+          </div>
+        </div>`;
+      });
     }
-  }, 7200000);
+    html += `</div>`;
+  };
+  renderBlock('待赴约', pending, '没有待赴约');
+  renderBlock('已完成', done, '还没有完成的约会');
+  renderBlock('已取消', cancelled, '没有取消的约会');
+  content.innerHTML = html;
+  content.querySelectorAll('.date-done-btn').forEach(btn => {
+    btn.addEventListener('click', () => {
+      const records = JSON.parse(localStorage.getItem('dateRecords') || '[]');
+      const t = records.find(x => x.id === btn.dataset.id);
+      if (t) t.status = 'done';
+      localStorage.setItem('dateRecords', JSON.stringify(records));
+      openDatePanel();
+    });
+  });
+  content.querySelectorAll('.date-cancel-btn').forEach(btn => {
+    btn.addEventListener('click', () => {
+      const records = JSON.parse(localStorage.getItem('dateRecords') || '[]');
+      const t = records.find(x => x.id === btn.dataset.id);
+      if (t) t.status = 'cancelled';
+      localStorage.setItem('dateRecords', JSON.stringify(records));
+      openDatePanel();
+    });
+  });
 }
 
-function scheduleDateRecall() {
-  setInterval(async () => {
-    if (Math.random() < 0.03 && !isReplying && !isArchiving) {
-      const records = JSON.parse(localStorage.getItem('dateRecords') || '[]');
-      if (!records.length) return;
-      const r = records[Math.floor(Math.random() * records.length)];
-      let pool = onlineWorlds.length ? onlineWorlds : ['real'];
-      const wid = pool[Math.floor(Math.random() * pool.length)];
-      const msg = { sender: 'ta', content: '还记得' + r.date + '我们在' + r.place + '吗？我很开心', timestamp: Date.now(), pinned: false, pinBy: '', pinTime: 0, heartMark: null, worldId: wid, worldLabel: getWorldLabel(wid) };
-      const id = await idbPutReturnId('messages', msg);
-      msg.id = id;
-      await appendMessage(msg);
-      sendNotification(msg.content);
-      addNotification('🌙', '易遇回忆约会');
+// ← 改：TA 主动约会邀请（频率制）
+function scheduleTADateInvite() {
+  const next = Math.random() * (settings.taDateMax - settings.taDateMin) + settings.taDateMin;
+  setTimeout(async () => {
+    if (!isReplying && !isArchiving && onlineWorlds.length) {
+      const wid = onlineWorlds[Math.floor(Math.random() * onlineWorlds.length)];
+      const placeData = JSON.parse(localStorage.getItem('datePlaceActivity') || '{"place":[],"activity":[]}');
+      if (placeData.place && placeData.place.length && placeData.activity && placeData.activity.length) {
+        const range = [1, 3, 5, 7][Math.floor(Math.random() * 4)];
+        const place = placeData.place[Math.floor(Math.random() * placeData.place.length)];
+        const activity = placeData.activity[Math.floor(Math.random() * placeData.activity.length)];
+        const today = new Date();
+        const candidateDatesArr = [];
+        for (let i = 1; i <= range; i++) {
+          const d = new Date(today);
+          d.setDate(d.getDate() + i);
+          candidateDatesArr.push(d.toISOString().slice(0, 10));
+        }
+        const inviteMsg = { sender: 'ta', content: `大概${range}天后，想约你去${place}${activity}，选个时间吧`, timestamp: Date.now(), pinned: false, pinBy: '', pinTime: 0, heartMark: null, quoteContent: null, worldId: wid, worldLabel: getWorldLabel(wid) };
+        const id = await idbPutReturnId('messages', inviteMsg);
+        inviteMsg.id = id;
+        await appendMessage(inviteMsg);
+        const records = JSON.parse(localStorage.getItem('dateRecords') || '[]');
+        records.push({
+          id: 'inv_ta_' + Date.now(),
+          worldId: wid,
+          date: '',
+          time: '',
+          place, activity,
+          from: 'ta',
+          status: 'pending',
+          range,
+          candidateDates: candidateDatesArr.map(d => d.slice(5)).join(' / '),
+          candidateDatesArr,
+          createdAt: Date.now(),
+          reminded: false
+        });
+        localStorage.setItem('dateRecords', JSON.stringify(records));
+        sendNotification('易遇约你了');
+        addNotification('💗', '易遇约你了');
+        addBigEvent('tadateinvite', '第一次收到易遇的约会邀请');
+      }
     }
-  }, 10800000);
+    scheduleTADateInvite();
+  }, next);
+}
+
+// ← 改：约会当天提醒（提前 1 小时）
+function checkDateReminders() {
+  const now = Date.now();
+  const records = JSON.parse(localStorage.getItem('dateRecords') || '[]');
+  let changed = false;
+  records.forEach(r => {
+    if (r.status !== 'pending' || r.reminded) return;
+    if (!r.date || !r.time) return;
+    const targetTime = new Date(r.date + 'T' + r.time).getTime();
+    if (isNaN(targetTime)) return;
+    const diff = targetTime - now;
+    if (diff > 0 && diff <= 3600000) {
+      r.reminded = true;
+      changed = true;
+      const taMsg = { sender: 'ta', content: getDateText('remind'), timestamp: Date.now(), pinned: false, pinBy: '', pinTime: 0, heartMark: null, quoteContent: null, worldId: r.worldId, worldLabel: getWorldLabel(r.worldId) };
+      idbPutReturnId('messages', taMsg).then(async id => { taMsg.id = id; await appendMessage(taMsg); });
+      sendNotification('约会提醒');
+      addNotification('⏰', '约会提醒');
+    }
+  });
+  if (changed) localStorage.setItem('dateRecords', JSON.stringify(records));
+}
+setInterval(checkDateReminders, 60000);
+
+// 兼容旧约会的字卡（保留但不再使用）
+function openDateCardsPanel() {
+  const overlay = createModal(`
+    <div class="big-input-title">约会字卡</div>
+    <textarea class="big-input-area" id="date-cards-input" placeholder="一行一条" style="min-height:150px;">${(JSON.parse(localStorage.getItem('dateCards') || '[]')).join('\n')}</textarea>
+    <button class="save-btn-center" id="save-date-cards" style="margin-top:12px;">保存</button>`);
+  overlay.querySelector('#save-date-cards').addEventListener('click', () => {
+    localStorage.setItem('dateCards', JSON.stringify(overlay.querySelector('#date-cards-input').value.trim().split('\n').map(s => s.trim()).filter(Boolean)));
+    showToast('约会字卡已保存');
+    overlay.remove();
+  });
 }
 
 // ========== 心愿单 ==========
@@ -11326,7 +11878,6 @@ async function renderPetPanel(content, pets) {
       renderPetPanel(content, list);
     });
   });
-  // ← 改：玩家找回宠物
   content.querySelectorAll('.pet-recall-btn').forEach(btn => {
     btn.addEventListener('click', () => {
       const idx = Number(btn.dataset.idx);
@@ -11407,7 +11958,7 @@ function openPetAdoptDialog() {
   });
 }
 
-// ← 改：宠物掉落 4 小时 1 点；72 小时三值全 0 离家
+// 宠物掉落 4 小时 1 点；72 小时三值全 0 离家
 function checkPetStatus() {
   const list = getPets();
   if (!list.length) return;
@@ -11422,7 +11973,7 @@ function checkPetStatus() {
     } else {
       pet.zeroDays = 0;
     }
-    if (pet.zeroDays >= 18) { // 18 * 4h = 72h
+    if (pet.zeroDays >= 18) {
       pet.left = true;
       addBigEvent('petleft', '第一次宠物离家');
     }
@@ -11431,9 +11982,8 @@ function checkPetStatus() {
   savePets(list);
   if (needCare) taAutoCarePets();
 }
-setInterval(checkPetStatus, 14400000); // ← 改：4 小时一次
+setInterval(checkPetStatus, 14400000);
 
-// ← 改：TA 照顾不需要在线，补所有低于阈值的，发通知
 async function taAutoCarePets() {
   const list = getPets();
   if (!list.length) return;
@@ -11457,7 +12007,6 @@ async function taAutoCarePets() {
   }
 }
 
-// ← 改：照顾宠物，频率制
 function scheduleTAPetCare() {
   const next = Math.random() * (settings.taPetCareMax - settings.taPetCareMin) + settings.taPetCareMin;
   setTimeout(async () => {
@@ -11719,7 +12268,7 @@ function openPlantTypeManageDialog(tab) {
   });
 }
 
-// ← 改：植物掉落 4 小时 1 点
+// 植物掉落 4 小时 1 点
 function checkPlantStatus() {
   const data = getPlantsData();
   let changed = false;
@@ -11734,7 +12283,7 @@ function checkPlantStatus() {
       } else {
         p.zeroDays = 0;
       }
-      if (p.zeroDays >= 18) { // 18 * 4h = 72h
+      if (p.zeroDays >= 18) {
         p.withered = true;
         addBigEvent('plantwithered', '第一次植物枯萎');
       }
@@ -11743,9 +12292,8 @@ function checkPlantStatus() {
   });
   if (changed) savePlantsData(data);
 }
-setInterval(checkPlantStatus, 14400000); // ← 改：4 小时一次
+setInterval(checkPlantStatus, 14400000);
 
-// ← 改：TA 照顾不需要在线，补所有低于阈值的，枯萎可救活，发通知
 async function taAutoCarePlants() {
   const data = getPlantsData();
   const all = [...data.flowers.map((p, i) => ({ p, key: 'flowers', i })), ...data.trees.map((p, i) => ({ p, key: 'trees', i }))];
@@ -11754,7 +12302,6 @@ async function taAutoCarePlants() {
   all.forEach(x => {
     const plant = x.p;
     if (plant.withered) {
-      // TA 尝试救活枯萎植物
       if (Math.random() < 0.4) {
         plant.zeroDays = Math.max(0, (plant.zeroDays || 0) - 2);
         if (plant.zeroDays <= 0) {
@@ -11795,7 +12342,6 @@ async function taAutoCarePlants() {
   }
 }
 
-// ← 改：照顾植物，频率制
 function scheduleTAPlantCare() {
   const next = Math.random() * (settings.taPlantCareMax - settings.taPlantCareMin) + settings.taPlantCareMin;
   setTimeout(async () => {
@@ -11812,7 +12358,7 @@ setInterval(async () => {
     await taAutoCarePlants();
     refreshOpenPanels();
   }
-}, 14400000); // ← 改：4 小时
+}, 14400000);
   // ========== 视频通话 ==========
 const VIDEO_GRADIENTS = [
   'linear-gradient(135deg, #fdd9c8, #f7d4e3, #dcd3f5)',
@@ -12729,11 +13275,11 @@ function openWorldEditDialog(world, panelOverlay) {
 }
 
 // ========== 大事记 ==========
-// ← 改：大事记去重 + 全量触发点
+// ← 改：去重规则改成"只要 text 相同就不重复记"
 function addBigEvent(type, text) {
   settings.bigEvents = settings.bigEvents || [];
-  const key = type + '|' + text;
-  if (settings.bigEvents.some(ev => (ev.type + '|' + ev.text) === key)) return;
+  // ← 改：不看 type，只看 text
+  if (settings.bigEvents.some(ev => ev.text === text)) return;
   settings.bigEvents.push({ type, text, time: Date.now() });
   saveSettings();
 }
@@ -12756,7 +13302,6 @@ function openTimelinePanel() {
 }
 
 // ========== 高维彩蛋 ==========
-// ← 改：保留第22条版本（删除第17条重复定义）
 function openHighDimPanel() {
   const overlay = createModal(`
     <div class="big-input-title">高维彩蛋</div>
@@ -12772,7 +13317,6 @@ function openHighDimPanel() {
 }
 
 // ========== 重要记事 ==========
-// ← 改：保留第22条版本（删除第17条重复定义）
 function openImportantNotesPanel() {
   const overlay = createModal(`
     <div class="big-input-title">重要记事</div>
@@ -12826,7 +13370,8 @@ async function init() {
   await openDB();
   await loadSettings();
   await migrateMediaOnce();
-  await initGiftsOnce(); // ← 改：首次启动初始化礼物/礼包
+  await initGiftsOnce();
+  loadPendingDateInvites();
   refreshScheduleTypes();
   renderHeartLine();
   initBallPosition();
@@ -12837,19 +13382,20 @@ async function init() {
   initOnlineWorlds();
   scheduleTAActive();
   scheduleTAAutonomy();
-  scheduleTASticker();      // ← 改：独立贴纸定时器
-  scheduleTAGift();         // ← 改：独立礼物定时器
-  scheduleTAGiftPack();     // ← 改：独立礼包定时器
-  scheduleTAInteract();     // ← 改：独立互动定时器
-  scheduleTANick();         // ← 改：独立昵称定时器
-  scheduleTAQuote();        // ← 改：独立引用定时器
+  scheduleTASticker();
+  scheduleTAGift();
+  scheduleTAGiftPack();
+  scheduleTAInteract();
+  scheduleTANick();
+  scheduleTAQuote();
   scheduleTAAvatarChange();
   scheduleTABGChange();
-  scheduleTAMusicRequest(); // ← 改：独立点歌定时器
-  scheduleTALetter();       // ← 改：独立写信定时器
-  scheduleTANote();         // ← 改：独立留言定时器
-  scheduleTALoverPost();    // ← 改：独立动态定时器
+  scheduleTAMusicRequest();
+  scheduleTALetter();
+  scheduleTANote();
+  scheduleTALoverPost();
   scheduleTAVideoCall();
+  scheduleTADateInvite();
   scheduleDateInvite();
   scheduleDateRecall();
   scheduleTALoverCheckin();
